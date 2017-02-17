@@ -1,0 +1,27 @@
+template(name="noticiasView")
+	+indexHeaderSearch header=header searchFields=searchFields newLink=newLink extraLinks=extraLinks
+	table.ui.top.attached.table
+		thead
+			tr
+				th.two.wide &nbsp;
+				th.one.wide Ativa
+				th.one.wide Cor
+				th.three.wide Data
+				th.three.wide Assunto
+				th Título
+		tbody
+			each noticias.data
+				tr
+					td
+						a.ui.icon.button.editBtn(href="#{pathFor 'noticiasUpdateRoute' id=_id}")
+							i.edit.blue.icon
+						.ui.icon.button.removeBtn
+							i.trash.red.icon
+					td
+						+indexActivateButton active=active id=_id
+					td
+						.ui.circular.label(class="#{cor}")
+					td #{dateTimeBr date}
+					td #{assunto.name}
+					td #{title}
+	+indexInfoPaginator ready=ready nothingFound='Nenhuma notícia cadastrada.' count=noticias.count page=noticias.count pages=noticias.pages singularForm='Notícia' pluralForm='Notícias'

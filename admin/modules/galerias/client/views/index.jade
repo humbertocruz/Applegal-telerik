@@ -1,0 +1,30 @@
+template(name="galeriasView")
+	+indexHeaderSearch header=header newLink=newLink
+	table.ui.top.attached.table
+		thead
+			tr
+				th.two.wide &nbsp;
+				th.one.wide Ativa
+				th.two.wide Data
+				th.two.wide Capa
+				th Título
+				th Qtd Fotos
+		tbody
+			each galerias.data
+				tr
+					td
+						a.ui.icon.button.editBtn(href="#{pathFor 'galeriasUpdateRoute' id=_id}")
+							i.edit.blue.icon
+						.ui.icon.button.removeBtn
+							i.trash.red.icon
+					td
+						+indexActivateButton active=active id=_id
+					td #{dateBr date}
+					td
+						if capa_id
+							img.ui.rounded.tiny.image(src="/fotoDaGaleria/#{capa_id}")
+						else
+							.ui.red.small.header Sem Capa
+					td #{title}
+					td #{fotos.length}
+	+indexInfoPaginator ready=ready nothingFound='Nenhuma galeria cadastrada.' count=galerias.count page=galerias.count pages=galerias.pages singularForm='Galeria' pluralForm='Galerias'

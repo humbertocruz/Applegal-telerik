@@ -1,0 +1,22 @@
+template(name="turmasView")
+	+indexHeaderSearch header=header extraLinks=extraLinks
+	.ui.three.column.grid
+		each cursos
+			.column
+				.ui.fluid.button.selectCursoEvent(class="#{addClassIf 'blue' _id selectCurso 'eq'}") #{name}
+	if selectCurso
+		table.ui.top.attached.table
+			thead
+				tr
+					th.two.wide
+					th Nome
+			tbody
+				each alunos.data
+					tr
+						td
+							a.ui.icon.button(href="#{pathFor 'EnsinoNotasRoute' id=aluno_id}")
+								i.eye.icon
+						td #{aluno.profile.name}
+		+indexInfoPaginator ready=ready nothingFound='Nenhum Aluno Cadastrado' count=alunos.count page=alunos.count pages=alunos.pages singularForm='Aluno' pluralForm='Alunos'
+	else
+		.ui.header Selecione o Curso acima

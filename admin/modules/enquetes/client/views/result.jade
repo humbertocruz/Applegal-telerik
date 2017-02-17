@@ -1,0 +1,14 @@
+template(name="enquetesResultView")
+	+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
+	unless perguntas
+		.ui.red.message Nenhuma Pergunta
+	else
+		each perguntas
+			.ui.clearing.segment(class="#{addClassIf 'blue' perguntaAtual order 'eq'}")
+				.ui.left.floated.header #{title}
+				.ui.clearing.hidden.divider
+				each opc in opcoes
+						.ui.blue.progress(id="perg_#{order}_opc_#{opc.order}")
+							.bar
+								.progress
+							.label #{opc.title}

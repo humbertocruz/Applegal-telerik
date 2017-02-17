@@ -1,0 +1,15 @@
+template(name="notFoundView")
+	.ui.container.two.column.centered.grid#notFoundGrid(style="height:100%;")
+		.middle.aligned.row
+			.center.aligned.column
+				i.red.massive.warning.sign.center.aligned.icon
+				.ui.red.large.centered.header Página não encontrada!
+				.ui.divider
+				if userId
+					.ui.two.item.secondary.menu
+						a.item(href="#{pathFor 'homeRoute'}") Home
+				else
+					.ui.three.item.secondary.menu
+						a.item(href="#{pathFor 'passwordRoute'}") Esqueceu sua senha ?
+						a.item(href="#{pathFor 'loginRoute'}") Login
+						a.item(href="#{pathFor 'registerRoute'}") Cadastre-se

@@ -1,0 +1,18 @@
+template(name="filiaisView")
+	+indexHeaderSearch header=header newLink=newLink extraLinks=extraLinks
+	table.ui.top.attached.table
+		thead
+			tr
+				th.two.wide
+				th Nome
+		tbody
+			each filiais.data
+				tr
+					td
+						a.ui.icon.button.editBtn(href="#{pathFor 'filiaisUpdateRoute' id=_id}")
+							i.edit.blue.icon
+						unless main
+							.ui.icon.button.removeBtn
+								i.trash.red.icon
+					td #{name}
+	+indexInfoPaginator ready=ready nothingFound='Nenhuma Filial Cadastrada' count=filiais.count page=filiais.page pages=filiais.pages singularForm='Filial' pluralForm='Filiais'

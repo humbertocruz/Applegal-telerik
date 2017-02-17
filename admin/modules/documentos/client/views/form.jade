@@ -1,0 +1,22 @@
+template(name="documentosFormView")
+	+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
+	form.ui.form#documentosForm(method="post")
+		.three.fields
+			.field
+				label Data
+				input#dateField(type="date",name="date")
+			.field
+				label Título
+				input#titleField(type="text",name="title")
+			.field
+				label Tipo
+				select.ui.dropdown#assuntoField(name="tipo_id")
+					option(value="") Escolha o Tipo
+					each tipos
+						option(value="#{_id}") #{name}
+		if documento_id
+			.ui.segment.documentos.dropzone(style="min-height:100px")
+		else
+			.ui.blue.message
+				i.warning.icon
+				span É necessário Salvar para poder fazer o Upload do Arquivo no Documento.

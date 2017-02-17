@@ -1,0 +1,21 @@
+template(name="enquetesFormView")
+	+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
+
+	form.ui.form#enquetesForm(method="post")
+		.two.fields
+			.field
+				label Título
+				input#subjectField(type="text",name="title")
+			.field
+				label Cor
+				select.ui.dropdown#publicadaField(name="cor")
+					option(value="") Escolha uma opção
+					each semanticColors
+						option(value="#{className}") #{title}
+		.two.fields
+			.field
+				label Início
+				input#startingField(type="date",name="date_starting")
+			.field
+				label Fim
+				input#endingField(type="date",name="date_ending")

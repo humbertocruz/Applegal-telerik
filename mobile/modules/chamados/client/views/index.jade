@@ -1,0 +1,14 @@
+template(name="chamadosView")
+	unless chamados
+		.ui.loading.message Carregando...
+	else
+		if compare chamados.count 'eq' 0
+			.ui.red.message 
+				p Nenhum chamado encontrado
+		each chamados.data
+			a.ui.icon.message(href="#{pathFor 'mensagensRoute' id=_id}")
+				i.comments.outline.icon
+				.content
+					.header #{dateTimeBr date}
+	.ui.blue.icon.button#abrirChamadoBtn
+		i.plus.icon

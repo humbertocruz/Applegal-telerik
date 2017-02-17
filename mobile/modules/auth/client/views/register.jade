@@ -1,0 +1,46 @@
+template(name="registerView")
+	form.ui.stackable.form#registerForm(method="post",novalidate="novalidate")
+		img.ui.small.centered.image(src="#{appInfo.logo}")
+		.field
+			label Seu CPF
+			input#usernameField(type="tel",name="username")
+		.field
+			label Sua Senha
+			.ui.action.input
+				input#password1Field.hidePwd(type="tel",name="password1",autocomplete="off")
+				.ui.icon.button.showPasswordBtn
+					i.eye.icon
+		.field
+			label Repita a Senha
+			.ui.action.input
+				input#password2Field.hidePwd(type="tel",name="password2",autocomplete="off")
+				.ui.icon.button.showPasswordBtn
+					i.eye.icon
+	br
+	button.ui.blue.fluid.button(type="submit",form="registerForm") Continuar
+	br
+	a.ui.fluid.button(href="#{pathFor 'homeRoute'}") Cancelar
+
+template(name="registerTwoView")
+	.ui.dividing.header Cadastro
+	form.ui.stackable.form#registerTwoForm(method="post",novalidate="novalidate")
+		.field
+			label Nome
+			input(type="text",name="name")
+		.field
+			label Email
+			input(type="text",name="email")
+		.field
+			label Aniversário
+			.ui.action.input
+				input#aniversarioField(type="tel",name="data",autocomplete="off")
+				.ui.icon.button.toggleDatePicker(data-field="#aniversarioField")
+					i.calendar.icon
+		.field
+			label Telefone
+			input#phoneField(type="tel",name="phone")
+	br
+	button.ui.blue.fluid.button(type="submit",form="registerTwoForm") Cadastre-se
+	br
+	a.ui.fluid.button(href="#{pathFor 'homeRoute'}") Cancelar
+			

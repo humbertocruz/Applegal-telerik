@@ -1,0 +1,27 @@
+template(name="modulosView")
+	+indexHeaderSearch header=header newLink=newLink extraLinks=extraLinks
+	table.ui.top.attached.table
+		thead
+			tr
+				th.two.wide &nbsp;
+				th Título
+				th Path
+				th.one.wide
+					i.desktop.icon
+				th.onw.wide
+					i.mobile.icon
+				th Ícone
+		tbody
+			each modulos.data
+				tr
+					td
+						a.ui.icon.button.editBtn(href="#{pathFor 'modulosUpdateRoute' id=_id}")
+							i.edit.blue.icon
+						.ui.icon.button.removeBtn
+							i.trash.red.icon
+					td #{title}
+					td #{path}
+					td #{admin}
+					td #{mobile}
+					td #{icon}
+	+indexInfoPaginator ready=ready nothingFound='Nenhum módulo cadastrado.' count=modulos.count page=modulos.count pages=modulos.pages singularForm='Módulo' pluralForm='Módulos'

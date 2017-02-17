@@ -1,0 +1,14 @@
+template(name="filiaisView")
+	unless filiais
+		.ui.loading.message Carregando...
+	else
+		if compare filiais.count 'eq' 0
+			.ui.red.message 
+				p Nenhuma filial encontrada
+		.ui.large.feed
+			each filiais.data
+				.event.selectFilialEvent
+					.label
+						img(src="https://placehold.it/500x500")
+					.content 
+						.header #{name}

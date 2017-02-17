@@ -1,0 +1,9 @@
+template(name="homeView")
+	.ui.basic.segment
+		img.ui.small.centered.image(src="#{appInfo.logo}")
+	.ui.three.column.grid
+		each modulos
+			.center.aligned.column
+				a.ui.icon.inverted.small.header(href="#{pathFor modulo.path}") 
+					i.circular.icon(class="#{modulo.icon}")
+					.content #{modulo.title}

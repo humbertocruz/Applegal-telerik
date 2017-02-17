@@ -1,0 +1,8 @@
+template(name="noticiasDetalheView")
+	.ui.segment
+		.ui.left.floated.header #{noticia.title}
+		a.ui.mini.right.floated.icon.button(href="#{pathFor 'noticiasRoute'}")
+			i.chevron.left.icon
+		img.ui.fluid.rounded.image(src="https://s-media-cache-ak0.pinimg.com/736x/5b/1c/a5/5b1ca598a2c90c7034bff1d373204f92.jpg")
+		p !{noticia.mensagem}
+		

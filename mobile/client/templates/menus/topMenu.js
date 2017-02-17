@@ -1,0 +1,29 @@
+Controller('topMenu',{
+	created:function(){
+	},
+	rendered:function(){
+	},
+	helpers:{
+		isLogged:function(){
+			return Meteor.userId();
+		},
+		hasUpdate:function(){
+			return Reload.isWaitingForResume();
+		},
+		topTitle:function(){
+			return topTitleVar.get();
+		}
+	},
+	events:{
+		'click #logoutBtn':function(e,t){
+			htmlConfirm('Atenção','Tem certeza que deseja sair?',function(){
+				isLoadingVar.set('Fazendo logout...');
+				FlowRouter.go('homeRoute');
+				Meteor.logout();
+			});
+		},
+		'click #reloadBtn':function(e,t){
+			window.location.reload();
+		}
+	}
+});

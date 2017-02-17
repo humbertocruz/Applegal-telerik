@@ -1,0 +1,30 @@
+template(name="aplicativosModulosView")
+	+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
+	.ui.block.top.attached.header Módulos
+	.ui.bottom.attached.segment
+		.ui.grid
+			.four.wide.column
+				.ui.header Disponíveis
+				.ui.vertical.fluid.menu
+					each modulos_disponiveis
+						.item
+							|#{title}
+							i.link.add.icon.addModulo
+			.four.wide.column
+				.ui.header Ativos
+				if modulos_ativos
+					.ui.vertical.fluid.menu
+						each modulos_ativos
+							.link.item.updateModulo #{modulo.title}
+				else
+					.ui.warning.message
+						p Nenhum Módulo Ativo
+			.eight.wide.column
+				.ui.header Configuração
+				form.ui.form#modulosForm(method="post")
+					input#pathFieldModulo(type="hidden",name="path")
+					.field
+						label Título
+						input#titleFieldModulo(type="text",name="title")
+					.actions
+						button.ui.blue.button(type="submit",form="modulosForm") Salvar

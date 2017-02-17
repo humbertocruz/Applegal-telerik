@@ -1,0 +1,18 @@
+template(name="documentosView")
+	unless documentos
+		.ui.loading.message Carregando...
+	else
+		if compare documentos.count 'eq' 0
+			.ui.red.message 
+				p Nenhum documento encontrado
+		.ui.icon.fluid.input#documentosSearchEvent
+			input#searchField(type="search",name="seach",placeholder="Busque...")
+			i.link.search.icon#searchEvent
+		each documentos.data
+			.ui.fluid.card(class="#{cor}")
+				.content
+					.header #{title}
+					.meta #{tipo.name}
+					.description #{dateBr date}
+				.extra.content
+					.ui.fluid.blue.button#documentosEmailSendEvent Receber por Email

@@ -1,0 +1,21 @@
+template(name="alunosView")
+	.ui.divided.items
+		each cursos
+			.item
+				.content
+					.head 
+						.ui.header #{name}
+					.description #{description}
+					.extra
+						if compare status 'eq' 'doing'
+							.ui.fluid.three.buttons
+								.ui.button Notas
+								.ui.button Trabalhos
+								.ui.button Presenças
+						if compare status 'eq' 'done'
+							.ui.fluid.button Você já fez este curso.
+						if compare status 'eq' 'nothing'
+							if compare hasRequisitos 'eq' ''
+								.ui.blue.fluid.button.signUpEvent Inscrever-se
+							else
+								.ui.fluid.button O Curso #{nameCursoRequerido} é requirido.

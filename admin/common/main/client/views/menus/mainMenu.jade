@@ -1,0 +1,26 @@
+template(name="mainMenu")
+	.ui.blue.secondary.labeled.icon.menu#adminMenu
+		a.item(class="#{isActiveRoute regex='^home'}",href="#{pathFor 'homeRoute'}")
+			img.ui.tiny.circular.image(src="/images/AppLegal.png")
+		.item.header 
+			img.ui.mini.image(src="#{aplicativo.logo}")
+			|#{aplicativo.name}
+		.right.menu
+			if isInRole 'admin'
+				a.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
+					i.android.icon
+					|Aplicativos
+				a.item(class="#{isActiveRoute regex='^modulos'}",href="#{pathFor 'modulosRoute'}")
+					i.puzzle.icon
+					|Módulos
+				a.item(class="#{isActiveRoute regex='^admins'}",href="#{pathFor 'adminsRoute'}")
+					i.users.icon
+					|Admins
+			if currentUserId
+				a.item(class="#{isActiveRoute regex='^profile'}",href="#{pathFor 'profileRoute'}")
+					i.sign.out.icon
+					|#{currentUser.profile.name}
+			else
+				a.item(href="#{pathFor 'loginRoute'}")
+					i.sign.in.icon
+					|Entrar

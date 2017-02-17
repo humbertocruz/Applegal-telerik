@@ -1,0 +1,11 @@
+template(name="adminLayout")
+	if isLoading
+		.ui.active.inverted.dimmer
+			.ui.text.loader Carregando...
+	+confirmView
+	+promptView
+	.ui.container
+		+Template.dynamic template=menu
+		if aplicativoId
+			+appInfoView
+		+Template.dynamic template=main

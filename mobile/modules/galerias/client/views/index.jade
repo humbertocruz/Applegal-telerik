@@ -1,0 +1,14 @@
+template(name="galeriasView")
+	unless galerias
+		.ui.loading.message Carregando...
+	else
+		if compare galerias.count 'eq' 0
+			.ui.red.message 
+				p Nenhuma galeria encontrada
+		each galerias.data
+			a.ui.link.fluid.card(href="#{pathFor 'fotosRoute' id=_id}")
+				.image
+					img(src="#{locationOrigin}/fotoDaGaleria/#{capa_id}")
+				.content
+					.left.floated.header #{titulo}
+					.ui.red.right.floated.label #{fotos.length}

@@ -1,0 +1,5 @@
+template(name="loginLayout")
+	if isLoading
+		.ui.active.inverted.dimmer
+			.ui.text.loader Carregando...
+	+Template.dynamic template=main

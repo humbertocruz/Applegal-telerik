@@ -1,0 +1,17 @@
+template(name="noticiasAssuntosView")
+	+indexHeaderSearch header=header newLink=newLink extraLinks=extraLinks
+	table.ui.top.attached.table
+		thead
+			tr
+				th.two.wide &nbsp;
+				th Nome
+		tbody
+			each assuntos.data
+				tr
+					td
+						a.ui.icon.button.editBtn(href="#{pathFor 'noticiasAssuntosUpdateRoute' id=_id}")
+							i.edit.blue.icon
+						.ui.icon.button.removeBtn
+							i.trash.red.icon
+					td #{name}
+	+indexInfoPaginator ready=ready nothingFound='Nenhum assunto cadastrado.' count=assuntos.count page=assuntos.count pages=assuntos.pages singularForm='Assunto' pluralForm='Assuntos'

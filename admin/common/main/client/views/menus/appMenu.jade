@@ -1,0 +1,6 @@
+template(name="appMenu")
+	.ui.large.blue.header #{appInfo.name}
+	.ui.vertical.fluid.menu
+		a.item(href="#{pathFor 'aplicativosUpdateRoute' aplicativoId=appInfo._id}") Configuração
+		a.item(href="#{pathFor 'aplicativosUsuariosRoute' aplicativoId=appInfo._id}") Usuários
+		a.item(href="#{pathFor 'aplicativosModulosRoute' aplicativoId=appInfo._id}") Módulos

@@ -1,0 +1,17 @@
+template(name="enquetesView")
+	unless enquetes
+		.ui.loading.message Carregando...
+	else
+		if compare enquetes.count 'eq' 0
+			.ui.red.message 
+				p Nenhua Enquete encontrada
+		each enquetes.data
+			.ui.fluid.card(class="#{cor}")
+				.content
+					i.large.wizard.right.floated.icon(class="#{cor}")
+					.header #{title}
+				.extra.content
+					unless resposta
+						a.ui.fluid.button#enquetesResponderEvent(class="#{cor}",href="#{pathFor 'enquetesResponderRoute' id=_id}") Responder
+					else
+						a.ui.fluid.button Você já Respondeu

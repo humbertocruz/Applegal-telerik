@@ -1,0 +1,23 @@
+template(name="chamadosView")
+	+indexHeaderSearch header=header extraLinks=extraLinks
+	table.ui.top.attached.table
+		thead
+			tr
+				th.two.wide
+				th.two.wide Fechado
+				th.two.wide Data
+				th Associado
+		tbody
+			each chamados.data
+				tr
+					td
+						a.ui.icon.button(href="#{pathFor 'mensagensRoute' id=_id}")
+							i.eye.icon
+					td
+						unless close
+							.ui.red.circular.button.ctrlChamadoEvent(data-tooltip="Fechar Chamado",data-inverted) Não
+						else
+							.ui.green.circular.button.ctrlChamadoEvent(data-tooltip="Reabrir Chamado",data-inverted) Sim
+					td #{dateTimeBr date}
+					td #{remetente.profile.name}
+	+indexInfoPaginator ready=ready nothingFound='Nenhum Chamado Cadastrado' count=chamados.count page=chamados.count pages=chamados.pages singularForm='Chamado' pluralForm='Chamados'

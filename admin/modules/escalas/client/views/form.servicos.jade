@@ -1,0 +1,6 @@
+template(name="escalasServicosFormView")
+	+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
+	form.ui.form#servicosForm(method="post")
+		.field
+			label Nome
+			input#nomeField(type="text",name="name")

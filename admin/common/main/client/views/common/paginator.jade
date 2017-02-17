@@ -1,0 +1,8 @@
+template(name="paginator")
+	.ui.small.pagination.blue.inverted.menu
+		a.item.changePage(href="?page=1",class="#{addClassIf 'disabled' page 1 'eq'}")
+			i.chevron.left.icon
+		each paginatorHelper pages=pages
+			a.item.changePage(class="#{active} #{disabled}",href="?page=#{page}") #{page}
+		a.item.changePage(href="?page=#{pages}",class="#{addClassIf 'disabled' page pages 'eq'}")
+			i.chevron.right.icon

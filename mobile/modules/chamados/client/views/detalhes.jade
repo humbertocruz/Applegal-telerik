@@ -1,0 +1,22 @@
+template(name="mensagensView")
+	.ui.left.floated.header #{dateTimeBr chamado.date}
+	a.ui.right.floated.mini.icon.button(href="#{pathFor 'chamadosRoute'}")
+		i.chevron.left.icon
+	.ui.clearing.divider
+	.ui.action.fluid.input
+		input#respostaField(type="text",name="resposta")
+		button.ui.blue.right.floated.button#sendRespostaBtn(type="button") Enviar
+	br
+	.scroller(style="height:70vh;overflow:auto;")
+		.ui.comments(style="margin-bottom:40px;")
+			each chamado.mensagens
+				.comment
+					a.avatar
+						i.big.user.icon
+					.content
+						a.author #{user.profile.name}
+						.metadata
+							.date #{dateTimeBr date}
+						.text
+							| #{mensagem}
+	

@@ -1,0 +1,6 @@
+template(name="noticiasAssuntosFormView")
+	+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
+	form.ui.form#assuntosForm(method="post")
+		.field
+			label Nome
+			input#nomeField(type="text",name="name")

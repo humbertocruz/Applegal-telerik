@@ -1,0 +1,17 @@
+template(name="topMenu")
+	.ui.inverted.secondary.top.fixed.menu(class="#{appInfo.headerBackgroundColor}")
+		.icon.item.toggleSidebar
+			i.sidebar.icon
+		.header.item #{topTitle}
+		.right.menu
+			if hasUpdate
+				.item
+					.ui.tiny.icon.button#reloadBtn
+						i.red.loading.refresh.icon
+			else
+				if isLogged
+					a.icon.active.item(href="#{pathFor 'homeRoute'}")
+						i.ui.home.icon
+				else
+					a.icon.item(href="#{pathFor 'loginRoute'}")
+						i.ui.power.icon

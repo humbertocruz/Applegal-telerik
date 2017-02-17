@@ -1,0 +1,32 @@
+template(name="ensinoCursosFormView")
+	+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
+	form.ui.form#cursosForm(method="post")
+		.two.fields
+			.field
+				label Ordem
+				input#orderField(type="number",name="order")
+			.field
+				label Requisito
+				select.ui.dropdown#requisitoField(name="requisito")
+					option(value="") Nenhum
+					each requisitos
+						option(value="#{_id}") #{name}
+		.field
+			label Nome
+			input#nameField(type="text",name="name")
+		.field
+			label Descrição
+			textarea#descriptionField(name="description")
+		.ui.two.column.grid
+			.column
+				table.ui.table
+					caption Provas
+					thead
+						tr
+							th Data
+			.column
+				table.ui.table
+					caption Trabalhos
+					thead
+						tr
+							th Data

@@ -1,0 +1,40 @@
+template(name="enquetesQAView")
+	+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
+	.ui.grid
+		.row
+			.ten.wide.column
+				unless perguntas
+					.ui.red.message Nenhuma Pergunta
+				else
+					each perguntas
+						.ui.clearing.segment(class="#{addClassIf 'blue' perguntaAtual order 'eq'}")
+							.ui.mini.red.right.floated.icon.button#enquetesRemovePerguntaEvent(data-tooltip="Remove esta Pergunta",data-inverted)
+								i.close.icon
+							.ui.mini.blue.right.floated.icon.button#enquetesSelecionaPerguntaEvent(data-tooltip="Selecione esta Pergunta",data-inverted)
+								i.check.icon
+							.ui.left.floated.header #{title}
+							.ui.clearing.hidden.divider
+							each opc in opcoes
+								.ui.clearing.grey.segment
+									.ui.mini.red.right.floated.icon.button#enquetesRemoveOpcaoEvent(class="#{addClassIf 'disabled' perguntaAtual order 'ne'}",data-tooltip="Remove esta Opção",data-inverted)
+										i.close.icon
+									.ui.left.floated.header #{opc.title}
+											
+			.six.wide.column
+				.ui.segments
+					.ui.segment
+						form.ui.form#enqueteFormPergunta(method="post")
+							.field
+								label Adcione uma Pergunta
+								.ui.action.input
+									input#perguntaField(type="text",name="pergunta")
+									button.ui.icon.blue.button(form="enqueteFormPergunta",type="submit")
+										i.add.icon
+					.ui.segment
+						form.ui.form#enqueteFormOpcao(method="post")
+							.field(class="#{addClassIf 'disabled' perguntaAtual 'none' 'eq'}")
+								label Adicione uma Opção
+								.ui.action.input
+									input#opcaoField(type="text",name="opcao")
+									button.ui.icon.blue.button(form="enqueteFormOpcao",type="submit")
+										i.add.icon

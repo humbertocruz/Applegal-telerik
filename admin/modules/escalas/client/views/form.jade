@@ -1,0 +1,20 @@
+template(name="escalasFormView")
+	+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
+	.ui.divider
+	form.ui.form#escalasForm(method="post")
+		.two.fields
+			.field
+				label Data
+				input#dateField(type="text",name="date")
+			.field
+				label Serviço
+				select.ui.dropdown#servicoField(name="servico_id")
+					option(value="") Escolha o Serviço
+					each servicos
+						option(value="#{_id}") #{name}
+		if escala_id
+			.ui.segment.escalas.dropzone(style="min-height:100px")
+		else
+			.ui.blue.message
+				i.warning.icon
+				span É necessário Salvar para poder fazer o Upload da Escala.

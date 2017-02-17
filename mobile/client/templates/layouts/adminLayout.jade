@@ -1,0 +1,25 @@
+template(name="adminLayout")
+	if isOffline
+		.ui.active.dimmer
+			.ui.text.loader Offline! Sem conexão com o servidor...
+	if isLoading
+		.ui.active.dimmer
+			.ui.text.loader #{isLoading}
+	unless noApp
+		+sidebar
+		+technotronicsSidebar
+		+confirmView
+	.pusher
+		//if noApp
+			.ui.page.active.visible.dimmer
+				.content
+					.center 
+						.ui.large.center.aligned.inverted.header
+							i.red.warning.sign.icon
+							br
+							|Falha no Aplicativo
+		//else
+		.ui.basic.segment(style="height:86vh !important; margin-top:6vh; overflow:auto;")
+			+Template.dynamic template=menu
+			+Template.dynamic template=main
+			+Template.dynamic template=technotronics

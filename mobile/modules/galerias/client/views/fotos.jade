@@ -1,0 +1,9 @@
+template(name="fotosView")
+	.ui.left.floated.header Fotos da Galeria
+	a.ui.right.floated.mini.icon.button(href="#{pathFor 'galeriasRoute'}")
+		i.chevron.left.icon
+	.ui.clearing.divider
+	each fotos
+		.ui.fluid.card
+			.image
+				img(src="#{locationOrigin}/fotoDaGaleria/#{_id}")

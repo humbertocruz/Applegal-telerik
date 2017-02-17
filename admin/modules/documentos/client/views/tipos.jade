@@ -1,0 +1,17 @@
+template(name="documentosTiposView")
+	+indexHeaderSearch header=header newLink=newLink extraLinks=extraLinks
+	table.ui.top.attached.table
+		thead
+			tr
+				th.two.wide &nbsp;
+				th Nome
+		tbody
+			each tipos.data
+				tr
+					td
+						a.ui.icon.button.editBtn(href="#{pathFor 'documentosTiposUpdateRoute' id=_id}")
+							i.edit.blue.icon
+						.ui.icon.button.removeBtn
+							i.trash.red.icon
+					td #{name}
+	+indexInfoPaginator ready=ready nothingFound='Nenhum tipo cadastrado.' count=tipos.count page=tipos.count pages=tipos.pages singularForm='Tipo' pluralForm='Tipos'

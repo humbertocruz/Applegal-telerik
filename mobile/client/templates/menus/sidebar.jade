@@ -1,0 +1,26 @@
+template(name="sidebar")
+	.ui.left.sidebar.inverted.vertical.menu(class="#{appInfo.sidebarBackgroundColor}")
+		if userId
+			a.item(href="#{pathFor 'homeRoute'}")
+				i.home.icon
+				|Home
+			//if currentFilial
+			unless isSuspended
+				each modulos
+					a.item(href="#{pathFor modulo.route}")
+						i.icon(class="#{modulo.icon}")
+						|#{modulo.title}
+			else
+				a.item(href="#{pathFor 'suspensoRoute'}")
+					i.exclamation.icon
+					|Usuário Suspenso
+			a.item(href="#{pathFor 'chamadosRoute'}")
+				i.comments.outline.icon
+				|Chamados de Suporte
+			a.item#logoutBtn
+				i.power.icon
+				|Logout
+		else
+			a.item(href="#{pathFor 'loginRoute'}")
+				i.power.icon
+				|Login

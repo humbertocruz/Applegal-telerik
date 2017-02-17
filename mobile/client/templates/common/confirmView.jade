@@ -1,0 +1,12 @@
+template(name="confirmView")
+	.ui.small.modal.transition.hidden#confirmView
+		.header #{confirmView.title}
+		.content
+			p !{confirmView.message}
+		.actions
+			.ui.negative.right.labeled.icon.button
+				|Não
+				i.close.icon
+			.ui.positive.right.labeled.icon.button
+				|Sim
+				i.checkmark.icon

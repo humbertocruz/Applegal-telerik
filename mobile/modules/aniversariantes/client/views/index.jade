@@ -1,0 +1,13 @@
+template(name="aniversariantesView")
+	unless aniversariantes
+		.ui.loading.message Carregando...
+	else
+		if compare aniversariantes.count 'eq' 0
+			.ui.red.message 
+				p Nenhum aniversariante este mês
+		each aniversariantes.data
+			.ui.icon.message
+				i.birthday.icon
+				.content
+					.header #{profile.name}
+					p #{dateBr profile.birth}

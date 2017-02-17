@@ -1,0 +1,20 @@
+template(name="enquetesResponderView")
+	unless enquete
+		.ui.loading.message Carregando...
+	else
+		.ui.segment(class="#{enquente.cor}")
+			.ui.header
+				i.large.wizard.right.floated.icon(class="#{enquete.cor}")
+				|#{enquete.title}
+		form#salvaRespostasForm(method="post")
+			each perg in enquete.perguntas
+				.ui.message 
+					.ui.header #{perg.title}
+					.ui.divider
+					.ui.vertical.fluid.menu
+						each opc in perg.opcoes
+							.item
+								.ui.radio.checkbox
+									input(type="radio",name="#{opcName perg.order}",value="#{opc.order}")
+									label #{opc.title}
+			button.ui.blue.fluid.button#salvaRespostasEvent(type="submit") Salvar Respostas

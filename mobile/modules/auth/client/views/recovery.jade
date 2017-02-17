@@ -1,0 +1,21 @@
+template(name="recoveryView")
+	form.ui.form#recoveryForm(method="post")
+		img.ui.tiny.centered.image(src="#{appInfo.logo}")
+		.field
+			label Código do Email
+			input#codeField(type="tel",name="code",autocomplete="off")
+		.field
+			label Nova Senha
+			.ui.action.input
+				input#password1Field.hidePwd(type="tel",name="password1",autocomplete="off")
+				.ui.icon.button.showPasswordBtn
+					i.eye.icon
+		.field
+			label Confirme a Senha
+			.ui.action.input
+				input#password2Field.hidePwd(type="tel",name="password2",autocomplete="off")
+				.ui.icon.button.showPasswordBtn
+					i.eye.icon
+		.ui.divider
+		button.ui.fluid.blue.button(type="submit",form="recoveryForm") Alterar Senha
+			

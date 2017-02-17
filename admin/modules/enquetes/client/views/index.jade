@@ -1,0 +1,31 @@
+template(name="enquetesView")
+	+indexHeaderSearch header=header search=search newLink=newLink extraLinks=extraLinks
+	table.ui.top.attached.table
+		thead
+			tr
+				th.three.wide &nbsp;
+				th.two.wide Ativa
+				th.two.wide Início
+				th.two.wide Fim
+				th Título
+				th Respostas
+				
+		tbody
+			each enquetes.data
+				tr
+					td
+						a.ui.icon.button.editBtn(class="#{addClassIf 'disabled' respostas.length 0 'gt'}",data-tooltip="Editar Enquete",data-inverted,href="#{pathFor 'enquetesUpdateRoute' id=_id}")
+							i.edit.blue.icon
+						a.ui.icon.button.QABtn(class="#{addClassIf 'disabled' respostas.length 0 'gt'}",data-tooltip="Perguntas e Respostas",data-inverted,href="#{pathFor 'enquetesQARoute' id=_id}")
+							i.question.violet.icon
+						a.ui.icon.button.QABtn(data-tooltip="Resultados",data-inverted,href="#{pathFor 'enquetesResultRoute' id=_id}")
+							i.browser.green.icon
+						.ui.icon.button.removeBtn(data-tooltip="Excluir Enquete",data-inverted)
+							i.trash.red.icon
+					td
+						+indexActivateButton active=active id=_id
+					td #{dateBr date_starting}
+					td #{dateBr date_ending}
+					td #{title}
+					td #{respostas.length}
+	+indexInfoPaginator ready=ready nothingFound='Nenhuma Enquete Cadastrada' count=enquetes.count page=enquetes.count pages=enquetes.pages singularForm='Enquete' pluralForm='Enquetes'

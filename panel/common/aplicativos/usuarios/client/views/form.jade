@@ -1,0 +1,43 @@
+template(name="usuariosFormView")
+	+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
+	form.ui.form#usuariosForm(method="post",novalidate="novalidate")
+		unless isNew
+			.two.fields
+				.field
+					label Usuário ou CPF
+					input#usernameField(type="text",name="username")
+				.field
+					label Email
+					input#emailField(type="text",name="email")
+			.three.fields
+				.field
+					label Senha
+					input.hidePwd#password1Field(type="text",name="password1")
+				.field
+					label Repita a Senha
+					input.hidePwd#password2Field(type="text",name="password2")
+				.field
+					label Permissões
+					select.ui.dropdown#rolesField(name="roles",multiple)
+						option(value="") Permissões
+						option(value="manager") Gerente
+						each appRoles
+							option(value="#{modulo.path}") #{modulo.name}
+		else 
+			.field
+				label Permissões
+				select.ui.dropdown#rolesField(name="roles",multiple)
+					option(value="") Permissões
+					option(value="manager") Gerente
+					each appRoles
+						option(value="#{modulo.path}") #{modulo.name}
+		.three.fields
+			.field
+				label Nome
+				input#nomeField(type="text",name="nome")
+			.field
+				label Aniversário
+				input#aniversarioField(type="date",name="birth")
+			.field
+				label Telefone
+				input#phoneField(type="text",name="phone",placeholder="(61) 99999-9999")

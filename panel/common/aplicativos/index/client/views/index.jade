@@ -1,0 +1,17 @@
+template(name="aplicativosView")
+	+indexHeaderSearch header=header newLink=newLink extraLinks=extraLinks
+	table.ui.top.attached.single.line.fixed.selectable.striped.padded.table
+		thead
+			tr
+				th.one.wide &nbsp;
+				th.three.wide #{_ 'app_creation'}
+				th #{_ 'app_name'}
+		tbody
+			each aplicativos.data
+				tr.selectAppEvent
+					td
+						img.ui.mini.image(src="#{logo}")
+					td #{dateTimeBr createdAt}
+					td 
+						a(href="#{pathFor 'aplicativosIndexRoute' aplicativoId=_id}") #{name}
+	+indexInfoPaginator ready=ready nothingFound='Nenhum aplicativo cadastrado.' count=aplicativos.count page=aplicativos.count pages=aplicativos.pages singularForm='Aplicativo' pluralForm='Aplicativos'

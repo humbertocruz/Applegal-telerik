@@ -15,6 +15,7 @@ Meteor.publishComposite("allAplicativos", function(search,page){
 					$in:groups
 				};
 			}
+			console.log(Aplicativo.find(search).count());
 			Counts.publish(this, 'allAplicativos', Aplicativo.find(search), {
 				noReady: true
 			});
@@ -38,11 +39,24 @@ Meteor.publishComposite("allAplicativos", function(search,page){
 		]
 	}
 });
-Meteor.publish("oneAplicativo", function(id){
+Meteor.publishComposite("oneAplicativo", function(id){
 	// Apenas usuário logado
 	if (!this.userId) return false;
 	// Apenas para ADMIN
 	if (!Roles.userIsInRole(this.userId,'admin')) return false;
-	var aplicativo = Aplicativo.find(id);
-	return aplicativo;
+	return {
+		find: function() {
+			var aplicativo = Aplicativo.find(id);
+			return aplicativo;
+		},
+		children:[
+			{
+				find:function(app){
+					return AplicativoModulo.find({
+						aplicativoId:app._id
+					});
+				}
+			}
+		]
+	}
 });

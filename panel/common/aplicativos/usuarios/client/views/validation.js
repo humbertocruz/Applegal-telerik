@@ -36,8 +36,8 @@ Controller('usuariosFormView',{
 				username: {
 					identifier: 'usernameField',
 					rules: [{
-						type: 'empty',
-						prompt: 'Digite o nome ou CPF do usuário!'
+						type: 'cpf',
+						prompt: 'Digite o CPF corretamente.'
 					}]
 				},
 				nome: {
@@ -51,7 +51,7 @@ Controller('usuariosFormView',{
 					identifier: 'emailField',
 					rules: [{
 						type: 'email',
-						prompt: 'Digite um email válido!'
+						prompt: 'Digite o email corretamente!'
 					}]
 				},
 				aniversario: {
@@ -92,6 +92,7 @@ Controller('usuariosFormView',{
 			};
 		};
 		$('#usuariosForm').form({
+			inline:true,
 			fields:fields
 		})
 	}

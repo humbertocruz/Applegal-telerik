@@ -1,12 +1,13 @@
 Controller('aplicativosModulosView',{
 	created:function(){
+		updateModuloVar = new ReactiveVar(false);
 		Tracker.autorun(function(){
-			Meteor.subscribe("allAplicativosModulos", {}, FlowRouter.getQueryParam('page'), aplicativoVar.get()._id);
+			Meteor.subscribe("allAplicativosModulos", {}, FlowRouter.getQueryParam('page'), FlowRouter.getParam('AplicativoId'));
 		});
 	},
 	helpers:{
-		ready:function(){
-			return true;
+		updateModulo:function(){
+			return updateModuloVar.get();
 		},
 		header:function(){
 			return {
@@ -32,15 +33,47 @@ Controller('aplicativosModulosView',{
 			return modulos;
 		},
 		modulos_ativos:function(){
-			return AplicativoModulo.find().fetch();
+			return AplicativoModulo.find({
+				aplicativoId:FlowRouter.getParam('aplicativoId')
+			},{
+				sort:{
+					order:1
+				}
+			}).fetch();
 		}
 	},
 	events:{
+		'submit #appModuloForm':function(e,t){
+			var me = this;
+			e.preventDefault();
+			var fields = $('#appModuloForm').form('get values');
+			fields._id = updateModuloVar.get();
+			fields.aplicativoId = FlowRouter.getParam('aplicativoId');
+			Meteor.call("aplicativosUpdateModulo", fields, function(error, result){
+				if(error){
+					console.log("error", error);
+				}
+				if(result){
+					Bert.alert('Módulo Adicionado com sucesso!','success');
+				}
+			});
+		},
+		'click .updateModulo':function(e,t){
+			var me = this;
+			e.preventDefault();
+			updateModuloVar.set(me._id);
+			var fields = AplicativoModulo.findOne(me._id);
+			$('#appModuloForm').form('set values',fields);
+		},
 		'click .addModulo':function(e,t){
 			var me = this;
 			e.preventDefault();
 			htmlConfirm('Adicionar Módulo','Você tem Certeza?',function(){
-				Meteor.call("aplicatovosAddModulo", me._id, aplicativoVar.get()._id, function(error, result){
+				var fields = {
+					aplicativoId:FlowRouter.getParam('aplicativoId'),
+					moduloId: me._id
+				}
+				Meteor.call("aplicativosAddModulo", fields, function(error, result){
 					if(error){
 						console.log("error", error);
 					}

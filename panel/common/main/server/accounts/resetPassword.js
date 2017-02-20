@@ -1,7 +1,7 @@
 Meteor.startup(function(){
-	Accounts.emailTemplates.siteName = "Business App";
-	Accounts.emailTemplates.from = "Business App <admin@technotronics.com.br>";
+	Accounts.emailTemplates.siteName = "AppLegal";
+	Accounts.emailTemplates.from = "AppLegal <admin@applegal.com.br>";
 	Accounts.emailTemplates.resetPassword.from = function () {
-		return "Resetar senha <admin@technotronics.com.br>";
+		return "Resetar senha <admin@applegal.com.br>";
 	};
 });

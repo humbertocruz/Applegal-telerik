@@ -2,7 +2,7 @@ Controller('registerView', {
 	rendered: function() {
 		$('#usernameField').mask('999.999.999-99');
 		$('#passwordField').mask('9999999999999999');
-		$('#registerGrid').transition('fade');
+		$('#registerGrid').transition('horizontal flip in');
 	},
 	events: {
 		'submit #registerForm' (e, t) {

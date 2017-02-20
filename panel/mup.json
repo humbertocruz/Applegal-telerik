@@ -1,7 +1,7 @@
 {
   "servers": [
     {
-      "host": "applegal.com.br",
+      "host": "104.236.113.15",
       "username": "root",
       "pem": "~/.ssh/id_rsa",
       "env": {}
@@ -10,24 +10,16 @@
 
   "setupMongo": false,
 
-  "setupNginxLetsencrypt": false,
-
   "appName": "appLegal",
-
-  "uploadDir": "appLegal",
 
   "app": ".",
 
   "env": {
     "PORT": 4000,
     "UPSTART_UID": "meteoruser",
-    "ROOT_URL": "https://applegal.com.br",
+    "ROOT_URL": "https://panel.applegal.com.br",
     "MONGO_URL": "mongodb://10.132.62.239/applegal2",
-    "MAIL_URL":"smtp://admin%applegal.com.br:N32w7csfPU@mail.applegal.com.br:587",
-    "VIRTUAL_HOST":"applegal.com.br",
-    "VIRTUAL_PORT":4000,
-    "LETSENCRYPT_HOST":"applegal.com.br",
-    "LETSENCRYPT_EMAIL":"humberto.cruz@gmail.com"
+    "MAIL_URL":"smtp://admin%applegal.com.br:N32w7csfPU@mail.applegal.com.br:587"
   },
 
   "deployCheckWaitTime": 30,

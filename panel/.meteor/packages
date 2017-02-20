@@ -32,7 +32,6 @@ dburles:collection-helpers
 kadira:flow-router
 kadira:blaze-layout
 arillo:flow-router-helpers
-meteorhacks:subs-manager
 reywood:publish-composite
 tmeasday:publish-counts
 
@@ -47,16 +46,13 @@ themeteorchef:controller
 themeteorchef:bert
 meteorhacks:picker
 msavin:mongol
-dbarrett:dropzonejs
-ostrio:files
-cfs:graphicsmagick
+#dbarrett:dropzonejs
+#ostrio:files
+#cfs:graphicsmagick
 teamon:tinymce
 mrt:gm
-aldeed:tabular
-sayawan:pickadate
 raix:push
 mrt:moment-timezone
 london:body-class
-cfs:standard-packages
-cfs:gridfs
 tap:i18n
+vsivsi:file-collection

@@ -56,3 +56,4 @@ mrt:moment-timezone
 london:body-class
 tap:i18n
 vsivsi:file-collection
+benjaminrh:jquery-cookie

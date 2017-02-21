@@ -1,0 +1,22 @@
+template(name="appMenu")
+	if isManagerOrAdmin
+		.ui.small.blue.vertical.fluid.labeled.icon.menu
+			if aplicativoId
+				a.item(href="#{pathFor 'aplicativosUpdateRoute' aplicativoId=appInfo._id}")
+					i.setting.icon
+					|Configuração
+				a.item(href="#{pathFor 'aplicativosModulosRoute' aplicativoId=appInfo._id}")
+					i.puzzle.icon
+					|Módulos
+				a.item(href="#{pathFor 'aplicativosUsuariosRoute' aplicativoId=appInfo._id}")
+					i.users.icon
+					|Usuários
+			else 
+				a.item(href="#{pathFor 'aplicativosInsertRoute'}")
+					i.setting.icon
+					|Configuração
+
+	.ui.small.blue.vertical.fluid.labeled.icon.menu
+		a.item(href="#{pathFor 'noticiasRoute' aplicativoId=appInfo._id}")
+			i.newspaper.icon
+			|Notícias

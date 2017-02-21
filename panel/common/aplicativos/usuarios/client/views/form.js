@@ -17,14 +17,16 @@ Controller('usuariosFormView', {
 
 		if (id = FlowRouter.getParam('userId')) {
 			var fields = Meteor.users.findOne(id);
+			if (!fields) return false;
 			var usuario = {
 				username: fields.username,
 				nome: fields.profile.name,
-				roles: fields.roles,
+				roles: fields.roles[FlowRouter.getParam('aplicativoId')],
 				birth: moment(fields.profile.birth).format('YYYY-MM-DD'),
 				phone: fields.profile.phone
 			};
 			$('#usuariosForm').form('set values', usuario);
+			//$('#usuariosForm').form('set value','rolesField',fields.roles[FlowRouter.getParam('aplicativoId')]);
 		}
 	},
 	helpers: {
@@ -65,6 +67,11 @@ Controller('usuariosFormView', {
 				}
 			}).fetch();
 			return filiais;
+		},
+		appRoles: function(){
+			var app = Aplicativo.findOne(FlowRouter.getParam('aplicativoId'));
+			if (!app) return false;
+			return app.appModulos();
 		}
 	},
 	events: {
@@ -72,7 +79,7 @@ Controller('usuariosFormView', {
 			e.preventDefault();
 			var fields = $(e.target).form('get values');
 			var usuario = {
-				id: FlowRouter.getParam('userId'),
+				_id: FlowRouter.getParam('userId'),
 				email: fields.email,
 				username: fields.username,
 				password: fields.password1,

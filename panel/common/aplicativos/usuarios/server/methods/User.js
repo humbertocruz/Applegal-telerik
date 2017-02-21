@@ -8,17 +8,16 @@ Meteor.methods({
 		fields.profile.birth_day = parseInt(dt.format('DD'));
 		fields.profile.birth_month = parseInt(dt.format('MM'));
 		fields.profile.birth_year = parseInt(dt.format('YYYY'));
-
-		if (fields.id == undefined) {
+		if (fields._id == undefined) {
 			var id = Accounts.createUser(fields);
-			Roles.setUserRoles(id, roles, aplicativoId);
+			Roles.setUserRoles(fields._id, roles, aplicativoId);
 			return id;
 		} else {
-			var user = Meteor.users.findOne(fields.id);
-			var id = Meteor.users.update(fields.id, {
+			//var user = Meteor.users.findOne(fields._id);
+			var id = Meteor.users.update(fields._id, {
 				$set: fields
 			});
-			Roles.setUserRoles(id, roles, aplicativoId);
+			Roles.setUserRoles(fields._id, roles, aplicativoId);
 			return id;
 		}
 	}

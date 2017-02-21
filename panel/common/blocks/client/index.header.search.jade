@@ -20,7 +20,7 @@ template(name="indexHeaderSearch")
 								|#{search.title}
 						if newLink
 							if newLink.route
-								a.item#addBtn(href="#{pathFor newLink.route}")
+								a.item#addBtn(href="#{pathFor newLink.route newLink.params}")
 									i.plus.icon
 									|#{_ newLink.title}
 							else

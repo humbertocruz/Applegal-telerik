@@ -14,6 +14,15 @@ Controller('aplicativosView',{
 		$('.usernameField').mask('999.999.999-99');
 	},
 	helpers:{
+		logoLink:function(){
+			var md5 = Aplicativo.findOne(this._id).appLogo();
+			if (!md5) return false;
+			if (md5.md5 != 'd41d8cd98f00b204e9800998ecf8427e') {
+				return appLogo.baseURL + '/md5/' + md5.md5;
+			} else {
+				return false;
+			}
+		},
 		aplicativoId:function(){
 			return aplicativoVar.get()._id;
 		},

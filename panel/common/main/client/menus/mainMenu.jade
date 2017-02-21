@@ -1,15 +1,15 @@
 template(name="mainMenu")
-	.ui.blue.secondary.labeled.icon.menu#adminMenu
+	.ui.blue.secondary.labeled.icon.transition.hidden.menu#adminMenu
 		a.item(class="#{isActiveRoute regex='^home'}",href="#{pathFor 'homeRoute'}")
 			img.ui.tiny.circular.image(src="/images/technotronics.png")
 		.item.header 
 			img.ui.mini.image(src="#{aplicativo.logo}")
 			|#{aplicativo.name}
 		.right.menu
+			a.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
+				i.android.icon
+				|Aplicativos
 			if isInRole 'admin'
-				a.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
-					i.android.icon
-					|Aplicativos
 				a.item(class="#{isActiveRoute regex='^modulos'}",href="#{pathFor 'modulosRoute'}")
 					i.puzzle.icon
 					|Módulos

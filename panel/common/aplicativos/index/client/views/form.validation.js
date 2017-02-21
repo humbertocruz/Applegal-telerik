@@ -25,21 +25,22 @@ Controller('aplicativosFormView',{
 						}
 					]
 				},
-				headerField:{
-					indentifier:'headerField',
+				appInfoIdField:{
+					indentifier:'appInfoIdField',
+					optional: true,
 					rules:[
 						{
 							type:'empty',
-							prompt:'Deve-se escolher a cor do cabeçalho'
+							prompt:'O App ID deve ser informado.'
 						}
 					]
 				},
-				sidebarField:{
-					indentifier:'sidebarField',
+				itemsPerPageField:{
+					indentifier:'itemsPerPageField',
 					rules:[
 						{
-							type:'empty',
-							prompt:'Deve-se escolher a cor do menu lateral'
+							type:'minLength[2]',
+							prompt:'Quantidade de registros por página deve ser maior dez ou mais.'
 						}
 					]
 				},

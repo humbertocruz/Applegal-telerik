@@ -24,7 +24,7 @@ aplicativosRoutes.route('/', {
 aplicativosRoutes.route('/:aplicativoId/modulos', {
 	name: 'aplicativosModulosRoute',
 	action: function() {
-		BlazeLayout.render('appLayout', {
+		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
 			main: 'aplicativosModulosView'
 		});
@@ -34,7 +34,7 @@ aplicativosRoutes.route('/:aplicativoId/modulos', {
 aplicativosRoutes.route('/novo', {
 	name: 'aplicativosInsertRoute',
 	action: function() {
-		BlazeLayout.render('appLayout', {
+		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
 			main: 'aplicativosFormView'
 		});
@@ -44,9 +44,19 @@ aplicativosRoutes.route('/novo', {
 aplicativosRoutes.route('/:aplicativoId/edita', {
 	name: 'aplicativosUpdateRoute',
 	action: function() {
-		BlazeLayout.render('appLayout', {
+		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
 			main: 'aplicativosFormView'
+		});
+	}
+});
+
+aplicativosRoutes.route('/:aplicativoId/home', {
+	name: 'aplicativosHomeRoute',
+	action: function() {
+		BlazeLayout.render('adminLayout', {
+			menu: 'mainMenu',
+			main: 'aplicativosHomeView'
 		});
 	}
 });
@@ -55,7 +65,14 @@ aplicativosRoutes.route('/:aplicativoId', {
 	name: 'aplicativosIndexRoute',
 	triggersEnter:[
 		function(context,redirect){
-			redirect('aplicativosUsuariosRoute', context.params);
+			var superU = false;
+			if (Roles.userIsInRole(Meteor.userId(),'admin')) superU = true;
+			if (Roles.userIsInRole(Meteor.userId(),'manager',context.params.aplicativoId)) superU = true;
+			if (superU) {
+				redirect('aplicativosUpdateRoute', context.params);
+			} else {
+				redirect('aplicativosHomeRoute', context.params);
+			}
 		}
 	]
 });

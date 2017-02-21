@@ -1,9 +1,14 @@
 noticiasRoutes = FlowRouter.group({
 	name: 'noticiasRoutes',
-	prefix: '/noticias',
+	prefix: '/:aplicativoId/noticias',
 	triggersEnter: [
 		function(obj, redirect) {
-			if (!Roles.userIsInRole(Meteor.userId(), ['gerente', 'noticias'], aplicativoVar.get()._id)) {
+			var access = false;
+			if (!Roles.userIsInRole(Meteor.userId(), ['admin'])) access = true;
+			if (!Roles.userIsInRole(Meteor.userId(), ['manager'], obj.params.aplicativoId)) access = true;
+			if (!Roles.userIsInRole(Meteor.userId(), 'noticias', obj.params.aplicativoId)) access = true;
+
+			if (!access) {
 				Bert.alert('Você não tem permissão de acesso a este módulo!', 'danger');
 				redirect('homeRoute');
 			}

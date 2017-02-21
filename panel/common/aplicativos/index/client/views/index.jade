@@ -8,10 +8,9 @@ template(name="aplicativosView")
 				th #{_ 'app_name'}
 		tbody
 			each aplicativos.data
-				tr.selectAppEvent
+				tr.selectAppEvent(style="cursor:pointer;")
 					td
-						img.ui.mini.image(src="#{logo}")
+						img.ui.mini.image(src="#{logoLink}")
 					td #{dateTimeBr createdAt}
-					td 
-						a(href="#{pathFor 'aplicativosIndexRoute' aplicativoId=_id}") #{name}
+					td #{name}
 	+indexInfoPaginator ready=ready nothingFound='Nenhum aplicativo cadastrado.' count=aplicativos.count page=aplicativos.count pages=aplicativos.pages singularForm='Aplicativo' pluralForm='Aplicativos'

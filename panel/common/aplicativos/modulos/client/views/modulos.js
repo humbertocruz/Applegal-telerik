@@ -2,7 +2,9 @@ Controller('aplicativosModulosView',{
 	created:function(){
 		updateModuloVar = new ReactiveVar(false);
 		Tracker.autorun(function(){
-			Meteor.subscribe("allAplicativosModulos", {}, FlowRouter.getQueryParam('page'), FlowRouter.getParam('AplicativoId'));
+			var appId = FlowRouter.getParam('aplicativoId');
+			if (!appId) return false;
+			Meteor.subscribe("oneAplicativo", appId);
 		});
 	},
 	helpers:{
@@ -28,7 +30,7 @@ Controller('aplicativosModulosView',{
 			]
 		},
 		modulos_disponiveis:function(){
-			var modAtivos = _.pluck(AplicativoModulo.find().fetch(),'moduloId');
+			var modAtivos = _.pluck(Aplicativo.findOne(FlowRouter.getParam('aplicativoId')).appModulos(),'moduloId');
 			var modulos = Modulo.find({_id:{$nin:modAtivos}}).fetch();
 			return modulos;
 		},

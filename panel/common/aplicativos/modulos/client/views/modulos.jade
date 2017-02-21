@@ -1,41 +1,46 @@
 template(name="aplicativosModulosView")
-	+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
-	.ui.block.top.attached.header Módulos
-	.ui.bottom.attached.segment
-		.ui.grid
-			.four.wide.column
-				.ui.header Disponíveis
-				.ui.vertical.fluid.menu
-					each modulos_disponiveis
-						.item
-							|#{title}
-							i.link.add.icon.addModulo
-			.four.wide.column
-				.ui.header Ativos
-				if modulos_ativos
-					.ui.vertical.fluid.menu
-						each modulos_ativos
-							.link.item.updateModulo 
-								i.icon(class="#{icon}")
-								|#{title}
-				else
-					.ui.warning.message
-						p Nenhum Módulo Ativo
-			.eight.wide.column
-				.ui.header Configuração
-				if updateModulo
-					form.ui.form#appModuloForm(method="post")
-						.field
-							label Título
-							input#titleField(type="text",name="title")
-						.field
-							label Ordem
-							input#orderField(type="number",name="order")
-						.field
-							label Icone
-							input#iconField(type="text",name="icon")
-						.actions
-							button.ui.blue.button(type="submit",form="appModuloForm") Salvar
-				else
-					.ui.info.message
-						p Clique no nome do módulo ao lado para configurá-lo.
+	.ui.grid
+		.two.wide.column
+			+appMenu
+		
+		.fourteen.wide.column
+			+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
+			.ui.block.top.attached.header Módulos
+			.ui.bottom.attached.segment
+				.ui.grid
+					.four.wide.column
+						.ui.header Disponíveis
+						.ui.vertical.fluid.menu
+							each modulos_disponiveis
+								.item
+									|#{title}
+									i.link.add.icon.addModulo
+					.four.wide.column
+						.ui.header Ativos
+						if modulos_ativos
+							.ui.vertical.fluid.menu
+								each modulos_ativos
+									.link.item.updateModulo 
+										i.icon(class="#{icon}")
+										|#{title}
+						else
+							.ui.warning.message
+								p Nenhum Módulo Ativo
+					.eight.wide.column
+						.ui.header Configuração
+						if updateModulo
+							form.ui.form#appModuloForm(method="post")
+								.field
+									label Título
+									input#titleField(type="text",name="title")
+								.field
+									label Ordem
+									input#orderField(type="number",name="order")
+								.field
+									label Icone
+									input#iconField(type="text",name="icon")
+								.actions
+									button.ui.blue.button(type="submit",form="appModuloForm") Salvar
+						else
+							.ui.info.message
+								p Clique no nome do módulo ao lado para configurá-lo.

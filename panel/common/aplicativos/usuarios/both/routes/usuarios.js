@@ -13,8 +13,21 @@ aplicativosRoutes = FlowRouter.group({
 
 aplicativosRoutes.route('/:aplicativoId/usuarios', {
 	name: 'aplicativosUsuariosRoute',
+	triggersEnter:[
+		function(c,redirect){
+			Meteor.call("checkApp", c.params.aplicativoId, function(error, result){
+				if(error){
+					console.log("error", error);
+				}
+				if(!result){
+					Bert.alert('Aplicativo inexistente ou não permitido.','danger');
+					FlowRouter.go('homeRoute');
+				}
+			});
+		}
+	],
 	action: function() {
-		BlazeLayout.render('appLayout', {
+		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
 			main: 'aplicativosUsuariosView'
 		});
@@ -24,7 +37,7 @@ aplicativosRoutes.route('/:aplicativoId/usuarios', {
 aplicativosRoutes.route('/:aplicativoId/usuarios/novo', {
 	name: 'aplicativosUsuariosInsertRoute',
 	action: function() {
-		BlazeLayout.render('appLayout', {
+		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
 			main: 'usuariosFormView'
 		});
@@ -34,7 +47,7 @@ aplicativosRoutes.route('/:aplicativoId/usuarios/novo', {
 aplicativosRoutes.route('/:aplicativoId/usuarios/:userId', {
 	name: 'aplicativosUsuariosUpdateRoute',
 	action: function() {
-		BlazeLayout.render('appLayout', {
+		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
 			main: 'usuariosFormView'
 		});

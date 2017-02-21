@@ -1,4 +1,7 @@
 Meteor.methods({
+	registerUserOnPanel:function(fields){
+		return true;
+	},
 	profileForm:function(fields){
 		var birth = moment(fields.birth).startOf('day');
 		var user = {

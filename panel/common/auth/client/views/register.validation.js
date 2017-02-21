@@ -10,6 +10,13 @@ Controller('registerView', {
 						prompt: 'É necessário preencher o Nome'
 					}]
 				},
+				emailField: {
+					identifier: 'emailField',
+					rules: [{
+						type: 'email',
+						prompt: 'É necessário preencher o Email'
+					}]
+				},
 				userField: {
 					identifier: 'usernameField',
 					rules: [{

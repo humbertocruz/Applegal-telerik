@@ -21,17 +21,25 @@ Controller('noticiasView', {
 			}
 		},
 		newLink:function(){
-			return {
-				title:'Adicionar',
-				icon:'newspaper'
-			}
+			return {}
 		},
 		extraLinks:function(){
 			return [
 				{
 					title:'Assuntos',
 					route:'noticiasAssuntosRoute',
-					icon:'sidebar'
+					icon:'sidebar',
+					params:{
+						aplicativoId:FlowRouter.getParam('aplicativoId')
+					}
+				},
+				{
+					title:'Adicionar',
+					route:'noticiasInsertRoute',
+					icon:'add',
+					params:{
+						aplicativoId:FlowRouter.getParam('aplicativoId')
+					}
 				}
 			]
 		},

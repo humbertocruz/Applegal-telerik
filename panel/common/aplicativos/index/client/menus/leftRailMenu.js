@@ -1,4 +1,4 @@
-Controller('appMenu',{
+Controller('leftRailMain',{
 	helpers:{
 		isManagerOrAdmin:function(){
 			if (Roles.userIsInRole(Meteor.userId(),'admin')) return true;

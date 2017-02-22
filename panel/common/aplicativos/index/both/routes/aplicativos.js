@@ -1,14 +1,6 @@
 aplicativosRoutes = FlowRouter.group({
 	name: 'aplicativosRoutes',
-	prefix: '/aplicativos',
-	triggersEnter:[
-		function(){
-			if (!Meteor.userId()) {
-				Bert.alert('Faça o Login','danger');
-				FlowRouter.go('loginRoute');
-			}
-		}
-	]
+	prefix: '/aplicativos'
 });
 
 aplicativosRoutes.route('/', {
@@ -16,6 +8,7 @@ aplicativosRoutes.route('/', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftRailMain',
 			main: 'aplicativosView'
 		});
 	}
@@ -26,6 +19,7 @@ aplicativosRoutes.route('/:aplicativoId/modulos', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			leftRail: 'leftRailMain',
 			main: 'aplicativosModulosView'
 		});
 	}
@@ -36,6 +30,7 @@ aplicativosRoutes.route('/novo', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			leftRail: 'leftRailMain',
 			main: 'aplicativosFormView'
 		});
 	}
@@ -46,6 +41,7 @@ aplicativosRoutes.route('/:aplicativoId/edita', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			leftRail: 'leftRailMain',
 			main: 'aplicativosFormView'
 		});
 	}
@@ -56,6 +52,7 @@ aplicativosRoutes.route('/:aplicativoId/home', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			leftRail: 'leftRailMain',
 			main: 'aplicativosHomeView'
 		});
 	}

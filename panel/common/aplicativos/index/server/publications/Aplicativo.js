@@ -15,7 +15,6 @@ Meteor.publishComposite("allAplicativos", function(search,page){
 					$in:groups
 				};
 			}
-			console.log(Aplicativo.find(search).count());
 			Counts.publish(this, 'allAplicativos', Aplicativo.find(search), {
 				noReady: true
 			});
@@ -39,6 +38,14 @@ Meteor.publishComposite("allAplicativos", function(search,page){
 			{
 				find:function(app){
 					return appLogo.find({
+						'metadata._Resumable': { $exists: false },
+						'metadata.aplicativoId': app._id
+					});
+				}
+			},
+			{
+				find:function(app){
+					return appBg.find({
 						'metadata._Resumable': { $exists: false },
 						'metadata.aplicativoId': app._id
 					});

@@ -113,11 +113,7 @@ Controller('profileView', {
 			}
 		},
 		extraLinks: function() {
-			return [{
-				title: 'Cancelar',
-				route: 'usuariosRoute',
-				icon: 'close'
-			}]
+			return [];
 		},
 		filiais: function() {
 			var filiais = Filial.find({}, {
@@ -129,16 +125,6 @@ Controller('profileView', {
 		}
 	},
 	events: {
-		'click #logoutEvent':function(e,t){
-			htmlConfirm('Sair do Sistema', 'Você tem certeza?', function() {
-				isLoadingVar.set(true);
-				Meteor.logout(function() {
-					Bert.alert('Usuário desconectado com sucesso', 'success');
-					FlowRouter.go('loginRoute');
-					isLoadingVar.set(false);
-				});
-			});
-		},
 		'submit #profileForm':function(e, t) {
 			e.preventDefault();
 			var fields = $(e.target).form('get values');

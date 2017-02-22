@@ -24,6 +24,7 @@ noticiasRoutes.route('/', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuApp',
 			main: 'noticiasView'
 		});
 	}
@@ -34,6 +35,7 @@ noticiasRoutes.route('/nova', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuApp',
 			main: 'formNoticiasView'
 		});
 	}
@@ -44,6 +46,7 @@ noticiasRoutes.route('/:id', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuApp',
 			main: 'formNoticiasView'
 		});
 	}

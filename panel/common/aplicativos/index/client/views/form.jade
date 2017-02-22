@@ -1,65 +1,87 @@
 template(name="aplicativosFormView")
-	.ui.grid
-		.three.wide.column
-			+appMenu
-
-		.thirteen.wide.column
-			+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
-			form.ui.form#aplicativosForm(method="post")
-				.ui.top.attached.tabular.menu
-					.active.item(data-tab="info") Informações
-					.item(data-tab="design") Aparência do App
-					.item(data-tab="privacy") Privacidade
-				.ui.bottom.attached.active.tab.segment(data-tab="info")
-					.ui.grid
-						.two.wide.column
-							.field
-								label Logotipo
-								if aplicativoId
-									if logoLink
-										img.ui.fluid.image.logoBrowse(src="#{logoLink}")
-									else
-										img.ui.fluid.image.logoBrowse(src="https://placehold.it/100x100")
-								else
-									img.ui.fluid.image.logoNotBrowse(src="https://placehold.it/100x100")
-						.fourteen.wide.column
-							.two.fields
-								.field
-									label Nome
-									input#nameField(type="text",name="name")
-								.field
-									label APP ID (Google Play e Apple Store)
-									input#appInfoIdField(type="text",name="appInfoId",placeholder="br.com.dominio.nome")
-							.three.fields
-								.field
-									label Email
-									input#emailField(type="text",name="mailFrom")
-								.field
-									label Domínio Opcional
-									input#domainField(type="text",name="domain",placeholder="https://site.com.br")
-								.field
-									label Quantidade Paginação
-									input#itemsPerPageField(type="number",name="itemsPerPage")
-				.ui.bottom.attached.tab.segment(data-tab="design")
+	+indexHeaderSearch header=header saveLink=saveLink
+	form.ui.form#aplicativosForm(method="post")
+		.ui.top.attached.tabular.menu
+			.active.item(data-tab="info") Informações
+			.item(data-tab="design") Aparência do App
+			.item(data-tab="privacy") Privacidade
+		.ui.bottom.attached.active.tab.segment(data-tab="info")
+			.ui.grid
+				.three.wide.column
+					.field
+						label Logotipo
+						.ui.small.rounded.image
+							if logoUploadProgress
+								.ui.bottom.attached.progress(data-percent="#{logoUploadProgress}")
+									.bar
+							if logoLink
+								img.ui.image(src="#{logoLink}")
+							else
+								img.ui.image(src="https://placehold.it/150x150")
+						unless logoUploadProgress
+							br
+							.ui.blue.fluid.button.logoBrowse(class="#{addClassIf 'loading' logoUploadProgress undefined 'ne'}",class="#{addClassIf 'disabled' aplicativoId undefined 'eq'}") Upload
+				.thirteen.wide.column
 					.two.fields
 						.field
-							label Cor de Fundo do Cabeçalho
-							select.ui.search.dropdown#headerField(name="headerBackgroundColor")
-								option(value="") Escolha uma Cor
-								each semanticColors
-									option(value="#{className}") #{title}
+							label Nome
+							input#nameField(type="text",name="name")
 						.field
-							label Cor de Fundo do Menu Lateral
-							select.ui.search.dropdown#sidebarField(name="sidebarBackgroundColor")
-								option(value="") Escolha uma Cor
-								each semanticColors
-									option(value="#{className}") #{title}
-				.ui.bottom.attached.tab.segment(data-tab="privacy")
-					.field
-						label Privacidade
-						textarea#privacyField(name="privacy",rows="15")
-							|<p>Pol&iacute;tica de Privacidade</p>
-							|<p>- O aplicativo poder&aacute; detectar o n&uacute;mero do celular em uso para controle de acesso de usu&aacute;rios</p>
-							|<p>- As informa&ccedil;&otilde;es do us&aacute;rios fornecidas no aplicativo n&atilde;o ser&atilde;o compartilhadas com terceiros com excess&ccedil;&atilde;o:</p>
-							|<p>- O preenchimento do Anivers&aacute;rio aparecer&aacute; para outros usu&aacute;rios</p>
-							|<p>- O aplicativo detecta a posi&ccedil;&atilde;o atual do usu&aacute;rio via GPS para posicionamento das informa&ccedil;&otilde;es mas n&atilde;o salva essa informa&ccedil;&atilde;o</p>
+							label APP ID (Google Play e Apple Store)
+							input#appInfoIdField(type="text",name="appInfoId",placeholder="br.com.dominio.nome")
+					.three.fields
+						.field
+							label Email
+							input#emailField(type="text",name="mailFrom")
+						.field
+							label Domínio Opcional
+							input#domainField(type="text",name="domain",placeholder="https://site.com.br")
+						.field
+							label Quantidade Paginação
+							input#itemsPerPageField(type="number",name="itemsPerPage")
+		.ui.bottom.attached.tab.segment(data-tab="design")
+			.two.fields
+				.field
+					label Cor de Fundo do Cabeçalho
+					select.ui.search.dropdown#headerField(name="headerBackgroundColor")
+						option(value="") Escolha uma Cor
+						each semanticColors
+							option(value="#{className}") #{title}
+				.field
+					label Cor de Fundo do Menu Lateral
+					select.ui.search.dropdown#sidebarField(name="sidebarBackgroundColor")
+						option(value="") Escolha uma Cor
+						each semanticColors
+							option(value="#{className}") #{title}
+			.field
+				label Imagem de Fundo
+			.ui.top.attached.tabular.menu
+				.active.item(data-tab="bgChoose") Escolher
+				.item(data-tab="bgUpload") Enviar
+			.ui.bottom.attached.tab.active.segment(data-tab="bgChoose")
+				.ui.small.rounded.images
+					each bgImages
+						img.ui.link.image.bgSelectEvent(class="#{isBgSelected}",src="#{path}")
+				.field
+					.ui.buttons
+						.ui.icon.button#bgDownEvent
+							i.chevron.left.icon
+						.ui.icon.button#bgUpEvent
+							i.chevron.right.icon
+			.ui.bottom.attached.tab.segment(data-tab="bgUpload")
+				if aplicativoId
+					if bgLink
+						img.ui.small.image.bgBrowse(src="#{bgLink}")
+					else
+						img.ui.small.image.bgBrowse(src="https://placehold.it/150x267")
+				else
+					img.ui.small.image.bgNotBrowse(src="https://placehold.it/150x267")
+		.ui.bottom.attached.tab.segment(data-tab="privacy")
+			.field
+				label Privacidade
+				textarea#privacyField(name="privacy",rows="15")
+					|<p>Pol&iacute;tica de Privacidade</p>
+					|<p>- O aplicativo poder&aacute; detectar o n&uacute;mero do celular em uso para controle de acesso de usu&aacute;rios</p>
+					|<p>- As informa&ccedil;&otilde;es do us&aacute;rios fornecidas no aplicativo n&atilde;o ser&atilde;o compartilhadas com terceiros com excess&ccedil;&atilde;o:</p>
+					|<p>- O preenchimento do Anivers&aacute;rio aparecer&aacute; para outros usu&aacute;rios</p>
+					|<p>- O aplicativo detecta a posi&ccedil;&atilde;o atual do usu&aacute;rio via GPS para posicionamento das informa&ccedil;&otilde;es mas n&atilde;o salva essa informa&ccedil;&atilde;o</p>

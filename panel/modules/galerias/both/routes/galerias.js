@@ -24,6 +24,7 @@ galeriasRoutes.route('/', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuApp',
 			main: 'galeriasView'
 		});
 	}
@@ -35,6 +36,7 @@ galeriasRoutes.route('/nova', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuApp',
 			main: 'formGaleriasView'
 		});
 	}
@@ -45,6 +47,7 @@ galeriasRoutes.route('/:id', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuApp',
 			main: 'formGaleriasView'
 		});
 	}

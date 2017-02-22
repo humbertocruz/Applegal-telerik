@@ -16,6 +16,7 @@ adminsRoutes.route('/',{
 	action: function() {
 		BlazeLayout.render('adminLayout',{
 			menu:'mainMenu',
+			left:'leftMenuAdmin',
 			main:'adminsView'
 		});
 	}
@@ -26,6 +27,7 @@ adminsRoutes.route('/novo',{
 	action: function() {
 		BlazeLayout.render('adminLayout',{
 			menu:'mainMenu',
+			left:'leftMenuAdmin',
 			main:'adminsFormView'
 		});
 	}
@@ -36,6 +38,7 @@ adminsRoutes.route('/editar/:id',{
 	action: function() {
 		BlazeLayout.render('adminLayout',{
 			menu:'mainMenu',
+			left:'leftMenuAdmin',
 			main:'adminsFormView'
 		});
 	}

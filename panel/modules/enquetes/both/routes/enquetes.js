@@ -24,6 +24,7 @@ enquetesRoutes.route('/', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuApp',
 			main: 'enquetesView'
 		});
 	}
@@ -35,6 +36,7 @@ enquetesRoutes.route('/nova', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuApp',
 			main: 'enquetesFormView'
 		});
 	}
@@ -45,6 +47,7 @@ enquetesRoutes.route('/:id', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuApp',
 			main: 'enquetesFormView'
 		});
 	}
@@ -55,6 +58,7 @@ enquetesRoutes.route('/qa/:id', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuApp',
 			main: 'enquetesQAView'
 		});
 	}

@@ -24,6 +24,7 @@ escalasRoutes.route('/', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuApp',
 			main: 'escalasView'
 		});
 	}
@@ -35,6 +36,7 @@ escalasRoutes.route('/nova', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuApp',
 			main: 'escalasFormView'
 		});
 	}
@@ -45,6 +47,7 @@ escalasRoutes.route('/:id/edita', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuApp',
 			main: 'escalasFormView'
 		});
 	}

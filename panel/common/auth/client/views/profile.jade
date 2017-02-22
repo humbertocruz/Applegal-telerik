@@ -11,14 +11,6 @@ template(name="profileView")
 			.field
 				label Telefone
 				input#phoneField(type="text",name="phone",placeholder="(61) 99999-9999")
-		.three.fields
-			.field
-				.ui.button#changePwd Alterar Senha
-			.field
-				.ui.button#changeEmail Alterar Email
-			.field
-				if mySelf
-					.ui.red.button#logoutEvent Sair
 		unless isInRole 'admin'
 			.ui.dividing.header Permissões em Aplicativos
 			each userApps

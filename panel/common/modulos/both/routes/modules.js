@@ -16,6 +16,7 @@ modulosRoutes.route('/', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuAdmin',
 			main: 'modulosView'
 		});
 	}
@@ -26,6 +27,7 @@ modulosRoutes.route('/novo', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuAdmin',
 			main: 'modulosFormView'
 		});
 	}
@@ -36,6 +38,7 @@ modulosRoutes.route('/:id', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuAdmin',
 			main: 'modulosFormView'
 		});
 	}

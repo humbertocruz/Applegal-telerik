@@ -16,6 +16,7 @@ profileRoutes.route('/',{
 	action: function() {
 		BlazeLayout.render('adminLayout',{
 			menu:'mainMenu',
+			left:'leftMenuProfile',
 			main:'profileView'
 		});
 	}
@@ -34,6 +35,7 @@ profileRoutes.route('/user/:id',{
 	action: function() {
 		BlazeLayout.render('adminLayout',{
 			menu:'mainMenu',
+			left:'leftMenuProfile',
 			main:'profileView'
 		});
 	}

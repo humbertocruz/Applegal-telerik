@@ -24,6 +24,7 @@ tiposRoutes.route('/', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuApp',
 			main: 'documentosTiposView'
 		});
 	}
@@ -34,6 +35,7 @@ tiposRoutes.route('/nova', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuApp',
 			main: 'documentosTiposFormView'
 		});
 	}
@@ -44,6 +46,7 @@ tiposRoutes.route('/:id', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuApp',
 			main: 'documentosTiposFormView'
 		});
 	}

@@ -8,30 +8,8 @@ aplicativosRoutes.route('/', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftRailMain',
+			left:'leftMenuAdmin',
 			main: 'aplicativosView'
-		});
-	}
-});
-
-aplicativosRoutes.route('/:aplicativoId/modulos', {
-	name: 'aplicativosModulosRoute',
-	action: function() {
-		BlazeLayout.render('adminLayout', {
-			menu: 'mainMenu',
-			leftRail: 'leftRailMain',
-			main: 'aplicativosModulosView'
-		});
-	}
-});
-
-aplicativosRoutes.route('/novo', {
-	name: 'aplicativosInsertRoute',
-	action: function() {
-		BlazeLayout.render('adminLayout', {
-			menu: 'mainMenu',
-			leftRail: 'leftRailMain',
-			main: 'aplicativosFormView'
 		});
 	}
 });
@@ -41,35 +19,30 @@ aplicativosRoutes.route('/:aplicativoId/edita', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			leftRail: 'leftRailMain',
+			left: 'leftMenuApp',
 			main: 'aplicativosFormView'
 		});
 	}
 });
 
 aplicativosRoutes.route('/:aplicativoId/home', {
-	name: 'aplicativosHomeRoute',
+	name: 'aplicativosIndexRoute',
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			leftRail: 'leftRailMain',
+			left: 'leftMenuApp',
 			main: 'aplicativosHomeView'
 		});
 	}
 });
 
-aplicativosRoutes.route('/:aplicativoId', {
-	name: 'aplicativosIndexRoute',
-	triggersEnter:[
-		function(context,redirect){
-			var superU = false;
-			if (Roles.userIsInRole(Meteor.userId(),'admin')) superU = true;
-			if (Roles.userIsInRole(Meteor.userId(),'manager',context.params.aplicativoId)) superU = true;
-			if (superU) {
-				redirect('aplicativosUpdateRoute', context.params);
-			} else {
-				redirect('aplicativosHomeRoute', context.params);
-			}
-		}
-	]
+aplicativosRoutes.route('/novo', {
+	name: 'aplicativosInsertRoute',
+	action: function() {
+		BlazeLayout.render('adminLayout', {
+			menu: 'mainMenu',
+			left: 'leftMenuAdmin',
+			main: 'aplicativosFormView'
+		});
+	}
 });

@@ -1,11 +1,6 @@
 Controller('aplicativosModulosView',{
 	created:function(){
 		updateModuloVar = new ReactiveVar(false);
-		Tracker.autorun(function(){
-			var appId = FlowRouter.getParam('aplicativoId');
-			if (!appId) return false;
-			Meteor.subscribe("oneAplicativo", appId);
-		});
 	},
 	helpers:{
 		updateModulo:function(){
@@ -30,18 +25,16 @@ Controller('aplicativosModulosView',{
 			]
 		},
 		modulos_disponiveis:function(){
-			var modAtivos = _.pluck(Aplicativo.findOne(FlowRouter.getParam('aplicativoId')).appModulos(),'moduloId');
+			var app = Aplicativo.findOne(FlowRouter.getParam('aplicativoId'));
+			if (!app) return false;
+			var modAtivos = _.pluck(app.appModulos(),'moduloId');
 			var modulos = Modulo.find({_id:{$nin:modAtivos}}).fetch();
 			return modulos;
 		},
 		modulos_ativos:function(){
-			return AplicativoModulo.find({
-				aplicativoId:FlowRouter.getParam('aplicativoId')
-			},{
-				sort:{
-					order:1
-				}
-			}).fetch();
+			var app = Aplicativo.findOne(FlowRouter.getParam('aplicativoId'));
+			if (!app) return false;
+			return app.appModulos();
 		}
 	},
 	events:{

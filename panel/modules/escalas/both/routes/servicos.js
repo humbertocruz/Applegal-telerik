@@ -24,6 +24,7 @@ servicosRoutes.route('/', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuApp',
 			main: 'escalasServicosView'
 		});
 	}
@@ -34,6 +35,7 @@ servicosRoutes.route('/nova', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuApp',
 			main: 'escalasServicosFormView'
 		});
 	}
@@ -44,6 +46,7 @@ servicosRoutes.route('/:id', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuApp',
 			main: 'escalasServicosFormView'
 		});
 	}

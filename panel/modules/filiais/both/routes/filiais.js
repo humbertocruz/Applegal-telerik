@@ -24,6 +24,7 @@ filiaisRoutes.route('/', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuApp',
 			main: 'filiaisView'
 		});
 	}
@@ -34,6 +35,7 @@ filiaisRoutes.route('/nova', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuApp',
 			main: 'filiaisFormView'
 		});
 	}
@@ -44,6 +46,7 @@ filiaisRoutes.route('/:id/edita', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuApp',
 			main: 'filiaisFormView'
 		});
 	}

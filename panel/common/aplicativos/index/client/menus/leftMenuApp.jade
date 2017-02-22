@@ -1,0 +1,31 @@
+template(name="leftMenuApp")
+	.ui.header #{appInfo.name}
+	if isManagerOrAdmin
+		.ui.vertical.fluid.inverted.menu(class="#{appInfo.headerBackgroundColor}")
+			if aplicativoId
+				a.item(class="#{isActiveRoute regex='^aplicativosUpdate'}",href="#{pathFor 'aplicativosUpdateRoute' aplicativoId=appInfo._id}")
+					i.setting.icon
+					.content
+						.header Configuração
+				a.item(class="#{isActiveRoute regex='^aplicativosModulos'}",href="#{pathFor 'aplicativosModulosRoute' aplicativoId=appInfo._id}")
+					i.puzzle.icon
+					.content
+						.header Módulos
+				a.item(class="#{isActiveRoute regex='^aplicativosUsuarios'}",href="#{pathFor 'aplicativosUsuariosRoute' aplicativoId=appInfo._id}")
+					i.users.icon
+					.content
+						.header Usuários
+			else
+				a.item(href="#{pathFor 'aplicativosInsertRoute'}")
+					i.setting.icon
+					.content
+						.header Configuração
+		.ui.divider
+	if appModulos
+		.ui.vertical.fluid.inverted.menu(class="#{appInfo.sidebarBackgroundColor}")
+			each appModulos
+				if userHasPerm modulo.path
+					a.item(href="#{pathFor modulo.route aplicativoId=appInfo._id}")
+						i.icon(class="#{icon}")
+						.content
+							.header #{title}

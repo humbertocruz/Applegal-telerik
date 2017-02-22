@@ -25,7 +25,7 @@
     "KADIRA_APP_SECRET":"fa3c304a-3cda-4a5a-aaae-ca5a81e7ccf7"
   },
 
-  "deployCheckWaitTime": 30,
+  "deployCheckWaitTime": 45,
 
   "enableUploadProgressBar": true
 }

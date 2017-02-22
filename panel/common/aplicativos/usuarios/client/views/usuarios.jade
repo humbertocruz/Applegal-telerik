@@ -1,47 +1,42 @@
 template(name="aplicativosUsuariosView")
-	.ui.grid
-		.three.wide.column
-			+appMenu
+	+indexHeaderSearch header=header extraLinks=extraLinks
+	table.ui.top.attached.table
+		thead
+			tr
+				th.three.wide &nbsp;
+				th.three.wide CPF/Usuário
+				th Nome
+				th Aniversário
 
-		.thirteen.wide.column
-			+indexHeaderSearch header=header extraLinks=extraLinks
-			table.ui.top.attached.table
-				thead
-					tr
-						th.three.wide &nbsp;
-						th.three.wide CPF/Usuário
-						th Nome
-						th Aniversário
-
-				tbody
-					each usuarios.data
-						tr
-							td
-								a.ui.icon.button.editBtn(href="#{pathFor 'aplicativosUsuariosUpdateRoute' aplicativoId=aplicativoId userId=_id}",data-tooltip="Editar Usuário",data-inverted)
-									i.edit.icon
-								a.ui.icon.button.chamadoBtn(data-tooltip="Abrir Chamado",data-inverted)
-									i.talk.icon
-								.ui.icon.button.removeBtn(data-tooltip="Excluir Usuário",data-inverted)
-									i.trash.icon
-							td #{username}
-							td #{profile.name}
-							td #{dateBr profile.birth}
-			+indexInfoPaginator ready=ready nothingFound='Nenhum Usuário Cadastrado' count=usuarios.count page=usuarios.count pages=usuarios.pages singularForm='Usuário' pluralForm='Usuários'
-			.ui.divider
-			.ui.blue.button#addUsersApp
-				i.plus.icon
-				|Adicionar Usuário Existente
-			.ui.large.popup
-				form.ui.form#addUserToAppForm(method="post")
-					.field
-						label CPF
-						input#usernameField(type="text",name="username")
-					.field
-						label Permissões
-						select.ui.dropdown.tipoField(name="tipo",multiple)
-							option(value="") Escolha as permissões do Usuário
-							option(value="manager") Gerente
-							each appModulos
-								option(value="#{modulo.path}") #{modulo.title}
-					.field
-						.ui.primary.fluid.button#addUserToAppEvent Adicionar
+		tbody
+			each usuarios.data
+				tr
+					td
+						a.ui.icon.button.editBtn(href="#{pathFor 'aplicativosUsuariosUpdateRoute' aplicativoId=aplicativoId userId=_id}",data-tooltip="Editar Usuário",data-inverted)
+							i.edit.icon
+						a.ui.icon.button.chamadoBtn(data-tooltip="Abrir Chamado",data-inverted)
+							i.talk.icon
+						.ui.icon.button.removeBtn(data-tooltip="Excluir Usuário",data-inverted)
+							i.trash.icon
+					td #{username}
+					td #{profile.name}
+					td #{dateBr profile.birth}
+	+indexInfoPaginator ready=ready nothingFound='Nenhum Usuário Cadastrado' count=usuarios.count page=usuarios.count pages=usuarios.pages singularForm='Usuário' pluralForm='Usuários'
+	.ui.divider
+	.ui.blue.button#addUsersApp
+		i.plus.icon
+		|Adicionar Usuário Existente
+	.ui.large.popup
+		form.ui.form#addUserToAppForm(method="post")
+			.field
+				label CPF
+				input#usernameField(type="text",name="username")
+			.field
+				label Permissões
+				select.ui.dropdown.tipoField(name="tipo",multiple)
+					option(value="") Escolha as permissões do Usuário
+					option(value="manager") Gerente
+					each appModulos
+						option(value="#{modulo.path}") #{modulo.title}
+			.field
+				.ui.primary.fluid.button#addUserToAppEvent Adicionar

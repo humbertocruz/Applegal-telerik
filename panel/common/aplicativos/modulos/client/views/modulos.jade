@@ -1,9 +1,9 @@
 template(name="aplicativosModulosView")
 	.ui.grid
-		.two.wide.column
+		.three.wide.column
 			+appMenu
-		
-		.fourteen.wide.column
+
+		.thirteen.wide.column
 			+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
 			.ui.block.top.attached.header Módulos
 			.ui.bottom.attached.segment
@@ -20,7 +20,7 @@ template(name="aplicativosModulosView")
 						if modulos_ativos
 							.ui.vertical.fluid.menu
 								each modulos_ativos
-									.link.item.updateModulo 
+									.link.item.updateModulo
 										i.icon(class="#{icon}")
 										|#{title}
 						else

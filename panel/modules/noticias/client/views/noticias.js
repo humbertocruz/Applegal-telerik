@@ -1,10 +1,11 @@
 Controller('noticiasView', {
 	created:function() {
 		sint = 0;
-		Tracker.autorun(function(){
-			Meteor.subscribe("appNoticias", {}, FlowRouter.getQueryParam('page'), aplicativoVar.get()._id);
-		});
 		noticiasSearchVar = new ReactiveVar({});
+		Tracker.autorun(function(){
+			var appId = FlowRouter.getParam('aplicativoId');
+			Meteor.subscribe("appNoticias", noticiasSearchVar.get(), FlowRouter.getQueryParam('page'), appId);
+		});
 	},
 	rendered:function(){
 	},
@@ -70,7 +71,7 @@ Controller('noticiasView', {
 			FlowRouter.go('noticiasInsertRoute');
 		},
 		'click #activateEvent':function(e,t){
-			Meteor.call("noticiasActivate", $(e.currentTarget).data('id'), aplicativoVar.get()._id, function(error, result){
+			Meteor.call("noticiasActivate", $(e.currentTarget).data('id'), FlowRouter.getParam('aplicativoId'), function(error, result){
 				if(error){
 					console.log("error", error);
 				}
@@ -97,7 +98,7 @@ Controller('noticiasView', {
 			});
 		},
 		'click #deactivateEvent':function(e,t){
-			Meteor.call("noticiasDeactivate", $(e.currentTarget).data('id'), aplicativoVar.get()._id, function(error, result){
+			Meteor.call("noticiasDeactivate", $(e.currentTarget).data('id'), FlowRouter.getParam('aplicativoId'), function(error, result){
 				if(error){
 					console.log("error", error);
 				}
@@ -109,7 +110,7 @@ Controller('noticiasView', {
 		'click .removeBtn':function(e,t){
 			var me = this;
 			htmlConfirm('Aviso','Você tem certeza?',function(){
-				Meteor.call("removeNoticia", me._id, aplicativoVar.get()._id, function(error, result){
+				Meteor.call("removeNoticia", me._id, FlowRouter.getParam('aplicativoId'), function(error, result){
 					if(error){
 						console.log("error", error);
 					}

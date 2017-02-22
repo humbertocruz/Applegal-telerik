@@ -36,7 +36,7 @@ Controller('escalasServicosFormView',{
 			var fields = $(e.target).form('get values');
 			var id = FlowRouter.getParam('id');
 			if (id) fields.id = id;
-			Meteor.call("servicosForm",fields, aplicativoVar.get()._id, function(error, result){
+			Meteor.call("servicosForm",fields, FlowRouter.getParam('aplicativoId'), function(error, result){
 				if(error){
 					console.log("error", error);
 				}

@@ -4,7 +4,7 @@ Galeria.helpers({
 		return Foto.find(
 			{
 				modulo_id:this._id,
-				aplicativoId:aplicativoVar.get()._id
+				aplicativoId:FlowRouter.getParam('aplicativoId')
 			}).fetch();
 	}
 });

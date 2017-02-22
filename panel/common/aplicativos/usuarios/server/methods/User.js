@@ -10,7 +10,7 @@ Meteor.methods({
 		fields.profile.birth_year = parseInt(dt.format('YYYY'));
 		if (fields._id == undefined) {
 			var id = Accounts.createUser(fields);
-			Roles.setUserRoles(fields._id, roles, aplicativoId);
+			Roles.setUserRoles(id, roles, aplicativoId);
 			return id;
 		} else {
 			//var user = Meteor.users.findOne(fields._id);

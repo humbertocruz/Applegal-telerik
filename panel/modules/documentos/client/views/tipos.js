@@ -48,7 +48,7 @@ Controller('documentosTiposView',{
 		'click .removeBtn':function(e,t){
 			var me = this;
 			htmlConfirm('Aviso','Você tem certeza?',function(){
-				Meteor.call("tiposRemove", me._id, aplicativoVar.get()._id, function(error, result){
+				Meteor.call("tiposRemove", me._id, FlowRouter.getParam('aplicativoId'), function(error, result){
 					if(error){
 						console.log("error", error);
 					}

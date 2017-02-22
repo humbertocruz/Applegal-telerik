@@ -3,7 +3,7 @@ Controller('escalasView', {
 		sint = 0;
 		searchEscalasVar = new ReactiveVar({});
 		Tracker.autorun(function(){
-			allEscalas = Meteor.subscribe('allEscalas', searchEscalasVar.get(),aplicativoVar.get()._id);
+			allEscalas = Meteor.subscribe('allEscalas', searchEscalasVar.get(),FlowRouter.getParam('aplicativoId'));
 		});
 	},
 	rendered:function(){
@@ -72,7 +72,7 @@ Controller('escalasView', {
 		'click .removeBtn':function(e,t){
 			var me = this;
 			htmlConfirm('Aviso','Você tem certeza?',function(){
-				Meteor.call("escalasRemove", me._id, aplicativoVar.get()._id, function(error, result){
+				Meteor.call("escalasRemove", me._id, FlowRouter.getParam('aplicativoId'), function(error, result){
 					if(error){
 						console.log("error", error);
 					}

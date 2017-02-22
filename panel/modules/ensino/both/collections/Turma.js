@@ -6,7 +6,7 @@ Turma.helpers({
 	curso: function() {
 		return Curso.findOne({
 			_id:this.cursoId,
-			aplicativoId: aplicativoVar.get()._id
+			aplicativoId: FlowRouter.getParam('aplicativoId')
 		});
 	}
 });

@@ -1,7 +1,7 @@
 Controller('enquetesResultView',{
 	created:function(){
 		Tracker.autorun(function(){
-			oneEnquete = Meteor.subscribe('oneEnquete', FlowRouter.getParam('id'), aplicativoVar.get()._id);
+			oneEnquete = Meteor.subscribe('oneEnquete', FlowRouter.getParam('id'), FlowRouter.getParam('aplicativoId'));
 		});
 	},
 	rendered:function(){

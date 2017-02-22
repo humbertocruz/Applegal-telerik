@@ -107,10 +107,11 @@ Controller('aplicativosFormView',{
 			]
 		},
 		logoLink:function(){
-			var md5 = Aplicativo.findOne(FlowRouter.getParam('aplicativoId')).appLogo();
+			var md5 = Aplicativo.findOne(FlowRouter.getParam('aplicativoId'));
 			if (!md5) return false;
-			if (md5.md5 != 'd41d8cd98f00b204e9800998ecf8427e') {
-				return appLogo.baseURL + '/md5/' + md5.md5;
+			md5 = md5.appLogo().md5;
+			if (md5 != 'd41d8cd98f00b204e9800998ecf8427e') {
+				return appLogo.baseURL + '/md5/' + md5;
 			} else {
 				return false;
 			}

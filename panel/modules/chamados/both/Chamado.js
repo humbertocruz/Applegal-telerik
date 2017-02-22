@@ -4,6 +4,6 @@ Chamado.helpers({
     return Meteor.users.findOne(this.user_id);
   },
 	mensagens:function(){
-		return Mensagem.find({chamado_id:this._id,aplicativoId:aplicativoVar.get()._id}).fetch();
+		return Mensagem.find({chamado_id:this._id,aplicativoId:FlowRouter.getParam('aplicativoId')}).fetch();
 	}
 });

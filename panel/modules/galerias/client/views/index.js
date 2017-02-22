@@ -2,7 +2,7 @@ Controller('galeriasView', {
 	created:function() {
 		sint = 0;
 		Tracker.autorun(function(){
-			allGalerias = Meteor.subscribe('allGalerias',{},FlowRouter.getQueryParam('page'),aplicativoVar.get()._id);
+			allGalerias = Meteor.subscribe('allGalerias',{},FlowRouter.getQueryParam('page'),FlowRouter.getParam('aplicativoId'));
 		});
 	},
 	rendered:function(){
@@ -50,7 +50,7 @@ Controller('galeriasView', {
 			FlowRouter.go('galeriasInsertRoute');
 		},
 		'click #activateEvent':function(e,t){
-			Meteor.call("galeriasActivate", $(e.currentTarget).data('id'), aplicativoVar.get()._id, function(error, result){
+			Meteor.call("galeriasActivate", $(e.currentTarget).data('id'), FlowRouter.getParam('aplicativoId'), function(error, result){
 				if(error){
 					console.log("error", error);
 				}

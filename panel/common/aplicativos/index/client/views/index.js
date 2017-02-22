@@ -65,9 +65,6 @@ Controller('aplicativosView',{
 		'click .selectAppEvent':function(e,t){
 			FlowRouter.go('aplicativosIndexRoute',{aplicativoId:this._id});
 		},
-		'click #addBtn':function(e,t){
-			aplicativoVar.set({_id:undefined});
-		},
 		'click .editBtn':function(e,t){
 			e.preventDefault();
 			aplicativoVar.set(Aplicativo.findOne(this._id));

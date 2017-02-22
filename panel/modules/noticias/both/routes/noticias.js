@@ -1,13 +1,16 @@
-noticiasRoutes = FlowRouter.group({
+import { permRoutes } from '../../../permRoutes.js';
+
+noticiasRoutes = permRoutes.group({
 	name: 'noticiasRoutes',
-	prefix: '/:aplicativoId/noticias',
+	prefix: '/noticias',
 	triggersEnter: [
 		function(obj, redirect) {
 			var access = false;
-			if (!Roles.userIsInRole(Meteor.userId(), ['admin'])) access = true;
-			if (!Roles.userIsInRole(Meteor.userId(), ['manager'], obj.params.aplicativoId)) access = true;
-			if (!Roles.userIsInRole(Meteor.userId(), 'noticias', obj.params.aplicativoId)) access = true;
-
+      // Admin tem acesso
+			if (Roles.userIsInRole(Meteor.userId(), ['admin'])) access = true;
+      // Manager e Perm Exclusiva do App tem acesso
+			if (Roles.userIsInRole(Meteor.userId(), ['manager','noticias'], obj.params.aplicativoId)) access = true;
+      // Niguem mais tem acesso
 			if (!access) {
 				Bert.alert('Você não tem permissão de acesso a este módulo!', 'danger');
 				redirect('homeRoute');

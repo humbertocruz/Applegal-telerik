@@ -1,6 +1,6 @@
 Controller('documentosFormView',{
 	created:function(){
-		Meteor.subscribe("oneDocumento", FlowRouter.getParam('id'),aplicativoVar.get()._id);
+		Meteor.subscribe("oneDocumento", FlowRouter.getParam('id'),FlowRouter.getParam('aplicativoId'));
 	},
 	rendered:function(){
 		$('.ui.dropdown').dropdown();
@@ -66,7 +66,7 @@ Controller('documentosFormView',{
 			e.preventDefault();
 			var fields = $(e.target).form('get values');
 			fields._id = FlowRouter.getParam('id');
-			Meteor.call("documentosForm",fields, aplicativoVar.get()._id, function(error, result){
+			Meteor.call("documentosForm",fields, FlowRouter.getParam('aplicativoId'), function(error, result){
 				if(error){
 					console.log("error", error);
 					Bert.alert('Houve um erro ao salvar o Documento!','error');

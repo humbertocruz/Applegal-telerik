@@ -3,7 +3,7 @@ Controller('noticiasAssuntosView',{
 		sint = 0;
 		assuntosSearchVar = new ReactiveVar({});
 		Tracker.autorun(function(){
-			Meteor.subscribe("appAssuntos", assuntosSearchVar.get(), FlowRouter.getQueryParam('page'), aplicativoVar.get()._id); 
+			Meteor.subscribe("appAssuntos", assuntosSearchVar.get(), FlowRouter.getQueryParam('page'), FlowRouter.getParam('aplicativoId')); 
 		});
 	},
 	helpers:{

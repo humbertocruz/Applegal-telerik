@@ -3,7 +3,7 @@ Enquete.helpers({
 	respostas:function(){
 		return EnqueteResposta.find({
 			enquete_id:this._id,
-			aplicativoId: aplicativoVar.get()._id
+			aplicativoId: FlowRouter.getParam('aplicativoId')
 		}).fetch();
 	}
 });

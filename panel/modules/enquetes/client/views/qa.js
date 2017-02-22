@@ -2,11 +2,11 @@ Controller('enquetesQAView',{
 	created:function(){
 		perguntaAtualVar = new ReactiveVar('none');
 		Tracker.autorun(function(){
-			oneEnquete = Meteor.subscribe('oneEnquete', FlowRouter.getParam('id'), aplicativoVar.get()._id);
+			oneEnquete = Meteor.subscribe('oneEnquete', FlowRouter.getParam('id'), FlowRouter.getParam('aplicativoId'));
 			enqueteVar = new ReactiveVar(Enquete.findOne(
 				{
 				_id:FlowRouter.getParam('id'),
-				aplicativoId:aplicativoVar.get()._id
+				aplicativoId:FlowRouter.getParam('aplicativoId')
 				}
 			));
 		});
@@ -18,7 +18,7 @@ Controller('enquetesQAView',{
 		'click #enquetesRemoveOpcaoEvent':function(e,t){
 			var me = this;
 			htmlConfirm('Aviso','Você tem certeza?',function(){
-				Meteor.call("enquetesRemoveOpcao", FlowRouter.getParam('id'), perguntaAtualVar.get(), me.order, aplicativoVar.get()._id, function(error, result){
+				Meteor.call("enquetesRemoveOpcao", FlowRouter.getParam('id'), perguntaAtualVar.get(), me.order, FlowRouter.getParam('aplicativoId'), function(error, result){
 					if(error){
 						console.log("error", error);
 					}
@@ -35,7 +35,7 @@ Controller('enquetesQAView',{
 		'click #enquetesRemovePerguntaEvent':function(e,t){
 			var me = this;
 			htmlConfirm('Aviso','Você tem certeza?',function(){
-				Meteor.call("enquetesRemovePergunta", FlowRouter.getParam('id'), me.order, aplicativoVar.get()._id, function(error, result){
+				Meteor.call("enquetesRemovePergunta", FlowRouter.getParam('id'), me.order, FlowRouter.getParam('aplicativoId'), function(error, result){
 					if(error){
 						console.log("error", error);
 					}
@@ -55,7 +55,7 @@ Controller('enquetesQAView',{
 				opcoes:[]
 			};
 			perguntas.push(pergunta);
-			Meteor.call("enquentesUpdatePerguntas", FlowRouter.getParam('id'), perguntas, aplicativoVar.get()._id, function(error, result){
+			Meteor.call("enquentesUpdatePerguntas", FlowRouter.getParam('id'), perguntas, FlowRouter.getParam('aplicativoId'), function(error, result){
 				if(error){
 					console.log("error", error);
 				}
@@ -76,7 +76,7 @@ Controller('enquetesQAView',{
 				title:fields.opcao
 			};
 			opcoes.push(opcao);
-			Meteor.call("enquentesUpdateOpcoes", FlowRouter.getParam('id'), ordem, perguntas, opcoes, aplicativoVar.get()._id, function(error, result){
+			Meteor.call("enquentesUpdateOpcoes", FlowRouter.getParam('id'), ordem, perguntas, opcoes, FlowRouter.getParam('aplicativoId'), function(error, result){
 				if(error){
 					console.log("error", error);
 				}

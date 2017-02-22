@@ -49,7 +49,7 @@ Controller('insertMensagemView',{
 		'submit #mensagensForm'(e,t){
 			e.preventDefault();
 			var fields = $(e.target).form('get values');
-			Meteor.call("insertMensagem",fields, aplicativoVar.get()._id, function(error, result){
+			Meteor.call("insertMensagem",fields, FlowRouter.getParam('aplicativoId'), function(error, result){
 				if(error){
 					console.log("error", error);
 				}

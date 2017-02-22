@@ -1,8 +1,8 @@
 template(name="mainMenu")
 	.ui.blue.secondary.labeled.icon.transition.hidden.menu#adminMenu
 		a.item(class="#{isActiveRoute regex='^home'}",href="#{pathFor 'homeRoute'}")
-			img.ui.tiny.circular.image(src="/images/technotronics.png")
-		.item.header 
+			img.ui.tiny.image(src="#{appLogoByDomain}")
+		.item.header
 			img.ui.mini.image(src="#{aplicativo.logo}")
 			|#{aplicativo.name}
 		.right.menu

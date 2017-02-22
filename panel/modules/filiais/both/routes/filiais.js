@@ -1,7 +1,22 @@
-filiaisRoutes = FlowRouter.group({
+import { permRoutes } from '../../../permRoutes.js';
+
+filiaisRoutes = permRoutes.group({
 	name: 'filiaisRoutes',
 	prefix: '/filiais',
-
+	triggersEnter: [
+		function(obj, redirect) {
+			var access = false;
+      // Admin tem acesso
+			if (Roles.userIsInRole(Meteor.userId(), ['admin'])) access = true;
+      // Manager e Perm Exclusiva do App tem acesso
+			if (Roles.userIsInRole(Meteor.userId(), ['manager','filiais'], obj.params.aplicativoId)) access = true;
+      // Niguem mais tem acesso
+			if (!access) {
+				Bert.alert('Você não tem permissão de acesso a este módulo!', 'danger');
+				redirect('homeRoute');
+			}
+		}
+	]
 });
 
 filiaisRoutes.route('/', {

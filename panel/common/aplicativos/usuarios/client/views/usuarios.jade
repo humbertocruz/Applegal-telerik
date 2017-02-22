@@ -1,9 +1,9 @@
 template(name="aplicativosUsuariosView")
 	.ui.grid
-		.two.wide.column
+		.three.wide.column
 			+appMenu
-		
-		.fourteen.wide.column
+
+		.thirteen.wide.column
 			+indexHeaderSearch header=header extraLinks=extraLinks
 			table.ui.top.attached.table
 				thead
@@ -12,7 +12,7 @@ template(name="aplicativosUsuariosView")
 						th.three.wide CPF/Usuário
 						th Nome
 						th Aniversário
-						
+
 				tbody
 					each usuarios.data
 						tr
@@ -28,7 +28,7 @@ template(name="aplicativosUsuariosView")
 							td #{dateBr profile.birth}
 			+indexInfoPaginator ready=ready nothingFound='Nenhum Usuário Cadastrado' count=usuarios.count page=usuarios.count pages=usuarios.pages singularForm='Usuário' pluralForm='Usuários'
 			.ui.divider
-			.ui.blue.button#addUsersApp 
+			.ui.blue.button#addUsersApp
 				i.plus.icon
 				|Adicionar Usuário Existente
 			.ui.large.popup

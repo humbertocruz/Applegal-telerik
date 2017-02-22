@@ -2,7 +2,7 @@ Controller('chamadosView', {
 	created:function() {
 		chamadosSearchVar = new ReactiveVar({});
 		Tracker.autorun(function(){
-			Meteor.subscribe("allChamados", chamadosSearchVar.get(), FlowRouter.getQueryParam('page'),aplicativoVar.get()._id);
+			Meteor.subscribe("allChamados", chamadosSearchVar.get(), FlowRouter.getQueryParam('page'),FlowRouter.getParam('aplicativoId'));
 		});
 	},
 	rendered:function() {
@@ -50,7 +50,7 @@ Controller('chamadosView', {
 		},
 		'click .ctrlChamadoEvent':function(e,t){
 			var me = this;
-			Meteor.call("chamadosCtrl", this._id, this.close, aplicativoVar.get()._id, function(error, result){
+			Meteor.call("chamadosCtrl", this._id, this.close, FlowRouter.getParam('aplicativoId'), function(error, result){
 				if(error){
 					console.log("error", error);
 				}

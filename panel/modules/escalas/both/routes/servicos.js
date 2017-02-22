@@ -1,9 +1,17 @@
-servicosRoutes = FlowRouter.group({
+import { permRoutes } from '../../../permRoutes.js';
+
+servicosRoutes = permRoutes.group({
 	name: 'servicosRoutes',
 	prefix: '/escalas/servicos',
 	triggersEnter: [
 		function(obj, redirect) {
-			if (!Roles.userIsInRole(Meteor.userId(), ['gerente', 'escalas'],aplicativoVar.get()._id)) {
+			var access = false;
+      // Admin tem acesso
+			if (Roles.userIsInRole(Meteor.userId(), ['admin'])) access = true;
+      // Manager e Perm Exclusiva do App tem acesso
+			if (Roles.userIsInRole(Meteor.userId(), ['manager','escalas'], obj.params.aplicativoId)) access = true;
+      // Niguem mais tem acesso
+			if (!access) {
 				Bert.alert('Você não tem permissão de acesso a este módulo!', 'danger');
 				redirect('homeRoute');
 			}

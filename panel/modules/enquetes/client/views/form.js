@@ -1,7 +1,7 @@
 Controller('enquetesFormView',{
 	created:function(){
 		Tracker.autorun(function(){
-			Meteor.subscribe("oneEnquete", FlowRouter.getQueryParam('id'),aplicativoVar.get()._id);
+			Meteor.subscribe("oneEnquete", FlowRouter.getQueryParam('id'),FlowRouter.getParam('aplicativoId'));
 		});
 	},
 	rendered:function(){
@@ -47,7 +47,7 @@ Controller('enquetesFormView',{
 			var fields = $(e.target).form('get values');
 			var id = FlowRouter.getParam('id');
 			if (id) fields.id = id;
-			Meteor.call("enquetesForm",fields, aplicativoVar.get()._id, function(error, result){
+			Meteor.call("enquetesForm",fields, FlowRouter.getParam('aplicativoId'), function(error, result){
 				if(error){
 					console.log("error", error);
 				}

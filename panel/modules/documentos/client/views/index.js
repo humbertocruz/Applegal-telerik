@@ -3,7 +3,7 @@ Controller('documentosView', {
 		sint = 0;
 		searchDocumentosVar = new ReactiveVar({});
 		Tracker.autorun(function(){
-			Meteor.subscribe("allDocumentos", searchDocumentosVar.get(),FlowRouter.getQueryParam('page'),aplicativoVar.get()._id);
+			Meteor.subscribe("allDocumentos", searchDocumentosVar.get(),FlowRouter.getQueryParam('page'),FlowRouter.getParam('aplicativoId'));
 		});
 	},
 	rendered:function(){
@@ -58,7 +58,7 @@ Controller('documentosView', {
 			FlowRouter.go('documentosInsertRoute');
 		},
 		'click #activateEvent':function(e,t){
-			Meteor.call("documentosActivate", $(e.currentTarget).data('id'), aplicativoVar.get()._id, function(error, result){
+			Meteor.call("documentosActivate", $(e.currentTarget).data('id'), FlowRouter.getParam('aplicativoId'), function(error, result){
 				if(error){
 					console.log("error", error);
 				}
@@ -68,7 +68,7 @@ Controller('documentosView', {
 			});
 		},
 		'click #deactivateEvent':function(e,t){
-			Meteor.call("documentosDeactivate", $(e.currentTarget).data('id'), aplicativoVar.get()._id, function(error, result){
+			Meteor.call("documentosDeactivate", $(e.currentTarget).data('id'), FlowRouter.getParam('aplicativoId'), function(error, result){
 				if(error){
 					console.log("error", error);
 				}

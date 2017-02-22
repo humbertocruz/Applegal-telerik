@@ -1,6 +1,6 @@
 Controller('escalasFormView',{
 	created:function(){
-		oneEscala = Meteor.subscribe('oneEscala', FlowRouter.getQueryParam('id'),aplicativoVar.get()._id);
+		oneEscala = Meteor.subscribe('oneEscala', FlowRouter.getQueryParam('id'),FlowRouter.getParam('aplicativoId'));
 	},
 	rendered:function(){
 		$('.ui.dropdown').dropdown();
@@ -63,7 +63,7 @@ Controller('escalasFormView',{
 			var id = FlowRouter.getParam('id');
 			if (id) fields.id = id;
 			fields.date = moment(fields.date,'DD/MM/YYYY').toDate();
-			Meteor.call("escalasForm",fields, aplicativoVar.get()._id, function(error, result){
+			Meteor.call("escalasForm",fields, FlowRouter.getParam('aplicativoId'), function(error, result){
 				if(error){
 					console.log("error", error);
 				}

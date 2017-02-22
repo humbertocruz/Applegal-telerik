@@ -2,8 +2,7 @@ template(name="registerView")
 	.ui.container.two.column.centered.hidden.transition.grid#registerGrid(style="height:100%;")
 		.middle.aligned.row
 			.left.aligned.column
-				img.ui.small.centered.image(src="/images/technotronics.png")
-				.ui.blue.large.centered.header applegal.com.br
+				img.ui.small.centered.image(src="#{appLogoByDomain}")
 				.ui.info.message
 					p Estamos em período de testes. Todos os dados e inscrições serão apagados em breve.
 				form.ui.form#registerForm(method="post")

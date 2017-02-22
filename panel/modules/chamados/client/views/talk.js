@@ -1,6 +1,6 @@
 Controller('talkView',{
 	created:function(){
-		oneChamado = Meteor.subscribe("oneChamado", FlowRouter.getParam('id',aplicativoVar.get()._id));
+		oneChamado = Meteor.subscribe("oneChamado", FlowRouter.getParam('id',FlowRouter.getParam('aplicativoId')));
 	},
 	helpers:{
 		header:function(){
@@ -35,7 +35,7 @@ Controller('talkView',{
 				chamado_id:FlowRouter.getParam('id')
 			};
 			$('#respostaField').val('');
-			Meteor.call("insertMensagem", fields, aplicativoVar.get()._id);
+			Meteor.call("insertMensagem", fields, FlowRouter.getParam('aplicativoId'));
 		}
 	}
 });

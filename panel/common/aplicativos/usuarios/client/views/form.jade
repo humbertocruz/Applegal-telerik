@@ -1,9 +1,9 @@
 template(name="usuariosFormView")
 	.ui.grid
-		.two.wide.column
+		.three.wide.column
 			+appMenu
-		
-		.fourteen.wide.column
+
+		.thirteen.wide.column
 			+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
 			form.ui.form#usuariosForm(method="post",novalidate="novalidate")
 				unless isNew
@@ -28,7 +28,7 @@ template(name="usuariosFormView")
 								option(value="manager") Gerente
 								each appRoles
 									option(value="#{modulo.path}") #{modulo.name}
-				else 
+				else
 					.field
 						label Permissões
 						select.ui.dropdown#rolesField(name="roles",multiple)

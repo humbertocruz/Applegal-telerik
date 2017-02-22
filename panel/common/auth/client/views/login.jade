@@ -2,8 +2,7 @@ template(name="loginView")
 	.ui.container.three.column.centered.hidden.transition.grid#loginGrid(style="height:100%;")
 		.middle.aligned.row
 			.left.aligned.column
-				img.ui.small.centered.image(src="/images/technotronics.png")
-				.ui.blue.large.centered.header applegal.com.br
+				img.ui.small.centered.image(src="#{appLogoByDomain}")
 				form.ui.form#loginForm(method="post")
 					.field
 						label CPF

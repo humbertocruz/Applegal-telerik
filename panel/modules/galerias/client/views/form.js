@@ -1,7 +1,7 @@
 Controller('formGaleriasView',{
 	created:function(){
 		Tracker.autorun(function(){
-			oneGaleria = Meteor.subscribe('oneGaleria',FlowRouter.getParam('id'),aplicativoVar.get()._id);
+			oneGaleria = Meteor.subscribe('oneGaleria',FlowRouter.getParam('id'),FlowRouter.getParam('aplicativoId'));
 		});
 	},
 	rendered(){
@@ -90,7 +90,7 @@ Controller('formGaleriasView',{
 				_id:FlowRouter.getParam('id'),
 				capa_id:this._id
 			}
-			Meteor.call("galeriasForm", fields, aplicativoVar.get()._id, function(error, result){
+			Meteor.call("galeriasForm", fields, FlowRouter.getParam('aplicativoId'), function(error, result){
 				if(error){
 					console.log("error", error);
 				}
@@ -102,7 +102,7 @@ Controller('formGaleriasView',{
 		'click .deleteBtn'(e,t){
 			var me = this;
 			htmlConfirm('Excluir','Você tem certeza?',function(){
-				Meteor.call("fotosRemove", me._id, aplicativoVar.get()._id, function(error, result){
+				Meteor.call("fotosRemove", me._id, FlowRouter.getParam('aplicativoId'), function(error, result){
 					if(error){
 						console.log("error", error);
 					}
@@ -117,7 +117,7 @@ Controller('formGaleriasView',{
 			var fields = $(e.target).form('get values');
 			var id = FlowRouter.getParam('id');
 			if (id) fields._id = id;
-			Meteor.call("galeriasForm",fields, aplicativoVar.get()._id, function(error, result){
+			Meteor.call("galeriasForm",fields, FlowRouter.getParam('aplicativoId'), function(error, result){
 				if(error){
 					console.log("error", error);
 				}

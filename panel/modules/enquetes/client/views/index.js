@@ -3,7 +3,7 @@ Controller('enquetesView', {
 		sint = 0;
 		enquetesSearchVar = new ReactiveVar({});
 		Tracker.autorun(function() {
-			allEnquetes = Meteor.subscribe('allEnquetes', enquetesSearchVar.get(), FlowRouter.getQueryParam('page'),aplicativoVar.get()._id,);
+			allEnquetes = Meteor.subscribe('allEnquetes', enquetesSearchVar.get(), FlowRouter.getQueryParam('page'),FlowRouter.getParam('aplicativoId'),);
 		});
 	},
 	rendered: function() {},
@@ -62,7 +62,7 @@ Controller('enquetesView', {
 			FlowRouter.go('enquetesInsertRoute');
 		},
 		'click #activateEvent': function(e, t) {
-			Meteor.call("enquetesActivate", $(e.currentTarget).data('id'), aplicativoVar.get()._id, function(error, result) {
+			Meteor.call("enquetesActivate", $(e.currentTarget).data('id'), FlowRouter.getParam('aplicativoId'), function(error, result) {
 				if (error) {
 					console.log("error", error);
 				}
@@ -89,7 +89,7 @@ Controller('enquetesView', {
 			});
 		},
 		'click #deactivateEvent': function(e, t) {
-			Meteor.call("enquetesDeactivate", $(e.currentTarget).data('id'), aplicativoVar.get()._id, function(error, result) {
+			Meteor.call("enquetesDeactivate", $(e.currentTarget).data('id'), FlowRouter.getParam('aplicativoId'), function(error, result) {
 				if (error) {
 					console.log("error", error);
 				}
@@ -101,7 +101,7 @@ Controller('enquetesView', {
 		'click .removeBtn': function(e, t) {
 			var me = this;
 			htmlConfirm('Aviso', 'Você tem certeza?', function() {
-				Meteor.call("enquetesRemove", me._id, aplicativoVar.get()._id, function(error, result) {
+				Meteor.call("enquetesRemove", me._id, FlowRouter.getParam('aplicativoId'), function(error, result) {
 					if (error) {
 						console.log("error", error);
 					}

@@ -3,7 +3,7 @@ Controller('noticiasAssuntosView',{
 		sint = 0;
 		assuntosSearchVar = new ReactiveVar({});
 		Tracker.autorun(function(){
-			Meteor.subscribe("appAssuntos", assuntosSearchVar.get(), FlowRouter.getQueryParam('page'), FlowRouter.getParam('aplicativoId')); 
+			Meteor.subscribe("appAssuntos", assuntosSearchVar.get(), FlowRouter.getQueryParam('page'), FlowRouter.getParam('aplicativoId'));
 		});
 	},
 	helpers:{
@@ -24,11 +24,17 @@ Controller('noticiasAssuntosView',{
 				{
 					title:'Voltar',
 					route:'noticiasRoute',
+					params: {
+						aplicativoId: FlowRouter.getParam('aplicativoId')
+					},
 					icon:'close'
 				},
 				{
 					title:'Adicionar',
 					route:'noticiasAssuntosInsertRoute',
+					params: {
+						aplicativoId: FlowRouter.getParam('aplicativoId')
+					},
 					icon:'add'
 				}
 			]

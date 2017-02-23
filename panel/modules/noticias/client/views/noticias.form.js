@@ -48,10 +48,16 @@ Controller('formNoticiasView',{
 				{
 					title:'Cancelar',
 					route:'noticiasRoute',
+					params: {
+						aplicativoId: FlowRouter.getParam('aplicativoId')
+					},
 					icon:'close'
 				},
 				{
 					title:'Assuntos',
+					params: {
+						aplicativoId: FlowRouter.getParam('aplicativoId')
+					},
 					route:'noticiasAssuntosRoute',
 					icon:'sidebar'
 				}
@@ -69,8 +75,8 @@ Controller('formNoticiasView',{
 					console.log("error", error);
 				}
 				if(result){
-					 Bert.alert('A notícia foi salva com sucesso!','success','growl-top-right');
-					 FlowRouter.go('noticiasRoute')
+					 Bert.alert('A notícia foi salva com sucesso!','success');
+					 FlowRouter.go('noticiasRoute',{aplicativoId:FlowRouter.getParam('aplicativoId')})
 				}
 			});
 		}

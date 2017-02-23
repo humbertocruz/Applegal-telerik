@@ -3,15 +3,15 @@ template(name="noticiasAssuntosView")
 	table.ui.top.attached.table
 		thead
 			tr
-				th.two.wide &nbsp;
+				th.three.wide &nbsp;
 				th Nome
 		tbody
 			each assuntos.data
 				tr
 					td
-						a.ui.icon.button.editBtn(href="#{pathFor 'noticiasAssuntosUpdateRoute' id=_id}")
-							i.edit.blue.icon
+						a.ui.icon.button.editBtn(href="#{pathFor 'noticiasAssuntosUpdateRoute' aplicativoId=aplicativoId id=_id}")
+							i.edit.icon
 						.ui.icon.button.removeBtn
-							i.trash.red.icon
+							i.trash.icon
 					td #{name}
 	+indexInfoPaginator ready=ready nothingFound='Nenhum assunto cadastrado.' count=assuntos.count page=assuntos.count pages=assuntos.pages singularForm='Assunto' pluralForm='Assuntos'

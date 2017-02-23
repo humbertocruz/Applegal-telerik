@@ -3,7 +3,7 @@ template(name="noticiasView")
 	table.ui.top.attached.table
 		thead
 			tr
-				th.two.wide &nbsp;
+				th.three.wide &nbsp;
 				th.one.wide Ativa
 				th.one.wide Cor
 				th.three.wide Data
@@ -14,9 +14,9 @@ template(name="noticiasView")
 				tr
 					td
 						a.ui.icon.button.editBtn(href="#{pathFor 'noticiasUpdateRoute' id=_id}")
-							i.edit.blue.icon
+							i.edit.icon
 						.ui.icon.button.removeBtn
-							i.trash.red.icon
+							i.trash.icon
 					td
 						+indexActivateButton active=active id=_id
 					td

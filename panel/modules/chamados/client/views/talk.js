@@ -1,11 +1,13 @@
 Controller('talkView',{
 	created:function(){
-		oneChamado = Meteor.subscribe("oneChamado", FlowRouter.getParam('id',FlowRouter.getParam('aplicativoId')));
+		Tracker.autorun(function(){
+			oneChamado = Meteor.subscribe("oneChamado", FlowRouter.getParam('id'),FlowRouter.getParam('aplicativoId'));
+		});
 	},
 	helpers:{
 		header:function(){
 			return {
-				title:(FlowRouter.getParam('id')==undefined?'Mensagens do Chamado':'Mensagens do Chamado'),
+				title:'Mensagens do Chamado',
 				icon:'comments outline',
 				corner:'add'
 			}
@@ -14,13 +16,19 @@ Controller('talkView',{
 			return [
 				{
 					title:'Cancelar',
+					params:{
+						aplicativoId:FlowRouter.getParam('aplicativoId')
+					},
 					route:'chamadosRoute',
 					icon:'close'
 				}
 			]
 		},
 		chamado:function(){
-			var chamado = Chamado.findOne(FlowRouter.getParam('id'));
+			var chamado = Chamado.findOne({
+				_id:FlowRouter.getParam('id'),
+				aplicativoId:FlowRouter.getParam('aplicativoId')
+			});
 			return chamado;
 		}
 	},

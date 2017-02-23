@@ -49,7 +49,6 @@ Controller('aplicativosFormView',{
 		// Update the upload progress session variable
 		appLogo.resumable.on('fileProgress', function(file) {
 			var progress = Math.floor(100*file.progress());
-			console.log(progress);
 			logoUploadProgressVar.set(progress);
 		});
 		appBg.resumable.on('fileProgress', function(file) {
@@ -58,6 +57,7 @@ Controller('aplicativosFormView',{
 
 		// Finish the upload progress in the session variable
 		appLogo.resumable.on('fileSuccess', function(file) {
+			Bert.alert('Arquivo do Logotipo enviado com sucesso.','success');
 			logoUploadProgressVar.set(undefined);
 		});
 		appBg.resumable.on('fileSuccess', function(file) {

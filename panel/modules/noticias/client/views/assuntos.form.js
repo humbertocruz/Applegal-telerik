@@ -24,6 +24,9 @@ Controller('noticiasAssuntosFormView',{
 			return [
 				{
 					title:'Cancelar',
+					params: {
+						aplicativoId: FlowRouter.getParam('aplicativoId')
+					},
 					route:'noticiasAssuntosRoute',
 					icon:'close'
 				}
@@ -42,7 +45,7 @@ Controller('noticiasAssuntosFormView',{
 				}
 				if(result){
 					 Bert.alert('O assunto foi salvo com sucesso!','success');
-					 FlowRouter.go('noticiasAssuntosRoute')
+					 FlowRouter.go('noticiasAssuntosRoute',{aplicativoId:FlowRouter.getParam('aplicativoId')})
 				}
 			});
 		}

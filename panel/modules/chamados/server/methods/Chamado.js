@@ -12,6 +12,7 @@ Meteor.methods({
 	startChamado: function(userId,aplicativoId) {
 		var fields = {
 			user_id: userId,
+			manager_id: this.userId,
 			date: moment().toDate(),
 			close: false,
 			aplicativoId:aplicativoId

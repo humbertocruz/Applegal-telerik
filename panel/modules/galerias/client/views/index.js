@@ -20,12 +20,19 @@ Controller('galeriasView', {
 			}
 		},
 		newLink:function(){
-			return {
-				title:'Adicionar'
-			}
+			return {}
 		},
 		extraLinks:function(){
-			return false;
+			return [
+				{
+					title: 'Adicionar',
+					icon: 'plus',
+					route: 'galeriasInsertRoute',
+					params:{
+						aplicativoId:FlowRouter.getParam('aplicativoId')
+					}
+				}
+			]
 		},
 		galerias: function() {
 			var qtd = 10;
@@ -43,11 +50,16 @@ Controller('galeriasView', {
 				count: Counts.get('allGalerias'),
 				pages: Math.ceil(Counts.get('allGalerias')/qtd)
 			};
-		}
+		},
+		fotoLink:function(){
+			var foto = appGaleriaFoto.findOne(this.capa_id);
+			if (!foto) return false;
+			return appGaleriaFoto.baseURL + '/md5/' + foto.md5;
+		},
 	},
 	events: {
 		'click #addBtn':function(e,t){
-			FlowRouter.go('galeriasInsertRoute');
+			FlowRouter.go('galeriasInsertRoute',{aplicativoId:FlowRouter.getParam('aplicativoId')});
 		},
 		'click #activateEvent':function(e,t){
 			Meteor.call("galeriasActivate", $(e.currentTarget).data('id'), FlowRouter.getParam('aplicativoId'), function(error, result){
@@ -60,14 +72,13 @@ Controller('galeriasView', {
 
 					pushObj = {
 						id: $(e.currentTarget).data('id'),
-						from:aplicativoVar.get().pushFrom,
+						from:FlowRouter.getParam('aplicativoId'),
 						title:'Nova Galeria de fotos do Grêmio.',
 						text:galeria.title
 					};
-					Meteor.setTimeout(function(){
+					/*Meteor.setTimeout(function(){
 
 						Meteor.call("pushSend", pushObj, function(error, result){
-							console.log(error,result);
 							if(error){
 								console.log("error", error);
 							}
@@ -76,11 +87,12 @@ Controller('galeriasView', {
 							}
 						});
 					}, 1000);
+					*/
 				}
 			});
 		},
 		'click #deactivateEvent':function(e,t){
-			Meteor.call("galeriasDeactivate", $(e.currentTarget).data('id'), function(error, result){
+			Meteor.call("galeriasDeactivate", $(e.currentTarget).data('id'), FlowRouter.getParam('aplicativoId'), function(error, result){
 				if(error){
 					console.log("error", error);
 				}

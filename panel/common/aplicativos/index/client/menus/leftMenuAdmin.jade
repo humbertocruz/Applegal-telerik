@@ -6,7 +6,7 @@ template(name="leftMenuAdmin")
 			if isInRole 'admin'
 				a.item(class="#{isActiveRoute regex='^modulos'}",href="#{pathFor 'modulosRoute'}")
 					i.puzzle.icon
-					|Módulos
+					|Módulos Disponíveis
 				a.item(class="#{isActiveRoute regex='^admins'}",href="#{pathFor 'adminsRoute'}")
 					i.users.icon
-					|Admins
+					|Admins da Plataforma

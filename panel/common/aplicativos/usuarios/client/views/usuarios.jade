@@ -5,8 +5,9 @@ template(name="aplicativosUsuariosView")
 			tr
 				th.three.wide &nbsp;
 				th.three.wide CPF/Usuário
+				th.three.wide Permissões
 				th Nome
-				th Aniversário
+				th.three.wide Aniversário
 
 		tbody
 			each usuarios.data
@@ -19,6 +20,7 @@ template(name="aplicativosUsuariosView")
 						.ui.icon.button.removeBtn(data-tooltip="Excluir Usuário",data-inverted)
 							i.trash.icon
 					td #{username}
+					td #{userAppPerm}
 					td #{profile.name}
 					td #{dateBr profile.birth}
 	+indexInfoPaginator ready=ready nothingFound='Nenhum Usuário Cadastrado' count=usuarios.count page=usuarios.count pages=usuarios.pages singularForm='Usuário' pluralForm='Usuários'
@@ -35,6 +37,7 @@ template(name="aplicativosUsuariosView")
 				label Permissões
 				select.ui.dropdown.tipoField(name="tipo",multiple)
 					option(value="") Escolha as permissões do Usuário
+					option(value="subscriber") Assinante
 					option(value="manager") Gerente
 					each appModulos
 						option(value="#{modulo.path}") #{modulo.title}

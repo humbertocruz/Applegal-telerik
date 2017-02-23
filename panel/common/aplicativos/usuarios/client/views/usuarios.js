@@ -19,6 +19,9 @@ Controller('aplicativosUsuariosView', {
 		aplicativoId: function(){
 			return FlowRouter.getParam('aplicativoId');
 		},
+		userAppPerm:function(){
+			return Roles.getRolesForUser(this._id, FlowRouter.getParam('aplicativoId'));
+		},
 		appModulos:function(){
 			var app = Aplicativo.findOne(FlowRouter.getParam('aplicativoId'));
 			if (app) return app.appModulos();
@@ -98,14 +101,15 @@ Controller('aplicativosUsuariosView', {
 			FlowRouter.go('aplicativosUsuariosInsertRoute');
 		},
 		'click .chamadoBtn': function(e, t) {
-			Meteor.call("startChamado", this._id, function(error, result) {
+			Meteor.call("startChamado", this._id, FlowRouter.getParam('aplicativoId'), function(error, result) {
 				if (error) {
 					console.log("error", error);
 				}
 				if (result) {
 					Bert.alert('Chamado aberto.', 'success');
 					FlowRouter.go('mensagensRoute', {
-						id: result
+						id: result,
+						aplicativoId: FlowRouter.getParam('aplicativoId')
 					});
 				}
 			});

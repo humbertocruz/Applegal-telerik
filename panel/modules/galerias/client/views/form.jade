@@ -1,24 +1,28 @@
 template(name="formGaleriasView")
 	+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
 	form.ui.form#galeriasForm(method="post")
-		.two.fields
+		.three.fields
 			.field
 				label Data
 				input#dateField(type="date",name="date")
 			.field
 				label Título
 				input#titleField(type="text",name="title")
+			.field
+				label &nbsp;
+				if galeria_id
+					.ui.blue.fluid.button.fotoBrowse Enviar Fotos
+				else
+					.ui.blue.disabled.fluid.button Enviar Fotos
 	if galeria_id
-		.ui.divider
-		.ui.segment.galerias.dropzone(style="min-height:100px")
 		.ui.large.header Fotos da Galeria
 		if fotos
 			if compare fotos.length 'gt' 0
-				.ui.items
+				.ui.five.cards
 					each fotos
-						.item
-							.ui.small.image
-								img(src="#{locationOrigin}/fotoDaGaleria/#{_id}")
+						.card
+							.ui.fluid.image
+								img(src="#{fotoLink}")
 							.content
 								.description
 								|#{originalname} #{galeria.capa_id}

@@ -1,6 +1,8 @@
 Controller('chamadosView', {
 	created:function() {
-		chamadosSearchVar = new ReactiveVar({});
+		chamadosSearchVar = new ReactiveVar({
+			aplicativoId:FlowRouter.getParam('aplicativoId')
+		});
 		Tracker.autorun(function(){
 			Meteor.subscribe("allChamados", chamadosSearchVar.get(), FlowRouter.getQueryParam('page'),FlowRouter.getParam('aplicativoId'));
 		});

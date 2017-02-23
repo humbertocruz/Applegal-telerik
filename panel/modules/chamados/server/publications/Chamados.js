@@ -1,5 +1,5 @@
 Meteor.publishComposite('oneChamado', function(id,aplicativoId){
-	if (typeof(DomainAppVar) == 'undefined') return false;
+	if (typeof(aplicativoId) == 'undefined') return false;
 	return {
 		find:function(){
 			var chamado = Chamado.find({

@@ -1,6 +1,9 @@
 Mensagem = new Mongo.Collection('mensagens');
 Mensagem.helpers({
-  remetente:function(){
-    return Meteor.users.findOne(this.user_id,FlowRouter.getParam('aplicativoId'));
-  }
+	remetente:function(){
+		return Meteor.users.findOne({
+			_id:this.user_id,
+			aplicativoId:FlowRouter.getParam('aplicativoId')
+		});
+	}
 });

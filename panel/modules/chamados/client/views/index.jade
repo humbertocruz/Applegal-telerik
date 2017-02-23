@@ -11,8 +11,8 @@ template(name="chamadosView")
 			each chamados.data
 				tr
 					td
-						a.ui.icon.button(href="#{pathFor 'mensagensRoute' id=_id}")
-							i.eye.icon
+						a.ui.icon.button(href="#{pathFor 'mensagensRoute' aplicativoId=aplicativoId id=_id}")
+							i.talk.icon
 					td
 						unless close
 							.ui.red.circular.button.ctrlChamadoEvent(data-tooltip="Fechar Chamado",data-inverted) Não

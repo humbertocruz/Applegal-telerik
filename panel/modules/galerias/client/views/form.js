@@ -1,10 +1,11 @@
 Controller('formGaleriasView',{
 	created:function(){
+		fotosUploadProgressVar = new ReactiveVar();
 		Tracker.autorun(function(){
 			oneGaleria = Meteor.subscribe('oneGaleria',FlowRouter.getParam('id'),FlowRouter.getParam('aplicativoId'));
 		});
 	},
-	rendered(){
+	rendered:function(){
 		$('#noticiasForm .ui.dropdown').dropdown();
 		$('#formGaleriasView').form({
 			onFailure(prompts,values){
@@ -25,22 +26,51 @@ Controller('formGaleriasView',{
 		});
 		if (id = FlowRouter.getParam('id')) {
 			var galeria = Galeria.findOne(id);
+			if (!galeria) return false;
 			$('#galeriasForm').form('set values',galeria);
 			$('#galeriasForm').form('set value','dateField',moment(galeria.date).format('YYYY-MM-DD'));
 		} else {
 			$('#galeriasForm').form('set value','dateField',moment().format('YYYY-MM-DD'));
 		}
-		var dropZone = $("div.galerias.dropzone").dropzone({
-			url: location.origin+'/upload/galerias/'+FlowRouter.getParam('id'),
-			dictDefaultMessage:'Arraste e solte as fotos aqui para enviar ao servidor.',
-			dictInvalidFileType:'Apenas arquivos de imagems.',
-			dictFileTooBig:'Arquivo muito grande',
-			paramName: 'file',
-			maxFilesize: 25,
-			method:'post',
-			acceptedFiles:'.jpg,.png,.jpeg'
+		// Upload
+		appGaleriaFoto.resumable.assignBrowse($(".fotoBrowse"));
+		// Update the upload progress session variable
+		appGaleriaFoto.resumable.on('fileProgress', function(file) {
+			var progress = Math.floor(100*file.progress());
+			fotosUploadProgressVar.set(progress);
 		});
-		dropZone.on('success',function(file){
+
+		// Finish the upload progress in the session variable
+		appGaleriaFoto.resumable.on('fileSuccess', function(file) {
+			Bert.alert('Foto enviada com sucesso.','success');
+			fotosUploadProgressVar.set(undefined);
+		});
+
+		// More robust error handling needed!
+		appGaleriaFoto.resumable.on('fileError', function(file) {
+			fotosUploadProgressVar.set(undefined);
+		});
+
+		appGaleriaFoto.resumable.on('fileAdded', function (file) {
+			if (!_.contains(['image/png','image/jpeg'],file.file.type)){
+				Bert.alert('Só são permitidos arquivos PNG ou JPG!','warning');
+				return false;
+			}
+			fotosUploadProgressVar.set(0);
+			// Create a new file in the file collection to upload
+			appGaleriaFoto.insert({
+				_id: file.uniqueIdentifier,  // This is the ID resumable will use
+				filename: file.fileName,
+				contentType: file.file.type,
+				metadata:{
+					aplicativoId: FlowRouter.getParam('aplicativoId'),
+					galeriaId: FlowRouter.getParam('id')
+				}
+			}, function (err, _id) {  // Callback to .insert
+				if (err) { return console.error("Erro ao enviar o arquivo!", err); }
+				// Once the file exists on the server, start uploading
+				appGaleriaFoto.resumable.upload();
+			});
 		});
 	},
 	helpers:{
@@ -51,8 +81,10 @@ Controller('formGaleriasView',{
 			return location.origin;
 		},
 		fotos:function(){
-			if (!FlowRouter.getParam('id')) return [];
+			if (!FlowRouter.getParam('id')) return false;
 			var galeria = Galeria.findOne(FlowRouter.getParam('id'));
+			if (!galeria) return false;
+			console.log(galeria.fotos());
 			return galeria.fotos();
 		},
 		capa_id:function(){
@@ -78,11 +110,18 @@ Controller('formGaleriasView',{
 			return [
 				{
 					title:'Cancelar',
+					params:{
+						aplicativoId:FlowRouter.getParam('aplicativoId')
+					},
 					route:'galeriasRoute',
 					icon:'left chevron'
 				}
 			]
-		}
+		},
+		fotoLink:function(){
+			var foto = appGaleriaFoto.baseURL + '/md5/' + this.md5;
+			return foto;
+		},
 	},
 	events:{
 		'click .capaBtn'(e,t){
@@ -124,21 +163,9 @@ Controller('formGaleriasView',{
 				if(result){
 					Bert.alert('A galeria foi salva com sucesso!','success');
 					if (FlowRouter.getParam('id')){
-						FlowRouter.go('galeriasRoute');
+						FlowRouter.go('galeriasRoute',{aplicativoId:FlowRouter.getParam('aplicativoId')});
 					} else {
-						FlowRouter.go('galeriasUpdateRoute',{id:result});
-						var dropZone = $("div.galerias.dropzone").dropzone({
-							url: location.origin+'/upload/galerias/'+FlowRouter.getParam('id'),
-							dictDefaultMessage:'Arraste e solte as fotos aqui para enviar ao servidor.',
-							dictInvalidFileType:'Apenas arquivos de imagems.',
-							dictFileTooBig:'Arquivo muito grande',
-							paramName: 'file',
-							maxFilesize: 25,
-							method:'post',
-							acceptedFiles:'.jpg,.png,.jpeg'
-						});
-						dropZone.on('success',function(file){
-						});
+						FlowRouter.go('galeriasUpdateRoute',{id:result,aplicativoId:FlowRouter.getParam('aplicativoId')});
 					}
 				}
 			});

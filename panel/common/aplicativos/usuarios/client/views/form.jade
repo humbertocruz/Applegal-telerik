@@ -20,6 +20,7 @@ template(name="usuariosFormView")
 					label Permissões
 					select.ui.dropdown#rolesField(name="roles",multiple)
 						option(value="") Permissões
+						option(value="subscriber") Assinante
 						option(value="manager") Gerente
 						each appRoles
 							option(value="#{modulo.path}") #{title}
@@ -28,6 +29,7 @@ template(name="usuariosFormView")
 				label Permissões
 				select.ui.dropdown#rolesField(name="roles",multiple)
 					option(value="") Permissões
+					option(value="subscriber") Assinante
 					option(value="manager") Gerente
 					each appRoles
 						option(value="#{modulo.path}") #{title}

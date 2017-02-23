@@ -17,21 +17,9 @@ Meteor.methods({
 		}
 	},
 	galeriasRemove:function(id,aplicativoId) {
-		var fotos = Foto.find(
-			{
-				galeria_id:id,
-				aplicativoId:aplicativoId
-			}).fetch();
-		_.each(fotos,function(foto){
-			try {
-				fs.unlinkSync(foto.path);
-				Foto.remove({
-					_id:foto._id,
-					aplicativoId:aplicativoId
-				});
-			} catch(e){
-				console.log(e);
-			}
+		appGaleriaFoto.remove({
+			'metadata.galeriaId':id,
+			'metadata.aplicativoId':aplicativoId
 		});
 		return Galeria.remove({
 			_id:id,

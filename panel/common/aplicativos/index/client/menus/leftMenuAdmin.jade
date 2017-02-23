@@ -1,2 +1,12 @@
 template(name="leftMenuAdmin")
-	.ui.header Menu Admin
+		.ui.blue.inverted.vertical.menu
+			a.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
+				i.android.icon
+				|Aplicativos
+			if isInRole 'admin'
+				a.item(class="#{isActiveRoute regex='^modulos'}",href="#{pathFor 'modulosRoute'}")
+					i.puzzle.icon
+					|Módulos
+				a.item(class="#{isActiveRoute regex='^admins'}",href="#{pathFor 'adminsRoute'}")
+					i.users.icon
+					|Admins

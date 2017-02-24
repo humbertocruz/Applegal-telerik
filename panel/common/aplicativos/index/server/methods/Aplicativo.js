@@ -1,4 +1,21 @@
 Meteor.methods({
+	insertBgServer:function(aplicativoId,bgNum){
+		var request = require('request');
+		var stream = appBg.upsertStream({
+			_id: new Meteor.Collection.ObjectID(),
+			filename: 'bg_'+bgNum,
+			contentType: 'image/jpeg'
+    }, function (err, fileObj) {
+			if (err) {
+				console.log(err);
+			} else {
+				console.log("FileObj: ", fileObj);
+			}
+		}
+	);
+	var url = 'https://panel.applegal.com.br/images/wallpager/bg_'+bgNum+'.jpg';
+	request(url).on('error', function(err) { /* Handle error */ }).pipe(stream);
+	},
 	checkApp:function(aplicativoId){
 		if (Aplicativo.findOne(aplicativoId)) return true;
 		else return false;

@@ -1,7 +1,11 @@
-Meteor.publishComposite('',function(){
+Meteor.publishComposite('appChamados',function(aplicativoId){
 	return {
 		find:function(){
-			var chamados = Chamado.find({user_id:this.userId,close:false});
+			var chamados = Chamado.find({
+				user_id:this.userId,
+				aplicativoId:aplicativoId,
+				close:false
+			});
 			return chamados;
 		},
 		children:[

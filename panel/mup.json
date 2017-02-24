@@ -5,12 +5,6 @@
       "username": "root",
       "pem": "~/.ssh/id_rsa",
       "env": {}
-    },
-    {
-      "host": "104.131.84.163",
-      "username": "root",
-      "pem": "~/.ssh/id_rsa",
-      "env": {}
     }
   ],
 
@@ -24,7 +18,7 @@
     "PORT": 4000,
     "UPSTART_UID": "meteoruser",
     "ROOT_URL": "https://panel.applegal.com.br",
-    "MONGO_URL": "mongodb://10.132.62.239/applegal4",
+    "MONGO_URL": "mongodb://10.132.62.239/applegal5",
     "MAIL_URL":"smtp://admin%applegal.com.br:N32w7csfPU@mail.applegal.com.br:587",
     "CLUSTER_WORKERS_COUNT":"auto",
     "KADIRA_APP_ID":"pE2aTg4fw5uqeTWYm",

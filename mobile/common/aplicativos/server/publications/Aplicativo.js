@@ -14,7 +14,22 @@ Meteor.publishComposite('clientApp', function(appInfo) {
 			aplicativoVar = app.fetch()[0];
 			return app;
 		},
-		children: [{
+		children: [
+			{
+				find: function(app) {
+					return appLogo.find({
+						'metadata.aplicativoId':app._id
+					});
+				},
+			},
+			{
+				find: function(app) {
+					return appBg.find({
+						'metadata.aplicativoId':app._id
+					});
+				},
+			},
+			{
 			find: function(app) {
 				return AplicativoModulo.find({
 					aplicativoId:app._id

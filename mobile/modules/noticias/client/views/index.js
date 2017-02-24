@@ -1,7 +1,11 @@
 Controller('noticiasView', {
 	created: function() {
 		topTitleVar.set('Notícias');
-		Meteor.subscribe('appNoticias', currentFilialVar.get());
+		Tracker.autorun(function(){
+			var app = Aplicativo.findOne();
+			if (!app) return false;
+			Meteor.subscribe('appNoticias', app._id);
+		});
 	},
 	rendered: function() {
 

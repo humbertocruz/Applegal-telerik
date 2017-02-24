@@ -1,20 +1,41 @@
-Meteor.publishComposite('',function(){
+Meteor.publishComposite('appGalerias',function(aplicativoId){
 	return {
 		find:function(){
-			var galerias = Galeria.find({active:true});
+			var galerias = Galeria.find({
+				active:true,
+				aplicativoId:aplicativoId
+			});
 			return galerias;
 		},
 		children:[
 			{
 				find:function(galeria){
-					return Foto.find({galeria_id:galeria._id});
+					return appGaleriaFoto.find({
+						'metadata.galeriaId':galeria._id
+					});
 				}
 			}
 		]
 	}
 });
-
-Meteor.publish('galeriaFotos',function(galeria_id){
-  var fotos = Foto.find({galeria_id:galeria_id});
-	return fotos;
+Meteor.publishComposite('oneGalerias',function(id, aplicativoId){
+	return {
+		find:function(){
+			var galerias = Galeria.find({
+				active:true,
+				_id: id,
+				aplicativoId:aplicativoId
+			});
+			return galerias;
+		},
+		children:[
+			{
+				find:function(galeria){
+					return appGaleriaFoto.find({
+						'metadata.galeriaId':galeria._id
+					});
+				}
+			}
+		]
+	}
 });

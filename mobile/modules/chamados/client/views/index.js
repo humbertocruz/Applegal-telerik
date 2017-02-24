@@ -1,6 +1,11 @@
 Controller('chamadosView',{
 	created:function(){
 		topTitleVar.set('Chamados de Suporte');
+		Tracker.autorun(function(){
+			var app = Aplicativo.findOne();
+			if (!app) return false;
+			Meteor.subscribe("appChamados", app._id);
+		});
 	},
 	rendered:function(){
 

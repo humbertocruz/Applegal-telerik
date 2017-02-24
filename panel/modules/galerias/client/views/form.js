@@ -84,7 +84,6 @@ Controller('formGaleriasView',{
 			if (!FlowRouter.getParam('id')) return false;
 			var galeria = Galeria.findOne(FlowRouter.getParam('id'));
 			if (!galeria) return false;
-			console.log(galeria.fotos());
 			return galeria.fotos();
 		},
 		capa_id:function(){

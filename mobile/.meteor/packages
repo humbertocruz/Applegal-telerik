@@ -55,5 +55,5 @@ pascoual:pdfjs
 wizonesolutions:underscore-string
 mrt:moment-timezone
 peerlibrary:server-autorun
-cfs:standard-packages
-cfs:gridfs
+vsivsi:file-collection
+benjaminrh:jquery-cookie

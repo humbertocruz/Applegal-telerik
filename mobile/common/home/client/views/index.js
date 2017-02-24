@@ -1,7 +1,9 @@
 Controller('homeView', {
 	created: function() {
 		topTitleVar.set('Home');
-		Meteor.subscribe('allNoticias', currentFilialVar.get());
+		Tracker.autorun(function(){
+			Meteor.subscribe('allNoticias', currentFilialVar.get());
+		});
 	},
 	rendered: function() {
 
@@ -19,7 +21,6 @@ Controller('homeView', {
 		},
 		modulos:function(){
 			var appMods = AplicativoModulo.find().fetch();
-			console.log(appMods);
 			return appMods;
 		}
 	},

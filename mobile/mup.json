@@ -12,15 +12,13 @@
 
   "appName": "appLegalMobile",
 
-  "uploadDir":"appLegalAdmin",
-
   "app": ".",
 
   "env": {
     "PORT": 4050,
     "UPSTART_UID": "meteoruser",
     "ROOT_URL": "https://m.applegal.com.br",
-    "MONGO_URL": "mongodb://10.132.62.239/applegal2",
+    "MONGO_URL": "mongodb://10.132.62.239/applegal5",
     "MAIL_URL":"smtp://applegal%40applegal.com.br:N32w7csfPU@mail.applegal.com.br:587",
     "VIRTUAL_HOST":"m.applegal.com.br",
     "VIRTUAL_PORT":4050,
@@ -28,7 +26,7 @@
     "LETSENCRYPT_EMAIL":"humberto.cruz@gmail.com"
   },
 
-  "deployCheckWaitTime": 30,
+  "deployCheckWaitTime": 45,
 
   "enableUploadProgressBar": true
 }

@@ -1,22 +1,25 @@
 Controller('galeriasView',{
 	created:function(){
 		topTitleVar.set('Galeria de Fotos');
+		Tracker.autorun(function(){
+			var app = Aplicativo.findOne();
+			if (!app) return false;
+			Meteor.subscribe("appGalerias", app._id);
+		});
 	},
 	rendered:function(){
 
 	},
 	helpers:{
-		locationOrigin:function(){
-			if (location.origin == "http://localhost:4000") {
-				return "http://localhost:3000";
-			} else {
-				return 'https://admin.gremiopioneiro.com.br';
-			}
+		fotoCapaPath:function(){
+			var foto = appGaleriaFoto.findOne(this.capa_id);
+			if (!foto) return false;
+			return '/gridfs/galeria_fotos/md5/'+foto.md5;
 		},
 		galerias:function(){
-			var galerias = Galeria.find({},{sort:{date:-1}}).fetch();
+			var galerias = Galeria.find({},{sort:{date:-1}});
 			return {
-				data:galerias,
+				data:galerias.fetch(),
 				count:galerias.length
 			}
 		}

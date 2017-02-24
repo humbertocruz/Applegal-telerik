@@ -1,13 +1,30 @@
-Meteor.publishComposite('appNoticias', function(filialId) {
+Meteor.publishComposite('appNoticias', function(aplicativoId) {
 	return {
 		find: function() {
 			var noticias = Noticia.find({
 				active: true,
-				aplicativoId: aplicativoVar._id
+				aplicativoId: aplicativoId
 			}, {
 				sort: {
 					date: -1
 				}
+			});
+			return noticias;
+		},
+		children: [{
+			find: function(noticia) {
+				return Assunto.find(noticia.assunto_id);
+			}
+		}]
+	}
+});
+
+Meteor.publishComposite('oneNoticias', function(id, aplicativoId) {
+	return {
+		find: function() {
+			var noticias = Noticia.find({
+				_id: id,
+				aplicativoId: aplicativoId
 			});
 			return noticias;
 		},

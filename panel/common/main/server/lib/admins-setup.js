@@ -26,7 +26,7 @@ Meteor.startup(function() {
 			"sidebarBackgroundColor":"violet",
 			"itemsPerPage":15,
 			"createdAt":moment().toDate(),
-			"appInfoId":"br.com.applegal.technoapp",
+			"appInfoId":"br.com.applegal.applegal",
 			"privacidade":"<p>Pol&iacute;tica de Privacidade</p>\n<p>- O aplicativo poder&aacute; detectar o n&uacute;mero do celular em uso para controle de acesso de usu&aacute;rios</p>\n<p>- As informa&ccedil;&otilde;es do us&aacute;rios fornecidas no aplicativo n&atilde;o ser&atilde;o compartilhadas com terceiros com excess&ccedil;&atilde;o:</p>\n<p>- O preenchimento do Anivers&aacute;rio aparecer&aacute; para outros usu&aacute;rios</p>\n"
 		};
 		appId = Aplicativo.insert(app);

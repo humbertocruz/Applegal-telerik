@@ -8,7 +8,7 @@ template(name="galeriasView")
 		each galerias.data
 			a.ui.link.fluid.card(href="#{pathFor 'fotosRoute' id=_id}")
 				.image
-					img(src="#{locationOrigin}/fotoDaGaleria/#{capa_id}")
+					img(src="#{fotoCapaPath}")
 				.content
 					.left.floated.header #{titulo}
 					.ui.red.right.floated.label #{fotos.length}

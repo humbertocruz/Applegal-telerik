@@ -1,6 +1,8 @@
 Controller('noticiasDetalheView',{
 	created:function(){
-		oneNoticia = Meteor.subscribe("oneNoticia", FlowRouter.getParam('id'), Aplicativo.findOne());
+		var app = Aplicativo.findOne();
+		if (!app) return false;
+		oneNoticia = Meteor.subscribe("oneNoticia", FlowRouter.getParam('id'), app._id);
 	},
 	helpers:{
 		noticia:function(){

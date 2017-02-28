@@ -4,7 +4,7 @@ Controller('loginView',{
 			return TestaCPF(value);
 		};
 		$('#loginForm').form({
-			inline:true,
+			inline:false,
 			fields:{
 				usernameField:{
 					identifier:'usernameField',

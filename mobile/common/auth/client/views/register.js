@@ -10,7 +10,7 @@ Controller('registerTwoView', {
 		$('#aniversarioField').mask('99/99/9999');
 		$('#phoneField').mask('(99) 99999-9999');
 		$('#registerTwoForm').form({
-			inline: true,
+			inline: false,
 			fields: {
 				guerra: {
 					identifier: 'name',
@@ -89,7 +89,7 @@ Controller('registerView', {
 			return TestaCPF(value);
 		};
 		$('#registerForm').form({
-			inline: true,
+			inline: false,
 			fields: {
 				cpf: {
 					identifier: 'username',

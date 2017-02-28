@@ -2,39 +2,39 @@ Controller('homeView', {
 	created: function() {
 		topTitleVar.set('Home');
 		Tracker.autorun(function(){
-			Meteor.subscribe('allNoticias', currentFilialVar.get());
+			//Meteor.subscribe('allNoticias');
 		});
 	},
 	rendered: function() {
-		Meteor.setTimeout(function(){
-			$('.iconAlpha').each(function(ic,ix){
-				var bg = $(ix).css('backgroundColor').split('(')[1];
-				bg = bg.split(')')[0];
-				bg = bg.split(',');
-				var alpha = Aplicativo.findOne().iconOpacity;
-				rgba = 'rgba('+bg[0]+''+bg[1]+','+bg[2]+','+alpha+') !important';
-				$(ix).css('backgroundColor',rgba);
-
-			});
-		},1000);
+		// Aparece os icones dos módulos conforme a configuração
+		var app = Aplicativo.findOne();
+		$('.iconAlpha').transition({
+			animation: app.iconAnimation,
+			durantion: 1000,
+			interval: 50
+		});
 	},
 	helpers: {
 		userId: function() {
 			return Meteor.userId();
 		},
-		locationOrigin: function() {
-			if (location.origin == "http://localhost:4000") {
-				return "http://localhost:3000";
-			} else {
-				return 'https://admin.gremiopioneiro.com.br';
-			}
-		},
 		modulos:function(){
 			var appMods = AplicativoModulo.find().fetch();
 			return appMods;
+		},
+		appLogo:function(){
+			var app = Aplicativo.findOne();
+			if (!app) return false;
+			return appLogo.baseURL+'/md5/'+app.appLogo().md5;
 		}
 	},
 	events: {
+		'click .moduloClickEvent':function(e,t){
+			var me = this;
+			$(e.currentTarget).transition('jiggle',function(){
+				FlowRouter.go(me.modulo().path);
+			});
+		},
 		'click #showPhoneNumber': function(e, t) {
 			return window.plugins.sim.getSimInfo(
 

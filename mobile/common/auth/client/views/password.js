@@ -7,6 +7,11 @@ Controller('passwordView',{
 	helpers:{
 		recovery:function(){
 			return recoveryVar.get();
+		},
+		appLogo:function(){
+			var app = Aplicativo.findOne();
+			if (!app) return false;
+			return appLogo.baseURL+'/md5/'+app.appLogo().md5;
 		}
 	},
 	events:{

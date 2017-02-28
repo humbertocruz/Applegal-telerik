@@ -1,20 +1,19 @@
 template(name="loginView")
-	img.ui.small.centered.image(src="#{appLogo}",target="_self")
-	form.ui.inverted.form#loginForm(method="post")
+	img.ui.small.centered.image(src="#{appLogo}")
+	.ui.hidden.divider
+	form.ui.inverted.form#loginForm(style="background-color:#{appThemeBgColor}", method="post")
 		.field
 			label CPF
-			input#usernameField(type="tel",name="username",autocomplete="off")
+			input#usernameField(type="tel",name="username",autocomplete="off",placeholder="CPF")
 		.field
 			label Senha
 			.ui.action.input
-				input#passwordField.hidePwd(type="tel",name="password",autocomplete="off")
+				input#passwordField.hidePwd(type="tel",name="password",autocomplete="off",placeholder="Senha")
 				.ui.icon.button.showPasswordBtn
 					i.eye.icon
 		.ui.divider
 		button.ui.fluid.blue.button(type="submit",form="loginForm") Entrar
-		br
-		.ui.two.column.grid
-			.column
-				a.ui.fluid.button(href="#{pathFor 'passwordRoute'}") Esqueceu sua Senha ?
-			.column
-				a.ui.fluid.button(href="#{pathFor 'registerRoute'}") Cadastro
+	//.ui.hidden.divider
+		a.ui.small.fluid.button(href="#{pathFor 'passwordRoute'}") Esqueceu sua Senha ?
+		.ui.hidden.divider
+		a.ui.small.fluid.button(href="#{pathFor 'registerRoute'}") Cadastre-se

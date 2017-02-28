@@ -2,7 +2,7 @@ semanticColors = [
 	{
 		className:'white',
 		title:'Branco',
-		rgb: '#FFFFFF'
+		rgb: '#ffffff'
 	},{
 		className:'red',
 		title:'Vermelho',

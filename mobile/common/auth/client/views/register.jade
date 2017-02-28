@@ -1,6 +1,7 @@
 template(name="registerView")
-	form.ui.stackable.form#registerForm(method="post",novalidate="novalidate")
-		img.ui.small.centered.image(src="#{appInfo.logo}")
+	img.ui.small.centered.image(src="#{appLogoSrc}")
+	br
+	form.ui.form#registerForm(style="background-color:#{appThemeBgColor}", class="#{appThemeText}",method="post",novalidate="novalidate")
 		.field
 			label Seu CPF
 			input#usernameField(type="tel",name="username")
@@ -16,10 +17,8 @@ template(name="registerView")
 				input#password2Field.hidePwd(type="tel",name="password2",autocomplete="off")
 				.ui.icon.button.showPasswordBtn
 					i.eye.icon
-	br
-	button.ui.blue.fluid.button(type="submit",form="registerForm") Continuar
-	br
-	a.ui.fluid.button(href="#{pathFor 'homeRoute'}") Cancelar
+		.ui.divider(class="#{appThemeText}")
+		button.ui.blue.fluid.button(type="submit",form="registerForm") Continuar
 
 template(name="registerTwoView")
 	.ui.dividing.header Cadastro

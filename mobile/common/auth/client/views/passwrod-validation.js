@@ -1,7 +1,7 @@
 Controller('passwordView',{
 	rendered(){
 		$('#passwordForm').form({
-			inline:true,
+			inline:false,
 			fields:{
 				usernameField:{
 					identifier:'usernameField',

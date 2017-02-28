@@ -1,8 +1,7 @@
 template(name="homeView")
-	img.ui.mini.centered.image(src="#{appLogo}")
-	.ui.three.column.grid
+	img.ui.small.centered.image(src="#{appLogo}")
+	.ui.hidden.divider
+	.ui.four.column.fluid.grid
 		each modulos
-			.center.aligned.column
-				a.ui.icon.inverted.header(href="#{pathFor modulo.path}")
-					i.inverted.iconAlpha.icon(id="icon_#{_id}",class="#{modulo.icon}",class="#{appInfo.iconType}", class="#{appInfo.iconColor}")
-					.content(style="text-shadow: 3px 3px 3px #000;") #{title}
+			.center.aligned.column.moduloClickEvent
+				i.iconAlpha.big.inverted.transition.hidden.icon(style="background-color:#{iconRGBA} !important",id="icon_#{_id}",class="#{modulo.icon} #{appInfo.iconColor} #{appInfo.iconType}")

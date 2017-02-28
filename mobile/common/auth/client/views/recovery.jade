@@ -1,6 +1,6 @@
 template(name="recoveryView")
+	img.ui.small.centered.image(src="#{appLogo}")
 	form.ui.form#recoveryForm(method="post")
-		img.ui.tiny.centered.image(src="#{appInfo.logo}")
 		.field
 			label Código do Email
 			input#codeField(type="tel",name="code",autocomplete="off")

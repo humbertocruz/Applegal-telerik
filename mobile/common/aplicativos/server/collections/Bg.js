@@ -17,6 +17,6 @@ appBg.allow({
 	// Necessary to support Resumable.js
 	write: function (userId, file, fields) {
 		// Only owners can upload file data
-		return false;
+		return true;
 	}
 });

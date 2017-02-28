@@ -1,9 +1,8 @@
 template(name="homeView")
-	.ui.basic.segment
-		img.ui.small.centered.image(src="#{appInfo.logo}")
+	img.ui.mini.centered.image(src="#{appLogo}")
 	.ui.three.column.grid
 		each modulos
 			.center.aligned.column
-				a.ui.icon.inverted.small.header(href="#{pathFor modulo.path}") 
-					i.circular.icon(class="#{modulo.icon}")
-					.content #{modulo.title}
+				a.ui.icon.inverted.header(href="#{pathFor modulo.path}")
+					i.inverted.iconAlpha.icon(id="icon_#{_id}",class="#{modulo.icon}",class="#{appInfo.iconType}", class="#{appInfo.iconColor}")
+					.content(style="text-shadow: 3px 3px 3px #000;") #{title}

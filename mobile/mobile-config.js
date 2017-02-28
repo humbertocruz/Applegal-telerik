@@ -1,5 +1,5 @@
 App.info({
-	id: 'br.com.applegal.applegal',
+	id: 'br.com.applegal.gremio',
 	name: 'AppLegal',
 	description: "App Legal",
 	author: 'Humberto Cruz',
@@ -20,7 +20,7 @@ App.launchScreens({
 	'android_xhdpi_portrait': '../../src/Android/res/drawable-xhdpi/screen.png',
 	'android_xxhdpi_portrait': '../../src/Android/res/drawable-xxhdpi/screen.png'
 });
-App.setPreference('android-minSdkVersion', '19');
+App.setPreference('android-minSdkVersion', '16');
 App.setPreference('BackgroundColor', '0xffffffff');
 App.setPreference('HideKeyboardFormAccessoryBar', true);
 App.setPreference('Orientation', 'portrait');
@@ -30,8 +30,9 @@ App.configurePlugin('phonegap-plugin-push', {
 	SENDER_ID: 862875202989
 });
 
-App.accessRule('https://applegal.com.br/*');
+App.accessRule("blob:*");
 
+// Permite acesso a alguns sites importantes e uteis
 App.accessRule('https://m.facebook.com/*');
 App.accessRule('https://facebook.com/*');
 App.accessRule('https://plus.google.com/*');

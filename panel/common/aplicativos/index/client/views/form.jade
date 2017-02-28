@@ -40,7 +40,7 @@ template(name="aplicativosFormView")
 							label Quantidade Paginação
 							input#itemsPerPageField(type="number",name="itemsPerPage")
 		.ui.bottom.attached.tab.segment(data-tab="design")
-			.two.fields
+			.three.fields
 				.field
 					label Cor de Fundo do Cabeçalho
 					select.ui.search.dropdown#headerField(name="headerBackgroundColor")
@@ -53,7 +53,42 @@ template(name="aplicativosFormView")
 						option(value="") Escolha uma Cor
 						each semanticColors
 							option(value="#{className}") #{title}
+				.field
+					label Tema
+					select.ui.search.dropdown#themeField(name="theme")
+						option(value="") Escolha o Tema
+						option(value="lighten") Claro
+						option(value="darken") Escuro
+			.three.fields
+				.field
+					label Cor do Ícone
+					select.ui.search.dropdown#iconColorField(name="iconColor")
+						option(value="") Escolha uma Cor
+						each semanticColors
+							option(value="#{className}") #{title}
+				.field
+					label Tipo do Ícone
+					select.ui.search.dropdown#iconTypeField(name="iconType")
+						option(value="") Escolha um Tipo
+						option(value="circular") Circular
+						option(value="bordered") Quadrado
+				.field
+					label Opacidade dos Icones
+					select.ui.search.dropdown#iconOpacityField(name="iconOpacity")
+						option(value="") Escolha a Opacidade do ícone
+						option(value="0") 100%
+						option(value=".1") 90%
+						option(value=".2") 80%
+						option(value=".3") 70%
+						option(value=".4") 60%
+						option(value=".5") 50%
+						option(value=".6") 40%
+						option(value=".7") 30%
+						option(value=".8") 20%
+						option(value=".9") 10%
+						option(value="1") 0%
 			.field
+				.field
 				label Imagem de Fundo
 			.ui.top.attached.tabular.menu
 				.active.item(data-tab="bgChoose") Escolher

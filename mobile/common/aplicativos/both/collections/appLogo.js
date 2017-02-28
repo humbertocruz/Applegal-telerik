@@ -1,4 +1,4 @@
-appBg = new FileCollection('fundos', {
+appLogo = new FileCollection('logos', {
 	resumable: true,
 	//resumableIndexName: 'appL',
 	http: [
@@ -11,10 +11,10 @@ appBg = new FileCollection('fundos', {
 				};
 			},
 			handler: function (req, res, next) {
-				if (req.headers && req.headers.origin) {
-					res.setHeader('Access-Control-Allow-Origin', req.headers.origin); // For Cordova
-					res.setHeader('Access-Control-Allow-Credentials', true);
-				}
+				// if (req.headers && req.headers.origin) {
+				res.setHeader('Access-Control-Allow-Origin', '*'); // For Cordova
+				res.setHeader('Access-Control-Allow-Credentials', true);
+				//  }
 				next();
 			}
 		},
@@ -22,7 +22,9 @@ appBg = new FileCollection('fundos', {
 			method: 'options',  // Enable an OPTIONS endpoint (for CORS)
       path: '/_resumable',  // this will be at route "/gridfs/myFiles/:md5"
       lookup: function (params, query) {  // uses express style url param
-				  // a query mapping url to myFiles
+				return {
+					'md5': params.md5
+				};
       },
       handler: function (req, res, next) {  // Custom express.js handler for OPTIONS
          res.writeHead(200, {

@@ -14,7 +14,7 @@ Controller('loginView', {
 		appLogo:function(){
 			var app = Aplicativo.findOne();
 			if (!app) return false;
-			return '/gridfs/logos/md5/'+app.appLogo().md5;
+			return appLogo.baseURL+'/md5/'+app.appLogo().md5;
 		}
 	},
 	events: {

@@ -1,10 +1,9 @@
 Controller('escalasView',{
 	created:function(){
 		topTitleVar.set('Escalas');
-		fromDateVar = ReactiveVar(moment().toDate());
-		subsEscala = new SubsManager();
+		fromDateVar = ReactiveVar(moment().toDate());;
 		Tracker.autorun(function(){
-			pubEscalas = subsEscala.subscribe('pubEscalas',fromDateVar.get());
+			pubEscalas = Meteor.subscribe('pubEscalas',fromDateVar.get());
 		});
 	},
 	rendered:function(){

@@ -16,7 +16,7 @@ Controller('adminLayout',{
 			var app = Aplicativo.findOne();
 			if (!app) return false;
 			var bg = app.appBg();
-			return 'background-image:url(/gridfs/fundos/md5/'+bg.md5+') !important;';
+			return appBg.baseURL+'/md5/'+bg.md5;
 		},
 		noApp:function(){
 			if (!Aplicativo.findOne()) return true;

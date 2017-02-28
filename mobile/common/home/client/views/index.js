@@ -6,7 +6,17 @@ Controller('homeView', {
 		});
 	},
 	rendered: function() {
+		Meteor.setTimeout(function(){
+			$('.iconAlpha').each(function(ic,ix){
+				var bg = $(ix).css('backgroundColor').split('(')[1];
+				bg = bg.split(')')[0];
+				bg = bg.split(',');
+				var alpha = Aplicativo.findOne().iconOpacity;
+				rgba = 'rgba('+bg[0]+''+bg[1]+','+bg[2]+','+alpha+') !important';
+				$(ix).css('backgroundColor',rgba);
 
+			});
+		},1000);
 	},
 	helpers: {
 		userId: function() {

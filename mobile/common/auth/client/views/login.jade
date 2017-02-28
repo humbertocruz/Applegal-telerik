@@ -1,6 +1,6 @@
 template(name="loginView")
-	form.ui.form#loginForm(method="post")
-		img.ui.small.centered.image(src="#{appLogo}")
+	img.ui.small.centered.image(src="#{appLogo}",target="_self")
+	form.ui.inverted.form#loginForm(method="post")
 		.field
 			label CPF
 			input#usernameField(type="tel",name="username",autocomplete="off")
@@ -13,6 +13,8 @@ template(name="loginView")
 		.ui.divider
 		button.ui.fluid.blue.button(type="submit",form="loginForm") Entrar
 		br
-		a.ui.fluid.button(href="#{pathFor 'passwordRoute'}") Esqueceu sua Senha ?
-		br
-		a.ui.fluid.button(href="#{pathFor 'registerRoute'}") Cadastro
+		.ui.two.column.grid
+			.column
+				a.ui.fluid.button(href="#{pathFor 'passwordRoute'}") Esqueceu sua Senha ?
+			.column
+				a.ui.fluid.button(href="#{pathFor 'registerRoute'}") Cadastro

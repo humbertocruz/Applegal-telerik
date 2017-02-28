@@ -3,7 +3,7 @@ template(name="fotosView")
 	a.ui.right.floated.mini.icon.button(href="#{pathFor 'galeriasRoute'}")
 		i.chevron.left.icon
 	.ui.clearing.divider
-	each fotos
-		.ui.fluid.card
-			.image
-				img(src="#{fotoPath}")
+	.ui.three.column.grid
+		each fotos
+			.column
+				img.ui.fluid.image(src="#{fotoPath}")

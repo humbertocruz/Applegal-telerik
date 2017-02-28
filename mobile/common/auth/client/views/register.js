@@ -2,6 +2,7 @@ Controller('registerTwoView', {
 	created: function() {
 		phoneNumberVar = new ReactiveVar();
 		datePickerFieldVar = new ReactiveVar();
+		topTitleVar.set('Cadastre-se');
 	},
 	rendered: function() {
 		$.fn.form.settings.rules.cpf = function(value) {

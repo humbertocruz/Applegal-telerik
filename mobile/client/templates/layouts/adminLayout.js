@@ -16,7 +16,7 @@ Controller('adminLayout',{
 			var app = Aplicativo.findOne();
 			if (!app) return false;
 			var bg = app.appBg();
-			return appBg.baseURL+'/md5/'+bg.md5;
+			return 'https://panel.applegal.com.br'+appBg.baseURL+'/md5/'+bg.md5;
 		},
 		noApp:function(){
 			if (!Aplicativo.findOne()) return true;

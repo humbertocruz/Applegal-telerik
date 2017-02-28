@@ -10,11 +10,6 @@ Controller('loginView', {
 	helpers: {
 		filiais: function() {
 			return Filial.find().fetch();
-		},
-		appLogo:function(){
-			var app = Aplicativo.findOne();
-			if (!app) return false;
-			return appLogo.baseURL+'/md5/'+app.appLogo().md5;
 		}
 	},
 	events: {

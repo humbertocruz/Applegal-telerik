@@ -1,5 +1,6 @@
 Controller('recoveryView',{
 	created:function(){
+		topTitleVar.set('Recuperar Senha');
 	},
 	rendered:function(){
 		$('#password1Field').mask('9999999999999999');

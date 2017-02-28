@@ -1,11 +1,11 @@
 App.info({
-	id: 'br.com.applegal.gremio',
-	name: 'AppLegal',
-	description: "App Legal",
+	id: 'br.com.applegal.applegal',
+	name: 'Tehcno App',
+	description: "Tehcno App - Aplicação de Testes",
 	author: 'Humberto Cruz',
 	email: 'humberto.cruz@gmail.com',
 	website: 'https://applegal.com.br',
-	version: '0.0.1'
+	version: '0.0.4'
 });
 App.icons({
 	'android_mdpi': '../../src/Android/res/drawable-mdpi/icon.png',
@@ -33,6 +33,7 @@ App.configurePlugin('phonegap-plugin-push', {
 App.accessRule("blob:*");
 
 // Permite acesso a alguns sites importantes e uteis
+App.accessRule('https://panel.applegal.com.br/*');
 App.accessRule('https://m.facebook.com/*');
 App.accessRule('https://facebook.com/*');
 App.accessRule('https://plus.google.com/*');

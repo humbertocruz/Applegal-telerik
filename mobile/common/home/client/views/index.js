@@ -27,7 +27,7 @@ Controller('homeView', {
 		'click .moduloClickEvent':function(e,t){
 			var me = this;
 			$(e.currentTarget).transition('jiggle',function(){
-				FlowRouter.go(me.modulo().path);
+				location.redirect(me.modulo().path);
 			});
 		},
 		'click #showPhoneNumber': function(e, t) {

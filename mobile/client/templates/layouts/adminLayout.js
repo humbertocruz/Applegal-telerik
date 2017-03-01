@@ -3,10 +3,10 @@ Controller('adminLayout',{
 
 	},
 	rendered:function(){
-		Meteor.setTimeout(function(){
+		//Meteor.setTimeout(function(){
 			//$('.ui.left.sidebar').sidebar('attach events', '.toggleSidebar');
 			//$('.ui.bottom.sidebar').sidebar('attach events', '.toggleTechnotronics');
-		}, 1000);
+		//}, 1000);
 	},
 	events:{
 
@@ -16,7 +16,11 @@ Controller('adminLayout',{
 			var app = Aplicativo.findOne();
 			if (!app) return false;
 			var bg = app.appBg();
-			return 'https://panel.applegal.com.br'+appBg.baseURL+'/md5/'+bg.md5;
+			if (bg) {
+				return 'https://panel.applegal.com.br'+appBg.baseURL+'/md5/'+bg.md5;
+			} else {
+				return 'https://panel.applegal.com.br'+Arquivo.baseURL+'/md5/'+app.bgImage;
+			}
 		},
 		noApp:function(){
 			if (!Aplicativo.findOne()) return true;

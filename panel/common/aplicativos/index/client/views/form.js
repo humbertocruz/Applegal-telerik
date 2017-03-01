@@ -1,22 +1,19 @@
 Controller('aplicativosFormView',{
 	created:function(){
 		logoUploadProgressVar = new ReactiveVar();
+		arquivosPageVar = new ReactiveVar(1);
 		bgUploadProgressVar = new ReactiveVar();
 		bgSelectedVar = new ReactiveVar(false);
-		bgStartNumVar = new ReactiveVar(0);
-		bgStepNumVar = new ReactiveVar(10);
-		bgMaxNumVar = new ReactiveVar(81);
-		//Tracker.autorun(function(){
-		//	Meteor.subscribe("oneAplicativo", FlowRouter.getParam('aplicativoId'));
-		//});
+		Tracker.autorun(function(){
+			var page = arquivosPageVar.get();
+			Meteor.subscribe("appArquivos", page);
+		});
 	},
 	rendered:function(){
 		var loadApp = function(aplicativo){
 			$('#aplicativosForm').form('set values',aplicativo);
 			if (aplicativo.bgImage) {
 				bgSelectedVar.set(aplicativo.bgImage);
-				var page = Math.floor(aplicativo.bgImage/bgStepNumVar.get());
-				bgStartNumVar.set(page*bgStepNumVar.get());
 			}
 		};
 		Tracker.autorun(function(){
@@ -142,21 +139,8 @@ Controller('aplicativosFormView',{
 			return FlowRouter.getParam('aplicativoId');
 		},
 		isBgSelected:function(){
-			if (this.num != bgSelectedVar.get()) return '';
+			if (this._id != bgSelectedVar.get()) return '';
 			else return 'disabled';
-		},
-		bgImages:function(){
-			var imgs = [];
-			var init = bgStartNumVar.get();
-			var ending = bgStartNumVar.get()+bgStepNumVar.get();
-			if (ending > bgMaxNumVar.get()) ending = bgMaxNumVar.get()+1;
-			for(i=init;i<ending;i++) {
-				imgs.push({
-					num: i,
-					path: '/images/wallpapers/thumbs/bg_'+i+'.jpg'
-				})
-			}
-			return imgs;
 		},
 		header:function(){
 			return {
@@ -202,6 +186,17 @@ Controller('aplicativosFormView',{
 		},
 		bgUploadProgress:function(){
 			return bgUploadProgressVar.get();
+		},
+		wallpapers:function(){
+			var wallpapers = Arquivo.find({
+				'metadata.tipoArquivo':'wallpaper'
+			}).fetch();
+			return {
+				data:wallpapers
+			}
+		},
+		arquivoPath:function(){
+			return '/gridfs/arquivos/md5/'+this.md5;
 		}
 	},
 	events:{
@@ -212,17 +207,18 @@ Controller('aplicativosFormView',{
 			Bert.alert('Você precisa salvar o App para poder alterar seu Wallpaper.','info');
 		},
 		'click #bgUpEvent':function(e,t){
-			var num = bgStartNumVar.get()+bgStepNumVar.get();
-			if (num > bgMaxNumVar.get()) return false;
-			bgStartNumVar.set(num);
+			var max = Math.ceil(Counts.get('allArquivos')/5);
+			if (arquivosPageVar.get() == max) return false;
+			var num = arquivosPageVar.get()+1;
+			arquivosPageVar.set(num);
 		},
 		'click #bgDownEvent':function(e,t){
-			var num = bgStartNumVar.get()-bgStepNumVar.get();
-			if (num < 0) num = 0;
-			bgStartNumVar.set(num);
+			if (arquivosPageVar.get() == 1) return false;
+			var num = arquivosPageVar.get()-1;
+			arquivosPageVar.set(num);
 		},
 		'click .bgSelectEvent':function(e,t){
-			bgSelectedVar.set(this.num);
+			bgSelectedVar.set(this._id);
 		},
 		'submit #aplicativosForm':function(e,t){
 			e.preventDefault();

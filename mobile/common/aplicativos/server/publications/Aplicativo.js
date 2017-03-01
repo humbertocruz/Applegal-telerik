@@ -29,6 +29,11 @@ Meteor.publishComposite('clientApp', function(appInfo) {
 				},
 			},
 			{
+				find: function(app) {
+					return Arquivo.find(app.bgImage,{limit:1});
+				},
+			},
+			{
 			find: function(app) {
 				return AplicativoModulo.find({
 					aplicativoId:app._id

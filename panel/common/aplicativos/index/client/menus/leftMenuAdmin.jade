@@ -1,5 +1,5 @@
 template(name="leftMenuAdmin")
-		.ui.blue.inverted.vertical.menu
+		.ui.blue.inverted.fluid.vertical.menu
 			a.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
 				i.android.icon
 				|Aplicativos
@@ -7,6 +7,9 @@ template(name="leftMenuAdmin")
 				a.item(class="#{isActiveRoute regex='^modulos'}",href="#{pathFor 'modulosRoute'}")
 					i.puzzle.icon
 					|Módulos Disponíveis
+				a.item(class="#{isActiveRoute regex='^arquivos'}",href="#{pathFor 'arquivosRoute'}")
+					i.file.icon
+					|Arquivos
 				a.item(class="#{isActiveRoute regex='^admins'}",href="#{pathFor 'adminsRoute'}")
 					i.users.icon
 					|Admins da Plataforma

@@ -38,7 +38,6 @@ Meteor.publishComposite("allAplicativos", function(search,page){
 			{
 				find:function(app){
 					return appLogo.find({
-						'metadata._Resumable': { $exists: false },
 						'metadata.aplicativoId': app._id
 					});
 				}
@@ -46,7 +45,6 @@ Meteor.publishComposite("allAplicativos", function(search,page){
 			{
 				find:function(app){
 					return appBg.find({
-						'metadata._Resumable': { $exists: false },
 						'metadata.aplicativoId': app._id
 					});
 				}

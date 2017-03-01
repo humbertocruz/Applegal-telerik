@@ -10,5 +10,13 @@ Meteor.startup(function() {
 		style: 'fixed-bottom',
 		type: 'default'
 	};
-	FlowRouter.initialize();
+	Tracker.autorun(function(){
+		var app = Aplicativo.findOne();
+		if (isAppVar.get()) return false;
+		if (app) {
+			isAppVar.set(true);
+			FlowRouter.initialize();
+		}
+	});
+
 });

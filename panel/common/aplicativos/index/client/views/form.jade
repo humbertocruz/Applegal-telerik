@@ -5,6 +5,7 @@ template(name="aplicativosFormView")
 			.active.item(data-tab="info") Informações
 			.item(data-tab="design") Aparência do App
 			.item(data-tab="home") Home Page
+			.item(data-tab="login") Login
 			.item(data-tab="privacy") Privacidade
 		.ui.bottom.attached.active.tab.segment(data-tab="info")
 			.ui.grid
@@ -83,8 +84,8 @@ template(name="aplicativosFormView")
 				.item(data-tab="bgUpload") Enviar
 			.ui.bottom.attached.tab.active.segment(data-tab="bgChoose")
 				.ui.small.rounded.images
-					each bgImages
-						img.ui.link.image.bgSelectEvent(class="#{isBgSelected}",src="#{path}")
+					each wallpapers.data
+						img.ui.link.image.bgSelectEvent(class="#{isBgSelected}",src="#{arquivoPath}")
 				.field
 					.ui.buttons
 						.ui.icon.button#bgDownEvent
@@ -137,6 +138,23 @@ template(name="aplicativosFormView")
 						option(value="drop") Cair
 						option(value="horizontal flip") Girar
 						option(value="scale") Aumentar
+		.ui.bottom.attached.tab.segment(data-tab="login")
+			.field
+				label Tipo de Login
+				select.ui.search.dropdown#loginTypeField(name="loginType")
+					option(value="") Escolha uma opção
+					option(value="email") Email
+					option(value="username") Username
+			.two.fields
+				.field
+					label Título
+					input#loginTitleField(type="text",name="loginTitle")
+				.field
+					label Máscara do Título
+					input#loginTitleMaskField(type="text",name="loginTitleMask")
+			.field
+				label Máscara da Senha
+				input#loginPasswordMaskField(type="text",name="loginPasswordMask")
 		.ui.bottom.attached.tab.segment(data-tab="privacy")
 			.field
 				label Privacidade

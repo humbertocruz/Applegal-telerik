@@ -10,7 +10,7 @@ Controller('modulosView',{
 		header:function(){
 			return {
 				title:'Módulos',
-				icon:'sidebar'
+				icon:'puzzle'
 			}
 		},
 		newLink:function(){

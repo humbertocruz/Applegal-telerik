@@ -30,13 +30,6 @@ Meteor.publishComposite('', function(){
 								aplicativoId:app._id
 							});
 						}
-					},{
-						find:function(app){
-							return appLogo.find({
-								'metadata._Resumable': { $exists: false },
-								'metadata.aplicativoId': app._id
-							});
-						}
 					}
 				]
 			}

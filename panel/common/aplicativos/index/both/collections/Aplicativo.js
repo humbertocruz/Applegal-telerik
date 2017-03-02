@@ -8,11 +8,5 @@ Aplicativo.helpers({
 				order:1
 			}
 		}).fetch();
-	},
-	appLogo:function(){
-		return appLogo.findOne({'metadata.aplicativoId':this._id});
-	},
-	appBg:function(){
-		return appBg.findOne({'metadata.aplicativoId':this._id});
 	}
 });

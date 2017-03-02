@@ -1,11 +1,10 @@
-Controller('arquivosView',{
+Controller('aplicativosArquivosView',{
 	created:function() {
 		arquivosSearchVar = new ReactiveVar({});
-		Tracker.autorun(function(){
-			var page = FlowRouter.getQueryParam('page');
-			var search = arquivosSearchVar.get();
-			Meteor.subscribe("allWallpapersThumbs", page);
-		});
+		var page = FlowRouter.getQueryParam('page');
+		var search = arquivosSearchVar.get();
+		var aplicativoId = FlowRouter.getParam('aplicativoId');
+		Meteor.subscribe("appArquivos", search, page, aplicativoId);
 	},
 	rendered:function(){
 		Arquivo.resumable.assignBrowse($("#arquivoBrowse"));
@@ -16,14 +15,15 @@ Controller('arquivosView',{
 			}
 			arquivoUploadProgressVar.set(0);
 			// Create a new file in the file collection to upload
+			var tipoArquivo = $('#typeField').val();
 			Arquivo.insert({
 				_id: file.uniqueIdentifier,  // This is the ID resumable will use
 				filename: file.fileName,
 				contentType: file.file.type,
 				metadata:{
 					aplicativoId: false,
-					public: true,
-					tipoArquivo:'wallpaper'
+					public: false,
+					tipoArquivo:tipoArquivo
 				}
 			}, function (err, _id) {  // Callback to .insert
 				if (err) { return console.error("Erro ao enviar o arquivo!", err); }
@@ -33,7 +33,7 @@ Controller('arquivosView',{
 		});
 		Deps.autorun(function () {
 			// Sending userId prevents a race condition
-			Meteor.subscribe('appArquivos', arquivosSearchVar.get(), FlowRouter.getQueryParam('page'));
+			// Meteor.subscribe('appArquivos', arquivosSearchVar.get(), FlowRouter.getQueryParam('page'));
 			// $.cookie() assumes use of "jquery-cookie" Atmosphere package.
 			// You can use any other cookie package you may prefer...
 			$.cookie('X-Auth-Token', Accounts._storedLoginToken(), { path: '/' });
@@ -49,18 +49,6 @@ Controller('arquivosView',{
 				icon:'file'
 			}
 		},
-		newLink:function(){
-			return false;
-		},
-		extraLinks:function(){
-			return [
-				{
-					title:'Tipos',
-					//route:'arquivosTiposRoute',
-					icon:'sidebar'
-				}
-			]
-		},
 		arquivos:function(){
 			var qtd = 10;
 			var page = FlowRouter.getQueryParam('page');
@@ -73,9 +61,9 @@ Controller('arquivosView',{
 			var page = FlowRouter.getQueryParam('page');
 			return {
 				page:page,
-				count:Counts.get('allArquivos'),
+				count:Counts.get('appArquivos'),
 				data:arquivos,
-				pages:Math.ceil(Counts.get('allArquivos')/qtd)
+				pages:Math.ceil(Counts.get('appArquivos')/qtd)
 			}
 		},
 		arquivoPath:function(){

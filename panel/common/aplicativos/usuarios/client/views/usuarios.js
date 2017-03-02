@@ -1,10 +1,8 @@
 Controller('aplicativosUsuariosView', {
 	created:function() {
 		usuariosSearchVar = new ReactiveVar({});
-		Meteor.autorun(function() {
-			var appId = FlowRouter.getParam('aplicativoId');
-			allUsuariosApp = Meteor.subscribe('allUsuariosApp', usuariosSearchVar.get(), FlowRouter.getQueryParam('page'), appId);
-		});
+		var appId = FlowRouter.getParam('aplicativoId');
+		allUsuariosApp = Meteor.subscribe('allUsuariosApp', usuariosSearchVar.get(), FlowRouter.getQueryParam('page'), appId);
 	},
 	rendered:function(){
 		$('#usernameField').mask('999.999.999-99');

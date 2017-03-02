@@ -1,8 +1,6 @@
 Controller('aplicativosFormView',{
 	created:function(){
-		logoUploadProgressVar = new ReactiveVar();
 		arquivosPageVar = new ReactiveVar(1);
-		bgUploadProgressVar = new ReactiveVar();
 		bgSelectedVar = new ReactiveVar(false);
 		Tracker.autorun(function(){
 			var page = arquivosPageVar.get();
@@ -40,98 +38,39 @@ Controller('aplicativosFormView',{
 		});
 
 		// Upload do Logotipo
-		appLogo.resumable.assignBrowse($(".logoBrowse"));
-		appBg.resumable.assignBrowse($(".bgBrowse"));
+		Arquivo.resumable.assignBrowse($(".logoBrowse"));
+		Arquivo.resumable.assignBrowse($('.wallpaperBrowse'));
 
-		// Update the upload progress session variable
-		appLogo.resumable.on('fileProgress', function(file) {
-			var progress = Math.floor(100*file.progress());
-			logoUploadProgressVar.set(progress);
-		});
-		appBg.resumable.on('fileProgress', function(file) {
-			bgUploadProgressVar.set(Math.floor(100*file.progress()));
-		});
-
-		// Finish the upload progress in the session variable
-		appLogo.resumable.on('fileSuccess', function(file) {
-			Bert.alert('Arquivo do Logotipo enviado com sucesso.','success');
-			logoUploadProgressVar.set(undefined);
-		});
-		appBg.resumable.on('fileSuccess', function(file) {
-			bgUploadProgressVar.set(undefined);
-		});
-
-		// More robust error handling needed!
-		appLogo.resumable.on('fileError', function(file) {
-			logoUploadProgressVar.set(undefined);
-		});
-		appBg.resumable.on('fileError', function(file) {
-			bgUploadProgressVar.set(undefined);
-		});
-
-		appLogo.resumable.on('fileAdded', function (file) {
+		Arquivo.resumable.on('fileAdded', function (file) {
 			if (!_.contains(['image/png','image/jpeg'],file.file.type)){
 				Bert.alert('Só são permitidos arquivos PNG ou JPG!','warning');
 				return false;
 			}
 			// Verifica se já existe um logo do aplicativo
-			var logos = appLogo.find({
-				'metadata.aplicativoId':FlowRouter.getParam('aplicativoId')
+			var logos = Arquivo.find({
+				'metadata.aplicativoId':FlowRouter.getParam('aplicativoId'),
+				'metadata.type':'logotype'
 			}).fetch();
 			if (logos) {
 				_.each(logos,function(logo){
-					appLogo.remove(logo._id);
+					Arquivo.remove(logo._id);
 				});
 			}
-			logoUploadProgressVar.set(0);
+			arquivoUploadProgressVar.set(0);
 			// Create a new file in the file collection to upload
-			appLogo.insert({
+			Arquivo.insert({
 				_id: file.uniqueIdentifier,  // This is the ID resumable will use
 				filename: file.fileName,
 				contentType: file.file.type,
 				metadata:{
+					type: 'logotype',
 					aplicativoId: FlowRouter.getParam('aplicativoId')
 				}
 			}, function (err, _id) {  // Callback to .insert
 				if (err) { return console.error("Erro ao enviar o arquivo!", err); }
 				// Once the file exists on the server, start uploading
-				appLogo.resumable.upload();
+				Arquivo.resumable.upload();
 			});
-		});
-
-		appBg.resumable.on('fileAdded', function (file) {
-			// Verifica se já existe um logo do aplicativo
-			var bgs = appBg.find({
-				'metadata.aplicativoId':FlowRouter.getParam('aplicativoId')
-			}).fetch();
-			if (bgs) {
-				_.each(bgs,function(bg){
-					appBg.remove(bg._id);
-				});
-			}
-			bgUploadProgressVar.set(0);
-			// Create a new file in the file collection to upload
-			appBg.insert({
-				_id: file.uniqueIdentifier,  // This is the ID resumable will use
-				filename: file.fileName,
-				contentType: file.file.type,
-				metadata:{
-					aplicativoId: FlowRouter.getParam('aplicativoId')
-				}
-			}, function (err, _id) {  // Callback to .insert
-				if (err) { return console.error("File creation failed!", err); }
-				// Once the file exists on the server, start uploading
-				appBg.resumable.upload();
-			});
-		});
-
-		Deps.autorun(function () {
-			// Sending userId prevents a race condition
-			Meteor.subscribe('appLogo', FlowRouter.getParam('aplicativoId'));
-			Meteor.subscribe('appBg', FlowRouter.getParam('aplicativoId'));
-			// $.cookie() assumes use of "jquery-cookie" Atmosphere package.
-			// You can use any other cookie package you may prefer...
-			$.cookie('X-Auth-Token', Accounts._storedLoginToken(), { path: '/' });
 		});
 	},
 	helpers:{
@@ -159,44 +98,13 @@ Controller('aplicativosFormView',{
 				form:'aplicativosForm'
 			}
 		},
-		logoLink:function(){
-			var md5 = Aplicativo.findOne(FlowRouter.getParam('aplicativoId'));
-			if (!md5) return false;
-			if (!md5.appLogo()) return false;
-			md5 = md5.appLogo().md5;
-			if (md5 != 'd41d8cd98f00b204e9800998ecf8427e') {
-				return appLogo.baseURL + '/md5/' + md5;
-			} else {
-				return false;
-			}
-		},
-		bgLink:function(){
-			var md5 = Aplicativo.findOne(FlowRouter.getParam('aplicativoId'));
-			if (!md5) return false;
-			if (!md5.appBg()) return false;
-			md5 = md5.appBg().md5;
-			if (md5 != 'd41d8cd98f00b204e9800998ecf8427e') {
-				return appBg.baseURL + '/md5/' + md5;
-			} else {
-				return false;
-			}
-		},
-		logoUploadProgress:function(){
-			return logoUploadProgressVar.get();
-		},
-		bgUploadProgress:function(){
-			return bgUploadProgressVar.get();
-		},
 		wallpapers:function(){
 			var wallpapers = Arquivo.find({
-				'metadata.tipoArquivo':'wallpaper'
+				'metadata.type':'wallpaper'
 			}).fetch();
 			return {
 				data:wallpapers
 			}
-		},
-		arquivoPath:function(){
-			return '/gridfs/arquivos/md5/'+this.md5;
 		}
 	},
 	events:{

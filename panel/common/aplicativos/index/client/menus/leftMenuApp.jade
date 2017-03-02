@@ -3,6 +3,10 @@ template(name="leftMenuApp")
 	if isManagerOrAdmin
 		.ui.vertical.fluid.inverted.menu(class="#{appInfo.headerBackgroundColor}")
 			if aplicativoId
+				a.item(class="#{isActiveRoute regex='^aplicativosArquivos'}",href="#{pathFor 'aplicativosArquivosRoute' aplicativoId=appInfo._id}")
+					i.file.icon
+					.content
+						.header Arquivos
 				a.item(class="#{isActiveRoute regex='^aplicativosUpdate'}",href="#{pathFor 'aplicativosUpdateRoute' aplicativoId=appInfo._id}")
 					i.setting.icon
 					.content

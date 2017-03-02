@@ -9,7 +9,6 @@ Meteor.publishComposite('allArquivos', function (search,page) {
 			Counts.publish(this, 'allArquivos', Arquivo.find(search), {
 				noReady: true
 			});
-			console.log(search,page);
 			return Arquivo.find(search,{
 				limit:pages,
 				skip: (page - 1) * pages

@@ -11,6 +11,7 @@ Controller('aplicativosFormView',{
 	rendered:function(){
 		var loadApp = function(aplicativo){
 			$('#aplicativosForm').form('set values',aplicativo);
+			bgSelectedVar.set(aplicativo.imagem);
 		};
 		Tracker.autorun(function(){
 			var aplicativo = Aplicativo.findOne(FlowRouter.getParam('aplicativoId'));

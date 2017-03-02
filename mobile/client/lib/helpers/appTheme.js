@@ -8,8 +8,8 @@ Template.registerHelper("appThemeText", function(){
 Template.registerHelper("appThemeBgColor", function(){
 	var app = Aplicativo.findOne();
 	if (!app) return false;
-	if (app.theme == 'lighten') return 'rgba(255,255,255,.3) !important';
-	else return 'rgba(0,0,0,.3) !important';
+	if (app.theme == 'lighten') return 'rgba(255,255,255,.8) !important';
+	else return 'rgba(0,0,0,.8) !important';
 });
 
 Template.registerHelper("iconRGBA", function(){

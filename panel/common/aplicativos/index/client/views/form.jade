@@ -13,16 +13,8 @@ template(name="aplicativosFormView")
 					.field
 						label Logotipo
 						.ui.small.rounded.image
-							if logoUploadProgress
-								.ui.bottom.attached.progress(data-percent="#{logoUploadProgress}")
-									.bar
-							if logoLink
-								img.ui.image(src="#{logoLink}")
-							else
-								img.ui.image(src="https://placehold.it/150x150")
-						unless logoUploadProgress
-							br
-							.ui.blue.fluid.button.logoBrowse(class="#{addClassIf 'loading' logoUploadProgress undefined 'ne'}",class="#{addClassIf 'disabled' aplicativoId undefined 'eq'}") Upload
+								img.ui.image(src="#{arquivoPath appInfo.appLogo}")
+					.ui.blue.fluid.button#logoBrowse(class="#{addClassIf 'loading' logoUploadProgress undefined 'ne'}",class="#{addClassIf 'disabled' aplicativoId undefined 'eq'}") Upload
 				.thirteen.wide.column
 					.two.fields
 						.field
@@ -84,8 +76,9 @@ template(name="aplicativosFormView")
 				.item(data-tab="bgUpload") Enviar
 			.ui.bottom.attached.tab.active.segment(data-tab="bgChoose")
 				.ui.small.rounded.images
-					each wallpapers.data
-						img.ui.link.image.bgSelectEvent(class="#{isBgSelected}",src="#{arquivoPath}")
+					if ready
+						each wallpapers.data
+							img.ui.link.mage.bgSelectEvent(src="#{arquivoPath _id}")
 				.field
 					.ui.buttons
 						.ui.icon.button#bgDownEvent
@@ -101,7 +94,14 @@ template(name="aplicativosFormView")
 				else
 					img.ui.small.image.bgNotBrowse(src="https://placehold.it/150x267")
 		.ui.bottom.attached.tab.segment(data-tab="home")
-			.two.fields
+			.three.fields
+				.field
+					label Quantidade por Linha
+					select.ui.search.dropdown#iconQuantityField(name="iconQuantity")
+						option(value="") Escolha uma opção
+						option(value="two") Dois Por Linha
+						option(value="three") Três Por Linha
+						option(value="four") Quatro Por Linha
 				.field
 					label Cor dos Ícones
 					select.ui.search.dropdown#iconColorField(name="iconColor")
@@ -138,6 +138,14 @@ template(name="aplicativosFormView")
 						option(value="drop") Cair
 						option(value="horizontal flip") Girar
 						option(value="scale") Aumentar
+						option(value="fly right") Voar à Direita
+			.two.fields
+				.field
+					label Duração da Animação
+					input#iconDurationField(type="number",name="iconDuration")
+				.field
+					label Intervalo entre as Animações
+					input#iconIntervalField(type="number",name="iconInterval")
 		.ui.bottom.attached.tab.segment(data-tab="login")
 			.field
 				label Tipo de Login

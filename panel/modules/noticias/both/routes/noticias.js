@@ -41,7 +41,7 @@ noticiasRoutes.route('/nova', {
 	}
 });
 
-noticiasRoutes.route('/:id', {
+noticiasRoutes.route('/editar/:noticiaId', {
 	name: 'noticiasUpdateRoute',
 	action: function() {
 		BlazeLayout.render('adminLayout', {

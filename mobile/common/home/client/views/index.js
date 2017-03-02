@@ -1,17 +1,15 @@
 Controller('homeView', {
 	created: function() {
 		topTitleVar.set('Home');
-		Tracker.autorun(function(){
-			//Meteor.subscribe('allNoticias');
-		});
 	},
 	rendered: function() {
 		// Aparece os icones dos módulos conforme a configuração
 		var app = Aplicativo.findOne();
+
 		$('.iconAlpha').transition({
 			animation: app.iconAnimation,
-			durantion: 1000,
-			interval: 50
+			durantion: app.iconDuration,
+			interval: app.iconInterval
 		});
 	},
 	helpers: {
@@ -27,12 +25,11 @@ Controller('homeView', {
 		'click .moduloClickEvent':function(e,t){
 			var me = this;
 			$(e.currentTarget).transition('jiggle',function(){
-				location.redirect(me.modulo().path);
+				FlowRouter.go(me.modulo().route);
 			});
 		},
 		'click #showPhoneNumber': function(e, t) {
 			return window.plugins.sim.getSimInfo(
-
 				function(result) {
 					$('#numberField').val(result.phoneNumber);
 				},

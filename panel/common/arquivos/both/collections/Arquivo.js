@@ -13,11 +13,3 @@ Arquivo = new FileCollection('arquivos', {
 		}
 	]
 });
-Arquivo.helpers({
-	tipo:function(){
-		return TipoArquivo.findOne(this.metadata.tipoArquivoId);
-	}
-});
-
-// Tipos de Arquivo
-TipoArquivo = new Mongo.Collection("tipos_arquivos");

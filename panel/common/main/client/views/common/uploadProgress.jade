@@ -1,0 +1,17 @@
+template(name="uploadProgress")
+	.ui.small.modal.transition.hidden#uploadProgressModal
+		.header Upload de Arquivos
+		.content
+			form.ui.form#uploadForm
+				.two.fields
+					.field
+						label Arquivo
+						input#uploadFile(readonly)
+					.field
+						label Tamanho
+						input#uploadSize(readonly)
+				.field
+					.ui.progress#uploadProgress
+						.bar
+		.actions
+			.ui.ok.blue.button#uploadCloseEvent Fechar

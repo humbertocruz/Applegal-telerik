@@ -1,4 +1,12 @@
 Meteor.methods({
+	noticiasUploadFoto:function(fileId, aplicativoId, noticiaId){
+		fileId = new Meteor.Collection.ObjectID(fileId);
+		return Noticia.update(noticiaId,{
+			$set:{
+				imagem:fileId
+			}
+		})
+	},
 	noticiasForm: function(fields,aplicativoId) {
 		fields.date = moment(fields.date, 'YYYY-MM-DD').toDate();
 		fields.aplicativoId = aplicativoId;

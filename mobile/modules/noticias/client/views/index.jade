@@ -1,17 +1,16 @@
 template(name="noticiasView")
-	.ui.segment
+	.ui.segment(style="background-color:#{appThemeBgColor}",class="#{appThemeText}")
 		unless noticias
 			.ui.loading.message Carregando...
 		else
 			if compare noticias.count 'eq' 0
 				.ui.red.message 
 					p Nenhuma notícia encontrada
-			.ui.items
+			.ui.divided.items
 				each noticias.data
-					a.item(class="#{cor}",href="#{pathFor 'noticiasDetalheRoute' id=_id}")
-						//.image
-							img(src="https://s-media-cache-ak0.pinimg.com/736x/5b/1c/a5/5b1ca598a2c90c7034bff1d373204f92.jpg")
-						i.large.newspaper.icon
+					a.item(href="#{pathFor 'noticiasDetalheRoute' id=_id}")
+						.image
+							img(src="#{arquivoPath imagem}")
 						.content
 							.header #{title}
 							.meta #{assunto.name}

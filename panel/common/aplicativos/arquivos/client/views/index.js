@@ -1,10 +1,12 @@
 Controller('aplicativosArquivosView',{
 	created:function() {
 		arquivosSearchVar = new ReactiveVar({});
-		var page = FlowRouter.getQueryParam('page');
-		var search = arquivosSearchVar.get();
-		var aplicativoId = FlowRouter.getParam('aplicativoId');
-		Meteor.subscribe("appArquivos", search, page, aplicativoId);
+		Tracker.autorun(function(){
+			var page = FlowRouter.getQueryParam('page');
+			var search = arquivosSearchVar.get();
+			var aplicativoId = FlowRouter.getParam('aplicativoId');
+			Meteor.subscribe("appArquivos", search, page, aplicativoId);
+		});
 	},
 	rendered:function(){
 		Arquivo.resumable.assignBrowse($("#arquivoBrowse"));
@@ -53,21 +55,17 @@ Controller('aplicativosArquivosView',{
 			var qtd = 10;
 			var page = FlowRouter.getQueryParam('page');
 			if (!page) page = 1;
-			var arquivos = Arquivo.find({
-				limit:qtd,
-				skip: (page - 1) * qtd
-			}).fetch();
-
-			var page = FlowRouter.getQueryParam('page');
+			var arquivos = Arquivo.find({},
+				{
+					limit:qtd,
+					skip: (page - 1) * qtd
+				}).fetch();
 			return {
 				page:page,
 				count:Counts.get('appArquivos'),
 				data:arquivos,
 				pages:Math.ceil(Counts.get('appArquivos')/qtd)
 			}
-		},
-		arquivoPath:function(){
-			return '/gridfs/arquivos/md5/'+this.md5;
 		}
 	},
 	events:{

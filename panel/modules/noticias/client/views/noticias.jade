@@ -13,7 +13,7 @@ template(name="noticiasView")
 			each noticias.data
 				tr
 					td
-						a.ui.icon.button.editBtn(href="#{pathFor 'noticiasUpdateRoute' id=_id}")
+						a.ui.icon.button.editBtn(href="#{pathFor 'noticiasUpdateRoute' aplicativoId=aplicativoId noticiaId=_id}")
 							i.edit.icon
 						.ui.icon.button.removeBtn
 							i.trash.icon

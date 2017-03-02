@@ -3,7 +3,6 @@ Meteor.publish('appArquivos', function (search,page,aplicativoId) {
 	if (!page) page = 1;
 	if (!search) search = {};
 
-	search['metadata.public'] = false;
 	search['metadata.aplicativoId'] = aplicativoId;
 
 	var qtd = 10;
@@ -12,6 +11,9 @@ Meteor.publish('appArquivos', function (search,page,aplicativoId) {
 	});
 	return Arquivo.find(search,{
 		limit:qtd,
-		skip: (page - 1) * qtd
+		skip: (page - 1) * qtd,
+		sort:{
+			'metadata.type':1
+		}
 	});
 });

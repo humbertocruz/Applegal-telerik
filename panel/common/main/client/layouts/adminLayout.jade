@@ -2,6 +2,7 @@ template(name="adminLayout")
 	if isLoading
 		.ui.active.inverted.page.dimmer
 			.ui.text.loader #{isLoading}
+	+uploadProgress
 	+confirmView
 	+promptView
 	.ui.container

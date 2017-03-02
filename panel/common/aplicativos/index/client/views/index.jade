@@ -10,7 +10,7 @@ template(name="aplicativosView")
 			each aplicativos.data
 				tr.selectAppEvent(style="cursor:pointer;")
 					td
-						img.ui.mini.image(src="#{logoLink}")
+						img.ui.mini.image(src="#{arquivoPath appLogo}")
 					td #{dateTimeBr createdAt}
 					td #{name}
 	+indexInfoPaginator ready=ready nothingFound='Nenhum aplicativo cadastrado.' count=aplicativos.count page=aplicativos.count pages=aplicativos.pages singularForm='Aplicativo' pluralForm='Aplicativos'

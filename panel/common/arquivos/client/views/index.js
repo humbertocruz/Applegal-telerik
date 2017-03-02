@@ -1,21 +1,28 @@
 Controller('arquivosView',{
 	created:function() {
 		arquivosSearchVar = new ReactiveVar({});
+		arquivosPageVar = new ReactiveVar(1);
 		Tracker.autorun(function(){
-			var page = FlowRouter.getQueryParam('page');
-			var search = arquivosSearchVar.get();
-			Meteor.subscribe("allWallpapersThumbs", page);
+			allWallpapers = Meteor.subscribe("allWallpapers", FlowRouter.getQueryParam('page'));
 		});
 	},
 	rendered:function(){
 		Arquivo.resumable.assignBrowse($("#arquivoBrowse"));
+		// Excutar ao fim do envio do arquivo
+		Arquivo.resumable.on('fileSuccess', function(file) {
+			Bert.alert('Arquivo enviado com sucesso.','success');
+			arquivoUploadProgressVar.set(undefined);
+		});
 		Arquivo.resumable.on('fileAdded', function (file) {
 			if (!_.contains(['image/png','image/jpeg'],file.file.type)){
 				Bert.alert('Só são permitidos arquivos PNG ou JPG!','warning');
 				return false;
 			}
+			console.log('show modal');
+			$('#uploadProgressModal').modal('show');
 			arquivoUploadProgressVar.set(0);
 			// Create a new file in the file collection to upload
+
 			Arquivo.insert({
 				_id: file.uniqueIdentifier,  // This is the ID resumable will use
 				filename: file.fileName,
@@ -23,20 +30,13 @@ Controller('arquivosView',{
 				metadata:{
 					aplicativoId: false,
 					public: true,
-					tipoArquivo:'wallpaper'
+					type:'wallpaper'
 				}
 			}, function (err, _id) {  // Callback to .insert
 				if (err) { return console.error("Erro ao enviar o arquivo!", err); }
 				// Once the file exists on the server, start uploading
 				Arquivo.resumable.upload();
 			});
-		});
-		Deps.autorun(function () {
-			// Sending userId prevents a race condition
-			Meteor.subscribe('appArquivos', arquivosSearchVar.get(), FlowRouter.getQueryParam('page'));
-			// $.cookie() assumes use of "jquery-cookie" Atmosphere package.
-			// You can use any other cookie package you may prefer...
-			$.cookie('X-Auth-Token', Accounts._storedLoginToken(), { path: '/' });
 		});
 	},
 	helpers:{
@@ -61,21 +61,19 @@ Controller('arquivosView',{
 				}
 			]
 		},
+		ready: function(){
+			return allWallpapers.ready();
+		},
 		arquivos:function(){
 			var qtd = 10;
 			var page = FlowRouter.getQueryParam('page');
 			if (!page) page = 1;
-			var arquivos = Arquivo.find({
-				limit:qtd,
-				skip: (page - 1) * qtd
-			}).fetch();
-
-			var page = FlowRouter.getQueryParam('page');
+			var arquivos = Arquivo.find();
 			return {
 				page:page,
-				count:Counts.get('allArquivos'),
-				data:arquivos,
-				pages:Math.ceil(Counts.get('allArquivos')/qtd)
+				count:Counts.get('allWallpapers'),
+				data:arquivos.fetch(),
+				pages:Math.ceil(Counts.get('allWallpapers')/qtd)
 			}
 		},
 		arquivoPath:function(){
@@ -83,10 +81,10 @@ Controller('arquivosView',{
 		}
 	},
 	events:{
-		'click .removeBtn':function(e,t){
+		'click .arquivoRemoveEvent':function(e,t){
 			var me = this;
 			htmlConfirm('Aviso','Você tem certeza?',function(){
-				Meteor.call("arquivosRemove", me._id, function(error, result){
+				Arquivo.remove(me._id,function(error, result){
 					if(error){
 						console.log("error", error);
 					}

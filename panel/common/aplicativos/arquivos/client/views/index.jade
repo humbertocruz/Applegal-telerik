@@ -11,8 +11,8 @@ template(name="aplicativosArquivosView")
 			.field
 				label &nbsp;
 				.ui.blue.button#arquivoBrowse Upload de Arquivos
-	.ui.small.rounded.images
+	.ui.small.images
 		each arquivos.data
-			img.ui.link.image.bgSelectEvent(src="#{arquivoPath}")
+			img.ui.link.image.bgSelectEvent(src="#{arquivoPath _id}")
 
 	+indexInfoPaginator ready=ready nothingFound='Nenhum arquivo cadastrado.' count=arquivos.count page=arquivos.count pages=arquivos.pages singularForm='Arquivo' pluralForm='Arquivos'

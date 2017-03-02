@@ -1,6 +1,5 @@
 Controller('formGaleriasView',{
 	created:function(){
-		fotosUploadProgressVar = new ReactiveVar();
 		Tracker.autorun(function(){
 			oneGaleria = Meteor.subscribe('oneGaleria',FlowRouter.getParam('id'),FlowRouter.getParam('aplicativoId'));
 		});
@@ -33,43 +32,28 @@ Controller('formGaleriasView',{
 			$('#galeriasForm').form('set value','dateField',moment().format('YYYY-MM-DD'));
 		}
 		// Upload
-		appGaleriaFoto.resumable.assignBrowse($(".fotoBrowse"));
-		// Update the upload progress session variable
-		appGaleriaFoto.resumable.on('fileProgress', function(file) {
-			var progress = Math.floor(100*file.progress());
-			fotosUploadProgressVar.set(progress);
-		});
+		Arquivo.resumable.assignBrowse($(".fotoBrowse"));
 
-		// Finish the upload progress in the session variable
-		appGaleriaFoto.resumable.on('fileSuccess', function(file) {
-			Bert.alert('Foto enviada com sucesso.','success');
-			fotosUploadProgressVar.set(undefined);
-		});
-
-		// More robust error handling needed!
-		appGaleriaFoto.resumable.on('fileError', function(file) {
-			fotosUploadProgressVar.set(undefined);
-		});
-
-		appGaleriaFoto.resumable.on('fileAdded', function (file) {
+		Arquivo.resumable.on('fileAdded', function (file) {
 			if (!_.contains(['image/png','image/jpeg'],file.file.type)){
 				Bert.alert('Só são permitidos arquivos PNG ou JPG!','warning');
 				return false;
 			}
-			fotosUploadProgressVar.set(0);
+			arquivosUploadProgressVar.set(0);
 			// Create a new file in the file collection to upload
-			appGaleriaFoto.insert({
+			Arquivo.insert({
 				_id: file.uniqueIdentifier,  // This is the ID resumable will use
 				filename: file.fileName,
 				contentType: file.file.type,
 				metadata:{
+					type: 'foto',
 					aplicativoId: FlowRouter.getParam('aplicativoId'),
-					galeriaId: FlowRouter.getParam('id')
+					galeriaId: FlowRouter.getParam('galeriaId')
 				}
 			}, function (err, _id) {  // Callback to .insert
 				if (err) { return console.error("Erro ao enviar o arquivo!", err); }
 				// Once the file exists on the server, start uploading
-				appGaleriaFoto.resumable.upload();
+				Arquivo.resumable.upload();
 			});
 		});
 	},
@@ -116,11 +100,7 @@ Controller('formGaleriasView',{
 					icon:'left chevron'
 				}
 			]
-		},
-		fotoLink:function(){
-			var foto = appGaleriaFoto.baseURL + '/md5/' + this.md5;
-			return foto;
-		},
+		}
 	},
 	events:{
 		'click .capaBtn'(e,t){

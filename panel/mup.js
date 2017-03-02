@@ -27,7 +27,8 @@ module.exports = {
 
     // change to 'kadirahq/meteord' if your app is not using Meteor 1.4
     docker: {
-      image: 'abernix/meteord:base',
+      //image: 'abernix/meteord:base',
+	image: 'humbertocruz/meteordgm',
     },
     deployCheckWaitTime: 60,
 

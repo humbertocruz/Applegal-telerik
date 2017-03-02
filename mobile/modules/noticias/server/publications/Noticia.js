@@ -14,6 +14,9 @@ Meteor.publishComposite('appNoticias', function(aplicativoId) {
 		children: [{
 			find: function(noticia) {
 				return Assunto.find(noticia.assunto_id);
+			},
+			find: function(noticia) {
+				return Arquivo.find(noticia.imagem);
 			}
 		}]
 	}
@@ -31,6 +34,9 @@ Meteor.publishComposite('oneNoticias', function(id, aplicativoId) {
 		children: [{
 			find: function(noticia) {
 				return Assunto.find(noticia.assunto_id);
+			},
+			find: function(noticia) {
+				return Arquivo.find(noticia.imagem);
 			}
 		}]
 	}

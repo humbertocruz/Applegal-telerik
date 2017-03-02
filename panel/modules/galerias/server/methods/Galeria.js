@@ -1,4 +1,3 @@
-var fs = require('fs');
 Meteor.methods({
 	galeriasForm:function(fields,aplicativoId) {
 		fields.date = moment(fields.date).toDate();

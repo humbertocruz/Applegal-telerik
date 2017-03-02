@@ -2,26 +2,34 @@ template(name="formNoticiasView")
 	+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
 	
 	form.ui.form#noticiasForm(method="post")
-		.two.fields
-			.field
-				label Título
-				input#titleField(type="text",name="title")
-			.field
-				label Data
-				input#dateField(type="date",name="date")
-		.two.fields
-			.field
-				label Assunto
-				select.ui.search.dropdown#assuntoField(name="assunto_id")
-					option(value="") Escolha um Assunto
-					each assuntos
-						option(value="#{_id}") #{name}
-			.field
-				label Cor
-				select.ui.search.dropdown#corField(name="cor")
-					option(value="") Escolha uma Cor
-					each semanticColors
-						option(value="#{className}") #{title}
+		.ui.grid
+			.four.wide.column
+				.field
+					label Foto
+					img.ui.fluid.image#noticiasFoto(src="#{arquivoPath noticia.imagem}")
+					.ui.hidden.divider
+					.ui.blue.fluid.button#imagemBrowse Enviar Foto
+			.twelve.wide.column
+				.two.fields
+					.field
+						label Título
+						input#titleField(type="text",name="title")
+					.field
+						label Data
+						input#dateField(type="date",name="date")
+				.two.fields
+					.field
+						label Assunto
+						select.ui.search.dropdown#assuntoField(name="assunto_id")
+							option(value="") Escolha um Assunto
+							each assuntos
+								option(value="#{_id}") #{name}
+					.field
+						label Cor
+						select.ui.search.dropdown#corField(name="cor")
+							option(value="") Escolha uma Cor
+							each semanticColors
+								option(value="#{className}") #{title}
 		.field
 			label Mensagem
 			textarea#bodyField(name="mensagem",rows="15")

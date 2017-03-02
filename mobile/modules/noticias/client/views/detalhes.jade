@@ -1,10 +1,10 @@
 template(name="noticiasDetalheView")
-	.ui.segment
+	.ui.segment(class="#{appThemeText}",style="background-color:#{appThemeBgColor}")
 		.ui.left.floated.header #{noticia.title}
-		a.ui.mini.right.floated.icon.button(href="#{pathFor 'noticiasRoute'}")
+		a.ui.blue.mini.right.floated.icon.button(href="#{pathFor 'noticiasRoute'}")
 			i.chevron.left.icon
-		i.large.newspaper.icon
-		br
-		br
-		p !{noticia.mensagem}
+		.ui.clearing.divider
+		img.ui.fluid.image(src="#{arquivoPath noticia.imagem}")
+		.ui.divider
+		p(style="background-color:transparent !important;") !{noticia.mensagem}
 		

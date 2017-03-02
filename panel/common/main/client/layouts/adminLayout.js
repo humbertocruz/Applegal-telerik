@@ -5,6 +5,9 @@ Controller('adminLayout', {
 		},
 		isLoading:function() {
 			return isLoadingVar.get();
+		},
+		isUploading:function(){
+			return Arquivo.resumable.isUploading();
 		}
 	}
 });

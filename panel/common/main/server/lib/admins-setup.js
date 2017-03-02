@@ -17,8 +17,6 @@ Meteor.startup(function() {
 		Accounts.addEmail(ida, 'admin@applegal.com.br', true);
 		// InitDB
 		var app = {
-			"filiais": false,
-			"logo": "/images/technotronics.png",
 			"name": "Techno App",
 			"domain":"",
 			"mailFrom": "admin@applegal.com.br",

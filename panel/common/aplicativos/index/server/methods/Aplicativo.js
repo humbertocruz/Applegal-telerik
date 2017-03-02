@@ -3,6 +3,14 @@ Meteor.methods({
 		if (Aplicativo.findOne(aplicativoId)) return true;
 		else return false;
 	},
+	aplicativosUploadLogo:function(file,aplicativoId){
+		file = new Meteor.Collection.ObjectID(file);
+		return Aplicativo.update({_id:aplicativoId},{
+			$set:{
+				appLogo:file
+			}
+		});
+	},
 	addUserToAppForm:function(fields){
 		var user = Accounts.findUserByUsername(fields.username);
 		if (!user) return {msg:'Usuário não encontrado.',status:false};

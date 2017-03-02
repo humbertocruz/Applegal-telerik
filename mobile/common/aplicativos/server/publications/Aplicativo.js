@@ -16,21 +16,7 @@ Meteor.publishComposite('clientApp', function(appInfo) {
 		children: [
 			{
 				find: function(app) {
-					return appLogo.find({
-						'metadata.aplicativoId':app._id
-					});
-				},
-			},
-			{
-				find: function(app) {
-					return appBg.find({
-						'metadata.aplicativoId':app._id
-					});
-				},
-			},
-			{
-				find: function(app) {
-					return Arquivo.find(app.bgImage,{limit:1});
+					return Arquivo.find(app.appLogo,{limit:1});
 				},
 			},
 			{

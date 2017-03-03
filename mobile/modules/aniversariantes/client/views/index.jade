@@ -6,7 +6,7 @@ template(name="aniversariantesView")
 			.ui.red.message 
 				p Nenhum aniversariante este mês
 		each aniversariantes.data
-			.ui.icon.message
+			.ui.icon.message(class="#{appThemeText}",style="background-color:#{appThemeBgColor}")
 				i.birthday.icon
 				.content
 					.header #{profile.name}

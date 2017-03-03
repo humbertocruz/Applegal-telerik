@@ -33,6 +33,10 @@ template(name="aplicativosFormView")
 						.field
 							label Quantidade Paginação
 							input#itemsPerPageField(type="number",name="itemsPerPage")
+					.ui.small.rounded.images
+						if ready
+							each logotipos.data
+								img.ui.link.mage.logoSelectEvent(src="#{arquivoPath _id}")
 		.ui.bottom.attached.tab.segment(data-tab="design")
 			.two.fields
 				.field

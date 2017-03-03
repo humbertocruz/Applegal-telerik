@@ -4,7 +4,8 @@ Arquivo.allow({
 		// Assign the proper owner when a file is created
 		file.metadata = file.metadata || {};
 		file.metadata.owner = userId;
-		return true;
+		console.log(userId, file);
+		return userId;
 	},
 	// Only owners can remove a file
 	remove: function (userId, file) {

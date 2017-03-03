@@ -1,6 +1,7 @@
 Controller('aniversariantesView',{
 	created:function(){
 		topTitleVar.set('Aniversariantes');
+		Meteor.subscribe("appAniversariantes", Aplicativo.findOne()._id);
 	},
 	rendered:function(){
 	},
@@ -11,7 +12,7 @@ Controller('aniversariantesView',{
 			var month = parseInt(moment().format('MM'));
 			// recria lista para eliminar usuario logado' se necessário
 			_.each(anivers,function(aniv){
-				if (aniv.profile.birth_month == month && aniv.profile.active) {
+				if (aniv.profile.birth_month == month) {
 					anivers2.push(aniv);
 				}
 			});

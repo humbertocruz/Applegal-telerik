@@ -6,3 +6,5 @@ tiposUploadArquivos = {
 	wallpaper:'Papel de Parede',
 	photo:'Foto'
 };
+
+topTitleVar = new ReactiveVar('Home');

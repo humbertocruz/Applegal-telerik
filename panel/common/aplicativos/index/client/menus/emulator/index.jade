@@ -1,0 +1,7 @@
+template(name="emulatorView")
+	img.ui.small.centered.image(src="#{arquivoPath appInfo.appLogo}")
+	.ui.hidden.divider
+	.ui.fluid.grid(class="#{appInfo.iconQuantity} column")
+		each modulos
+			.center.aligned.column.moduloClickEvent
+				i.iconAlpha.big.inverted.transition.hidden.icon(style="background-color:#{iconRGBA} !important;",id="icon_#{_id}",class="#{modulo.icon} #{appInfo.iconColor} #{appInfo.iconType}")

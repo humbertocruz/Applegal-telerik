@@ -1,19 +1,29 @@
 Controller('fotosView',{
 	created:function(){
 		Tracker.autorun(function(){
-			galeriaFotos = Meteor.subscribe('oneGaleria',FlowRouter.getParam('id'),Aplicativo.findOne());
+			galeriaFotos = Meteor.subscribe('oneGaleria',FlowRouter.getParam('id'),Aplicativo.findOne()._id);
+		});
+	},
+	rendered:function(){
+		$('.fotos').transition({
+			animation: 'drop',
+			durantion: 500,
+			interval: 100
 		});
 	},
 	helpers:{
-		fotoPath:function(){
-			var foto = appGaleriaFoto.findOne(this._id);
-			if (!foto) return false;
-			return '/gridfs/galeria_fotos/md5/'+foto.md5;
+		galeria:function(){
+			return Galeria.findOne(FlowRouter.getParam('id'))
 		},
 		fotos:function(){
-			var gal = Galeria.findOne();
+			var gal = Galeria.findOne(FlowRouter.getParam('id'));
 			if(!gal) return false;
 			return gal.fotos();
+		}
+	},
+	events:{
+		'click .fotos':function(e,t){
+			$(e.currentTarget).transition('jiggle');
 		}
 	}
 });

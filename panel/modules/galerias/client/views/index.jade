@@ -22,7 +22,7 @@ template(name="galeriasView")
 					td #{dateBr date}
 					td
 						if capa_id
-							img.ui.rounded.tiny.image(src="#{fotoLink}")
+							img.ui.rounded.tiny.image(src="#{arquivoPath capa_id}")
 						else
 							.ui.red.small.header Sem Capa
 					td #{title}

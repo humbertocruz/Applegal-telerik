@@ -1,0 +1,19 @@
+template(name="emulatorLayout")
+	if isOffline
+		.ui.active.dimmer
+			.ui.text.loader Offline! Sem conexão com o servidor...
+	if isLoading
+		.ui.active.dimmer
+			.ui.text.loader #{isLoading}
+	unless noApp
+		+sidebar
+		+technotronicsSidebar
+		+confirmView
+	
+	.pusher(style="background-image:url(#{arquivoPath appInfo.appBg}) !important; background-repeat: no-repeat !important;background-size: cover !important;")
+		div(style="height:100vh !important; overflow:auto;")
+			+Template.dynamic template=menu
+			br
+			.ui.basic.segment(style="margin-bottom:45px;")
+				+Template.dynamic template=main
+			+Template.dynamic template=technotronics

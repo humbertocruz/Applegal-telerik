@@ -36,7 +36,7 @@ Meteor.publishComposite('oneGaleria', function(id,aplicativoId){
 		children:[
 			{
 				find:function(galeria){
-					return appGaleriaFoto.find({
+					return Arquivo.find({
 						'metadata.type':'photo',
 						'metadata.galeriaId':galeria._id,
 						'metadata.aplicativoId':aplicativoId

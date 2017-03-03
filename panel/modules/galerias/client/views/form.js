@@ -31,31 +31,15 @@ Controller('formGaleriasView',{
 		} else {
 			$('#galeriasForm').form('set value','dateField',moment().format('YYYY-MM-DD'));
 		}
-		// Upload
+		// Upload - Configurando variaveis
 		Arquivo.resumable.assignBrowse($(".fotoBrowse"));
-
-		Arquivo.resumable.on('fileAdded', function (file) {
-			if (!_.contains(['image/png','image/jpeg'],file.file.type)){
-				Bert.alert('Só são permitidos arquivos PNG ou JPG!','warning');
-				return false;
-			}
-			arquivosUploadProgressVar.set(0);
-			// Create a new file in the file collection to upload
-			Arquivo.insert({
-				_id: file.uniqueIdentifier,  // This is the ID resumable will use
-				filename: file.fileName,
-				contentType: file.file.type,
-				metadata:{
-					type: 'foto',
-					aplicativoId: FlowRouter.getParam('aplicativoId'),
-					galeriaId: FlowRouter.getParam('galeriaId')
-				}
-			}, function (err, _id) {  // Callback to .insert
-				if (err) { return console.error("Erro ao enviar o arquivo!", err); }
-				// Once the file exists on the server, start uploading
-				Arquivo.resumable.upload();
-			});
+		arquivoUploadProgressIdVar = '#galeriasFotoProgress';
+		arquivoUploadMetadataVar.set({
+			type: 'photo',
+			aplicativoId: FlowRouter.getParam('aplicativoId'),
+			galeriaId: FlowRouter.getParam('id')
 		});
+		console.log(arquivoUploadMetadataVar.get());
 	},
 	helpers:{
 		galeria_id:function(){

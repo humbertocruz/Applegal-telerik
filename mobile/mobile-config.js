@@ -1,24 +1,24 @@
 App.info({
-	id: 'br.com.applegal.applegal',
-	name: 'Tehcno App',
-	description: "Tehcno App - Aplicação de Testes",
+	id: 'br.com.technotronics.igreja',
+	name: 'Escola das Nações',
+	description: "Escola das Nações",
 	author: 'Humberto Cruz',
 	email: 'humberto.cruz@gmail.com',
-	website: 'https://applegal.com.br',
-	version: '0.0.4'
+	website: 'https://igreja.technotronics.com.br',
+	version: '0.0.10'
 });
 App.icons({
-	'android_mdpi': '../../src/Android/res/drawable-mdpi/icon.png',
-	'android_hdpi': '../../src/Android/res/drawable-hdpi/icon.png',
-	'android_xhdpi': '../../src/Android/res/drawable-xhdpi/icon.png',
-	'android_xxhdpi': '../../src/Android/res/drawable-xxhdpi/icon.png',
-	'android_xxxhdpi': '../../src/Android/res/drawable-xxxhdpi/icon.png'
+	'android_mdpi': '../../src-nacoes/Android/res/drawable-mdpi/icon.png',
+	'android_hdpi': '../../src-nacoes/Android/res/drawable-hdpi/icon.png',
+	'android_xhdpi': '../../src-nacoes/Android/res/drawable-xhdpi/icon.png',
+	'android_xxhdpi': '../../src-nacoes/Android/res/drawable-xxhdpi/icon.png',
+	'android_xxxhdpi': '../../src-nacoes/Android/res/drawable-xxxhdpi/icon.png'
 });
 App.launchScreens({
-	'android_mdpi_portrait': '../../src/Android/res/drawable-mdpi/screen.png',
-	'android_hdpi_portrait': '../../src/Android/res/drawable-hdpi/screen.png',
-	'android_xhdpi_portrait': '../../src/Android/res/drawable-xhdpi/screen.png',
-	'android_xxhdpi_portrait': '../../src/Android/res/drawable-xxhdpi/screen.png'
+	'android_mdpi_portrait': '../../src-nacoes/Android/res/drawable-mdpi/screen.png',
+	'android_hdpi_portrait': '../../src-nacoes/Android/res/drawable-hdpi/screen.png',
+	'android_xhdpi_portrait': '../../src-nacoes/Android/res/drawable-xhdpi/screen.png',
+	'android_xxhdpi_portrait': '../../src-nacoes/Android/res/drawable-xxhdpi/screen.png'
 });
 App.setPreference('android-minSdkVersion', '16');
 App.setPreference('BackgroundColor', '0xffffffff');

@@ -10,35 +10,11 @@ Controller('aplicativosArquivosView',{
 	},
 	rendered:function(){
 		Arquivo.resumable.assignBrowse($("#arquivoBrowse"));
-		Arquivo.resumable.on('fileAdded', function (file) {
-			if (!_.contains(['image/png','image/jpeg'],file.file.type)){
-				Bert.alert('Só são permitidos arquivos PNG ou JPG!','warning');
-				return false;
-			}
-			arquivoUploadProgressVar.set(0);
-			// Create a new file in the file collection to upload
-			var tipoArquivo = $('#typeField').val();
-			Arquivo.insert({
-				_id: file.uniqueIdentifier,  // This is the ID resumable will use
-				filename: file.fileName,
-				contentType: file.file.type,
-				metadata:{
-					aplicativoId: false,
-					public: false,
-					tipoArquivo:tipoArquivo
-				}
-			}, function (err, _id) {  // Callback to .insert
-				if (err) { return console.error("Erro ao enviar o arquivo!", err); }
-				// Once the file exists on the server, start uploading
-				Arquivo.resumable.upload();
-			});
-		});
-		Deps.autorun(function () {
-			// Sending userId prevents a race condition
-			// Meteor.subscribe('appArquivos', arquivosSearchVar.get(), FlowRouter.getQueryParam('page'));
-			// $.cookie() assumes use of "jquery-cookie" Atmosphere package.
-			// You can use any other cookie package you may prefer...
-			$.cookie('X-Auth-Token', Accounts._storedLoginToken(), { path: '/' });
+		var tipoArquivo = $('#typeField').val();
+		arquivoUploadMetadataVar.set({
+			aplicativoId: false,
+			public: false,
+			tipoArquivo:tipoArquivo
 		});
 	},
 	helpers:{

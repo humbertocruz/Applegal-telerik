@@ -8,6 +8,7 @@ Meteor.methods({
 		if (Roles.userIsInRole(this.userId,'manager',fields.aplicativoId)) canDoIt = true;
 		if (Roles.userIsInRole(this.userId,'admin')) canDoIt = true;
 		if (!canDoIt) return false;
+		fields.order = parseInt(fields.order); // order campo numerico
 		return AplicativoModulo.update(fields._id, {$set:fields});
 	},
 	aplicativosAddModulo:function(fields){

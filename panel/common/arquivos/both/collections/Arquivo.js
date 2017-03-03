@@ -1,6 +1,6 @@
 Arquivo = new FileCollection('arquivos', {
 	resumable: true,
-	resumableIndexName: 'appL',
+	resumableIndexName: 'appArquivo',
 	http: [
 		{
 			method: 'get',

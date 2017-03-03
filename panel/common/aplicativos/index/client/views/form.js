@@ -1,17 +1,22 @@
 Controller('aplicativosFormView',{
 	created:function(){
 		arquivosPageVar = new ReactiveVar(1);
+		logotiposPageVar = new ReactiveVar(1);
 		uploadType = new ReactiveVar(); // logo ou wallpaper
 		bgSelectedVar = new ReactiveVar(false);
+		logoSelectedVar = new ReactiveVar(false);
 		Tracker.autorun(function(){
 			var page = arquivosPageVar.get();
+			var plogo = logotiposPageVar.get();
 			allWallpapers = Meteor.subscribe("allWallpapers", page);
+			allWallpapers = Meteor.subscribe("appLogotipos", plogo, FlowRouter.getParam('aplicativoId'));
 		});
 	},
 	rendered:function(){
 		var loadApp = function(aplicativo){
 			$('#aplicativosForm').form('set values',aplicativo);
-			bgSelectedVar.set(aplicativo.imagem);
+			bgSelectedVar.set(aplicativo.appBg);
+			logoSelectedVar.set(aplicativo.appLogo);
 		};
 		Tracker.autorun(function(){
 			var aplicativo = Aplicativo.findOne(FlowRouter.getParam('aplicativoId'));
@@ -38,40 +43,9 @@ Controller('aplicativosFormView',{
 
 		// Upload do Logotipo
 		Arquivo.resumable.assignBrowse($("#logoBrowse"));
-		//Arquivo.resumable.assignBrowse($('#wallpaperBrowse'));
-
-		// Excutar ao fim do envio do arquivo
-		Arquivo.resumable.on('fileSuccess', function(file) {
-			Bert.alert('Arquivo enviado com sucesso.','success');
-			arquivoUploadProgressVar.set(undefined);
-			if (uploadType.get() == 'logotype') {
-				Meteor.call("aplicativosUploadLogo", file.file.uniqueIdentifier, FlowRouter.getParam('aplicativoId'),function(err,result){
-				});
-			}
-		});
-
-		Arquivo.resumable.on('fileAdded', function (file) {
-			if (!_.contains(['image/png','image/jpeg'],file.file.type)){
-				Bert.alert('Só são permitidos arquivos PNG ou JPG!','warning');
-				return false;
-			}
-			arquivoUploadProgressVar.set(0);
-			// Se já estiver enviando, cancela.
-			if (Arquivo.resumable.isUploading()) return false;
-			// Create a new file in the file collection to upload
-			Arquivo.insert({
-				_id: file.uniqueIdentifier,  // This is the ID resumable will use
-				filename: file.fileName,
-				contentType: file.file.type,
-				metadata:{
-					type: uploadType.get(),
-					aplicativoId: FlowRouter.getParam('aplicativoId')
-				}
-			}, function (err, _id) {  // Callback to .insert
-				if (err) { return console.error("Erro ao enviar o arquivo!", err); }
-				// Once the file exists on the server, start uploading
-				Arquivo.resumable.upload();
-			});
+		arquivoUploadMetadataVar.set({
+			type: 'logotype',
+			aplicativoId: FlowRouter.getParam('aplicativoId')
 		});
 	},
 	helpers:{
@@ -112,6 +86,17 @@ Controller('aplicativosFormView',{
 				data:wallpapers.fetch(),
 				pages: 10
 			}
+		},
+		logotipos:function(){
+			var logotipos = Arquivo.find({
+				'metadata.type':'logotype'
+			});
+			return {
+				page:FlowRouter.getQueryParam('page'),
+				count:Counts.get('appLogotipos'),
+				data:logotipos.fetch(),
+				pages: 10
+			}
 		}
 	},
 	events:{
@@ -132,20 +117,24 @@ Controller('aplicativosFormView',{
 		'click .bgSelectEvent':function(e,t){
 			bgSelectedVar.set(this._id);
 		},
+		'click .logoSelectEvent':function(e,t){
+			logoSelectedVar.set(this._id);
+		},
 		'submit #aplicativosForm':function(e,t){
 			e.preventDefault();
-			isLoadingVar.set('Salvando Aplicativo!');
+			//isLoadingVar.set('Salvando Aplicativo!');
 			var fields = $(e.target).form('get values');
 			var id = FlowRouter.getParam('aplicativoId');
 			fields.appBg = bgSelectedVar.get();
+			fields.appLogo = logoSelectedVar.get();
 			if (id) fields._id = id;
 			Meteor.call("aplicativosForm",fields, function(error, result){
 				if(error){
 					console.log("error", error);
-					isLoadingVar.set(false);
+					//isLoadingVar.set(false);
 				}
 				if(result){
-					isLoadingVar.set(false);
+					//isLoadingVar.set(false);
 					Bert.alert('O aplicativo foi salvo com sucesso!','success');
 					FlowRouter.go('aplicativosUpdateRoute',{aplicativoId:result});
 				}

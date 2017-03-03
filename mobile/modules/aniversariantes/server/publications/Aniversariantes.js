@@ -1,7 +1,9 @@
-Meteor.publish('', function(){
+Meteor.publish('appAniversariantes', function(aplicativoId){
 	var search = {
 		'profile.birth_month':parseInt(moment().format('MM')),
-		'profile.active':true
+		'roles':{
+			$in:[aplicativoId]
+		}
 	};
 	var aniversariantes = Meteor.users.find(
 		search,

@@ -1,0 +1,15 @@
+template(name="emulatorLoginView")
+	img.ui.small.centered.image(src="#{arquivoPath appInfo.appLogo}")
+	.ui.hidden.divider
+	form.ui.inverted.form#loginForm(style="background-color:#{appThemeBgColor}", method="post")
+		.field
+			label CPF
+			input#usernameField(type="tel",name="username",autocomplete="off",placeholder="CPF")
+		.field
+			label Senha
+			.ui.action.input
+				input#passwordField.hidePwd(type="tel",name="password",autocomplete="off",placeholder="Senha")
+				.ui.icon.button.showPasswordBtn
+					i.eye.icon
+		.ui.divider
+		button.ui.fluid.blue.button(type="submit",form="loginForm") Entrar

@@ -22,7 +22,7 @@ template(name="formGaleriasView")
 					each fotos
 						.card
 							.ui.fluid.image
-								img(src="#{fotoLink}")
+								img(src="#{arquivoPath _id}")
 							.content
 								.description
 								|#{originalname} #{galeria.capa_id}

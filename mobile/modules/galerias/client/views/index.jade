@@ -5,10 +5,11 @@ template(name="galeriasView")
 		if compare galerias.count 'eq' 0
 			.ui.red.message 
 				p Nenhuma galeria encontrada
-		each galerias.data
-			a.ui.link.fluid.card(href="#{pathFor 'fotosRoute' id=_id}")
-				.image
-					img(src="#{fotoCapaPath}")
-				.content
-					.left.floated.header #{titulo}
-					.ui.red.right.floated.label #{fotos.length}
+		.ui.two.cards
+			each galerias.data
+				a.ui.link.fluid.card(href="#{pathFor 'fotosRoute' id=_id}",class="#{appThemeText}",style="background-color:#{appThemeBgColor}")
+					.image
+						img(src="#{arquivoPath capa_id}")
+					.content
+						.left.floated.header #{title}
+						.ui.red.right.floated.label #{fotos.length}

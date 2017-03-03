@@ -1,4 +1,4 @@
-template(name="leftMenuApp")
+template(name="leftEmulatorApp")
 	.ui.header #{appInfo.name}
 	if isManagerOrAdmin
 		.ui.blue.vertical.fluid.inverted.menu
@@ -25,12 +25,5 @@ template(name="leftMenuApp")
 					i.setting.icon
 					.content
 						.header Configuração
-		.ui.divider
-	if appModulos
-		.ui.vertical.fluid.inverted.menu(class="#{appInfo.sidebarBackgroundColor}")
-			each appModulos
-				if userHasPerm modulo.path
-					a.item(href="#{pathFor modulo.route aplicativoId=appInfo._id}")
-						i.icon(class="#{icon}")
-						.content
-							.header #{title}
+	.ui.basic.center.aligned.segment
+		iframe(src="/aplicativos/#{appInfo._id}/emulator",style="border:2px solid #000;width:320px;height:560px;")

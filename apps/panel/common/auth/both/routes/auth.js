@@ -16,14 +16,23 @@ FlowRouter.route('/recuperar-senha', {
 	}
 });
 
-FlowRouter.route('/cadastre-se', {
+FlowRouter.route('/nova-senha/:token', {
+	name: 'passwordResetRoute',
+	action: function() {
+		BlazeLayout.render('loginLayout', {
+			main: 'passwordResetView'
+		});
+	}
+});
+
+/*FlowRouter.route('/cadastre-se', {
 	name: 'registerRoute',
 	action: function() {
 		BlazeLayout.render('loginLayout', {
 			main: 'registerView'
 		});
 	}
-});
+});*/
 
 FlowRouter.route('/logout', {
 	name: 'logoutRoute',

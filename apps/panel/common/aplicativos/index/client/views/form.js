@@ -9,7 +9,7 @@ Controller('aplicativosFormView',{
 			var page = arquivosPageVar.get();
 			var plogo = logotiposPageVar.get();
 			allWallpapers = Meteor.subscribe("allWallpapers", page);
-			allWallpapers = Meteor.subscribe("appLogotipos", plogo, FlowRouter.getParam('aplicativoId'));
+			appLogotipos = Meteor.subscribe("appLogotipos", plogo, FlowRouter.getParam('aplicativoId'));
 		});
 	},
 	rendered:function(){
@@ -56,8 +56,8 @@ Controller('aplicativosFormView',{
 			return FlowRouter.getParam('aplicativoId');
 		},
 		isBgSelected:function(){
-			if (this._id != bgSelectedVar.get()) return '';
-			else return 'disabled';
+			if (this._id == bgSelectedVar.get()) return 'red';
+			else return '';
 		},
 		header:function(){
 			return {
@@ -77,14 +77,19 @@ Controller('aplicativosFormView',{
 			}
 		},
 		wallpapers:function(){
+			var page = FlowRouter.getQueryParam('page');
+			if (!page) page = 1;
 			var wallpapers = Arquivo.find({
 				'metadata.type':'wallpaper'
+			},{
+				limit:8,
+				skit:(page - 1) * 8
 			});
 			return {
 				page:FlowRouter.getQueryParam('page'),
 				count:Counts.get('allWallpapers'),
 				data:wallpapers.fetch(),
-				pages: 10
+				pages: 8
 			}
 		},
 		logotipos:function(){
@@ -95,7 +100,7 @@ Controller('aplicativosFormView',{
 				page:FlowRouter.getQueryParam('page'),
 				count:Counts.get('appLogotipos'),
 				data:logotipos.fetch(),
-				pages: 10
+				pages: 8
 			}
 		}
 	},

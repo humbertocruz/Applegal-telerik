@@ -1,0 +1,5 @@
+template(name="aniversariantesView")
+	each aniversariantes.data
+		.ui.message
+			i.birthday.icon
+			|#{dateBr profile.birthday} - #{profile.name}

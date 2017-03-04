@@ -5,8 +5,8 @@ template(name="loginView")
 				img.ui.small.centered.image(src="#{appLogoByDomain}")
 				form.ui.form#loginForm(method="post")
 					.field
-						label CPF
-						input#usernameField(type="text",name="username",placeholder="Digite seu CPF",autocomplete="off")
+						label Email
+						input#emailField(type="text",name="email",placeholder="Digite seu Email",autocomplete="off")
 					.field
 						label Senha
 						input#passwordField(type="password",name="password",placeholder="Digite sua senha",autocomplete="off")
@@ -15,4 +15,4 @@ template(name="loginView")
 				.ui.divider
 				.ui.two.item.secondary.menu
 					a.item(href="#{pathFor 'passwordRoute'}") Esqueceu sua senha ?
-					a.item(href="#{pathFor 'registerRoute'}") Cadastre-se
+					//a.item(href="#{pathFor 'registerRoute'}") Cadastre-se

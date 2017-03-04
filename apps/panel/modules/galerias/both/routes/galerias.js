@@ -9,7 +9,7 @@ galeriasRoutes = permRoutes.group({
       // Admin tem acesso
 			if (Roles.userIsInRole(Meteor.userId(), ['admin'])) access = true;
       // Manager e Perm Exclusiva do App tem acesso
-			if (Roles.userIsInRole(Meteor.userId(), ['manager','gaçerias'], obj.params.aplicativoId)) access = true;
+			if (Roles.userIsInRole(Meteor.userId(), ['manager','galerias'], obj.params.aplicativoId)) access = true;
       // Niguem mais tem acesso
 			if (!access) {
 				Bert.alert('Você não tem permissão de acesso a este módulo!', 'danger');

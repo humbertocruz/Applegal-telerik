@@ -42,7 +42,6 @@ Meteor.startup(function(){
 			}
 			arquivoUploadProgressVar.set(0);
 			// Create a new file in the file collection to upload
-			console.log(arquivoUploadMetadataVar.get());
 			Arquivo.insert({
 				_id: file.uniqueIdentifier,  // This is the ID resumable will use
 				filename: file.fileName,

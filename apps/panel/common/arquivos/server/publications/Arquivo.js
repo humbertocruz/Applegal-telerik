@@ -5,7 +5,7 @@ Meteor.publishComposite('allWallpapers', function (page) {
 	search['metadata.public'] = true;
 	search['metadata.type'] = 'wallpaper';
 	search['metadata.aplicativoId'] = false;
-	var qtd = 10;
+	var qtd = 8;
 	return {
 		find:function(){
 			Counts.publish(this, 'allWallpapers', Arquivo.find(search), {
@@ -26,7 +26,7 @@ Meteor.publishComposite('appLogotipos', function (page,aplicativoId) {
 	var search = {};
 	search['metadata.type'] = 'logotype';
 	search['metadata.aplicativoId'] = aplicativoId;
-	var qtd = 10;
+	var qtd = 8;
 	return {
 		find:function(){
 			Counts.publish(this, 'appLogotipos', Arquivo.find(search), {

@@ -1,3 +1,7 @@
+Accounts.onResetPasswordLink(function(token, done){
+	FlowRouter.go('passwordResetRoute',{token:token});
+	done();
+});
 Meteor.startup(function(){
 	Accounts.onLogout(function(){
 		FlowRouter.go('loginRoute');

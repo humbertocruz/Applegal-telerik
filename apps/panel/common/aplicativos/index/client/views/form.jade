@@ -33,10 +33,15 @@ template(name="aplicativosFormView")
 						.field
 							label Quantidade Paginação
 							input#itemsPerPageField(type="number",name="itemsPerPage")
-					.ui.small.rounded.images
-						if ready
-							each logotipos.data
-								img.ui.link.mage.logoSelectEvent(src="#{arquivoPath _id}")
+			.ui.eight.cards
+				if ready
+					each logotipos.data
+						.ui.card(class="#{isBgSelected}")
+							.image
+								img.ui.tiny.image.logoSelectEvent(src="#{arquivoPath _id}")
+							.extra
+								.ui.blue.icon.button.logoSelectEvent
+									i.checkmark.icon
 		.ui.bottom.attached.tab.segment(data-tab="design")
 			.two.fields
 				.field
@@ -79,16 +84,21 @@ template(name="aplicativosFormView")
 				.active.item(data-tab="bgChoose") Escolher
 				.item(data-tab="bgUpload") Enviar
 			.ui.bottom.attached.tab.active.segment(data-tab="bgChoose")
-				.ui.small.rounded.images
+				.ui.eight.cards
 					if ready
 						each wallpapers.data
-							img.ui.link.mage.bgSelectEvent(src="#{arquivoPath _id}")
-				.field
-					.ui.buttons
-						.ui.icon.button#bgDownEvent
-							i.chevron.left.icon
-						.ui.icon.button#bgUpEvent
-							i.chevron.right.icon
+							.ui.card(class="#{isBgSelected}")
+								.image
+									img.ui.tiny.image.bgSelectEvent(src="#{arquivoPath _id}")
+								.extra
+									.ui.blue.icon.button.bgSelectEvent
+										i.checkmark.icon
+			.field
+				.ui.buttons
+					.ui.icon.button#bgDownEvent
+						i.chevron.left.icon
+					.ui.icon.button#bgUpEvent
+						i.chevron.right.icon
 			.ui.bottom.attached.tab.segment(data-tab="bgUpload")
 				if aplicativoId
 					if bgLink

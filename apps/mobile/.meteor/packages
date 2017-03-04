@@ -20,14 +20,11 @@ ecmascript@0.6.3              # Enable ECMAScript2015+ syntax in app code
 email@1.1.18
 random@1.0.10
 
-flemay:less-autoprefixer
-
 accounts-password@1.3.4
-service-configuration@1.0.11
+#service-configuration@1.0.11
 alanning:roles
 dburles:collection-helpers
 
-#meteorhacks:subs-manager
 reywood:publish-composite
 tmeasday:publish-counts
 
@@ -41,14 +38,11 @@ rzymek:moment-locale-pt-br
 mrt:mask
 
 themeteorchef:controller
-#meteorhacks:picker
 themeteorchef:bert
 msavin:mongol
-semantic:ui
 mdg:reload-on-resume
 hot-code-push@1.0.4
 raix:push
-sayawan:pickadate
 pascoual:pdfjs
 wizonesolutions:underscore-string
 mrt:moment-timezone
@@ -61,3 +55,4 @@ vsivsi:file-collection
 kadira:flow-router
 kadira:blaze-layout
 arillo:flow-router-helpers
+less

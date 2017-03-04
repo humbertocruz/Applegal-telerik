@@ -1,0 +1,1 @@
+../../public/semantic-ui/semantic.js

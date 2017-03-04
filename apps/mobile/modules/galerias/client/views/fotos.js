@@ -1,7 +1,9 @@
 Controller('fotosView',{
 	created:function(){
 		Tracker.autorun(function(){
-			galeriaFotos = Meteor.subscribe('oneGaleria',FlowRouter.getParam('id'),Aplicativo.findOne()._id);
+			var galeriaId = FlowRouter.getParam('id');
+			var aplicativoId = aplicativoIdVar.get();
+			galeriaFotos = Meteor.subscribe('oneGaleria',galeriaId,aplicativoId);
 		});
 	},
 	rendered:function(){
@@ -13,7 +15,7 @@ Controller('fotosView',{
 	},
 	helpers:{
 		galeria:function(){
-			return Galeria.findOne(FlowRouter.getParam('id'))
+			return Galeria.findOne(FlowRouter.getParam('id'));
 		},
 		fotos:function(){
 			var gal = Galeria.findOne(FlowRouter.getParam('id'));
@@ -22,8 +24,8 @@ Controller('fotosView',{
 		}
 	},
 	events:{
-		'click .fotos':function(e,t){
-			$(e.currentTarget).transition('jiggle');
+		'click .fotos img':function(e,t){
+
 		}
 	}
 });

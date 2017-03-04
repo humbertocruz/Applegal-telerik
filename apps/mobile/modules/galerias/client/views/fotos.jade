@@ -4,7 +4,12 @@ template(name="fotosView")
 		a.ui.blue.mini.right.floated.icon.button(href="#{pathFor 'galeriasRoute'}")
 			i.chevron.left.icon
 		.ui.hidden.clearing.divider
-	.ui.two.column.grid
+	.ui.two.cards
 		each fotos
-			.column
-				img.ui.fluid.rounded.transition.hidden.image.fotos(src="#{arquivoPath _id}")
+			.transition.hidden.fotos.card
+				.image
+					img(src="#{arquivoPath _id}")
+				.extra.content
+					.left.floated.like
+						i.like.icon
+						|Gostei

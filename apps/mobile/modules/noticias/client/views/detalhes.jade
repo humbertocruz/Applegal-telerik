@@ -4,7 +4,7 @@ template(name="noticiasDetalheView")
 		a.ui.blue.mini.right.floated.icon.button(href="#{pathFor 'noticiasRoute'}")
 			i.chevron.left.icon
 		.ui.clearing.divider
-		img.ui.fluid.image(src="#{arquivoPath noticia.imagem}")
+		if noticia.imagem
+			img.ui.fluid.image(src="#{arquivoPath noticia.imagem}")
 		.ui.divider
 		p(style="background-color:transparent !important;") !{noticia.mensagem}
-		

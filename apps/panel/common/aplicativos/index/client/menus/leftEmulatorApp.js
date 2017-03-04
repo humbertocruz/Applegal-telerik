@@ -1,4 +1,9 @@
 Controller('leftEmulatorApp',{
+	rendered:function(){
+		var w = parseInt($('#emulatorFrame').css('width'));
+		var h = w * 1.77;
+		$('#emulatorFrame').css('height',h+'px');
+	},
 	helpers:{
 		isManagerOrAdmin:function(){
 			if (Roles.userIsInRole(Meteor.userId(),'admin')) return true;

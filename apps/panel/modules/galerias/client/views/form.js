@@ -39,7 +39,6 @@ Controller('formGaleriasView',{
 			aplicativoId: FlowRouter.getParam('aplicativoId'),
 			galeriaId: FlowRouter.getParam('id')
 		});
-		console.log(arquivoUploadMetadataVar.get());
 	},
 	helpers:{
 		galeria_id:function(){

@@ -30,8 +30,8 @@ App.configurePlugin('phonegap-plugin-push', {
 	SENDER_ID: 862875202989
 });
 
-App.accessRule("blob:*");
-
+// Acesso as imagens GridFS
+App.accessRule('blob:*');
 // Permite acesso a alguns sites importantes e uteis
 App.accessRule('https://panel.applegal.com.br/*');
 App.accessRule('https://m.facebook.com/*');
@@ -39,3 +39,5 @@ App.accessRule('https://facebook.com/*');
 App.accessRule('https://plus.google.com/*');
 App.accessRule('https://www.youtube.com/*');
 App.accessRule('https://youtube.com/*');
+
+App.accessRule('*'); // Abre qualquer acesso para testes com as imagens GridFS

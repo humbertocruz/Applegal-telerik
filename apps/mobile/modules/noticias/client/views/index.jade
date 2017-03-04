@@ -4,13 +4,14 @@ template(name="noticiasView")
 			.ui.loading.message Carregando...
 		else
 			if compare noticias.count 'eq' 0
-				.ui.red.message 
+				.ui.red.message
 					p Nenhuma notícia encontrada
 			.ui.divided.items
 				each noticias.data
 					a.item(href="#{pathFor 'noticiasDetalheRoute' id=_id}")
-						.image
-							img(src="#{arquivoPath imagem}")
+						if imagem
+							.image
+								img(src="#{arquivoPath imagem}")
 						.content
 							.header #{title}
 							.meta #{assunto.name}

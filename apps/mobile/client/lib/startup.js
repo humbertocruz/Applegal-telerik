@@ -16,6 +16,7 @@ Meteor.startup(function() {
 		if (app) {
 			isAppVar.set(true);
 			FlowRouter.initialize();
+			aplicativoIdVar.set(app._id);
 		}
 	});
 

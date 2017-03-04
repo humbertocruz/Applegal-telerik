@@ -18,15 +18,15 @@ Meteor.publishComposite('appGalerias',function(aplicativoId){
 		]
 	}
 });
-Meteor.publishComposite('oneGalerias',function(id, aplicativoId){
+Meteor.publishComposite('oneGaleria',function(id, aplicativoId){
 	return {
 		find:function(){
-			var galerias = Galeria.find({
+			var galeria = Galeria.find({
 				active:true,
 				_id: id,
 				aplicativoId:aplicativoId
 			});
-			return galerias;
+			return galeria;
 		},
 		children:[
 			{

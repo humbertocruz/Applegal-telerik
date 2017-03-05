@@ -36,7 +36,7 @@ template(name="aplicativosFormView")
 			.ui.eight.cards
 				if ready
 					each logotipos.data
-						.ui.card(class="#{isBgSelected}")
+						.ui.card(class="#{isLogoSelected}")
 							.image
 								img.ui.tiny.image.logoSelectEvent(src="#{arquivoPath _id}")
 							.extra
@@ -81,8 +81,8 @@ template(name="aplicativosFormView")
 			.field
 				label Imagem de Fundo
 			.ui.top.attached.tabular.menu
-				.active.item(data-tab="bgChoose") Escolher
-				.item(data-tab="bgUpload") Enviar
+				.active.item(data-tab="bgChoose") Galerias
+				.item(data-tab="bgUploaded") Enviadas
 			.ui.bottom.attached.tab.active.segment(data-tab="bgChoose")
 				.ui.eight.cards
 					if ready
@@ -93,20 +93,23 @@ template(name="aplicativosFormView")
 								.extra
 									.ui.blue.icon.button.bgSelectEvent
 										i.checkmark.icon
-			.field
-				.ui.buttons
-					.ui.icon.button#bgDownEvent
-						i.chevron.left.icon
-					.ui.icon.button#bgUpEvent
-						i.chevron.right.icon
-			.ui.bottom.attached.tab.segment(data-tab="bgUpload")
-				if aplicativoId
-					if bgLink
-						img.ui.small.image.bgBrowse(src="#{bgLink}")
-					else
-						img.ui.small.image.bgBrowse(src="https://placehold.it/150x267")
-				else
-					img.ui.small.image.bgNotBrowse(src="https://placehold.it/150x267")
+				.ui.divider
+				.field
+					.ui.buttons
+						.ui.icon.button#bgDownEvent
+							i.chevron.left.icon
+						.ui.icon.button#bgUpEvent
+							i.chevron.right.icon
+			.ui.bottom.attached.tab.segment(data-tab="bgUploaded")
+				.ui.eight.cards
+					if ready
+						each wallpapersUp.data
+							.ui.card(class="#{isBgSelected}")
+								.image
+									img.ui.tiny.image.bgSelectEvent(src="#{arquivoPath _id}")
+								.extra
+									.ui.blue.icon.button.bgSelectEvent
+										i.checkmark.icon
 		.ui.bottom.attached.tab.segment(data-tab="home")
 			.three.fields
 				.field

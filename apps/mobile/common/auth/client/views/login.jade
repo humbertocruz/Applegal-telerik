@@ -3,7 +3,7 @@ template(name="loginView")
 	.ui.hidden.divider
 	form.ui.form#loginForm(class="#{appThemeText}",style="background-color:#{appThemeBgColor}", method="post")
 		.field
-			label CPF
+			label #{appInfo.loginTitle}
 			input#usernameField(type="tel",name="username",autocomplete="off",placeholder="CPF")
 		.field
 			label Senha

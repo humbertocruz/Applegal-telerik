@@ -1,7 +1,5 @@
 template(name="arquivosView")
 	+indexHeaderSearch header=header
-	.ui.segment#arquivoBrowse(style="height:100px;")
-		p Upload de Arquivos
 	.ui.eight.cards
 		if ready
 			each arquivos.data
@@ -11,4 +9,5 @@ template(name="arquivosView")
 					.extra
 						.ui.red.icon.button.arquivoRemoveEvent
 							i.trash.icon
+	br
 	+indexInfoPaginator ready=ready nothingFound='Nenhum arquivo cadastrado.' count=arquivos.count page=arquivos.count pages=arquivos.pages singularForm='Arquivo' pluralForm='Arquivos'

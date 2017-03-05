@@ -1,18 +1,25 @@
 template(name="aplicativosArquivosView")
 	+indexHeaderSearch header=header
 	form.ui.form#arquivosForm(method="post")
-		.two.fields
-			.field
-				label Tipo de Arquivo
-				select.ui.dropdown#typeField(name="typeField")
-					option(value="") Escolha o Tipo
-					option(value="logotype") Logotipo
-					option(value="wallpaper") Papel de Parede
-			.field
-				label &nbsp;
-				.ui.blue.button#arquivoBrowse Upload de Arquivos
-	.ui.small.images
-		each arquivos.data
-			img.ui.link.image.bgSelectEvent(src="#{arquivoPath _id}")
+		if compare arquivos.count 'lte' 8
+			.two.fields
+				.field
+					label Tipo de Arquivo
+					select.ui.dropdown#typeField(name="typeField")
+						option(value="") Escolha o Tipo
+						option(value="logotype") Logotipo
+						option(value="wallpaper") Papel de Parede
+				.field
+					label &nbsp;
+					.ui.blue.button#arquivoBrowse Upload de Arquivos
+	.ui.eight.cards
+		if ready
+			each arquivos.data
+				.ui.card
+					.image
+						img.ui.image(src="#{arquivoPath _id}")
+					.extra
+						.ui.red.icon.button.arquivoRemoveEvent
+							i.trash.icon
 
 	+indexInfoPaginator ready=ready nothingFound='Nenhum arquivo cadastrado.' count=arquivos.count page=arquivos.count pages=arquivos.pages singularForm='Arquivo' pluralForm='Arquivos'

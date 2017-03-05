@@ -1,9 +1,8 @@
 Controller('arquivosView',{
 	created:function() {
-		arquivosSearchVar = new ReactiveVar({});
-		arquivosPageVar = new ReactiveVar(1);
 		Tracker.autorun(function(){
-			allWallpapers = Meteor.subscribe("allWallpapers", FlowRouter.getQueryParam('page'));
+			var page = FlowRouter.getQueryParam('page');
+			allWallpapers = Meteor.subscribe("allWallpapers", page);
 		});
 	},
 	rendered:function(){
@@ -40,10 +39,10 @@ Controller('arquivosView',{
 			return allWallpapers.ready();
 		},
 		arquivos:function(){
-			var qtd = 10;
+			var qtd = 8;
 			var page = FlowRouter.getQueryParam('page');
 			if (!page) page = 1;
-			var arquivos = Arquivo.find();
+			var arquivos = Arquivo.find({},{limit:qtd});
 			return {
 				page:page,
 				count:Counts.get('allWallpapers'),

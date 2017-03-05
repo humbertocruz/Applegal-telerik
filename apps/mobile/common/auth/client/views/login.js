@@ -3,9 +3,9 @@ Controller('loginView', {
 		topTitleVar.set('Login');
 	},
 	rendered: function() {
-		$('#usernameField').mask('999.999.999-99');
-		$('#passwordField').mask('9999999999999999');
-		$('#congregacaoField').dropdown();
+		var app = Aplicativo.findOne();
+		if (app.loginTitleMask) $('#usernameField').mask(app.loginTitleMask);
+		if (app.loginPasswordMask) $('#passwordField').mask(app.loginPasswordMask);
 	},
 	helpers: {
 		filiais: function() {

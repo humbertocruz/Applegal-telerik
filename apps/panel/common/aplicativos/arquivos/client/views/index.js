@@ -10,12 +10,6 @@ Controller('aplicativosArquivosView',{
 	},
 	rendered:function(){
 		Arquivo.resumable.assignBrowse($("#arquivoBrowse"));
-		var tipoArquivo = $('#typeField').val();
-		arquivoUploadMetadataVar.set({
-			aplicativoId: false,
-			public: false,
-			tipoArquivo:tipoArquivo
-		});
 	},
 	helpers:{
 		ready:function(){
@@ -28,27 +22,34 @@ Controller('aplicativosArquivosView',{
 			}
 		},
 		arquivos:function(){
-			var qtd = 10;
+			var qtd = 8;
 			var page = FlowRouter.getQueryParam('page');
 			if (!page) page = 1;
-			var arquivos = Arquivo.find({},
-				{
-					limit:qtd,
-					skip: (page - 1) * qtd
-				}).fetch();
+			var arquivos = Arquivo.find({
+				'metadata.aplicativoId':FlowRouter.getParam('aplicativoId'),
+				'metadata.type':{
+					$in:['logotype','wallpaper']
+				}
+			});
 			return {
 				page:page,
 				count:Counts.get('appArquivos'),
-				data:arquivos,
+				data:arquivos.fetch(),
 				pages:Math.ceil(Counts.get('appArquivos')/qtd)
 			}
 		}
 	},
 	events:{
-		'click .removeBtn':function(e,t){
+		'change #typeField':function(e,t){
+			arquivoUploadMetadataVar.set({
+				aplicativoId: FlowRouter.getParam('aplicativoId'),
+				type:$(e.currentTarget).val()
+			});
+		},
+		'click .arquivoRemoveEvent':function(e,t){
 			var me = this;
 			htmlConfirm('Aviso','Você tem certeza?',function(){
-				Meteor.call("arquivosRemove", me._id, function(error, result){
+				Arquivo.remove(me._id,function(error, result){
 					if(error){
 						console.log("error", error);
 					}

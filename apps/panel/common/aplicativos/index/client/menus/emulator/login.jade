@@ -3,12 +3,12 @@ template(name="emulatorLoginView")
 	.ui.hidden.divider
 	form.ui.inverted.form#loginForm(style="background-color:#{appThemeBgColor}", method="post")
 		.field
-			label CPF
-			input#usernameField(type="tel",name="username",autocomplete="off",placeholder="CPF")
+			label #{appInfo.loginTitle}
+			input#usernameField(type="tel",name="username",autocomplete="off")
 		.field
 			label Senha
 			.ui.action.input
-				input#passwordField.hidePwd(type="tel",name="password",autocomplete="off",placeholder="Senha")
+				input#passwordField.hidePwd(type="tel",name="password",autocomplete="off")
 				.ui.icon.button.showPasswordBtn
 					i.eye.icon
 		.ui.divider

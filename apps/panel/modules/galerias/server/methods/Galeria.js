@@ -16,7 +16,7 @@ Meteor.methods({
 		}
 	},
 	galeriasRemove:function(id,aplicativoId) {
-		appGaleriaFoto.remove({
+		Arquivo.remove({
 			'metadata.galeriaId':id,
 			'metadata.aplicativoId':aplicativoId
 		});

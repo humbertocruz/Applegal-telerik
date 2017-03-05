@@ -1,14 +1,17 @@
 Controller('aplicativosFormView',{
 	created:function(){
 		arquivosPageVar = new ReactiveVar(1);
+		wallPageVar = new ReactiveVar(1);
 		logotiposPageVar = new ReactiveVar(1);
 		uploadType = new ReactiveVar(); // logo ou wallpaper
 		bgSelectedVar = new ReactiveVar(false);
 		logoSelectedVar = new ReactiveVar(false);
 		Tracker.autorun(function(){
 			var page = arquivosPageVar.get();
+			var pup = wallPageVar.get();
 			var plogo = logotiposPageVar.get();
 			allWallpapers = Meteor.subscribe("allWallpapers", page);
+			allWallpapers = Meteor.subscribe("appWallpapers", pup, FlowRouter.getParam('aplicativoId'));
 			appLogotipos = Meteor.subscribe("appLogotipos", plogo, FlowRouter.getParam('aplicativoId'));
 		});
 	},
@@ -59,6 +62,10 @@ Controller('aplicativosFormView',{
 			if (this._id == bgSelectedVar.get()) return 'red';
 			else return '';
 		},
+		isLogoSelected:function(){
+			if (this._id == logoSelectedVar.get()) return 'red';
+			else return '';
+		},
 		header:function(){
 			return {
 				title:(FlowRouter.getParam('aplicativoId')==undefined?'Criar Aplicativo':'Editar Aplicativo'),
@@ -77,17 +84,26 @@ Controller('aplicativosFormView',{
 			}
 		},
 		wallpapers:function(){
-			var page = FlowRouter.getQueryParam('page');
-			if (!page) page = 1;
 			var wallpapers = Arquivo.find({
-				'metadata.type':'wallpaper'
-			},{
-				limit:8,
-				skit:(page - 1) * 8
-			});
+				'metadata.type':'wallpaper',
+				'metadata.aplicativoId':false,
+				'metadata.public':true
+			},{limit:8});
 			return {
 				page:FlowRouter.getQueryParam('page'),
 				count:Counts.get('allWallpapers'),
+				data:wallpapers.fetch(),
+				pages: 8
+			}
+		},
+		wallpapersUp:function(){
+			var wallpapers = Arquivo.find({
+				'metadata.type':'wallpaper',
+				'metadata.aplicativoId':FlowRouter.getParam('aplicativoId'),
+			},{limit:8});
+			return {
+				page:FlowRouter.getQueryParam('page'),
+				count:Counts.get('appWallpapers'),
 				data:wallpapers.fetch(),
 				pages: 8
 			}

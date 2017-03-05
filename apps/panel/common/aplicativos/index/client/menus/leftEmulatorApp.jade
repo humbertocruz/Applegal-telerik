@@ -25,4 +25,5 @@ template(name="leftEmulatorApp")
 					i.setting.icon
 					.content
 						.header Configuração
-	iframe#emulatorFrame(style="width:100%;border:1px solid #787878;", src="#{pathFor 'aplicativosEmulatorRoute' aplicativoId=appInfo._id}")
+	div#emulatorFloatDiv
+		iframe#emulatorFrame(src="#{pathFor 'aplicativosEmulatorRoute' aplicativoId=appInfo._id}")

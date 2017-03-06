@@ -1,5 +1,6 @@
 Controller('leftEmulatorApp',{
 	created:function(){
+		showEmulatorVar = new ReactiveVar(false);
 		enteredVar = new ReactiveVar(false);
 		mouseVar = new ReactiveVar(false);
 		diff = {
@@ -21,6 +22,9 @@ Controller('leftEmulatorApp',{
 		};
 	},
 	events:{
+		'click #showEmulatorEvent':function(e,t){
+			showEmulatorVar.set(!showEmulatorVar.get());
+		},
 		'mousedown #emulatorFloatDiv':function(e,t){
 			e.preventDefault();
 			mouseVar.set(true);
@@ -73,6 +77,9 @@ Controller('leftEmulatorApp',{
 			if (Roles.userIsInRole(Meteor.userId(),'manager',FlowRouter.getParam('aplicativoId'))) return true;
 			if (Roles.userIsInRole(Meteor.userId(),modulo,FlowRouter.getParam('aplicativoId'))) return true;
 			return false;
+		},
+		showEmulator:function(){
+			return showEmulatorVar.get();
 		}
 	}
 });

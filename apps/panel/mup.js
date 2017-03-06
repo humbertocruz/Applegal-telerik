@@ -3,14 +3,14 @@ module.exports = {
     one: {
       host: 'panel.applegal.com.br',
       username: 'root',
-      //pem: '/Users/humberto/.ssh/id_rsa'
       // password:
       // or leave blank for authenticate from ssh-agent
     },
-		two: {
-			host: '174.138.73.135',
-			username: 'root'
-		}
+    two: {
+      host: '174.138.73.135',
+      username: 'root',
+      pem: '/Users/humberto/.ssh/id_rsa'
+    }
   },
 
   meteor: {

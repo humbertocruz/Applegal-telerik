@@ -13,8 +13,7 @@ template(name="aplicativosFormView")
 					.field
 						label Logotipo
 						.ui.small.rounded.image
-								img.ui.image(src="#{arquivoPath appInfo.appLogo}")
-					.ui.blue.fluid.button#logoBrowse(class="#{addClassIf 'loading' logoUploadProgress undefined 'ne'}",class="#{addClassIf 'disabled' aplicativoId undefined 'eq'}") Upload
+							img.ui.image(src="#{arquivoPath appInfo.appLogo}")
 				.thirteen.wide.column
 					.two.fields
 						.field
@@ -38,10 +37,18 @@ template(name="aplicativosFormView")
 					each logotipos.data
 						.ui.card(class="#{isLogoSelected}")
 							.image
-								img.ui.tiny.image.logoSelectEvent(src="#{arquivoPath _id}")
+								img.ui.tiny.image.logoSelectEvent(src="#{preview}")
 							.extra
 								.ui.blue.icon.button.logoSelectEvent
 									i.checkmark.icon
+			.ui.divider
+			.field
+				.ui.buttons
+					.ui.icon.button#logoDownEvent
+						i.chevron.left.icon
+					.ui.icon.button#logoUpEvent
+						i.chevron.right.icon
+
 		.ui.bottom.attached.tab.segment(data-tab="design")
 			.two.fields
 				.field
@@ -89,7 +96,7 @@ template(name="aplicativosFormView")
 						each wallpapers.data
 							.ui.card(class="#{isBgSelected}")
 								.image
-									img.ui.tiny.image.bgSelectEvent(src="#{arquivoPath _id}")
+									img.ui.tiny.image.bgSelectEvent(src="#{preview}")
 								.extra
 									.ui.blue.icon.button.bgSelectEvent
 										i.checkmark.icon

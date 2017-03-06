@@ -1,11 +1,15 @@
 Controller('arquivosView',{
 	created:function() {
-		Tracker.autorun(function(){
-			var page = FlowRouter.getQueryParam('page');
-			allWallpapers = Meteor.subscribe("allWallpapers", page);
+		Cloudinary.collection.find().observe({
+			changed:function(newc,oldc){
+				$('#progress_'+newc._id).progress({
+					percent: newc.percent_uploaded
+				});
+			}
 		});
 	},
 	rendered:function(){
+
 	},
 	helpers:{
 		ready:function(){
@@ -20,44 +24,57 @@ Controller('arquivosView',{
 		newLink:function(){
 			return false;
 		},
-		extraLinks:function(){
-			return [
-				{
-					title:'Enviar Arquivos',
-					id:'arquivoBrowse',
-					icon:'upload'
-				}
-			]
-		},
 		ready: function(){
-			return allWallpapers.ready();
+			return true;
 		},
-		arquivos:function(){
-			var qtd = 8;
+		arquivos: function(){
 			var page = FlowRouter.getQueryParam('page');
-			if (!page) page = 1;
-			var arquivos = Arquivo.find({},{limit:qtd});
+			var qtd = 8;
+			var arquivos = Arquivo.find({
+				tags:{
+					$all:['wallpaper','public']
+				}
+			},{
+				limit:qtd,
+				skip:(page-1)*qtd
+			});
 			return {
 				page:page,
-				count:Counts.get('allWallpapers'),
+				count: Counts.get('allWallpapers'),
+				data: arquivos.fetch(),
+				pages: Math.ceil(Counts.get('allWallpapers')/qtd)
+			};
+		},
+		uploads:function(){
+			var arquivos = Cloudinary.collection.find({
+				//status:'uploading'
+			});
+			return {
 				data:arquivos.fetch(),
-				pages:Math.ceil(Counts.get('allWallpapers')/qtd)
-			}
+			};
 		}
 	},
 	events:{
 		'change #uploadField': function(e) {
 			var files = e.currentTarget.files;
-			Cloudinary.upload(files,{
-				folder:"shared", // optional parameters described in http://cloudinary.com/documentation/upload_images#remote_upload
-				//type:"private", // optional: makes the image accessible only via a signed url. The signed url is available publicly for 1 hour.
-				function(err,res) { // optional callback, you can catch with the Cloudinary collection as well
-					console.log("Upload Error: #{err}"),
-					console.log("Upload Result: #{res}")
+			Cloudinary.upload(files,
+				{
+					folder:"shared",
+					tags:['wallpaper','public'],
+				},
+				function(err,res) {
+					if (err) {
+						console.log(err);
+					} else {
+						res.preview = Cloudinary.collection.findOne({
+							'response.public_id':res.public_id
+						}).preview;
+						Arquivo.insert(res);
+					}
 				}
-			});
+			);
 		},
-		'click .arquivoRemoveEvent':function(e,t){
+		'click .removeArquivoEvent':function(e,t){
 			var me = this;
 			htmlConfirm('Aviso','Você tem certeza?',function(){
 				Arquivo.remove(me._id,function(error, result){
@@ -66,9 +83,16 @@ Controller('arquivosView',{
 					}
 					if(result){
 						Bert.alert('Arquivo excluído com sucesso','success');
+						Cloudinary.delete(me.public_id,function(err,result){
+							console.log(err);
+							console.log(result);
+						});
 					}
 				});
 			});
+		},
+		'click .removePreviewEvent':function(e,t){
+			Cloudinary.collection.remove(this._id);
 		}
 	}
 });

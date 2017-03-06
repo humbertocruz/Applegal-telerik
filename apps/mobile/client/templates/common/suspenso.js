@@ -1,7 +1,7 @@
 Controller('suspensoView',{
 	helpers:{
-		newUser:function(){
-			return Roles.userIsInRole(Meteor.userId(),'novo');
+		guest:function(){
+			return Roles.userIsInRole(Meteor.userId(),'guest',Aplicativo.findOne()._id);
 		}
 	}
 });

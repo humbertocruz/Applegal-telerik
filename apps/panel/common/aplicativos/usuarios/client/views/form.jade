@@ -4,7 +4,7 @@ template(name="usuariosFormView")
 		unless isNew
 			.two.fields
 				.field
-					label CPF
+					label Usuário
 					input#usernameField(type="text",name="username")
 				.field
 					label Email
@@ -20,6 +20,7 @@ template(name="usuariosFormView")
 					label Permissões
 					select.ui.dropdown#rolesField(name="roles",multiple)
 						option(value="") Permissões
+						option(value="guest") Visitante
 						option(value="subscriber") Assinante
 						option(value="manager") Gerente
 						each appRoles
@@ -29,6 +30,7 @@ template(name="usuariosFormView")
 				label Permissões
 				select.ui.dropdown#rolesField(name="roles",multiple)
 					option(value="") Permissões
+					option(value="guest") Visitante
 					option(value="subscriber") Assinante
 					option(value="manager") Gerente
 					each appRoles

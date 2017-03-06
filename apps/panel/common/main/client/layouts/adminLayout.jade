@@ -6,6 +6,9 @@ template(name="adminLayout")
 	+confirmView
 	+promptView
 	.ui.fluid.container
+		.ui.yellow.right.corner.label
+			p(style="transform: rotate(45deg);margin-top:10px;margin-left:20px;") Beta
+
 		+Template.dynamic template=menu
 		.ui.grid
 			.three.wide.column

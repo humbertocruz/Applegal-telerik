@@ -1,6 +1,7 @@
 Arquivo = new FileCollection('arquivos', {
 	resumable: true,
-	resumableIndexName: 'appArquivo',
+	resumableIndexName: 'appL',
+	maxUploadSize:15728640,
 	http: [
 		{
 			method: 'get',
@@ -9,6 +10,11 @@ Arquivo = new FileCollection('arquivos', {
 				return {
 					'md5': params.md5
 				};
+			},
+			handler: function(req, res, next) {
+				res.setHeader('Access-Control-Allow-Origin', '*');
+				res.setHeader('Access-Control-Allow-Credentials', true);
+				return next();
 			}
 		}
 	]

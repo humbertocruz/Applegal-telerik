@@ -37,6 +37,7 @@ template(name="aplicativosUsuariosView")
 				label Permissões
 				select.ui.dropdown.tipoField(name="tipo",multiple)
 					option(value="") Escolha as permissões do Usuário
+					option(value="guest") Visitante
 					option(value="subscriber") Assinante
 					option(value="manager") Gerente
 					each appModulos

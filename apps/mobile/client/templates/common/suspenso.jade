@@ -1,8 +1,7 @@
 template(name="suspensoView")
-	.ui.dividing.header Atenção
-	if newUser
+	if guest
 		.ui.blue.message
 			|Se você acabou de se cadastrar não se preocupe, dentro de alguns minutos seu acesso será liberado.
 	else
 		.ui.red.message
-				|Procure a administração do Grêmio Pioneiro para re-estabecer seu acesso.
+				|Procure a administração para re-estabecer seu acesso.

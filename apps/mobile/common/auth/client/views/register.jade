@@ -21,25 +21,22 @@ template(name="registerView")
 		button.ui.blue.fluid.button(type="submit",form="registerForm") Continuar
 
 template(name="registerTwoView")
-	.ui.dividing.header Cadastro
-	form.ui.stackable.form#registerTwoForm(method="post",novalidate="novalidate")
+	img.ui.small.centered.image(src="#{arquivoPath appInfo.appLogo}")
+	br
+	form.ui.stackable.form#registerTwoForm(style="background-color:#{appThemeBgColor}", class="#{appThemeText}",method="post",novalidate="novalidate")
 		.field
 			label Nome
-			input(type="text",name="name")
+			input(type="text",name="name",autocomplete="off")
 		.field
 			label Email
-			input(type="text",name="email")
+			input(type="email",name="email",autocomplete="off")
 		.field
 			label Aniversário
-			.ui.action.input
-				input#aniversarioField(type="tel",name="data",autocomplete="off")
-				.ui.icon.button.toggleDatePicker(data-field="#aniversarioField")
-					i.calendar.icon
+			input#aniversarioField(type="date",name="birthday",autocomplete="off")
 		.field
 			label Telefone
-			input#phoneField(type="tel",name="phone")
+			input#phoneField(type="tel",name="phone",autocomplete="off")
 	br
 	button.ui.blue.fluid.button(type="submit",form="registerTwoForm") Cadastre-se
 	br
-	a.ui.fluid.button(href="#{pathFor 'homeRoute'}") Cancelar
-			
+	a.ui.fluid.button(href="#{pathFor 'loginRoute'}") Cancelar

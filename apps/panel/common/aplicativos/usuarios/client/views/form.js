@@ -10,8 +10,8 @@ Controller('usuariosFormView', {
 		});
 		$('#usuariosForm .ui.checkbox').checkbox();
 
-		$('#usernameField').mask('999.999.999-99');
-		$('#password1Field,#password2Field').mask('9999999999999999');
+		//$('#usernameField').mask('999.999.999-99');
+		//$('#password1Field,#password2Field').mask('9999999999999999');
 		$('#phoneField').mask('(99) 99999-9999');
 
 

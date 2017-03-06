@@ -9,8 +9,8 @@ Controller('sidebar', {
 		userId: function() {
 			return Meteor.userId();
 		},
-		isSuspended: function() {
-			return Roles.userIsInRole(Meteor.userId(), 'suspenso');
+		isSubscriber: function() {
+			return Roles.userIsInRole(Meteor.userId(), 'subscriber', Aplicativo.findOne()._id);
 		},
 		modulos: function() {
 			return AplicativoModulo.find().fetch();

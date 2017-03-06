@@ -2,6 +2,12 @@ Controller('topMenu',{
 	created:function(){
 	},
 	rendered:function(){
+		Tracker.autorun(function(){
+			if (Reload.isWaitingForResume()) {
+				isLoadingVar.set('Atualizando aplicação...');
+				window.location.reload();
+			}
+		});
 	},
 	helpers:{
 		isLogged:function(){

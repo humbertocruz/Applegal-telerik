@@ -1,10 +1,10 @@
-Meteor.publishComposite('appAssuntos', function(search, page, aplicativoId) {
+Meteor.publishComposite('appAssuntos', function(aplicativoId) {
 	if (typeof(aplicativoId) == 'undefined') return false;
 	if (!this.userId) return false;
 
 	return {
 		find: function() {
-			if (!search) search = {};
+			if (typeof(search) == 'undefined') search = {};
 			search.aplicativoId = aplicativoId;
 			Counts.publish(this, 'allAssuntos', Assunto.find(
 				search

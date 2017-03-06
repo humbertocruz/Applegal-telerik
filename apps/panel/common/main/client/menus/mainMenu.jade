@@ -2,9 +2,10 @@ template(name="mainMenu")
 	.ui.blue.secondary.labeled.icon.transition.hidden.menu#adminMenu
 		a.item(class="#{isActiveRoute regex='^home'}",href="#{pathFor 'homeRoute'}")
 			img.ui.tiny.image(src="#{appLogoByDomain}")
-		.item.header
+		//.item.header
 			img.ui.mini.image(src="#{aplicativo.logo}")
 			|#{aplicativo.name}
+		h3.item.header applegal.com.br
 		.right.menu
 			a.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
 				i.android.icon

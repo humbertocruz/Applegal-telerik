@@ -1,5 +1,5 @@
 template(name="arquivosView")
-	+indexHeaderSearch header=header
+	+indexHeaderSearch header=header extraLinks=extraLinks
 	.ui.eight.cards
 		if ready
 			each arquivos.data
@@ -9,5 +9,4 @@ template(name="arquivosView")
 					.extra
 						.ui.red.icon.button.arquivoRemoveEvent
 							i.trash.icon
-	br
 	+indexInfoPaginator ready=ready nothingFound='Nenhum arquivo cadastrado.' count=arquivos.count page=arquivos.count pages=arquivos.pages singularForm='Arquivo' pluralForm='Arquivos'

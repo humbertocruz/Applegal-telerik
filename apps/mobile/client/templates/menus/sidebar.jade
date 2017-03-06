@@ -4,8 +4,7 @@ template(name="sidebar")
 			a.item(href="#{pathFor 'homeRoute'}")
 				i.home.icon
 				|Home
-			//if currentFilial
-			unless isSuspended
+			if isSubscriber
 				each modulos
 					a.item(href="#{pathFor modulo.route}")
 						i.icon(class="#{modulo.icon}")

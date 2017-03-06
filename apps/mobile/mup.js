@@ -3,14 +3,14 @@ module.exports = {
     one: {
       host: 'm.applegal.com.br',
       username: 'root',
-      // pem: '/Users/humberto/.ssh/id_rsa',
+      //pem: '/Users/humberto/.ssh/id_rsa'
       // password:
       // or leave blank for authenticate from ssh-agent
     }
   },
 
   meteor: {
-    name: 'appLegalMobile',
+    name: 'appLegalMob',
     path: '.',
     servers: {
       one: {},
@@ -20,14 +20,14 @@ module.exports = {
     },
     env: {
       ROOT_URL: 'https://m.applegal.com.br',
-      MONGO_URL: 'mongodb://10.132.62.239/applegal5',
-      MAIL_URL:'smtp://applegal%40applegal.com.br:N32w7csfPU@mail.applegal.com.br:587',
+      MONGO_URL: 'mongodb://10.132.62.239/applegal_final',
+      MAIL_URL:'smtp://suporte%40applegal.com.br:N32w7csfPU@mail.applegal.com.br:587',
       PORT: 4050
     },
 
     // change to 'kadirahq/meteord' if your app is not using Meteor 1.4
     docker: {
-    	image: 'abernix/meteord:base',
+      image: 'abernix/meteord:base',
     },
     deployCheckWaitTime: 60,
 

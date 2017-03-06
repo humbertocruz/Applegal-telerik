@@ -1,7 +1,7 @@
 Meteor.startup(function(){
 	Accounts.onLogout(function() {
-		Bert.alert('Você foi desconectado com sucesso', 'success');
-		FlowRouter.go('homeRoute');
+		Bert.alert('Você foi desconectado.', 'success');
+		FlowRouter.go('loginRoute');
 		isLoadingVar.set(false);
 	});
 	Accounts.onLogin(function(user) {

@@ -1,6 +1,7 @@
 template(name="recoveryView")
-	img.ui.small.centered.image(src="#{appLogo}")
-	form.ui.form#recoveryForm(method="post")
+	img.ui.small.centered.image(src="#{arquivoPath appInfo.appLogo}")
+	.ui.hidden.divider
+	form.ui.form#recoveryForm(method="post",class="#{appThemeText}",style="background-color:#{appThemeBgColor}")
 		.field
 			label Código do Email
 			input#codeField(type="tel",name="code",autocomplete="off")
@@ -18,4 +19,3 @@ template(name="recoveryView")
 					i.eye.icon
 		.ui.divider
 		button.ui.fluid.blue.button(type="submit",form="recoveryForm") Alterar Senha
-			

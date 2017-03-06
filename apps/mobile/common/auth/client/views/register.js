@@ -8,7 +8,7 @@ Controller('registerTwoView', {
 		$.fn.form.settings.rules.cpf = function(value) {
 			return TestaCPF(value);
 		};
-		$('#aniversarioField').mask('99/99/9999');
+		//$('#aniversarioField').mask('99/99/9999');
 		$('#phoneField').mask('(99) 99999-9999');
 		$('#registerTwoForm').form({
 			inline: false,
@@ -63,7 +63,7 @@ Controller('registerTwoView', {
 			isLoadingVar.set('Cadastrando novo usuário...');
 			var fieldsTwo = $(e.currentTarget).form('get values');
 			var fields = registerFormVar.get(fields);
-			Meteor.call('registerUser', fields, fieldsTwo, function(error, result) {
+			Meteor.call('registerUser', fields, fieldsTwo, Aplicativo.findOne()._id, function(error, result) {
 				if (error) {
 					isLoadingVar.set(false);
 					console.log(error);

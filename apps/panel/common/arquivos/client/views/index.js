@@ -29,9 +29,9 @@ Controller('arquivosView',{
 		extraLinks:function(){
 			return [
 				{
-					title:'Tipos',
-					//route:'arquivosTiposRoute',
-					icon:'sidebar'
+					title:'Enviar Arquivos',
+					id:'arquivoBrowse',
+					icon:'upload'
 				}
 			]
 		},

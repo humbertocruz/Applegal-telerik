@@ -11,7 +11,7 @@ Controller('aplicativosFormView',{
 			var pup = wallPageVar.get();
 			var plogo = logotiposPageVar.get();
 			allWallpapers = Meteor.subscribe("allWallpapers", page);
-			allWallpapers = Meteor.subscribe("appWallpapers", pup, FlowRouter.getParam('aplicativoId'));
+			appWallpapers = Meteor.subscribe("appWallpapers", pup, FlowRouter.getParam('aplicativoId'));
 			appLogotipos = Meteor.subscribe("appLogotipos", plogo, FlowRouter.getParam('aplicativoId'));
 		});
 	},
@@ -40,7 +40,7 @@ Controller('aplicativosFormView',{
 		tinymce.init({
 			height:400,
 			selector: 'textarea',
-			language: 'pt_BR',
+			//language: 'pt_BR',
 			skin_url: '/packages/teamon_tinymce/skins/lightgray',
 		});
 
@@ -125,9 +125,10 @@ Controller('aplicativosFormView',{
 			uploadType.set('logotype');
 		},
 		'click #bgUpEvent':function(e,t){
-			var max = Math.ceil(Counts.get('allArquivos')/5);
+			var max = Math.ceil(Counts.get('allArquivos')/8);
 			if (arquivosPageVar.get() == max) return false;
 			var num = arquivosPageVar.get()+1;
+			console.log(num);
 			arquivosPageVar.set(num);
 		},
 		'click #bgDownEvent':function(e,t){

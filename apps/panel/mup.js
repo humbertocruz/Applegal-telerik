@@ -20,8 +20,8 @@ module.exports = {
     },
     env: {
       ROOT_URL: 'https://panel.applegal.com.br',
-      MONGO_URL: 'mongodb://10.132.62.239/applegal5',
-      MAIL_URL:'smtp://applegal%40applegal.com.br:N32w7csfPU@mail.applegal.com.br:587',
+      MONGO_URL: 'mongodb://10.132.62.239/applegal_final',
+      MAIL_URL:'smtp://admin%40applegal.com.br:N32w7csfPU@mail.applegal.com.br:587',
       PORT: 4000
     },
 

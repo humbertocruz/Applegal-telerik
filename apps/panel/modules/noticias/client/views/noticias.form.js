@@ -1,14 +1,15 @@
 Controller('formNoticiasView',{
 	created:function(){
 		Tracker.autorun(function(){
-			Meteor.subscribe("oneNoticia", FlowRouter.getQueryParam('noticiaId'));
-			Meteor.subscribe("allAssuntos");
+			Meteor.subscribe("oneNoticia", FlowRouter.getParam('noticiaId'));
+			Meteor.subscribe("appAssuntos", FlowRouter.getParam('aplicativoId'));
 		});
 	},
 	rendered:function(){
 		$('#noticiasForm .ui.dropdown').dropdown();
 		if (id = FlowRouter.getParam('noticiaId')) {
 			var noticia = Noticia.findOne(id);
+			if (!noticia) return false;
 			$('#noticiasForm').form('set values',noticia);
 			$('#dateField').val(moment(noticia.date).format('YYYY-MM-DD'));
 		} else {
@@ -18,7 +19,7 @@ Controller('formNoticiasView',{
 		tinymce.remove();
 		tinymce.init({
 			selector: 'textarea',
-			language: 'pt_BR',
+			//language: 'pt_BR',
 			skin_url: '/packages/teamon_tinymce/skins/lightgray',
 		});
 

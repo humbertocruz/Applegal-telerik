@@ -9,4 +9,8 @@ template(name="arquivosView")
 					.extra
 						.ui.red.icon.button.arquivoRemoveEvent
 							i.trash.icon
+		form.ui.form(method="post")
+			.field
+				label Upload
+				input#uploadField(type="file",name="files")
 	+indexInfoPaginator ready=ready nothingFound='Nenhum arquivo cadastrado.' count=arquivos.count page=arquivos.count pages=arquivos.pages singularForm='Arquivo' pluralForm='Arquivos'

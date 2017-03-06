@@ -6,12 +6,6 @@ Controller('arquivosView',{
 		});
 	},
 	rendered:function(){
-		Arquivo.resumable.assignBrowse($("#arquivoBrowse"));
-		arquivoUploadMetadataVar.set({
-			aplicativoId: false,
-			public: true,
-			type:'wallpaper'
-		});
 	},
 	helpers:{
 		ready:function(){
@@ -49,12 +43,20 @@ Controller('arquivosView',{
 				data:arquivos.fetch(),
 				pages:Math.ceil(Counts.get('allWallpapers')/qtd)
 			}
-		},
-		arquivoPath:function(){
-			return '/gridfs/arquivos/md5/'+this.md5;
 		}
 	},
 	events:{
+		'change #uploadField': function(e) {
+			var files = e.currentTarget.files;
+			Cloudinary.upload(files,{
+				folder:"shared", // optional parameters described in http://cloudinary.com/documentation/upload_images#remote_upload
+				//type:"private", // optional: makes the image accessible only via a signed url. The signed url is available publicly for 1 hour.
+				function(err,res) { // optional callback, you can catch with the Cloudinary collection as well
+					console.log("Upload Error: #{err}"),
+					console.log("Upload Result: #{res}")
+				}
+			});
+		},
 		'click .arquivoRemoveEvent':function(e,t){
 			var me = this;
 			htmlConfirm('Aviso','Você tem certeza?',function(){

@@ -8,7 +8,7 @@ template(name="fotosView")
 		each fotos
 			.transition.hidden.fotos.card
 				.image
-					img(src="#{arquivoPath _id}")
+					img(src="#{arquivoPath _id 'c_scale,w_120'}")
 				.extra.content
 					.left.floated.like
 						i.like.icon

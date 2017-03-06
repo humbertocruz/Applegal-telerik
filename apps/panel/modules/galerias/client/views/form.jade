@@ -11,7 +11,7 @@ template(name="formGaleriasView")
 			.field
 				label &nbsp;
 				if galeria_id
-					.ui.blue.fluid.button.fotoBrowse Enviar Fotos
+					input#uploadField(type="file")
 				else
 					.ui.blue.disabled.fluid.button Enviar Fotos
 	if galeria_id
@@ -22,7 +22,7 @@ template(name="formGaleriasView")
 					each fotos
 						.card
 							.ui.fluid.image
-								img(src="#{arquivoPath _id}")
+								img(src="#{arquivoPath _id 'c_scale,w_150'}")
 							.content
 								.description
 								|#{originalname} #{galeria.capa_id}
@@ -37,3 +37,17 @@ template(name="formGaleriasView")
 		.ui.blue.message
 			i.warning.icon
 			span É necessário Salvar para poder fazer o Upload de Fotos na Galeria.
+	.ui.ten.cards
+		each uploads.data
+			.ui.card(id="photo_#{_id}")
+				.image
+					img.ui.image(src="#{preview}")
+				.extra
+					if compare status 'eq' 'uploading'
+						.ui.tiny.progress(id="progress_#{_id}")
+							.bar
+							.label Enviando...
+					else
+						.ui.fluid.green.icon.tiny.button.removePreviewEvent
+							i.checkmark.icon
+	.ui.divider

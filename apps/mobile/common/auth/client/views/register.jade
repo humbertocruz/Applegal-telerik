@@ -1,6 +1,6 @@
 template(name="registerView")
-	img.ui.small.centered.image(src="#{arquivoPath appInfo.appLogo}")
-	br
+	img.ui.small.centered.image(src="#{arquivoPath appInfo.appLogo 'c_scale,w_150'}")
+	.ui.hidden.divider
 	form.ui.form#registerForm(style="background-color:#{appThemeBgColor}", class="#{appThemeText}",method="post",novalidate="novalidate")
 		.field
 			label Seu CPF

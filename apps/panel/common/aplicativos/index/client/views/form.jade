@@ -37,7 +37,7 @@ template(name="aplicativosFormView")
 					each logotipos.data
 						.ui.card(class="#{isLogoSelected}")
 							.image
-								img.ui.tiny.image.logoSelectEvent(src="#{preview}")
+								img.ui.tiny.image.logoSelectEvent(src="#{CloudinaryBaseURL public_id 'c_scale,w_150'}")
 							.extra
 								.ui.blue.icon.button.logoSelectEvent
 									i.checkmark.icon
@@ -96,7 +96,7 @@ template(name="aplicativosFormView")
 						each wallpapers.data
 							.ui.card(class="#{isBgSelected}")
 								.image
-									img.ui.tiny.image.bgSelectEvent(src="#{preview}")
+									img.ui.bgSelectEvent(src="#{CloudinaryBaseURL public_id 'c_scale,w_180'}")
 								.extra
 									.ui.blue.icon.button.bgSelectEvent
 										i.checkmark.icon
@@ -113,7 +113,7 @@ template(name="aplicativosFormView")
 						each wallpapersUp.data
 							.ui.card(class="#{isBgSelected}")
 								.image
-									img.ui.tiny.image.bgSelectEvent(src="#{arquivoPath _id}")
+									img.bgSelectEvent(src="#{CloudinaryBaseURL public_id 'c_scale,w_180'}")
 								.extra
 									.ui.blue.icon.button.bgSelectEvent
 										i.checkmark.icon

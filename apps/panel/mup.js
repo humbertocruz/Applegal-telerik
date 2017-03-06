@@ -3,13 +3,9 @@ module.exports = {
     one: {
       host: 'panel.applegal.com.br',
       username: 'root',
+      pem: '/Users/humberto/.ssh/id_rsa',
       // password:
       // or leave blank for authenticate from ssh-agent
-    },
-    two: {
-      host: '174.138.73.135',
-      username: 'root',
-      pem: '/Users/humberto/.ssh/id_rsa'
     }
   },
 
@@ -17,16 +13,15 @@ module.exports = {
     name: 'appLegal',
     path: '.',
     servers: {
-      //one: {},
-			two: {}
+      one: {},
     },
     buildOptions: {
       serverOnly: true,
     },
     env: {
       ROOT_URL: 'https://panel.applegal.com.br',
-      MONGO_URL: 'mongodb://10.132.62.239/applegal_dev',
-      MAIL_URL:'smtp://admin%40applegal.com.br:N32w7csfPU@mail.applegal.com.br:587',
+      MONGO_URL: 'mongodb://10.132.62.239/applegal_final',
+      MAIL_URL:'smtp://suporte%40applegal.com.br:N32w7csfPU@mail.applegal.com.br:587',
       PORT: 4000
     },
 

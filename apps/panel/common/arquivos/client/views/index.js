@@ -7,6 +7,10 @@ Controller('arquivosView',{
 				});
 			}
 		});
+		Tracker.autorun(function(){
+			var page = FlowRouter.getQueryParam('page');
+			allWallpapers = Meteor.subscribe("allWallpapers", page);
+		});
 	},
 	rendered:function(){
 
@@ -36,7 +40,6 @@ Controller('arquivosView',{
 				}
 			},{
 				limit:qtd,
-				skip:(page-1)*qtd
 			});
 			return {
 				page:page,

@@ -1,5 +1,5 @@
 template(name="loginView")
-	img.ui.small.centered.image(src="#{arquivoPath appInfo.appLogo}")
+	img.ui.small.centered.image(src="#{arquivoPath appInfo.appLogo 'c_scale,w_150'}")
 	.ui.hidden.divider
 	form.ui.form#loginForm(class="#{appThemeText}",style="background-color:#{appThemeBgColor}", method="post")
 		.field

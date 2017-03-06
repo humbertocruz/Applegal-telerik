@@ -1,15 +1,12 @@
 template(name="galeriasView")
-	unless galerias
-		.ui.loading.message Carregando...
-	else
-		if compare galerias.count 'eq' 0
-			.ui.red.message 
-				p Nenhuma galeria encontrada
-		.ui.two.cards
-			each galerias.data
-				a.ui.link.fluid.card(href="#{pathFor 'fotosRoute' id=_id}",class="#{appThemeText}",style="background-color:#{appThemeBgColor}")
-					.image
-						img(src="#{arquivoPath capa_id}")
-					.content
-						.left.floated.header #{title}
-						.ui.red.right.floated.label #{fotos.length}
+	if compare galerias.count 'eq' 0
+		.ui.red.message(style="background-color:#{appThemeBgColor}")
+			p Nenhuma galeria encontrada
+	.ui.two.cards
+		each galerias.data
+			a.ui.link.fluid.card(href="#{pathFor 'fotosRoute' id=_id}",class="#{appThemeText}",style="background-color:#{appThemeBgColor}")
+				.image
+					img(src="#{arquivoPath capa_id 'c_scale,w_120'}")
+				.content
+					.left.floated.header #{title}
+					.ui.red.right.floated.label #{fotos.length}

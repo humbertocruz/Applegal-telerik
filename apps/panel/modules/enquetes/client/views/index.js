@@ -3,14 +3,12 @@ Controller('enquetesView', {
 		sint = 0;
 		enquetesSearchVar = new ReactiveVar({});
 		Tracker.autorun(function() {
-			allEnquetes = Meteor.subscribe('allEnquetes', enquetesSearchVar.get(), FlowRouter.getQueryParam('page'),FlowRouter.getParam('aplicativoId'),);
+			appEnquetes = Meteor.subscribe('appEnquetes', enquetesSearchVar.get(), FlowRouter.getQueryParam('page'),FlowRouter.getParam('aplicativoId'));
 		});
 	},
-	rendered: function() {},
-	destroyed: function() {},
 	helpers: {
 		ready: function() {
-			return allEnquetes.ready();
+			return appEnquetes.ready();
 		},
 		header: function() {
 			return {
@@ -19,30 +17,33 @@ Controller('enquetesView', {
 			}
 		},
 		search: function() {
-			return {
-				title: 'Buscar',
-				modal: 'enquetesSearchModal'
-			}
+			return {}
 		},
 		newLink: function() {
-			return {
-				title: 'Adicionar'
-			}
+			return {}
 		},
 		extraLinks: function() {
-			return false;
+			return [
+				{
+					title:'Adicionar',
+					route:'enquetesInsertRoute',
+					icon:'add',
+					params:{
+						aplicativoId:FlowRouter.getParam('aplicativoId')
+					}
+				}
+			];
 		},
 		enquetes: function() {
-			var page = FlowRouter.getQueryParam('page');
-			if (!page) page = 1;
 			var qtd = 10;
+			var page = FlowRouter.getParam('page');
+			if (!page) page = 1;
 			var enquetes = Enquete.find(enquetesSearchVar.get(), {
 				sort: {
 					date: -1
 				},
 				limit: qtd,
-				skip: (page - 1) * qtd
-			}).fetch();
+			});
 
 			$('.ui.progress').progress({
 				duration: 200,
@@ -51,7 +52,7 @@ Controller('enquetesView', {
 			});
 			return {
 				page: FlowRouter.getQueryParam('page'),
-				data: enquetes,
+				data: enquetes.fetch(),
 				count: Counts.get('allEnquetes'),
 				pages: Math.ceil(Counts.get('allEnquetes') / qtd)
 			};
@@ -72,10 +73,10 @@ Controller('enquetesView', {
 					pushObj = {
 						id: $(e.currentTarget).data('id'),
 						from: aplicativoVar.get().pushFrom,
-						title: 'Nova Enquete no Grêmio.',
+						title: 'Nova Enquete.',
 						text: enquete.title
 					};
-					Meteor.setTimeout(function() {
+					/*Meteor.setTimeout(function() {
 						Meteor.call("pushSend", pushObj, function(error, result) {
 							if (error) {
 								console.log("error", error);
@@ -84,7 +85,7 @@ Controller('enquetesView', {
 								Bert.alert('Mensagens "Push" enviadas com sucesso.', 'success');
 							}
 						});
-					}, 1000);
+					}, 1000);*/
 				}
 			});
 		},

@@ -45,7 +45,10 @@ Controller('enquetesResultView',{
 				{
 					title:'Voltar',
 					route:'enquetesRoute',
-					icon:'close'
+					icon:'close',
+					params:{
+						aplicativoId:FlowRouter.getParam('aplicativoId')
+					}
 				}
 			]
 		},

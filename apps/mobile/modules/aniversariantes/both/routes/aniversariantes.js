@@ -7,6 +7,10 @@ aniversariantesRoutes = FlowRouter.group({
 				Bert.alert('Você precisa fazer o login para ter permissão de acesso.','danger','fixed-bottom');
 				redirect('loginRoute');
 			}
+			if (!Roles.userIsInRole(Meteor.userId(),'subscriber',aplicativoIdVar.get())) {
+				Bert.alert('Você ainda não tem permissão de acesso.','danger','fixed-bottom');
+				redirect('homeRoute');
+			}
 		}
 	]
 });

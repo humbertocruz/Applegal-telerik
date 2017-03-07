@@ -49,6 +49,14 @@ Controller('formGaleriasView',{
 			if (!galeria) return false;
 			return galeria.fotos();
 		},
+		uploads:function(){
+			var arquivos = Cloudinary.collection.find({
+				//status:'uploading'
+			});
+			return {
+				data:arquivos.fetch(),
+			};
+		},
 		capa_id:function(){
 			if (!FlowRouter.getParam('id')) return false;
 			var galeria = Galeria.findOne(FlowRouter.getParam('id'));
@@ -96,6 +104,8 @@ Controller('formGaleriasView',{
 					if (err) {
 						console.log(err);
 					} else {
+						res.galeriaId = FlowRouter.getParam('id');
+						res.likes = 0;
 						Arquivo.insert(res);
 					}
 				}
@@ -104,7 +114,7 @@ Controller('formGaleriasView',{
 		'click .capaBtn'(e,t){
 			var fields = {
 				_id:FlowRouter.getParam('id'),
-				capa_id:this._id
+				capa_id:this.public_id
 			}
 			Meteor.call("galeriasForm", fields, FlowRouter.getParam('aplicativoId'), function(error, result){
 				if(error){

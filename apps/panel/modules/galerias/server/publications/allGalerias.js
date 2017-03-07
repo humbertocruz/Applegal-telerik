@@ -13,10 +13,13 @@ Meteor.publishComposite('allGalerias', function(search,page,aplicativoId){
 			{
 				find:function(galeria){
 					return Arquivo.find({
-						'metadata._Resumable': { $exists: false },
-						'metadata.type':'photo',
-						'metadata.galeriaId':galeria._id,
-						'metadata.aplicativoId':aplicativoId
+						galeriaId:galeria._id,
+						tags:{
+							$all:[
+								'photo',
+								aplicativoId
+							]
+						}
 					});
 				}
 			}
@@ -38,10 +41,13 @@ Meteor.publishComposite('oneGaleria', function(id,aplicativoId){
 			{
 				find:function(galeria){
 					return Arquivo.find({
-						'metadata._Resumable': { $exists: false },
-						'metadata.type':'photo',
-						'metadata.galeriaId':galeria._id,
-						'metadata.aplicativoId':aplicativoId
+						galeriaId:galeria._id,
+						tags:{
+							$all:[
+								'photo',
+								aplicativoId
+							]
+						}
 					});
 				}
 			}

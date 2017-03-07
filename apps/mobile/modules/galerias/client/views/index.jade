@@ -1,4 +1,7 @@
 template(name="galeriasView")
+	.ui.info.message(style="background-color:#{appThemeBgColor}")
+		i.large.image.icon
+		|Galeria de Fotos
 	if compare galerias.count 'eq' 0
 		.ui.red.message(style="background-color:#{appThemeBgColor}")
 			p Nenhuma galeria encontrada
@@ -8,5 +11,6 @@ template(name="galeriasView")
 				.image
 					img(src="#{arquivoPath capa_id 'c_scale,w_120'}")
 				.content
-					.left.floated.header #{title}
-					.ui.red.right.floated.label #{fotos.length}
+					.meta #{title}
+				.extra.content
+					|#{fotos.length} fotos

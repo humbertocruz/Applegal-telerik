@@ -11,14 +11,6 @@ Meteor.methods({
 			}
 		});
 	},
-	addUserToAppForm:function(fields){
-		var user = Accounts.findUserByUsername(fields.username);
-		if (!user) return {msg:'Usuário não encontrado.',status:false};
-		if (Roles.userIsInRole(user._id, 'admin')) return {msg:'Este usuário não pode ser adicionado.',status:false};
-		if (Roles.getRolesForUser(user._id,fields.aplicativoId).length > 0) return {msg:'Este usuário já está no aplicativo.',status:false};
-		Roles.addUsersToRoles(user._id,fields.tipo,fields.aplicativoId);
-		return {msg:'Usuário inserido no aplicativo com sucesso.',status:true};
-	},
 	searchForManager:function(cpf) {
 
 	},

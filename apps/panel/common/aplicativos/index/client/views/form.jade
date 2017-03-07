@@ -13,7 +13,7 @@ template(name="aplicativosFormView")
 					.field
 						label Logotipo
 						.ui.small.rounded.image
-							img.ui.image(src="#{arquivoPath appInfo.appLogo}")
+							img.ui.image(src="#{arquivoPath appInfo.appLogo 'e_make_transparent,c_scale,w_150'}")
 				.thirteen.wide.column
 					.two.fields
 						.field
@@ -173,20 +173,36 @@ template(name="aplicativosFormView")
 		.ui.bottom.attached.tab.segment(data-tab="login")
 			.field
 				label Tipo de Login
-				select.ui.search.dropdown#loginTypeField(name="loginType")
+				select.ui.dropdown#loginTypeField(name="loginType")
 					option(value="") Escolha uma opção
 					option(value="email") Email
 					option(value="username") Username
-			.two.fields
+			.three.fields
 				.field
 					label Título
 					input#loginTitleField(type="text",name="loginTitle")
 				.field
 					label Máscara do Título
 					input#loginTitleMaskField(type="text",name="loginTitleMask")
-			.field
-				label Máscara da Senha
-				input#loginPasswordMaskField(type="text",name="loginPasswordMask")
+				.field
+					label Validador do Título
+					select.ui.dropdown#loginTitleValidationField(name="loginTitleValidation")
+						option(value="") Escolha uma opção
+						option(value="none") Sem Validção
+						option(value="cpf") CPF
+			.two.fields
+				.field
+					label Teclado do Título
+					select.ui.dropdown#loginTitleKeyboardField(name="loginTitleKeyboard")
+						option(value="") Escolha uma opção
+						option(value="text") Normal
+						option(value="tel") Numérico
+				.field
+					label Teclado da Senha
+					select.ui.dropdown#loginPasswordKeyboardField(name="loginPasswordKeyboard")
+						option(value="") Escolha uma opção
+						option(value="text") Normal
+						option(value="tel") Numérico
 		.ui.bottom.attached.tab.segment(data-tab="privacy")
 			.field
 				label Privacidade

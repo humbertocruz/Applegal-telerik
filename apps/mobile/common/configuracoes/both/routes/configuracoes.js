@@ -1,13 +1,13 @@
-galeriasRoutes = FlowRouter.group({
-	name:'privateRoutes',
-	prefix:'/galerias',
+managerRoutes = FlowRouter.group({
+	name:'managerRoutes',
+	prefix:'/configuracoes',
 	triggersEnter:[
 		function(obj,redirect){
 			if (!Meteor.userId()){
 				Bert.alert('Você precisa fazer o login para ter permissão de acesso.','danger','fixed-bottom');
 				redirect('loginRoute');
 			}
-			if (!Roles.userIsInRole(Meteor.userId(),'subscriber',aplicativoIdVar.get())) {
+			if (!Roles.userIsInRole(Meteor.userId(),'manager',aplicativoIdVar.get())) {
 				Bert.alert('Você ainda não tem permissão de acesso.','danger','fixed-bottom');
 				redirect('homeRoute');
 			}
@@ -15,23 +15,12 @@ galeriasRoutes = FlowRouter.group({
 	]
 });
 
-galeriasRoutes.route('/',{
-	name: 'galeriasRoute',
+managerRoutes.route('/',{
+	name: 'managerRoute',
 	action: function() {
 		BlazeLayout.render('adminLayout',{
 			menu:'topMenu',
-			main:'galeriasView',
-			technotronics:'technotronicsMenu'
-		});
-	}
-});
-
-galeriasRoutes.route('/:id',{
-	name: 'fotosRoute',
-	action: function() {
-		BlazeLayout.render('adminLayout',{
-			menu:'topMenu',
-			main:'fotosView',
+			main:'configuracoesView',
 			technotronics:'technotronicsMenu'
 		});
 	}

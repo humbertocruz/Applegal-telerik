@@ -9,13 +9,14 @@ template(name="sidebar")
 					a.item(href="#{pathFor modulo.route}")
 						i.icon(class="#{modulo.icon}")
 						|#{modulo.title}
-			else
+			if isGuest
 				a.item(href="#{pathFor 'suspensoRoute'}")
 					i.exclamation.icon
-					|Usuário Suspenso
-			a.item#logoutBtn
-				i.power.icon
-				|Logout
+					|Usuário Convidado
+			if isManager
+				a.item(href="#{pathFor 'managerRoute'}")
+					i.setting.icon
+					|Configurações
 		else
 			a.item(href="#{pathFor 'loginRoute'}")
 				i.power.icon

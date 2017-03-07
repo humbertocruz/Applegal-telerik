@@ -20,12 +20,12 @@ Meteor.publishComposite('oneEnquete', function(id,aplicativoId){
 		]
 	}
 });
-Meteor.publishComposite('allEnquetes', function(search,page,aplicativoId){
+Meteor.publishComposite('appEnquetes', function(search,page,aplicativoId){
 	return {
 		find:function(){
 			if (!search) search = {}
 			search.aplicativoId = aplicativoId;
-			Counts.publish(this,'allEnquetes',Enquete.find(search));
+			Counts.publish(this,'appEnquetes',Enquete.find(search));
 			var enquetes = Enquete.find(search);
 			return enquetes;
 		},

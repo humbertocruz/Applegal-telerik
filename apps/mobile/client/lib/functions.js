@@ -6,6 +6,14 @@ hexToRgb = function (hex) {
 				b: parseInt(result[3], 16)
 		} : null;
 };
+toSemanticList = function(list){
+	var msg = '<div class="ui list">';
+	_.each(list,function(l){
+	msg+= '<div class="">'+l+'</div>';
+	});
+	msg+= '</div>';
+	return msg;
+};
 TestaCPF = function(strCPF) {
 	strCPF = strCPF.replace(/[\.\-]/g, '');
 	var Soma;

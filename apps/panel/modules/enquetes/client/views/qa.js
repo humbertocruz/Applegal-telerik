@@ -107,7 +107,10 @@ Controller('enquetesQAView',{
 				{
 					title:'Cancelar',
 					route:'enquetesRoute',
-					icon:'left chevron'
+					icon:'left chevron',
+					params:{
+						aplicativoId:FlowRouter.getParam('aplicativoId')
+					}
 				}
 			]
 		},

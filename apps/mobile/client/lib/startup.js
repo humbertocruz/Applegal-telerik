@@ -15,6 +15,7 @@ Meteor.startup(function() {
 		if (isAppVar.get()) return false;
 		if (app) {
 			isAppVar.set(true);
+			userLikesVar = new ReactiveVar([]);
 			FlowRouter.initialize();
 			aplicativoIdVar.set(app._id);
 		}

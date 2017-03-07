@@ -8,12 +8,17 @@ template(name="formGaleriasView")
 			.field
 				label Título
 				input#titleField(type="text",name="title")
-			.field
-				label &nbsp;
-				if galeria_id
-					input#uploadField(type="file")
-				else
-					.ui.blue.disabled.fluid.button Enviar Fotos
+			if compare fotos.length 'lt' 50
+				.field
+					label &nbsp;
+					if galeria_id
+						input#uploadField(type="file")
+					else
+						.ui.blue.disabled.fluid.button Enviar Fotos
+			else
+				.field
+					label &nbsp;
+					.ui.red.fluid.button Limite de 50 Fotos
 	if galeria_id
 		.ui.large.header Fotos da Galeria
 		if fotos
@@ -22,10 +27,8 @@ template(name="formGaleriasView")
 					each fotos
 						.card
 							.ui.fluid.image
-								img(src="#{arquivoPath _id 'c_scale,w_150'}")
+								img(src="#{arquivoPath public_id 'c_scale,w_150,e_improve'}")
 							.content
-								.description
-								|#{originalname} #{galeria.capa_id}
 								.extra
 									.ui.blue.icon.button.capaBtn(data-tooltip="Capa da Galeria",data-inverted)
 										i.image.icon

@@ -53,7 +53,7 @@ Controller('enquetesFormView',{
 				}
 				if(result){
 					 Bert.alert('A enquete foi enviada com sucesso!','success');
-					 FlowRouter.go('enquetesRoute')
+					 FlowRouter.go('enquetesRoute',{aplicativoId:FlowRouter.getParam('aplicativoId')});
 				}
 			});
 		}

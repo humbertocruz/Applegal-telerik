@@ -6,5 +6,19 @@ tiposUploadArquivos = {
 	wallpaper:'Papel de Parede',
 	photo:'Foto'
 };
+userRoles = {
+	admin:{
+		name:'Admin'
+	},
+	manager:{
+		name:'Gerente'
+	},
+	guest:{
+		name:'Visitante'
+	},
+	subscriber:{
+		name:'Assinante'
+	}
+};
 
 topTitleVar = new ReactiveVar('Home');

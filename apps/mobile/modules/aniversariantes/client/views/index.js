@@ -1,5 +1,9 @@
 Controller('aniversariantesView',{
 	created:function(){
+		backBtnRouteVar.set({
+			route:'homeRoute',
+			params:{}
+		});
 		topTitleVar.set('Aniversariantes');
 		Meteor.subscribe("appAniversariantes", Aplicativo.findOne()._id);
 	},

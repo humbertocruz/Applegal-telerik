@@ -3,14 +3,11 @@ Controller('loginView', {
 		$('#loginForm').form({
 			inline: true,
 			fields: {
-				userField: {
-					identifier: 'usernameField',
+				emailField: {
+					identifier: 'emailField',
 					rules: [{
-						type: 'empty',
-						prompt: 'É necessário preencher o CPF.'
-					},{
-						type: 'cpf',
-						prompt: 'É necessário preencher o CPF corretamente.'
+						type: 'email',
+						prompt: 'Email inválido.'
 					}]
 				},
 				passwordField: {

@@ -6,6 +6,6 @@ template(name="noticiasDetalheView")
 		.ui.left.floated.header #{noticia.title}
 		.ui.clearing.divider
 		if noticia.imagem
-			img.ui.fluid.image(src="#{arquivoPath noticia.imagem}")
+			img.ui.fluid.image(src="#{arquivoPath noticia.imagem 'c_scale,w_320'}")
 			.ui.divider
 		p(style="background-color:transparent !important;") !{noticia.mensagem}

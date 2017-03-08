@@ -1,5 +1,6 @@
 Controller('usuariosFormView', {
 	created:function() {
+		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
 		Tracker.autorun(function(){
 			oneUsuario = Meteor.subscribe("oneUsuarioApp", FlowRouter.getParam('userId'));
 		});
@@ -75,7 +76,11 @@ Controller('usuariosFormView', {
 		}
 	},
 	events: {
-		'submit #usuariosForm' (e, t) {
+		'submit #addPerguntaForm':function(e,t){
+			e.preventDefault();
+			console.log('addPerguntaForm');
+		},
+		'submit #usuariosForm':function(e, t) {
 			e.preventDefault();
 			var fields = $(e.target).form('get values');
 			var usuario = {

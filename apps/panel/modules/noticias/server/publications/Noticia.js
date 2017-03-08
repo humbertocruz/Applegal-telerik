@@ -28,6 +28,13 @@ Meteor.publishComposite('appNoticias', function(search, page, aplicativoId) {
 						aplicativoId:aplicativoId
 					});
 				}
+			},
+			{
+				find:function(noticia){
+					return Arquivo.find({
+						noticiaId:noticia._id
+					});
+				}
 			}
 		]
 	}
@@ -43,6 +50,24 @@ Meteor.publishComposite('oneNoticia', function(id,aplicativoId) {
 				aplicativoId:aplicativoId
 			});
 			return noticia;
-		}
+		},
+		children:[
+			{
+				find:function(noticia){
+					return Assunto.find({
+						_id:noticia.assunto_id,
+						aplicativoId:aplicativoId
+					});
+				}
+			},
+			{
+				find:function(noticia){
+					var arqs = Arquivo.find({
+						noticiaId:noticia._id
+					});
+					return arqs;
+				}
+			}
+		]
 	}
 });

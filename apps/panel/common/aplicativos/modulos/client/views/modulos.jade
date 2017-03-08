@@ -3,13 +3,14 @@ template(name="aplicativosModulosView")
 	.ui.block.top.attached.header Módulos
 	.ui.bottom.attached.segment
 		.ui.grid
-			.four.wide.column
-				.ui.header Disponíveis
-				.ui.vertical.fluid.menu
-					each modulos_disponiveis
-						.link.item.addModulo
-							|#{title}
-							i.icon(class="#{icon}")
+			if isModAdmin
+				.four.wide.column
+					.ui.header Disponíveis
+					.ui.vertical.fluid.menu
+						each modulos_disponiveis
+							.link.item.addModulo
+								|#{title}
+								i.icon(class="#{icon}")
 			.four.wide.column
 				.ui.header Ativos
 				if modulos_ativos
@@ -21,17 +22,24 @@ template(name="aplicativosModulosView")
 				else
 					.ui.warning.message
 						p Nenhum Módulo Ativo
-			.eight.wide.column
-				.ui.header Configuração
-				form.ui.form#appModuloForm(method="post")
-					.field
-						label Título
-						input#titleField(type="text",name="title")
-					.field
-						label Ordem
-						input#orderField(type="number",name="order")
-					.field
-						label Icone
-						input#iconField(type="text",name="icon")
-					.actions
-						button.ui.blue.button(type="submit",form="appModuloForm") Salvar
+			if isModAdmin
+				.eight.wide.column
+					+modulosConfigPanel
+			else
+				.twelve.wide.column
+					+modulosConfigPanel
+				
+template(name="modulosConfigPanel")
+	.ui.header Configuração
+	form.ui.form#appModuloForm(method="post")
+		.field
+			label Título
+			input#titleField(type="text",name="title")
+		.field
+			label Ordem
+			input#orderField(type="number",name="order")
+		.field
+			label Icone
+			input#iconField(type="text",name="icon")
+		.actions
+			button.ui.blue.button(type="submit",form="appModuloForm") Salvar

@@ -1,5 +1,6 @@
 Controller('aplicativosUsuariosView', {
 	created:function() {
+		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
 		usuariosSearchVar = new ReactiveVar({});
 		var appId = FlowRouter.getParam('aplicativoId');
 		allUsuariosApp = Meteor.subscribe('allUsuariosApp', usuariosSearchVar.get(), FlowRouter.getQueryParam('page'), appId);

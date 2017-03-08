@@ -1,5 +1,6 @@
 Controller('formGaleriasView',{
 	created:function(){
+		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
 		Cloudinary.collection.find().observe({
 			changed:function(newc,oldc){
 				$('#progress_'+newc._id).progress({

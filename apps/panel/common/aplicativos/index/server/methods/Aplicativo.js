@@ -1,4 +1,7 @@
 Meteor.methods({
+	setServerAppId:function(aplicativoId){
+		aplicativoIdServerVar = aplicativoId;
+	},
 	checkApp:function(aplicativoId){
 		if (Aplicativo.findOne(aplicativoId)) return true;
 		else return false;
@@ -10,9 +13,6 @@ Meteor.methods({
 				appLogo:file
 			}
 		});
-	},
-	searchForManager:function(cpf) {
-
 	},
 	aplicativosForm: function(fields) {
 		var user = Meteor.users.findOne(this.userId);

@@ -27,11 +27,13 @@ template(name="formGaleriasView")
 					each fotos
 						.card
 							.ui.fluid.image
-								img(src="#{arquivoPath public_id 'c_scale,w_150,e_improve'}")
+								img(src="#{arquivoPath public_id 'c_scale,w_150'}")
 							.content
 								.extra
 									.ui.blue.icon.button.capaBtn(data-tooltip="Capa da Galeria",data-inverted)
 										i.image.icon
+									.ui.blue.icon.button.capaBtn(data-tooltip="Efeitos",data-inverted)
+										i.wizard.icon
 									.ui.red.icon.button.deleteBtn(data-tooltip="Excluir Foto",data-inverted)
 										i.trash.icon
 		else

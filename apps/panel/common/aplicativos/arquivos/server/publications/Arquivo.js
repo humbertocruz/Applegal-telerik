@@ -17,6 +17,13 @@ Meteor.publish('appArquivos', function (page,aplicativoId) {
 						'wallpaper'
 					]
 				}
+			},{
+				tags:{
+					$all:[
+						aplicativoId,
+						'noticia'
+					]
+				}
 			}
 		]
 	};
@@ -24,12 +31,9 @@ Meteor.publish('appArquivos', function (page,aplicativoId) {
 	Counts.publish(this, 'appArquivos', Arquivo.find(search), {
 		noReady: true
 	});
-	
+
 	return Arquivo.find(search,{
 		limit:qtd,
-		skip: (page - 1) * qtd,
-		sort:{
-			'metadata.type':1
-		}
+		skip: (page - 1) * qtd
 	});
 });

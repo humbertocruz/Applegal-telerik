@@ -1,5 +1,13 @@
 Controller('formNoticiasView',{
 	created:function(){
+		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
+		Cloudinary.collection.find().observe({
+			changed:function(newc,oldc){
+				$('#progress_'+newc._id).progress({
+					percent: newc.percent_uploaded
+				});
+			}
+		});
 		Tracker.autorun(function(){
 			Meteor.subscribe("oneNoticia", FlowRouter.getParam('noticiaId'));
 			Meteor.subscribe("appAssuntos", FlowRouter.getParam('aplicativoId'));
@@ -24,8 +32,19 @@ Controller('formNoticiasView',{
 		});
 	},
 	helpers:{
+		noticiaId:function(){
+			return FlowRouter.getParam('noticiaId');
+		},
 		semanticColors:function(){
 			return _.sortBy(semanticColors,'title');
+		},
+		uploaded:function(){
+			return Cloudinary.collection.find({},{
+				limit:1,
+				sort:{
+					created_at:-1
+				}
+			}).fetch();
 		},
 		noticia:function(){
 			return Noticia.findOne(FlowRouter.getParam('noticiaId'));
@@ -69,6 +88,50 @@ Controller('formNoticiasView',{
 		}
 	},
 	events:{
+		'click .removePreviewEvent':function(e,t){
+			Cloudinary.collection.remove(this._id);
+		},
+		'click #addFotoNoticiaEvent':function(e,t){
+			$('#uploadField').click();
+		},
+		'click #removeFotoNoticiaEvent':function(e,t){
+			var not = Noticia.findOne(FlowRouter.getParam('noticiaId'));
+			htmlConfirm('Aviso','Você tem certeza?',function(){
+				Meteor.call("removeNoticiaFoto", not._id, FlowRouter.getParam('aplicativoId'), function(error, result){
+					if(error){
+						console.log("error", error);
+					}
+					if(result){
+						 Bert.alert('Foto excluída com sucesso','success');
+					}
+				});
+			});
+		},
+		'change #uploadField': function(e) {
+			var files = e.currentTarget.files;
+			Cloudinary.upload(files,
+				{
+					folder:FlowRouter.getParam('aplicativoId'),
+					tags:['noticia',FlowRouter.getParam('aplicativoId')],
+				},
+				function(err,res) {
+					if (err) {
+						console.log(err);
+					} else {
+						res.noticiaId = FlowRouter.getParam('noticiaId');
+						Arquivo.insert(res);
+						Meteor.call("noticiasAddFoto", res, function(error, result){
+							if(error){
+								console.log("error", error);
+							}
+							if(result){
+
+							}
+						});
+					}
+				}
+			);
+		},
 		'submit #noticiasForm'(e,t){
 			e.preventDefault();
 			var fields = $(e.target).form('get values');

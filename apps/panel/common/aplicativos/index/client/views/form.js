@@ -4,7 +4,7 @@ Controller('aplicativosFormView',{
 		arquivosLogoPageVar = new ReactiveVar(1);
 		bgSelectedVar = new ReactiveVar(false);
 		logoSelectedVar = new ReactiveVar(false);
-
+		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
 
 		Tracker.autorun(function(){
 			var page = arquivosPageVar.get();

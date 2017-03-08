@@ -1,11 +1,12 @@
 Meteor.publishComposite('oneEnquete', function(id,aplicativoId){
-	if (typeof(DomainAppVar) == 'undefined') return false;
+	console.log(id,aplicativoId);
 	return {
 		find:function(){
 			var enquete = Enquete.find({
 				_id:id,
 				aplicativoId:aplicativoId
 			});
+			console.log(enquete.fetch());
 			return enquete;
 		},
 		children:[

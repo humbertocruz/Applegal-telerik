@@ -1,2 +1,2 @@
 // Nenhum aplicativo carregado pelo dominio
-// DomainAppVar = {};
+aplicativoIdVar = false;

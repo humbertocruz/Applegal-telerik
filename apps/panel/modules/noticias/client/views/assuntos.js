@@ -1,5 +1,6 @@
 Controller('noticiasAssuntosView',{
 	created:function() {
+		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
 		sint = 0;
 		assuntosSearchVar = new ReactiveVar({});
 		Tracker.autorun(function(){

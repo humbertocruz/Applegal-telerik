@@ -11,11 +11,10 @@ template(name="leftMenuApp")
 					i.setting.icon
 					.content
 						.header Configuração
-				if isAdmin
-					a.item(class="#{isActiveRoute regex='^aplicativosModulos'}",href="#{pathFor 'aplicativosModulosRoute' aplicativoId=appInfo._id}")
-						i.puzzle.icon
-						.content
-							.header Módulos
+				a.item(class="#{isActiveRoute regex='^aplicativosModulos'}",href="#{pathFor 'aplicativosModulosRoute' aplicativoId=appInfo._id}")
+					i.puzzle.icon
+					.content
+						.header Módulos
 				a.item(class="#{isActiveRoute regex='^aplicativosUsuarios'}",href="#{pathFor 'aplicativosUsuariosRoute' aplicativoId=appInfo._id}")
 					i.users.icon
 					.content

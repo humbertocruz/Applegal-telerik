@@ -1,11 +1,19 @@
 Meteor.methods({
-	noticiasUploadFoto:function(fileId, aplicativoId, noticiaId){
-		fileId = new Meteor.Collection.ObjectID(fileId);
-		return Noticia.update(noticiaId,{
+	removeNoticiaFoto:function(id){
+		var not = Noticia.update(id,{
 			$set:{
-				imagem:fileId
+				imagem:''
 			}
-		})
+		});
+		return not;
+	},
+	noticiasAddFoto:function(arquivo, noticiaId){
+		var not = Noticia.update(arquivo.noticiaId,{
+			$set:{
+				imagem:arquivo.public_id
+			}
+		});
+		return not;
 	},
 	noticiasForm: function(fields,aplicativoId) {
 		fields.date = moment(fields.date, 'YYYY-MM-DD').toDate();
@@ -14,14 +22,15 @@ Meteor.methods({
 			fields.user_created = this.userId;
 			fields.date_created = moment().toDate();
 			fields.active = false;
-			return Noticia.insert(fields);
+			var noticiaId = Noticia.insert(fields);
 		} else {
 			fields.user_updated = this.userId;
 			fields.date_updated = moment().toDate();
-			return Noticia.update(fields._id, {
+			var noticiaId = Noticia.update(fields._id, {
 				$set: fields
 			});
 		}
+		return noticiaId;
 	},
 	removeNoticia: function(id, aplicativoId) {
 		return Noticia.remove({

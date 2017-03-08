@@ -1,5 +1,6 @@
 Controller('galeriasView', {
 	created:function() {
+		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
 		sint = 0;
 		Tracker.autorun(function(){
 			allGalerias = Meteor.subscribe('allGalerias',{},FlowRouter.getQueryParam('page'),FlowRouter.getParam('aplicativoId'));

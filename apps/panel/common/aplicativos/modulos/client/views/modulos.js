@@ -1,5 +1,6 @@
 Controller('aplicativosModulosView',{
 	created:function(){
+		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
 		updateModuloVar = new ReactiveVar(false);
 	},
 	helpers:{
@@ -13,6 +14,10 @@ Controller('aplicativosModulosView',{
 			}
 		},
 		newLink:function(){
+			return false;
+		},
+		isModAdmin:function(){
+			if (Roles.userIsInRole(Meteor.userId(),'admin')) return true;
 			return false;
 		},
 		extraLinks:function(){
@@ -62,6 +67,7 @@ Controller('aplicativosModulosView',{
 		},
 		'click .addModulo':function(e,t){
 			var me = this;
+			if (!Roles.userIsInRole(Meteor.userId(),'admin')) return false;
 			e.preventDefault();
 			htmlConfirm('Adicionar Módulo','Você tem Certeza?',function(){
 				var fields = {

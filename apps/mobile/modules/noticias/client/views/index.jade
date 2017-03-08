@@ -16,7 +16,7 @@ template(name="noticiasView")
 						a.item(href="#{pathFor 'noticiasDetalheRoute' id=_id}")
 							if imagem
 								.image
-									img(src="#{arquivoPath imagem}")
+									img(src="#{arquivoPath imagem 'c_scale,w_320'}")
 							.content
 								.header #{title}
 								.meta #{assunto.name}

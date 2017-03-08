@@ -1,5 +1,6 @@
 Controller('enquetesView', {
 	created: function() {
+		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
 		sint = 0;
 		enquetesSearchVar = new ReactiveVar({});
 		Tracker.autorun(function() {
@@ -47,14 +48,14 @@ Controller('enquetesView', {
 
 			$('.ui.progress').progress({
 				duration: 200,
-				total: Math.ceil(Counts.get('allEnquetes') / qtd),
+				total: Math.ceil(Counts.get('appEnquetes') / qtd),
 				value: page
 			});
 			return {
 				page: FlowRouter.getQueryParam('page'),
 				data: enquetes.fetch(),
-				count: Counts.get('allEnquetes'),
-				pages: Math.ceil(Counts.get('allEnquetes') / qtd)
+				count: Counts.get('appEnquetes'),
+				pages: Math.ceil(Counts.get('appEnquetes') / qtd)
 			};
 		}
 	},

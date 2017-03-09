@@ -1,7 +1,30 @@
 template(name="registerView")
-	img.ui.small.centered.image(src="#{arquivoPath appInfo.appLogo}")
-	br
+	img.ui.small.centered.image(src="#{arquivoPath appInfo.appLogo 'c_scale,w_150'}")
+	.ui.hidden.divider
 	form.ui.form#registerForm(style="background-color:#{appThemeBgColor}", class="#{appThemeText}",method="post",novalidate="novalidate")
+		.field
+			label Seu Email
+			input#emailField(type="email",name="email")
+		.ui.divider(class="#{appThemeText}")
+		button.ui.blue.fluid.button(type="submit",form="registerForm") Continuar
+
+template(name="registerAuthView")
+	img.ui.small.centered.image(src="#{arquivoPath appInfo.appLogo 'c_scale,w_150'}")
+	.ui.hidden.divider
+	.ui.info.message(style="background-color:#{appThemeBgColor}")
+		i.large.exclamation.icon
+		|Você já está cadastrado, digite a sua senha para continuar.
+	form.ui.form#registerAuthForm(style="background-color:#{appThemeBgColor}", class="#{appThemeText}",method="post",novalidate="novalidate")
+		.field
+			label Senha
+			input#passwordField(type="password",name="email")
+		.ui.divider(class="#{appThemeText}")
+		button.ui.blue.fluid.button(type="submit",form="registerAuthForm") Continuar
+
+template(name="registerOneView")
+	img.ui.small.centered.image(src="#{arquivoPath appInfo.appLogo 'c_scale,w_150'}")
+	.ui.hidden.divider
+	form.ui.form#registerOneForm(style="background-color:#{appThemeBgColor}", class="#{appThemeText}",method="post",novalidate="novalidate")
 		.field
 			label Seu CPF
 			input#usernameField(type="tel",name="username")
@@ -18,7 +41,7 @@ template(name="registerView")
 				.ui.icon.button.showPasswordBtn
 					i.eye.icon
 		.ui.divider(class="#{appThemeText}")
-		button.ui.blue.fluid.button(type="submit",form="registerForm") Continuar
+		button.ui.blue.fluid.button(type="submit",form="registerOneForm") Continuar
 
 template(name="registerTwoView")
 	img.ui.small.centered.image(src="#{arquivoPath appInfo.appLogo}")
@@ -27,9 +50,6 @@ template(name="registerTwoView")
 		.field
 			label Nome
 			input(type="text",name="name",autocomplete="off")
-		.field
-			label Email
-			input(type="email",name="email",autocomplete="off")
 		.field
 			label Aniversário
 			input#aniversarioField(type="date",name="birthday",autocomplete="off")

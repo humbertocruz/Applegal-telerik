@@ -4,9 +4,28 @@ template(name="arquivosView")
 		if ready
 			each arquivos.data
 				.ui.card
+					.ui.red.right.corner.label
+						i.link.trash.icon.removeArquivoEvent
 					.image
-						img.ui.image(src="#{arquivoPath _id}")
-					.extra
-						.ui.red.icon.button.arquivoRemoveEvent
-							i.trash.icon
+						img.ui.image(src="#{CloudinaryBaseURL public_id 'c_scale,w_180'}")
+	.ui.divider
+	.ui.ten.cards
+		each uploads.data
+			.ui.card(id="wallpaper_#{_id}")
+				.image
+					img.ui.image(src="#{preview}")
+				.extra
+					if compare status 'eq' 'uploading'
+						.ui.tiny.progress(id="progress_#{_id}")
+							.bar
+							.label Enviando...
+					else
+						.ui.fluid.green.icon.tiny.button.removePreviewEvent
+							i.checkmark.icon
+	.ui.divider
+	form.ui.form#uploadForm(method="post")
+		.field
+			label Upload
+			input#uploadField(type="file",name="files",multiple="multiple")
+	.ui.divider
 	+indexInfoPaginator ready=ready nothingFound='Nenhum arquivo cadastrado.' count=arquivos.count page=arquivos.count pages=arquivos.pages singularForm='Arquivo' pluralForm='Arquivos'

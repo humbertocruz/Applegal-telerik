@@ -1,6 +1,7 @@
 Controller('homeView', {
 	created: function() {
 		topTitleVar.set('Home');
+		backBtnRouteVar.set();
 	},
 	rendered: function() {
 		// Aparece os icones dos módulos conforme a configuração

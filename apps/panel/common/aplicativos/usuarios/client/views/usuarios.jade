@@ -4,7 +4,7 @@ template(name="aplicativosUsuariosView")
 		thead
 			tr
 				th.three.wide &nbsp;
-				th.three.wide CPF/Usuário
+				th.three.wide Email
 				th.three.wide Permissões
 				th Nome
 				th.three.wide Aniversário
@@ -17,9 +17,9 @@ template(name="aplicativosUsuariosView")
 							i.edit.icon
 						a.ui.icon.button.chamadoBtn(data-tooltip="Abrir Chamado",data-inverted)
 							i.talk.icon
-						.ui.icon.button.removeBtn(data-tooltip="Excluir Usuário",data-inverted)
+						.ui.icon.button.removeUserAppBtn(data-tooltip="Excluir Usuário",data-inverted)
 							i.trash.icon
-					td #{username}
+					td #{firstEmail emails}
 					td #{userAppPerm}
 					td #{profile.name}
 					td #{dateBr profile.birth}
@@ -31,8 +31,8 @@ template(name="aplicativosUsuariosView")
 	.ui.large.popup
 		form.ui.form#addUserToAppForm(method="post")
 			.field
-				label CPF
-				input#usernameField(type="text",name="username")
+				label Email
+				input#emailField(type="text",name="email")
 			.field
 				label Permissões
 				select.ui.dropdown.tipoField(name="tipo",multiple)

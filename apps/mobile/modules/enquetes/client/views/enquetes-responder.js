@@ -1,9 +1,27 @@
 Controller('enquetesResponderView',{
 	created:function(){
 		topTitleVar.set('Enquete');
+		backBtnRouteVar.set({
+			route:'enquetesRoute',
+			params:{}
+		});
 	},
 	rendered:function(){
-
+		$('#salvaRespostasForm').form({
+			onFailure:function(){
+				console.log('fail');
+				return false;
+			},
+			fields:{
+				indentifier:'options',
+				rules:[
+					{
+						type:'checked',
+						prompt:'Você deve preencher todas as opções.'
+					}
+				]
+			}
+		});
 	},
 	helpers:{
 		enquete:function(){
@@ -17,6 +35,7 @@ Controller('enquetesResponderView',{
 			var fields = $(e.currentTarget).form('get values');
 			var respostas = {
 				enquete_id:FlowRouter.getParam('id'),
+				aplicativoId:aplicativoIdVar.get(),
 				respostas:fields
 			}
 			Meteor.call("enquetesResponder", respostas, function(error, result){

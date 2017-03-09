@@ -1,3 +1,131 @@
+Controller('registerView', {
+	created: function() {
+		registerFormVar = new ReactiveVar();
+		registerEmailVar = new ReactiveVar();
+	},
+	rendered: function() {
+		$('#registerForm').form({
+			onFailure:function(a,b,c){
+				var msg = toSemanticList(a);
+				Bert.alert(msg,'danger');
+				return false;
+			},
+			inline: false,
+			fields: {
+				email: {
+					identifier: 'email',
+					rules: [{
+						type: 'email',
+						prompt: 'Email inválido!'
+					}]
+				}
+			}
+		});
+		$('#usernameField').mask('999.999.999-99');
+	},
+	events: {
+		'click .showPasswordBtn': function(e, t) {
+			if ($(e.currentTarget).prev().hasClass('hidePwd')) {
+				$(e.currentTarget).prev().removeClass('hidePwd');
+			} else {
+				$(e.currentTarget).prev().addClass('hidePwd');
+			}
+		},
+		'submit #registerForm': function(e, t) {
+			e.preventDefault();
+			var fields = $(e.currentTarget).form('get values');
+			registerFormVar.set(fields);
+			registerEmailVar.set(fields.email);
+			Meteor.call("registerCheckEmail", fields, function(error, result){
+				if(error){
+					console.log("error", error);
+				}
+				if(result){
+					BlazeLayout.render('adminLayout', {
+						menu: 'topMenu',
+						main: 'registerAuthView',
+						technotronics: 'technotronicsMenu'
+					});
+				} else {
+					BlazeLayout.render('adminLayout', {
+						menu: 'topMenu',
+						main: 'registerOneView',
+						technotronics: 'technotronicsMenu'
+					});
+				}
+			});
+		}
+	}
+});
+
+Controller('registerOneView', {
+	created: function() {
+		registerFormVar = new ReactiveVar();
+	},
+	rendered: function() {
+		$.fn.form.settings.rules.cpf = function(value) {
+			return TestaCPF(value);
+		};
+		$('#registerForm').form({
+			inline: false,
+			fields: {
+				cpf: {
+					identifier: 'username',
+					rules: [{
+						type: 'cpf',
+						prompt: 'CPF inválido!'
+					}]
+				},
+				password1: {
+					identifier: 'password1',
+					rules: [{
+						type: 'empty',
+						prompt: 'Digite uma senha.'
+					}]
+				},
+				password2: {
+					identifier: 'password2',
+					rules: [{
+						type: 'match[password1]',
+						prompt: 'As senha digitadas não são iguais.'
+					}]
+				}
+			}
+		});
+		$('#usernameField').mask('999.999.999-99');
+		$('#password1Field,#password2Field').mask('9999999999999999');
+	},
+	events: {
+		'click .showPasswordBtn': function(e, t) {
+			if ($(e.currentTarget).prev().hasClass('hidePwd')) {
+				$(e.currentTarget).prev().removeClass('hidePwd');
+			} else {
+				$(e.currentTarget).prev().addClass('hidePwd');
+			}
+		},
+		'submit #registerOneForm': function(e, t) {
+			e.preventDefault();
+			var fields = $(e.currentTarget).form('get values');
+			registerFormVar.set(fields);
+			Meteor.call("registerCheckUsername", fields.username, function(error, result){
+				if(error){
+					console.log("error", error);
+				}
+				if(result){
+					Bert.alert('Esse CPF já está em uso.','danger');
+				} else {
+					BlazeLayout.render('adminLayout', {
+						menu: 'topMenu',
+						main: 'registerTwoView',
+						technotronics: 'technotronicsMenu'
+					});
+				}
+			});
+
+		}
+	}
+});
+
 Controller('registerTwoView', {
 	created: function() {
 		phoneNumberVar = new ReactiveVar();
@@ -63,6 +191,7 @@ Controller('registerTwoView', {
 			isLoadingVar.set('Cadastrando novo usuário...');
 			var fieldsTwo = $(e.currentTarget).form('get values');
 			var fields = registerFormVar.get(fields);
+			fieldsTwo.email = registerEmailVar.get();
 			Meteor.call('registerUser', fields, fieldsTwo, Aplicativo.findOne()._id, function(error, result) {
 				if (error) {
 					isLoadingVar.set(false);
@@ -76,64 +205,6 @@ Controller('registerTwoView', {
 						Bert.alert('Usuário adicionado com sucesso e registro concluído!', 'success');
 					});
 				}
-			});
-		}
-	}
-});
-
-Controller('registerView', {
-	created: function() {
-		registerFormVar = new ReactiveVar();
-	},
-	rendered: function() {
-		$.fn.form.settings.rules.cpf = function(value) {
-			return TestaCPF(value);
-		};
-		$('#registerForm').form({
-			inline: false,
-			fields: {
-				cpf: {
-					identifier: 'username',
-					rules: [{
-						type: 'cpf',
-						prompt: 'CPF inválido!'
-					}]
-				},
-				password1: {
-					identifier: 'password1',
-					rules: [{
-						type: 'empty',
-						prompt: 'Digite uma senha.'
-					}]
-				},
-				password2: {
-					identifier: 'password2',
-					rules: [{
-						type: 'match[password1]',
-						prompt: 'As senha digitadas não são iguais.'
-					}]
-				}
-			}
-		});
-		$('#usernameField').mask('999.999.999-99');
-		$('#password1Field,#password2Field').mask('9999999999999999');
-	},
-	events: {
-		'click .showPasswordBtn': function(e, t) {
-			if ($(e.currentTarget).prev().hasClass('hidePwd')) {
-				$(e.currentTarget).prev().removeClass('hidePwd');
-			} else {
-				$(e.currentTarget).prev().addClass('hidePwd');
-			}
-		},
-		'submit #registerForm': function(e, t) {
-			e.preventDefault();
-			var fields = $(e.currentTarget).form('get values');
-			registerFormVar.set(fields);
-			BlazeLayout.render('adminLayout', {
-				menu: 'topMenu',
-				main: 'registerTwoView',
-				technotronics: 'technotronicsMenu'
 			});
 		}
 	}

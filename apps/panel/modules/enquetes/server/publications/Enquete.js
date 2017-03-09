@@ -1,11 +1,12 @@
 Meteor.publishComposite('oneEnquete', function(id,aplicativoId){
-	if (typeof(DomainAppVar) == 'undefined') return false;
+	console.log(id,aplicativoId);
 	return {
 		find:function(){
 			var enquete = Enquete.find({
 				_id:id,
 				aplicativoId:aplicativoId
 			});
+			console.log(enquete.fetch());
 			return enquete;
 		},
 		children:[
@@ -20,12 +21,12 @@ Meteor.publishComposite('oneEnquete', function(id,aplicativoId){
 		]
 	}
 });
-Meteor.publishComposite('allEnquetes', function(search,page,aplicativoId){
+Meteor.publishComposite('appEnquetes', function(search,page,aplicativoId){
 	return {
 		find:function(){
 			if (!search) search = {}
 			search.aplicativoId = aplicativoId;
-			Counts.publish(this,'allEnquetes',Enquete.find(search));
+			Counts.publish(this,'appEnquetes',Enquete.find(search));
 			var enquetes = Enquete.find(search);
 			return enquetes;
 		},

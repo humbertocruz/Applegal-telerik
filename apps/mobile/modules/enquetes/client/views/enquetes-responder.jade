@@ -1,20 +1,18 @@
 template(name="enquetesResponderView")
+	.ui.message(style="background-color:#{appThemeBgColor}")
+		i.large.wizard.icon
+		|#{enquete.title}
 	unless enquete
 		.ui.loading.message Carregando...
 	else
-		.ui.segment(class="#{enquente.cor}")
-			.ui.header
-				i.large.wizard.right.floated.icon(class="#{enquete.cor}")
-				|#{enquete.title}
-		form#salvaRespostasForm(method="post")
+		form.ui.form#salvaRespostasForm(method="post",style="padding:10px !important;background-color:#{appThemeBgColor}")
 			each perg in enquete.perguntas
-				.ui.message 
-					.ui.header #{perg.title}
-					.ui.divider
-					.ui.vertical.fluid.menu
-						each opc in perg.opcoes
-							.item
-								.ui.radio.checkbox
-									input(type="radio",name="#{opcName perg.order}",value="#{opc.order}")
-									label #{opc.title}
+				.grouped.fields
+					label #{perg.title}
+					each opc in perg.opcoes
+						.field
+							.ui.radio.checkbox
+								input(type="radio",id="#{perg.order}_#{opc.order}Field",name="#{opcName perg.order}",value="#{opc.order}",required="required")
+								label(for="#{perg.order}_#{opc.order}Field") #{opc.title}
+			.ui.divider
 			button.ui.blue.fluid.button#salvaRespostasEvent(type="submit") Salvar Respostas

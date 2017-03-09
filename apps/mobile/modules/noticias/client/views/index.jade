@@ -1,19 +1,24 @@
 template(name="noticiasView")
-	.ui.segment(style="background-color:#{appThemeBgColor}",class="#{appThemeText}")
-		unless noticias
-			.ui.loading.message Carregando...
-		else
-			if compare noticias.count 'eq' 0
-				.ui.red.message
-					p Nenhuma notícia encontrada
-			.ui.divided.items
-				each noticias.data
-					a.item(href="#{pathFor 'noticiasDetalheRoute' id=_id}")
-						if imagem
-							.image
-								img(src="#{arquivoPath imagem}")
-						.content
-							.header #{title}
-							.meta #{assunto.name}
-							.description !{resume mensagem 100}
-							.extra #{dateBr date}
+	.ui.info.message(style="background-color:#{appThemeBgColor}")
+		i.large.newspaper.icon
+		|Notícias
+	if compare noticias.count 'eq' 0
+		.ui.orange.message(style="background-color:#{appThemeBgColor}")
+			i.large.exclamation.icon
+			|Nenhuma notícia encontrada
+	else
+		.ui.segment(style="background-color:#{appThemeBgColor}",class="#{appThemeText}")
+			unless noticias
+				.ui.loading.message Carregando...
+			else
+				.ui.divided.items
+					each noticias.data
+						a.item(href="#{pathFor 'noticiasDetalheRoute' id=_id}")
+							if imagem
+								.image
+									img(src="#{arquivoPath imagem 'c_scale,w_320'}")
+							.content
+								.header #{title}
+								.meta #{assunto.name}
+								.description !{resume mensagem 100}
+								.extra #{dateBr date}

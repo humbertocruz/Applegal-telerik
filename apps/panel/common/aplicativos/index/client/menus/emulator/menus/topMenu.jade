@@ -4,5 +4,5 @@ template(name="topMenu")
 			i.sidebar.icon
 		.header.item #{topTitle}
 		.right.menu
-				a.icon.active.item.reloadHome
+				a.icon.active.item(href="#{pathFor 'aplicativosEmulatorRoute' aplicativoId=appInfo._id}")
 					i.ui.home.icon

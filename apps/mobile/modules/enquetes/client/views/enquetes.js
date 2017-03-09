@@ -1,6 +1,10 @@
 Controller('enquetesView',{
 	created:function(){
 		topTitleVar.set('Enquetes');
+		backBtnRouteVar.set({
+			route:'homeRoute',
+			params:{}
+		});
 	},
 	rendered:function(){
 
@@ -15,6 +19,6 @@ Controller('enquetesView',{
 		}
 	},
 	events:{
-		
+
 	}
 });

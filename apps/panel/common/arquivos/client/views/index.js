@@ -1,17 +1,19 @@
 Controller('arquivosView',{
 	created:function() {
+		Cloudinary.collection.find().observe({
+			changed:function(newc,oldc){
+				$('#progress_'+newc._id).progress({
+					percent: newc.percent_uploaded
+				});
+			}
+		});
 		Tracker.autorun(function(){
 			var page = FlowRouter.getQueryParam('page');
 			allWallpapers = Meteor.subscribe("allWallpapers", page);
 		});
 	},
 	rendered:function(){
-		Arquivo.resumable.assignBrowse($("#arquivoBrowse"));
-		arquivoUploadMetadataVar.set({
-			aplicativoId: false,
-			public: true,
-			type:'wallpaper'
-		});
+
 	},
 	helpers:{
 		ready:function(){
@@ -26,36 +28,56 @@ Controller('arquivosView',{
 		newLink:function(){
 			return false;
 		},
-		extraLinks:function(){
-			return [
-				{
-					title:'Enviar Arquivos',
-					id:'arquivoBrowse',
-					icon:'upload'
-				}
-			]
-		},
 		ready: function(){
-			return allWallpapers.ready();
+			return true;
 		},
-		arquivos:function(){
-			var qtd = 8;
+		arquivos: function(){
 			var page = FlowRouter.getQueryParam('page');
-			if (!page) page = 1;
-			var arquivos = Arquivo.find({},{limit:qtd});
+			var qtd = 8;
+			var arquivos = Arquivo.find({
+				tags:{
+					$all:['wallpaper','public']
+				}
+			},{
+				limit:qtd,
+			});
 			return {
 				page:page,
-				count:Counts.get('allWallpapers'),
-				data:arquivos.fetch(),
-				pages:Math.ceil(Counts.get('allWallpapers')/qtd)
-			}
+				count: Counts.get('allWallpapers'),
+				data: arquivos.fetch(),
+				pages: Math.ceil(Counts.get('allWallpapers')/qtd)
+			};
 		},
-		arquivoPath:function(){
-			return '/gridfs/arquivos/md5/'+this.md5;
+		uploads:function(){
+			var arquivos = Cloudinary.collection.find({
+				//status:'uploading'
+			});
+			return {
+				data:arquivos.fetch(),
+			};
 		}
 	},
 	events:{
-		'click .arquivoRemoveEvent':function(e,t){
+		'change #uploadField': function(e) {
+			var files = e.currentTarget.files;
+			Cloudinary.upload(files,
+				{
+					folder:"shared",
+					tags:['wallpaper','public'],
+				},
+				function(err,res) {
+					if (err) {
+						console.log(err);
+					} else {
+						res.preview = Cloudinary.collection.findOne({
+							'response.public_id':res.public_id
+						}).preview;
+						Arquivo.insert(res);
+					}
+				}
+			);
+		},
+		'click .removeArquivoEvent':function(e,t){
 			var me = this;
 			htmlConfirm('Aviso','Você tem certeza?',function(){
 				Arquivo.remove(me._id,function(error, result){
@@ -64,9 +86,16 @@ Controller('arquivosView',{
 					}
 					if(result){
 						Bert.alert('Arquivo excluído com sucesso','success');
+						Cloudinary.delete(me.public_id,function(err,result){
+							console.log(err);
+							console.log(result);
+						});
 					}
 				});
 			});
+		},
+		'click .removePreviewEvent':function(e,t){
+			Cloudinary.collection.remove(this._id);
 		}
 	}
 });

@@ -1,18 +1,16 @@
 Controller('aplicativosFormView',{
 	created:function(){
 		arquivosPageVar = new ReactiveVar(1);
-		wallPageVar = new ReactiveVar(1);
-		logotiposPageVar = new ReactiveVar(1);
-		uploadType = new ReactiveVar(); // logo ou wallpaper
+		arquivosLogoPageVar = new ReactiveVar(1);
 		bgSelectedVar = new ReactiveVar(false);
 		logoSelectedVar = new ReactiveVar(false);
+		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
+
 		Tracker.autorun(function(){
 			var page = arquivosPageVar.get();
-			var pup = wallPageVar.get();
-			var plogo = logotiposPageVar.get();
 			allWallpapers = Meteor.subscribe("allWallpapers", page);
-			appWallpapers = Meteor.subscribe("appWallpapers", pup, FlowRouter.getParam('aplicativoId'));
-			appLogotipos = Meteor.subscribe("appLogotipos", plogo, FlowRouter.getParam('aplicativoId'));
+			var Logopage = arquivosLogoPageVar.get();
+			appArquivos = Meteor.subscribe("appArquivos", Logopage, FlowRouter.getParam('aplicativoId'));
 		});
 	},
 	rendered:function(){
@@ -43,27 +41,20 @@ Controller('aplicativosFormView',{
 			//language: 'pt_BR',
 			skin_url: '/packages/teamon_tinymce/skins/lightgray',
 		});
-
-		// Upload do Logotipo
-		Arquivo.resumable.assignBrowse($("#logoBrowse"));
-		arquivoUploadMetadataVar.set({
-			type: 'logotype',
-			aplicativoId: FlowRouter.getParam('aplicativoId')
-		});
 	},
 	helpers:{
 		ready:function(){
-			return allWallpapers.ready();
+			return appArquivos.ready();
 		},
 		aplicativoId:function(){
 			return FlowRouter.getParam('aplicativoId');
 		},
 		isBgSelected:function(){
-			if (this._id == bgSelectedVar.get()) return 'red';
+			if (this.public_id == bgSelectedVar.get()) return 'red';
 			else return '';
 		},
 		isLogoSelected:function(){
-			if (this._id == logoSelectedVar.get()) return 'red';
+			if (this.public_id == logoSelectedVar.get()) return 'red';
 			else return '';
 		},
 		header:function(){
@@ -85,12 +76,17 @@ Controller('aplicativosFormView',{
 		},
 		wallpapers:function(){
 			var wallpapers = Arquivo.find({
-				'metadata.type':'wallpaper',
-				'metadata.aplicativoId':false,
-				'metadata.public':true
-			},{limit:8});
+				tags:{
+					$all:[
+						'wallpaper',
+						'public'
+					]
+				}
+			},{
+				limit:8
+			});
 			return {
-				page:FlowRouter.getQueryParam('page'),
+				page:arquivosPageVar.get(),
 				count:Counts.get('allWallpapers'),
 				data:wallpapers.fetch(),
 				pages: 8
@@ -98,9 +94,13 @@ Controller('aplicativosFormView',{
 		},
 		wallpapersUp:function(){
 			var wallpapers = Arquivo.find({
-				'metadata.type':'wallpaper',
-				'metadata.aplicativoId':FlowRouter.getParam('aplicativoId'),
-			},{limit:8});
+				tags:{
+					$all:[
+						'wallpapers',
+						FlowRouter.getParam('aplicativoId')
+					]
+				}
+			});
 			return {
 				page:FlowRouter.getQueryParam('page'),
 				count:Counts.get('appWallpapers'),
@@ -110,7 +110,12 @@ Controller('aplicativosFormView',{
 		},
 		logotipos:function(){
 			var logotipos = Arquivo.find({
-				'metadata.type':'logotype'
+				tags:{
+					$all:[
+						'logotype',
+						FlowRouter.getParam('aplicativoId')
+					]
+				}
 			});
 			return {
 				page:FlowRouter.getQueryParam('page'),
@@ -121,14 +126,10 @@ Controller('aplicativosFormView',{
 		}
 	},
 	events:{
-		'click #logoBrowse':function(e,t){
-			uploadType.set('logotype');
-		},
 		'click #bgUpEvent':function(e,t){
-			var max = Math.ceil(Counts.get('allArquivos')/8);
+			var max = Math.ceil(Counts.get('allWallpapers')/8);
 			if (arquivosPageVar.get() == max) return false;
 			var num = arquivosPageVar.get()+1;
-			console.log(num);
 			arquivosPageVar.set(num);
 		},
 		'click #bgDownEvent':function(e,t){
@@ -137,10 +138,13 @@ Controller('aplicativosFormView',{
 			arquivosPageVar.set(num);
 		},
 		'click .bgSelectEvent':function(e,t){
-			bgSelectedVar.set(this._id);
+			bgSelectedVar.set(this.public_id);
 		},
 		'click .logoSelectEvent':function(e,t){
-			logoSelectedVar.set(this._id);
+			bgSelectedVar.set(this.public_id);
+		},
+		'click .logoSelectEvent':function(e,t){
+			logoSelectedVar.set(this.public_id);
 		},
 		'submit #aplicativosForm':function(e,t){
 			e.preventDefault();

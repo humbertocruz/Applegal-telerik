@@ -1,22 +1,39 @@
-Meteor.publish('appArquivos', function (search,page,aplicativoId) {
+Meteor.publish('appArquivos', function (page,aplicativoId) {
 	if (!aplicativoId) return [];
 	if (!page) page = 1;
-	if (!search) search = {};
-	search['metadata._Resumable'] = { $exists: false };
-	search['metadata.aplicativoId'] = aplicativoId;
-	search['metadata.aplicativoId'] = aplicativoId;
-	search['metadata.type'] = {
-		$in:['logotype','wallpaper']
+	search = {
+		$or:[
+			{
+				tags:{
+					$all:[
+						aplicativoId,
+						'logotype'
+					]
+				}
+			},{
+				tags:{
+					$all:[
+						aplicativoId,
+						'wallpaper'
+					]
+				}
+			},{
+				tags:{
+					$all:[
+						aplicativoId,
+						'noticia'
+					]
+				}
+			}
+		]
 	};
-	var qtd = 10;
+	var qtd = 8;
 	Counts.publish(this, 'appArquivos', Arquivo.find(search), {
 		noReady: true
 	});
+
 	return Arquivo.find(search,{
 		limit:qtd,
-		skip: (page - 1) * qtd,
-		sort:{
-			'metadata.type':1
-		}
+		skip: (page - 1) * qtd
 	});
 });

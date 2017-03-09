@@ -69,6 +69,7 @@ enquetesRoutes.route('/resultados/:id', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
+			left: 'leftMenuApp',
 			main: 'enquetesResultView'
 		});
 	}

@@ -6,19 +6,17 @@ template(name="enquetesQAView")
 				unless perguntas
 					.ui.red.message Nenhuma Pergunta
 				else
-					each perguntas
-						.ui.clearing.segment(class="#{addClassIf 'blue' perguntaAtual order 'eq'}")
-							.ui.mini.red.right.floated.icon.button#enquetesRemovePerguntaEvent(data-tooltip="Remove esta Pergunta",data-inverted)
-								i.close.icon
-							.ui.mini.blue.right.floated.icon.button#enquetesSelecionaPerguntaEvent(data-tooltip="Selecione esta Pergunta",data-inverted)
-								i.check.icon
-							.ui.left.floated.header #{title}
-							.ui.clearing.hidden.divider
-							each opc in opcoes
-								.ui.clearing.grey.segment
-									.ui.mini.red.right.floated.icon.button#enquetesRemoveOpcaoEvent(class="#{addClassIf 'disabled' perguntaAtual order 'ne'}",data-tooltip="Remove esta Opção",data-inverted)
-										i.close.icon
-									.ui.left.floated.header #{opc.title}
+					.ui.divided.list
+						each perguntas
+							.item
+								.content
+									.header #{title}
+									.ui.middle.aligned.divided.list
+										each opc in opcoes
+											.item#enquetesRemoveOpcaoEvent
+												img.ui.mini.image(src="#{arquivoPath opc.image 'c_scale,w_50'}")
+												.content
+													.header #{opc.title}
 											
 			.six.wide.column
 				.ui.segments

@@ -10,16 +10,31 @@ template(name="aplicativosArquivosView")
 						option(value="logotype") Logotipo
 						option(value="wallpaper") Papel de Parede
 				.field
-					label &nbsp;
-					.ui.blue.button#arquivoBrowse Upload de Arquivos
+					label Upload
+					input#uploadField(disabled,type="file",name="files",multiple="multiple")
+			.ui.divider
 	.ui.eight.cards
 		if ready
 			each arquivos.data
 				.ui.card
 					.image
-						img.ui.image(src="#{arquivoPath _id}")
+						img.ui.image(src="#{arquivoPath public_id 'c_scale,w_150'}")
 					.extra
-						.ui.red.icon.button.arquivoRemoveEvent
+						.ui.red.fluid.tiny.icon.button.arquivoRemoveEvent
 							i.trash.icon
 
+	.ui.ten.cards
+		each uploads.data
+			.ui.card(id="wallpaper_#{_id}")
+				.image
+					img.ui.image(src="#{preview}")
+				.extra
+					if compare status 'eq' 'uploading'
+						.ui.tiny.progress(id="progress_#{_id}")
+							.bar
+							.label Enviando...
+					else
+						.ui.fluid.green.icon.tiny.button.removePreviewEvent
+							i.checkmark.icon
+	.ui.divider
 	+indexInfoPaginator ready=ready nothingFound='Nenhum arquivo cadastrado.' count=arquivos.count page=arquivos.count pages=arquivos.pages singularForm='Arquivo' pluralForm='Arquivos'

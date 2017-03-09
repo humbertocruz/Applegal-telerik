@@ -21,7 +21,7 @@ template(name="noticiasView")
 						+indexActivateButton active=active id=_id
 					td
 						.ui.circular.label(class="#{cor}")
-					td #{dateTimeBr date}
+					td #{dateBr date}
 					td #{assunto.name}
 					td #{title}
 	+indexInfoPaginator ready=ready nothingFound='Nenhuma notícia cadastrada.' count=noticias.count page=noticias.count pages=noticias.pages singularForm='Notícia' pluralForm='Notícias'

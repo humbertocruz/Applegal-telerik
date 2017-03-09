@@ -53,8 +53,9 @@ raix:push
 mrt:moment-timezone
 london:body-class
 tap:i18n
-vsivsi:file-collection
 benjaminrh:jquery-cookie
 meteorhacks:cluster
 meteorhacks:kadira
 okgrow:analytics
+lepozepo:cloudinary
+check

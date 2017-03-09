@@ -1,5 +1,13 @@
 Controller('formGaleriasView',{
 	created:function(){
+		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
+		Cloudinary.collection.find().observe({
+			changed:function(newc,oldc){
+				$('#progress_'+newc._id).progress({
+					percent: newc.percent_uploaded
+				});
+			}
+		});
 		Tracker.autorun(function(){
 			oneGaleria = Meteor.subscribe('oneGaleria',FlowRouter.getParam('id'),FlowRouter.getParam('aplicativoId'));
 		});
@@ -31,27 +39,24 @@ Controller('formGaleriasView',{
 		} else {
 			$('#galeriasForm').form('set value','dateField',moment().format('YYYY-MM-DD'));
 		}
-		// Upload - Configurando variaveis
-		Arquivo.resumable.assignBrowse($(".fotoBrowse"));
-		arquivoUploadProgressIdVar = '#galeriasFotoProgress';
-		arquivoUploadMetadataVar.set({
-			type: 'photo',
-			aplicativoId: FlowRouter.getParam('aplicativoId'),
-			galeriaId: FlowRouter.getParam('id')
-		});
 	},
 	helpers:{
 		galeria_id:function(){
 			return FlowRouter.getParam('id');
-		},
-		locationOrigin:function(){
-			return location.origin;
 		},
 		fotos:function(){
 			if (!FlowRouter.getParam('id')) return false;
 			var galeria = Galeria.findOne(FlowRouter.getParam('id'));
 			if (!galeria) return false;
 			return galeria.fotos();
+		},
+		uploads:function(){
+			var arquivos = Cloudinary.collection.find({
+				//status:'uploading'
+			});
+			return {
+				data:arquivos.fetch(),
+			};
 		},
 		capa_id:function(){
 			if (!FlowRouter.getParam('id')) return false;
@@ -86,10 +91,31 @@ Controller('formGaleriasView',{
 		}
 	},
 	events:{
+		'click .removePreviewEvent':function(e,t){
+			Cloudinary.collection.remove(this._id);
+		},
+		'change #uploadField': function(e) {
+			var files = e.currentTarget.files;
+			Cloudinary.upload(files,
+				{
+					folder:FlowRouter.getParam('aplicativoId'),
+					tags:['photo',FlowRouter.getParam('aplicativoId')],
+				},
+				function(err,res) {
+					if (err) {
+						console.log(err);
+					} else {
+						res.galeriaId = FlowRouter.getParam('id');
+						res.likes = 0;
+						Arquivo.insert(res);
+					}
+				}
+			);
+		},
 		'click .capaBtn'(e,t){
 			var fields = {
 				_id:FlowRouter.getParam('id'),
-				capa_id:this._id
+				capa_id:this.public_id
 			}
 			Meteor.call("galeriasForm", fields, FlowRouter.getParam('aplicativoId'), function(error, result){
 				if(error){

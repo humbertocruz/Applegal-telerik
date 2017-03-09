@@ -1,6 +1,10 @@
 Controller('noticiasView', {
 	created: function() {
 		topTitleVar.set('Notícias');
+		backBtnRouteVar.set({
+			route:'homeRoute',
+			params:{}
+		});
 		Tracker.autorun(function(){
 			var app = Aplicativo.findOne();
 			if (!app) return false;

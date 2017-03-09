@@ -1,6 +1,6 @@
 template(name="enquetesView")
-	+indexHeaderSearch header=header search=search newLink=newLink extraLinks=extraLinks
-	table.ui.top.attached.table
+	+indexHeaderSearch header=header extraLinks=extraLinks
+	table.ui.single.line.top.attached.table
 		thead
 			tr
 				th.three.wide &nbsp;
@@ -14,11 +14,11 @@ template(name="enquetesView")
 			each enquetes.data
 				tr
 					td
-						a.ui.icon.button.editBtn(class="#{addClassIf 'disabled' respostas.length 0 'gt'}",data-tooltip="Editar Enquete",data-inverted,href="#{pathFor 'enquetesUpdateRoute' id=_id}")
+						a.ui.icon.button.editBtn(class="#{addClassIf 'disabled' respostas.length 0 'gt'}",data-tooltip="Editar Enquete",data-inverted,href="#{pathFor 'enquetesUpdateRoute' aplicativoId=aplicativoId id=_id}")
 							i.edit.blue.icon
-						a.ui.icon.button.QABtn(class="#{addClassIf 'disabled' respostas.length 0 'gt'}",data-tooltip="Perguntas e Respostas",data-inverted,href="#{pathFor 'enquetesQARoute' id=_id}")
+						a.ui.icon.button.QABtn(class="#{addClassIf 'disabled' respostas.length 0 'gt'}",data-tooltip="Perguntas e Respostas",data-inverted,href="#{pathFor 'enquetesQARoute' aplicativoId=aplicativoId id=_id}")
 							i.question.violet.icon
-						a.ui.icon.button.QABtn(data-tooltip="Resultados",data-inverted,href="#{pathFor 'enquetesResultRoute' id=_id}")
+						a.ui.icon.button.QABtn(data-tooltip="Resultados",data-inverted,href="#{pathFor 'enquetesResultRoute' aplicativoId=aplicativoId id=_id}")
 							i.browser.green.icon
 						.ui.icon.button.removeBtn(data-tooltip="Excluir Enquete",data-inverted)
 							i.trash.red.icon

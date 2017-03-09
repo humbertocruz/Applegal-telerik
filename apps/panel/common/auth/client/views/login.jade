@@ -1,8 +1,8 @@
 template(name="loginView")
-	.ui.container.three.column.centered.hidden.transition.grid#loginGrid(style="height:100%;")
+	.ui.container.three.column.desktop.one.column.mobile.centered.hidden.transition.grid#loginGrid(style="height:100%;")
 		.middle.aligned.row
 			.left.aligned.column
-				img.ui.small.centered.image(src="#{appLogoByDomain}")
+				img.ui.small.centered.image(src="#{arquivoPath appLogoByDomain 'c_scale,w_150'}")
 				form.ui.form#loginForm(method="post")
 					.field
 						label Email

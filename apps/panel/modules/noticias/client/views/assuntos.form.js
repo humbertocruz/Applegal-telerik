@@ -1,5 +1,6 @@
 Controller('noticiasAssuntosFormView',{
 	rendered:function(){
+		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
 		if (id = FlowRouter.getParam('id')){
 			var assunto = Assunto.findOne(id);
 			$('#assuntosForm').form('set values',assunto);

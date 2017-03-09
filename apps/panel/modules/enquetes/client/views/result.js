@@ -1,5 +1,6 @@
 Controller('enquetesResultView',{
 	created:function(){
+		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
 		Tracker.autorun(function(){
 			oneEnquete = Meteor.subscribe('oneEnquete', FlowRouter.getParam('id'), FlowRouter.getParam('aplicativoId'));
 		});
@@ -45,7 +46,10 @@ Controller('enquetesResultView',{
 				{
 					title:'Voltar',
 					route:'enquetesRoute',
-					icon:'close'
+					icon:'close',
+					params:{
+						aplicativoId:FlowRouter.getParam('aplicativoId')
+					}
 				}
 			]
 		},

@@ -8,9 +8,14 @@ template(name="indexHeaderSearch")
 				|#{header.title}
 		.right.menu
 			each extraLinks
-				a.item(href="#{pathFor route params}",id="#{id}")
-					i.icon(class="#{icon}")
-					|#{_ title}
+				if route
+					a.item(href="#{pathFor route params}",id="#{id}")
+						i.icon(class="#{icon}")
+						|#{_ title}
+				else
+					a.item(id="#{id}")
+						i.icon(class="#{icon}")
+						|#{_ title}
 			if search
 				a.item#searchBtn
 					i.search.icon

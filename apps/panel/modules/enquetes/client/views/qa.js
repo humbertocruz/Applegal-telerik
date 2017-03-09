@@ -1,5 +1,6 @@
 Controller('enquetesQAView',{
 	created:function(){
+		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
 		perguntaAtualVar = new ReactiveVar('none');
 		Tracker.autorun(function(){
 			oneEnquete = Meteor.subscribe('oneEnquete', FlowRouter.getParam('id'), FlowRouter.getParam('aplicativoId'));
@@ -107,7 +108,10 @@ Controller('enquetesQAView',{
 				{
 					title:'Cancelar',
 					route:'enquetesRoute',
-					icon:'left chevron'
+					icon:'left chevron',
+					params:{
+						aplicativoId:FlowRouter.getParam('aplicativoId')
+					}
 				}
 			]
 		},

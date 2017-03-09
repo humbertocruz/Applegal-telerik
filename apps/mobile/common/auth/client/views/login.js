@@ -5,7 +5,7 @@ Controller('loginView', {
 	rendered: function() {
 		var app = Aplicativo.findOne();
 		if (app.loginTitleMask) $('#usernameField').mask(app.loginTitleMask);
-		if (app.loginPasswordMask) $('#passwordField').mask(app.loginPasswordMask);
+		//if (app.loginPasswordMask) $('#passwordField').mask(app.loginPasswordMask);
 	},
 	helpers: {
 		filiais: function() {
@@ -24,7 +24,12 @@ Controller('loginView', {
 			e.preventDefault();
 			isLoadingVar.set('Fazendo Login...');
 			var fields = $(e.target).form('get values');
-			Meteor.loginWithPassword(fields.username, fields.password, function(err, result) {
+			if (fields.email) {
+				var loginField = fields.email;
+			} else {
+				var loginField = fields.username;
+			}
+			Meteor.loginWithPassword(loginField, fields.password, function(err, result) {
 				if (err) {
 					Bert.alert('Confira seu CPF e sua Senha!', 'danger');
 					isLoadingVar.set(false);

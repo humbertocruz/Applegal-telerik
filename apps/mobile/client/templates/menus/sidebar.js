@@ -12,6 +12,12 @@ Controller('sidebar', {
 		isSubscriber: function() {
 			return Roles.userIsInRole(Meteor.userId(), 'subscriber', Aplicativo.findOne()._id);
 		},
+		isGuest: function() {
+			return Roles.userIsInRole(Meteor.userId(), 'guest', Aplicativo.findOne()._id);
+		},
+		isManager: function() {
+			return Roles.userIsInRole(Meteor.userId(), 'manager', Aplicativo.findOne()._id);
+		},
 		modulos: function() {
 			return AplicativoModulo.find().fetch();
 		}

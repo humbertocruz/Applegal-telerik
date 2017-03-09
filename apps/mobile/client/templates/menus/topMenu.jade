@@ -2,16 +2,14 @@ template(name="topMenu")
 	.ui.inverted.secondary.top.fixed.menu(style="background-color:#{menusRGBA} !important;")
 		.icon.item.toggleSidebar
 			i.sidebar.icon
+		if backBtnRouteHelper
+			a.item(href="#{backBtnRouteHelper}")
+				i.left.arrow.icon
 		.header.item #{topTitle}
 		.right.menu
-			//if hasUpdate
-				.item
-					.ui.tiny.icon.button#reloadBtn
-						i.red.loading.refresh.icon
-			//else
 			if isLogged
-				a.icon.active.item(href="#{pathFor 'homeRoute'}")
-					i.ui.home.icon
+				a.icon.item#logoutBtn
+					i.sign.out.icon
 			else
 				a.icon.item(href="#{pathFor 'loginRoute'}")
-					i.ui.power.icon
+					i.sign.in.icon

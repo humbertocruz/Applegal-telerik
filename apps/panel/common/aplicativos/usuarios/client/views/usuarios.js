@@ -1,5 +1,6 @@
 Controller('aplicativosUsuariosView', {
 	created:function() {
+		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
 		usuariosSearchVar = new ReactiveVar({});
 		var appId = FlowRouter.getParam('aplicativoId');
 		allUsuariosApp = Meteor.subscribe('allUsuariosApp', usuariosSearchVar.get(), FlowRouter.getQueryParam('page'), appId);
@@ -18,7 +19,12 @@ Controller('aplicativosUsuariosView', {
 			return FlowRouter.getParam('aplicativoId');
 		},
 		userAppPerm:function(){
-			return Roles.getRolesForUser(this._id, FlowRouter.getParam('aplicativoId'));
+			var roles = Roles.getRolesForUser(this._id, FlowRouter.getParam('aplicativoId'));
+			var txt = [];
+			_.each(roles,function(r){
+				if (userRoles[r] != undefined) txt.push(userRoles[r].name);
+			});
+			return txt.join(' - ');
 		},
 		appModulos:function(){
 			var app = Aplicativo.findOne(FlowRouter.getParam('aplicativoId'));
@@ -148,11 +154,16 @@ Controller('aplicativosUsuariosView', {
 				});
 			}
 		},
-		'click .removeBtn': function(e, t) {
+		'click .removeUserAppBtn': function(e, t) {
 			var me = this;
 			htmlConfirm('Excluir Usuário', 'Você tem certeza?', function() {
-				Meteor.call('removeUsuario', me._id, function(err, result) {
-					Bert.alert('Usuário removido com sucesso!', 'success');
+				Meteor.call('removeUsuarioApp', me._id, FlowRouter.getParam('aplicativoId'), function(err, result) {
+					if (err){
+						console.log(err);
+					}
+					if (result){
+						Bert.alert('Usuário removido com sucesso!', 'success');
+					}
 				});
 			});
 		}

@@ -25,5 +25,9 @@ template(name="leftEmulatorApp")
 					i.setting.icon
 					.content
 						.header Configuração
-	div#emulatorFloatDiv
-		iframe#emulatorFrame(src="#{pathFor 'aplicativosEmulatorRoute' aplicativoId=appInfo._id}")
+	unless showEmulator
+		.ui.violet.fluid.button#showEmulatorEvent Mostrar Emulador
+	else
+		.ui.violet.fluid.button#showEmulatorEvent Esconder Emulador
+		div#emulatorFloatDiv
+			iframe#emulatorFrame(src="#{pathFor 'aplicativosEmulatorRoute' aplicativoId=appInfo._id}")

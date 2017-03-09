@@ -1,6 +1,10 @@
 Controller('galeriasView',{
 	created:function(){
 		topTitleVar.set('Galeria de Fotos');
+		backBtnRouteVar.set({
+			route:'homeRoute',
+			params:{}
+		});
 		Tracker.autorun(function(){
 			var app = Aplicativo.findOne();
 			if (!app) return false;

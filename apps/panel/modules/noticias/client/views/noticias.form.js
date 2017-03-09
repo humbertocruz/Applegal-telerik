@@ -1,5 +1,13 @@
 Controller('formNoticiasView',{
 	created:function(){
+		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
+		Cloudinary.collection.find().observe({
+			changed:function(newc,oldc){
+				$('#progress_'+newc._id).progress({
+					percent: newc.percent_uploaded
+				});
+			}
+		});
 		Tracker.autorun(function(){
 			Meteor.subscribe("oneNoticia", FlowRouter.getParam('noticiaId'));
 			Meteor.subscribe("appAssuntos", FlowRouter.getParam('aplicativoId'));
@@ -22,43 +30,21 @@ Controller('formNoticiasView',{
 			//language: 'pt_BR',
 			skin_url: '/packages/teamon_tinymce/skins/lightgray',
 		});
-
-		// Upload do Logotipo
-		Arquivo.resumable.assignBrowse($("#imagemBrowse"));
-		// Excutar ao fim do envio do arquivo
-		Arquivo.resumable.on('fileSuccess', function(file) {
-			Bert.alert('Foto enviada com sucesso.','success');
-			arquivoUploadProgressVar.set(undefined);
-			Meteor.call("noticiasUploadFoto", file.file.uniqueIdentifier, FlowRouter.getParam('aplicativoId'), FlowRouter.getParam('noticiaId'));
-		});
-
-		Arquivo.resumable.on('fileAdded', function (file) {
-			if (!_.contains(['image/png','image/jpeg'],file.file.type)){
-				Bert.alert('Só são permitidos arquivos PNG ou JPG!','warning');
-				return false;
-			}
-			arquivoUploadProgressVar.set(0);
-			// Se já estiver enviando, cancela.
-			if (Arquivo.resumable.isUploading()) return false;
-			// Create a new file in the file collection to upload
-			Arquivo.insert({
-				_id: file.uniqueIdentifier,  // This is the ID resumable will use
-				filename: file.fileName,
-				contentType: file.file.type,
-				metadata:{
-					type: 'noticias',
-					aplicativoId: FlowRouter.getParam('aplicativoId')
-				}
-			}, function (err, _id) {  // Callback to .insert
-				if (err) { return console.error("Erro ao enviar o arquivo!", err); }
-				// Once the file exists on the server, start uploading
-				Arquivo.resumable.upload();
-			});
-		});
 	},
 	helpers:{
+		noticiaId:function(){
+			return FlowRouter.getParam('noticiaId');
+		},
 		semanticColors:function(){
 			return _.sortBy(semanticColors,'title');
+		},
+		uploaded:function(){
+			return Cloudinary.collection.find({},{
+				limit:1,
+				sort:{
+					created_at:-1
+				}
+			}).fetch();
 		},
 		noticia:function(){
 			return Noticia.findOne(FlowRouter.getParam('noticiaId'));
@@ -102,6 +88,50 @@ Controller('formNoticiasView',{
 		}
 	},
 	events:{
+		'click .removePreviewEvent':function(e,t){
+			Cloudinary.collection.remove(this._id);
+		},
+		'click #addFotoNoticiaEvent':function(e,t){
+			$('#uploadField').click();
+		},
+		'click #removeFotoNoticiaEvent':function(e,t){
+			var not = Noticia.findOne(FlowRouter.getParam('noticiaId'));
+			htmlConfirm('Aviso','Você tem certeza?',function(){
+				Meteor.call("removeNoticiaFoto", not._id, FlowRouter.getParam('aplicativoId'), function(error, result){
+					if(error){
+						console.log("error", error);
+					}
+					if(result){
+						 Bert.alert('Foto excluída com sucesso','success');
+					}
+				});
+			});
+		},
+		'change #uploadField': function(e) {
+			var files = e.currentTarget.files;
+			Cloudinary.upload(files,
+				{
+					folder:FlowRouter.getParam('aplicativoId'),
+					tags:['noticia',FlowRouter.getParam('aplicativoId')],
+				},
+				function(err,res) {
+					if (err) {
+						console.log(err);
+					} else {
+						res.noticiaId = FlowRouter.getParam('noticiaId');
+						Arquivo.insert(res);
+						Meteor.call("noticiasAddFoto", res, function(error, result){
+							if(error){
+								console.log("error", error);
+							}
+							if(result){
+
+							}
+						});
+					}
+				}
+			);
+		},
 		'submit #noticiasForm'(e,t){
 			e.preventDefault();
 			var fields = $(e.target).form('get values');

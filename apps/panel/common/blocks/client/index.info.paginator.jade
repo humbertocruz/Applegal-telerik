@@ -1,24 +1,22 @@
 template(name="indexInfoPaginator")
 		unless ready
-			.ui.secondary.bottom.attached.segment(style="min-height:100px !important;")
+			.ui.secondary.segment(class="#{addClassIf 'bottom attached' noattached 'undefined' 'ne'}",style="min-height:100px !important;")
 				.ui.active.inverted.dimmer
 					.ui.text.loader #{_ 'loading'}...
 		else
 			if compare count 'eq' 0
-				.ui.secondary.bottom.attached.segment.grid(style="min-height:100px !important;")
+				.ui.secondary.segment.grid(class="#{addClassIf 'bottom attached' noattached 'undefined' 'ne'}",style="min-height:100px !important;")
 					.middle.aligned.row
 						.sixteen.wide.center.aligned.column
-							.ui.header 
+							.ui.header
 								i.red.warning.icon
 								|#{nothingFound}
 			else
-				.ui.secondary.bottom.attached.segment.grid
+
+				.ui.secondary.segment.grid(class="#{addClassIf 'bottom attached' noattached true 'ne'}")
 					.middle.aligned.row
 						.eight.wide.column
 							.ui.header #{singular_plural count singularForm pluralForm}
 						.eight.wide.right.aligned.column
 							if compare pages 'gt' 1
 								+paginator pages=pages page=page
-			//if compare pages 'gt' 1
-				.ui.blue.bottom.attached.progress
-					.bar

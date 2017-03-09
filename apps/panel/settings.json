@@ -1,0 +1,10 @@
+{
+	"public":{
+		"analyticsSettings":{
+			"Google Analytics":{
+				"trackingId":"UA-92404370-1"
+			}
+		}
+	},
+	"env":{}
+}

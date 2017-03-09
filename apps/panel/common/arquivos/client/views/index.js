@@ -25,11 +25,14 @@ Controller('arquivosView',{
 				icon:'file'
 			}
 		},
-		newLink:function(){
-			return false;
-		},
-		ready: function(){
-			return true;
+		extraLinks:function(){
+			return [
+				{
+					title:'Enviar Arquivo',
+					icon:'upload',
+					id:'enviarArquivoEvent'
+				}
+			]
 		},
 		arquivos: function(){
 			var page = FlowRouter.getQueryParam('page');
@@ -50,7 +53,7 @@ Controller('arquivosView',{
 		},
 		uploads:function(){
 			var arquivos = Cloudinary.collection.find({
-				//status:'uploading'
+				status:'uploading'
 			});
 			return {
 				data:arquivos.fetch(),
@@ -58,6 +61,9 @@ Controller('arquivosView',{
 		}
 	},
 	events:{
+		'click #enviarArquivoEvent':function(e,t){
+			$('#uploadField').click();
+		},
 		'change #uploadField': function(e) {
 			var files = e.currentTarget.files;
 			Cloudinary.upload(files,
@@ -69,9 +75,6 @@ Controller('arquivosView',{
 					if (err) {
 						console.log(err);
 					} else {
-						res.preview = Cloudinary.collection.findOne({
-							'response.public_id':res.public_id
-						}).preview;
 						Arquivo.insert(res);
 					}
 				}
@@ -80,22 +83,17 @@ Controller('arquivosView',{
 		'click .removeArquivoEvent':function(e,t){
 			var me = this;
 			htmlConfirm('Aviso','Você tem certeza?',function(){
-				Arquivo.remove(me._id,function(error, result){
-					if(error){
-						console.log("error", error);
-					}
-					if(result){
-						Bert.alert('Arquivo excluído com sucesso','success');
-						Cloudinary.delete(me.public_id,function(err,result){
-							console.log(err);
-							console.log(result);
-						});
-					}
+				Cloudinary.delete(me.public_id,function(err,result){
+					Arquivo.remove(me._id,function(error, result){
+						if(error){
+							console.log("error", error);
+						}
+						if(result){
+							Bert.alert('Arquivo excluído com sucesso','success');
+						}
+					});
 				});
 			});
-		},
-		'click .removePreviewEvent':function(e,t){
-			Cloudinary.collection.remove(this._id);
 		}
 	}
 });

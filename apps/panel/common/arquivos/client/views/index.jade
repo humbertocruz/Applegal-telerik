@@ -1,24 +1,28 @@
 template(name="arquivosView")
 	form.ui.form#uploadForm(method="post",enctype="multipart/form-data")
 		input#uploadField(type="file",name="files",style="display:none;",multiple="multiple")
-	+indexHeaderSearch header=header extraLinks=extraLinks
-	.ui.four.cards
+	+indexHeaderSearch header=header htmlItems=htmlItems
+	.ui.eight.cards
 		if ready
 			each arquivos.data
 				.ui.card
-					.ui.red.right.corner.label
-						i.link.trash.icon.removeArquivoEvent
 					.image
 						img.ui.image(src="#{CloudinaryBaseURL public_id 'c_scale,w_180'}")
+					.content
+						.header Tipo
+						.meta #{tags}
+					.extra.content
+						.ui.red.tiny.icon.button.removeArquivoEvent
+							i.link.trash.icon
 			each uploads.data
 				.ui.card
 					.image
 						img.ui.image(src="#{preview}",style="min-height:120px;")
+					.content
 					.extra
 						if compare status 'eq' 'uploading'
-							.ui.progress(id="progress_#{_id}")
+							.ui.tiny.progress(id="progress_#{_id}")
 								.bar
-									.progress
 								.label Enviando...
 						else
 							.ui.fluid.green.icon.tiny.button.removePreviewEvent

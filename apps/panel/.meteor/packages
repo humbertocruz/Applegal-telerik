@@ -56,7 +56,8 @@ benjaminrh:jquery-cookie
 meteorhacks:cluster
 meteorhacks:kadira
 okgrow:analytics
-lepozepo:cloudinary
 check
 semantic:ui
 juliancwirko:postcss
+
+humberto:cloudinary

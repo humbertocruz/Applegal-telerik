@@ -1,11 +1,11 @@
 template(name="indexInfoPaginator")
 		unless ready
-			.ui.secondary.segment(class="#{addClassIf 'bottom attached' noattached 'undefined' 'ne'}",style="min-height:100px !important;")
+			.ui.secondary.segment(class="#{addClassIf 'bottom attached' noattached true 'ne'}",style="min-height:100px !important;")
 				.ui.active.inverted.dimmer
 					.ui.text.loader #{_ 'loading'}...
 		else
 			if compare count 'eq' 0
-				.ui.secondary.segment.grid(class="#{addClassIf 'bottom attached' noattached 'undefined' 'ne'}",style="min-height:100px !important;")
+				.ui.secondary.segment.grid(class="#{addClassIf 'bottom attached' noattached true 'ne'}",style="min-height:100px !important;")
 					.middle.aligned.row
 						.sixteen.wide.center.aligned.column
 							.ui.header

@@ -7,13 +7,14 @@ Controller('arquivosView',{
 				});
 			}
 		});
+		uploadTypeVar = new ReactiveVar();
 		Tracker.autorun(function(){
 			var page = FlowRouter.getQueryParam('page');
 			allWallpapers = Meteor.subscribe("allWallpapers", page);
 		});
 	},
 	rendered:function(){
-
+		$('.ui.dropdown').dropdown();
 	},
 	helpers:{
 		ready:function(){
@@ -25,12 +26,10 @@ Controller('arquivosView',{
 				icon:'file'
 			}
 		},
-		extraLinks:function(){
+		htmlItems:function(){
 			return [
 				{
-					title:'Enviar Arquivo',
-					icon:'upload',
-					id:'enviarArquivoEvent'
+					html:'Eviar Arquivo<i class="dropdown icon"></i><div class="menu"><a class="item uploadEvent" data-value="logotype">Logotipo</a><a class="item uploadEvent" data-value="wallpaper">Papel de Parede</a></div>'
 				}
 			]
 		},
@@ -39,7 +38,7 @@ Controller('arquivosView',{
 			var qtd = 8;
 			var arquivos = Arquivo.find({
 				tags:{
-					$all:['wallpaper','public']
+					$all:['public']
 				}
 			},{
 				limit:qtd,
@@ -61,24 +60,27 @@ Controller('arquivosView',{
 		}
 	},
 	events:{
-		'click #enviarArquivoEvent':function(e,t){
+		'click .uploadEvent':function(e,t){
+			uploadTypeVar.set($(e.currentTarget).data('value'));
 			$('#uploadField').click();
 		},
 		'change #uploadField': function(e) {
 			var files = e.currentTarget.files;
-			Cloudinary.upload(files,
-				{
-					folder:"shared",
-					tags:['wallpaper','public'],
-				},
-				function(err,res) {
-					if (err) {
-						console.log(err);
-					} else {
-						Arquivo.insert(res);
+			_.each(files,function(ff,idx){
+				Cloudinary.upload(ff,
+					{
+						folder:'shared',
+						tags:[uploadTypeVar.get(),'public'],
+					},
+					function(err,res) {
+						if (err) {
+							console.log(err);
+						} else {
+							Arquivo.insert(res);
+						}
 					}
-				}
-			);
+				);
+			});
 		},
 		'click .removeArquivoEvent':function(e,t){
 			var me = this;

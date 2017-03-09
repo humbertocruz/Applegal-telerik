@@ -1,12 +1,12 @@
 template(name="adminsView")
-	+indexHeaderSearch header=header newLink=newLink extraLinks=extraLinks	
+	+indexHeaderSearch header=header newLink=newLink extraLinks=extraLinks
 	table.ui.top.attached.table
 		thead
 			tr
 				th.three.wide &nbsp;
-				th.three.wide CPF
+				th.three.wide Email
 				th Nome
-				
+
 		tbody
 			each admins.data
 				tr
@@ -17,7 +17,7 @@ template(name="adminsView")
 							i.talk.icon
 						.ui.icon.button.removeBtn(data-tooltip="Excluir Admin",data-inverted)
 							i.trash.icon
-					td #{username}
+					td #{firstEmail emails}
 					td #{profile.name}
 
 	+indexInfoPaginator ready=ready nothingFound='Nenhum Admin Cadastrado' count=admins.count page=admins.count pages=admins.pages singularForm='Admin' pluralForm='Admins'

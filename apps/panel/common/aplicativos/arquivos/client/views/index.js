@@ -9,6 +9,7 @@ Controller('aplicativosArquivosView',{
 				});
 			}
 		});
+		uploadTypeVar = new ReactiveVar();
 
 		arquivosSearchVar = new ReactiveVar({});
 		Tracker.autorun(function(){
@@ -19,6 +20,7 @@ Controller('aplicativosArquivosView',{
 		});
 	},
 	rendered:function(){
+		$('.ui.dropdown').dropdown();
 	},
 	helpers:{
 		ready:function(){
@@ -30,10 +32,25 @@ Controller('aplicativosArquivosView',{
 				icon:'file'
 			}
 		},
-
+		htmlItems:function(){
+			return [
+				{
+					html:'Eviar Arquivo<i class="dropdown icon"></i><div class="menu"><a class="item uploadEvent" data-value="logotype">Logotipo</a><a class="item uploadEvent" data-value="wallpaper">Papel de Parede</a></div>'
+				}
+			]
+		},
+		extraLinks:function(){
+			return [
+				{
+					title:'Enviar Arquivo',
+					icon:'upload',
+					id:'enviarArquivoEvent'
+				}
+			]
+		},
 		uploads:function(){
 			var arquivos = Cloudinary.collection.find({
-				//status:'uploading'
+				status:'uploading'
 			});
 			return {
 				data:arquivos.fetch(),
@@ -80,35 +97,30 @@ Controller('aplicativosArquivosView',{
 		}
 	},
 	events:{
-		'change #typeField':function(e,t){
-			var value = $(e.currentTarget).val();
-			if (value) {
-				$('#uploadField').removeAttr('disabled');
-			} else {
-				$('#uploadField').attr('disabled','disabled');
-			}
-		},
 		'click .removePreviewEvent':function(e,t){
 			Cloudinary.collection.remove(this._id);
 		},
+		'click .uploadEvent':function(e,t){
+			uploadTypeVar.set($(e.currentTarget).data('value'));
+			$('#uploadField').click();
+		},
 		'change #uploadField': function(e) {
 			var files = e.currentTarget.files;
-			Cloudinary.upload(files,
-				{
-					folder:FlowRouter.getParam('aplicativoId'),
-					tags:[$('#typeField').val(),FlowRouter.getParam('aplicativoId')],
-				},
-				function(err,res) {
-					if (err) {
-						console.log(err);
-					} else {
-						res.preview = Cloudinary.collection.findOne({
-							'response.public_id':res.public_id
-						}).preview;
-						Arquivo.insert(res);
+			_.each(files,function(ff,idx){
+				Cloudinary.upload(ff,
+					{
+						folder:FlowRouter.getParam('aplicativoId'),
+						tags:[uploadTypeVar.get(),FlowRouter.getParam('aplicativoId')],
+					},
+					function(err,res) {
+						if (err) {
+							console.log(err);
+						} else {
+							Arquivo.insert(res);
+						}
 					}
-				}
-			);
+				);
+			});
 		},
 		'click .arquivoRemoveEvent':function(e,t){
 			var me = this;

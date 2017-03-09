@@ -2,7 +2,7 @@ Meteor.publishComposite('allWallpapers', function (page) {
 	if (!page) page = 1;
 	var search = {
 		tags: {
-			$all:['wallpaper','public']
+			$all:['public']
 		}
 	};
 	return {

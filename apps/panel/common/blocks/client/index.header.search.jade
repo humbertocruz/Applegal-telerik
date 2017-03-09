@@ -7,6 +7,9 @@ template(name="indexHeaderSearch")
 					i.red.corner.icon(class="#{header.corner}")
 				|#{header.title}
 		.right.menu
+			each htmlItems
+				.ui.dropdown.item
+					|!{html}
 			each extraLinks
 				if route
 					a.item(href="#{pathFor route params}",id="#{id}")

@@ -1,7 +1,7 @@
 template(name="mainMenu")
 	.ui.blue.secondary.labeled.icon.transition.hidden.menu#adminMenu
 		a.item(class="#{isActiveRoute regex='^home'}",href="#{pathFor 'homeRoute'}")
-			img.ui.tiny.image(src="#{arquivoPath appLogoByDomain 'c_scale,w_80'}")
+			//img.ui.tiny.image(src="#{c.url appLogoByDomain 'c_scale,w_80'}")
 		h3.item.header applegal.com.br
 		.right.menu
 			a.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")

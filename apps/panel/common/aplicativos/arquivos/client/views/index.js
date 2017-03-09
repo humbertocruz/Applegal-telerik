@@ -17,10 +17,18 @@ Controller('aplicativosArquivosView',{
 			var search = arquivosSearchVar.get();
 			var aplicativoId = FlowRouter.getParam('aplicativoId');
 			Meteor.subscribe("appArquivos", page, aplicativoId);
+			Meteor.subscribe("AppCloudinary", aplicativoId);
 		});
 	},
 	rendered:function(){
 		$('.ui.dropdown').dropdown();
+		AppCloudinary.find({
+			aplicativoId:FlowRouter.getParam('aplicativoId')
+		}).observe({
+			added:function(appC){
+				$('#cloudinaryForm').form('set values',appC);
+			}
+		})
 	},
 	helpers:{
 		ready:function(){
@@ -97,6 +105,20 @@ Controller('aplicativosArquivosView',{
 		}
 	},
 	events:{
+		'submit #cloudinaryForm':function(e,t){
+			e.preventDefault();
+			var fields = $(e.currentTarget).form('get values');
+			fields.aplicativoId = FlowRouter.getParam('aplicativoId');
+			Meteor.call("configCloudinary", fields, function(error, result){
+				if(error){
+					console.log("error", error);
+				}
+				if(result){
+					Bert.alert('Repositório de Arquivos configurado com sucesso','success');
+				}
+			});
+			console.log(fields);
+		},
 		'click .removePreviewEvent':function(e,t){
 			Cloudinary.collection.remove(this._id);
 		},

@@ -54,6 +54,7 @@ Controller('aplicativosView',{
 	},
 	events:{
 		'click .selectAppEvent':function(e,t){
+			// Todo
 			FlowRouter.go('aplicativosIndexRoute',{aplicativoId:this._id});
 		},
 		'click .editBtn':function(e,t){

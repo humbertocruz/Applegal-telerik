@@ -3,13 +3,16 @@ template(name="aplicativosIndexView")
 	table.ui.top.attached.table
 		thead
 			tr
+				th
 				th.one.wide &nbsp;
 				th Nome
 		tbody
 			each aplicativos.data
 				tr
 					td
+						.ui.blue.icon.button#selectApp
+							i.play.icon
+					td
 						img.ui.mini.image(src="#{logo}")
-					td 
-						a(href="#{pathFor 'aplicativosIndexRoute' id=_id}") #{name}
+					td #{name}
 	+indexInfoPaginator ready=ready nothingFound='Nenhum aplicativo cadastrado.' count=aplicativos.count page=aplicativos.count pages=aplicativos.pages singularForm='Aplicativo' pluralForm='Aplicativos'

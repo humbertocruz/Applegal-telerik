@@ -14,8 +14,16 @@ Meteor.startup(function() {
 		return TestaCPF(value);
 	};
 	Tracker.autorun(function(){
-		if (appId = FlowRouter.getParam('aplicativoId')) {
-			Meteor.subscribe("oneAplicativo", appId);
-		}
+		var appId = FlowRouter.getParam('aplicativoId');
+		if (!appId) return false;
+		Meteor.subscribe("oneAplicativo", appId);
+		Meteor.call("setCloudinary", appId, function(err,result){
+			if (result){
+				$.cloudinary.init();
+				$.cloudinary.config = {
+					cloud_name:result
+				};
+			}
+		});
 	});
 });

@@ -1,6 +1,5 @@
 // Configura o FlowRouter para esperar até o carregamento da aplicação
 FlowRouter.wait();
-
 Meteor.startup(function() {
 	// Configura Blaze
 	BlazeLayout.setRoot('body');
@@ -19,6 +18,7 @@ Meteor.startup(function() {
 		Meteor.subscribe("oneAplicativo", appId);
 		Meteor.call("setCloudinary", appId, function(err,result){
 			if (result){
+				console.log(result);
 				$.cloudinary.init();
 				$.cloudinary.config = {
 					cloud_name:result

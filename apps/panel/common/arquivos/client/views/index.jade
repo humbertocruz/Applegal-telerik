@@ -7,7 +7,7 @@ template(name="arquivosView")
 			each arquivos.data
 				.ui.card
 					.image
-						img.ui.image(src="#{CloudinaryBaseURL public_id 'c_scale,w_180'}")
+						img.ui.image(src="#{c.private_url public_id '{}'}")
 					.content
 						.header Tipo
 						.meta #{tags}

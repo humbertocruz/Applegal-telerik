@@ -102,6 +102,9 @@ Controller('aplicativosArquivosView',{
 				data:arquivos.fetch(),
 				pages:Math.ceil(Counts.get('appArquivos')/qtd)
 			}
+		},
+		cl:function(){
+			return cloudinary.Cloudinary.new({cloud_name:'technotronics'});
 		}
 	},
 	events:{

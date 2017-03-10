@@ -69,6 +69,7 @@ Controller('arquivosView',{
 			_.each(files,function(ff,idx){
 				Cloudinary.upload(ff,
 					{
+						type: 'authenticated',
 						folder:'shared',
 						tags:[uploadTypeVar.get(),'public'],
 					},

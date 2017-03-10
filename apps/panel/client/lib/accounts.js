@@ -2,7 +2,7 @@ Accounts.onResetPasswordLink(function(token, done){
 	FlowRouter.go('passwordResetRoute',{token:token});
 	done();
 });
-Meteor.startup(function(){
+//Meteor.startup(function(){
 	Accounts.onLogout(function(){
 		FlowRouter.go('loginRoute');
 		return true;
@@ -15,4 +15,4 @@ Meteor.startup(function(){
 		//}
 		Bert.alert('Login efeutado com sucesso!', 'success');
 	});
-});
+//});

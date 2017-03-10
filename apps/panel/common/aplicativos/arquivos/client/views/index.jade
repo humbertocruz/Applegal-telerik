@@ -20,7 +20,7 @@ template(name="aplicativosArquivosView")
 			each arquivos.data
 				.ui.card
 					.image
-						img.ui.image(src="#{clUrl public_id 'crop:scale,width:150'}")
+						img.ui.image(src="#{cl.url public_id '{crop:scale,width:150}'}")
 					.content
 					.extra
 						.ui.blue.tiny.icon.button.arquivoEffectEvent

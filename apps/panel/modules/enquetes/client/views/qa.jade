@@ -14,10 +14,10 @@ template(name="enquetesQAView")
 									.ui.middle.aligned.divided.list
 										each opc in opcoes
 											.item#enquetesRemoveOpcaoEvent
-												img.ui.mini.image(src="#{arquivoPath opc.image 'c_scale,w_50'}")
+												img.ui.mini.image(src="#{clUrl opc.image crop='scale' width=50}")
 												.content
 													.header #{opc.title}
-											
+
 			.six.wide.column
 				.ui.segments
 					.ui.segment

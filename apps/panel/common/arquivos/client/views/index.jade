@@ -7,7 +7,7 @@ template(name="arquivosView")
 			each arquivos.data
 				.ui.card
 					.image
-						img.ui.image(src="#{c.private_url public_id '{}'}")
+						img.ui.image(src="#{clUrl public_id crop='scale' width=150}")
 					.content
 						.header Tipo
 						.meta #{tags}

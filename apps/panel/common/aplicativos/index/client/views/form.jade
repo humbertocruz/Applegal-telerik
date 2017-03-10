@@ -13,7 +13,7 @@ template(name="aplicativosFormView")
 					.field
 						label Logotipo
 						.ui.small.rounded.image
-							//img.ui.image(src="#{c.url appInfo.appLogo 'c_scale,w_150'}")
+							img.ui.image(src="#{clUrl appInfo.appLogo crop='scale' width=150}")
 				.thirteen.wide.column
 					.two.fields
 						.field
@@ -37,7 +37,7 @@ template(name="aplicativosFormView")
 					each logotipos.data
 						.ui.card(class="#{isLogoSelected}")
 							.image
-								img.ui.tiny.image.logoSelectEvent(src="#{CloudinaryBaseURL public_id 'c_scale,w_150'}")
+								img.ui.tiny.image.logoSelectEvent(src="#{clUrl public_id crop='scale' width=150}")
 							.extra
 								.ui.blue.icon.button.logoSelectEvent
 									i.checkmark.icon
@@ -96,7 +96,7 @@ template(name="aplicativosFormView")
 						each wallpapers.data
 							.ui.card(class="#{isBgSelected}")
 								.image
-									img.ui.bgSelectEvent(src="#{CloudinaryBaseURL public_id 'c_scale,w_180'}")
+									img.ui.bgSelectEvent(src="#{clUrl public_id crop='scale' width=150}")
 								.extra
 									.ui.blue.icon.button.bgSelectEvent
 										i.checkmark.icon
@@ -113,7 +113,7 @@ template(name="aplicativosFormView")
 						each wallpapersUp.data
 							.ui.card(class="#{isBgSelected}")
 								.image
-									img.bgSelectEvent(src="#{CloudinaryBaseURL public_id 'c_scale,w_180'}")
+									img.bgSelectEvent(src="#{clUrl public_id crop=scale width=150}")
 								.extra
 									.ui.blue.icon.button.bgSelectEvent
 										i.checkmark.icon

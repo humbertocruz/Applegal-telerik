@@ -120,7 +120,6 @@ Controller('aplicativosArquivosView',{
 					Bert.alert('Repositório de Arquivos configurado com sucesso','success');
 				}
 			});
-			console.log(fields);
 		},
 		'click .removePreviewEvent':function(e,t){
 			Cloudinary.collection.remove(this._id);
@@ -141,6 +140,7 @@ Controller('aplicativosArquivosView',{
 						if (err) {
 							console.log(err);
 						} else {
+							res.cloud_name = $.cloudinary.config.cloud_name;
 							Arquivo.insert(res);
 						}
 					}

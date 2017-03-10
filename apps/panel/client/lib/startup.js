@@ -15,10 +15,12 @@ Meteor.startup(function() {
 	Tracker.autorun(function(){
 		var appId = FlowRouter.getParam('aplicativoId');
 		if (!appId) return false;
-		Meteor.subscribe("oneAplicativo", appId);
+		var app = Aplicativo.findOne(appId);
+		if (!app) {
+			Meteor.subscribe("oneAplicativo", appId);
+		}
 		Meteor.call("setCloudinary", appId, function(err,result){
 			if (result){
-				console.log(result);
 				$.cloudinary.init();
 				$.cloudinary.config = {
 					cloud_name:result

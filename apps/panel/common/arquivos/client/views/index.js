@@ -1,5 +1,24 @@
 Controller('arquivosView',{
 	created:function() {
+		//Configura App Mestre
+		var appM = Aplicativo.findOne({
+			appInfoId:'br.com.applegal.applegal'
+		});
+		if (!appM) {
+			FlowRouter.go('aplicativosRoute');
+			return true;
+		};
+		Meteor.call("setServerAppId", appM._id, function(err,result){
+			Meteor.call("setCloudinary", appM._id, function(err,result){
+				if (result){
+					$.cloudinary.init();
+					$.cloudinary.config = {
+						cloud_name:result
+					};
+				}
+			});
+		});
+
 		Cloudinary.collection.find().observe({
 			changed:function(newc,oldc){
 				$('#progress_'+newc._id).progress({
@@ -69,7 +88,6 @@ Controller('arquivosView',{
 			_.each(files,function(ff,idx){
 				Cloudinary.upload(ff,
 					{
-						type: 'authenticated',
 						folder:'shared',
 						tags:[uploadTypeVar.get(),'public'],
 					},
@@ -77,6 +95,7 @@ Controller('arquivosView',{
 						if (err) {
 							console.log(err);
 						} else {
+							res.cloud_name = $.cloudinary.config.cloud_name;
 							Arquivo.insert(res);
 						}
 					}

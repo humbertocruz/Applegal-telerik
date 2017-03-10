@@ -1,7 +1,12 @@
-Template.registerHelper("CloudinaryBaseURL", function(public_id, options){
-	return CloudinaryBaseURL + '/' + options + '/' + public_id;
-});
-
 Template.registerHelper("clUrl", function(public_id, options){
-	return $.cloudinary.url(public_id,{crop:'scale',width:150});
+	var arq = Arquivo.findOne({
+		public_id:public_id
+	});
+	if (!arq) return false;
+	var cl = cloudinary.Cloudinary.new({cloud_name:arq.cloud_name});
+	options.hash.type = arq.type;
+	if (arq.type == 'authenticated') {
+		options.hash.sign_url = true;
+	}
+	return cl.url(public_id,options.hash);
 });

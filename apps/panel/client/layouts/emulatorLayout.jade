@@ -9,8 +9,8 @@ template(name="emulatorLayout")
 		+sidebar
 		+technotronicsSidebar
 		+confirmView
-	
-		.pusher(style="background-image:url(#{arquivoPath appInfo.appBg}) !important; background-repeat: no-repeat !important;background-size: cover !important;")
+
+		.pusher(style="background-image:url(#{clUrl appInfo.appBg}) !important; background-repeat: no-repeat !important;background-size: cover !important;")
 			div(style="height:100vh !important; overflow:auto;")
 				+Template.dynamic template=menu
 				br

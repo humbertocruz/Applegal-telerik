@@ -1,5 +1,5 @@
 template(name="emulatorLoginView")
-	img.ui.small.centered.image(src="#{c.url appInfo.appLogo}")
+	img.ui.small.centered.image(src="#{clUrl appInfo.appLogo crop='scale' width=150}")
 	.ui.hidden.divider
 	form.ui.inverted.form(style="background-color:#{appThemeBgColor}", method="post")
 		.field

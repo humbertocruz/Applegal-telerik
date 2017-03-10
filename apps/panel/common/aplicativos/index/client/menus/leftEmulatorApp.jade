@@ -30,4 +30,4 @@ template(name="leftEmulatorApp")
 	else
 		.ui.violet.fluid.button#showEmulatorEvent Esconder Emulador
 		div#emulatorFloatDiv
-			iframe#emulatorFrame(src="#{pathFor 'aplicativosEmulatorRoute' aplicativoId=appInfo._id}")
+			+emulatorFrame

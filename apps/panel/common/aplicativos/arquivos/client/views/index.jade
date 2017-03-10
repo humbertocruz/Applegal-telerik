@@ -20,10 +20,7 @@ template(name="aplicativosArquivosView")
 			each arquivos.data
 				.ui.card
 					.image
-						if compare type 'eq' 'authenticated'
-							img.ui.image(src="#{c.private_url public_id crop='scale' width=150}")
-						else
-							img.ui.image(src="#{clUrl public_id crop='scale' width=150}")
+						img.ui.image(src="#{clUrl public_id crop='scale' width=150 cloud_name=cloud_name}")
 					.content
 					.extra
 						.ui.blue.tiny.icon.button.arquivoEffectEvent

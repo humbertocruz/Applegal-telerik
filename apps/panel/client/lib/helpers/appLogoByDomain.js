@@ -9,6 +9,6 @@ Template.registerHelper("appLogoByDomain", function(){
 	if (appByDomain) {
 		return appByDomain.appLogo;
 	} else {
-		return 'technotronics.png';
+		return 'technotronics';
 	}
 });

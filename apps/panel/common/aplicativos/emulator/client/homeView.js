@@ -1,11 +1,11 @@
-Controller('emulatorView', {
+Controller('emulatorHomeView', {
 	created: function() {
-
+		topTitleVar.set('Home');
 	},
 	rendered: function() {
 		// Aparece os icones dos módulos conforme a configuração
 		var app = Aplicativo.findOne();
-		if (!app) return false;
+
 		$('.iconAlpha').transition({
 			animation: app.iconAnimation,
 			durantion: app.iconDuration,

@@ -14,7 +14,7 @@ template(name="aplicativosView")
 						.ui.small.blue.icon.button#selectApp(data-tooltip="Selecionar Aplicativo", data-inverted)
 							i.play.icon
 					td
-						//img.ui.mini.image(src="#{c.url appLogo 'c_scale,w_35'}")
+						img.ui.mini.image(src="#{clUrl appLogo crop='scale' width=35 cloud_name=cloud_name}")
 					td #{dateTimeBr createdAt}
 					td #{name}
 	+indexInfoPaginator ready=ready nothingFound='Nenhum aplicativo cadastrado.' count=aplicativos.count page=aplicativos.count pages=aplicativos.pages singularForm='Aplicativo' pluralForm='Aplicativos'

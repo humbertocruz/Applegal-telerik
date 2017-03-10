@@ -22,3 +22,4 @@ userRoles = {
 };
 
 topTitleVar = new ReactiveVar('Home');
+appInfoVar = new ReactiveVar({});

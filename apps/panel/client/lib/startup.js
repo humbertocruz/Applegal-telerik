@@ -19,13 +19,5 @@ Meteor.startup(function() {
 		if (!app) {
 			Meteor.subscribe("oneAplicativo", appId);
 		}
-		Meteor.call("setCloudinary", appId, function(err,result){
-			if (result){
-				$.cloudinary.init();
-				$.cloudinary.config = {
-					cloud_name:result
-				};
-			}
-		});
 	});
 });

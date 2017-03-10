@@ -2,7 +2,7 @@ template(name="passwordResetView")
 	.ui.container.three.column.centered.hidden.transition.grid#passwordResetGrid(style="height:100%;")
 		.middle.aligned.row
 			.left.aligned.column
-				img.ui.small.centered.image(src="#{appLogoByDomain}")
+				img.ui.small.centered.image(src="#{clUrl appLogoByDomain crop='scale' width=150}")
 				form.ui.form#passwordResetForm(method="post")
 					.field
 						label Nova Senha

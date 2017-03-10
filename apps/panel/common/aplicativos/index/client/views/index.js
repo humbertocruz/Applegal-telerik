@@ -57,7 +57,7 @@ Controller('aplicativosView',{
 			// Todo
 			FlowRouter.go('aplicativosIndexRoute',{aplicativoId:this._id});
 		},
-		'click .editBtn':function(e,t){
+		/*'click .editBtn':function(e,t){
 			e.preventDefault();
 			aplicativoVar.set(Aplicativo.findOne(this._id));
 			FlowRouter.go('aplicativosUpdateRoute');
@@ -84,6 +84,6 @@ Controller('aplicativosView',{
 					}
 				});
 			});
-		}
+		}*/
 	}
 });

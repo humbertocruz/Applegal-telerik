@@ -1,6 +1,6 @@
 Template.registerHelper("appLogoByDomain", function(){
 	Tracker.autorun(function(){
-		appByDomainSubs = Meteor.subscribe("appByDomain", location.protocol, location.hostname);
+		//appByDomainSubs = Meteor.subscribe("appByDomain", location.protocol, location.hostname);
 	});
 	if (!appByDomainSubs.ready()) return false;
 	var appByDomain = Aplicativo.findOne({

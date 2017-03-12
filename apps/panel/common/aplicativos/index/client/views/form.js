@@ -4,30 +4,6 @@ Controller('aplicativosFormView',{
 			title:'Configuração do Aplicativo',
 			icon:'setting'
 		});
-		extraLinksVar.set([]);
-		saveLinkVar.set({
-			title:'Salvar',
-			icon:'save'
-		});
-		var appSave = function(e,t){
-			var fields = $('#aplicativosForm').form('get values');
-			var id = FlowRouter.getParam('aplicativoId');
-			fields.appBg = bgSelectedVar.get();
-			fields.appLogo = logoSelectedVar.get();
-			if (id) fields._id = id;
-			Meteor.call("aplicativosForm",fields, function(error, result){
-				if(error){
-					console.log("error", error);
-					//isLoadingVar.set(false);
-				}
-				if(result){
-					//isLoadingVar.set(false);
-					Bert.alert('O aplicativo foi salvo com sucesso!','success');
-					FlowRouter.go('aplicativosUpdateRoute',{aplicativoId:result});
-				}
-			});
-		};
-		headerSaveVar.set(appSave);
 
 		arquivosPageVar = new ReactiveVar(1);
 		arquivosLogoPageVar = new ReactiveVar(1);
@@ -40,14 +16,22 @@ Controller('aplicativosFormView',{
 			allWallpapers = Meteor.subscribe("allWallpapers", page);
 			var Logopage = arquivosLogoPageVar.get();
 			appArquivos = Meteor.subscribe("appArquivos", Logopage, FlowRouter.getParam('aplicativoId'));
+			appCloudinary = Meteor.subscribe("AppCloudinary", FlowRouter.getParam('aplicativoId'));
 		});
 	},
 	rendered:function(){
 		var loadApp = function(aplicativo){
-			$('#aplicativosForm').form('set values',aplicativo);
+			$('.aplicativosForm').form('set values',aplicativo);
 			bgSelectedVar.set(aplicativo.appBg);
 			logoSelectedVar.set(aplicativo.appLogo);
 		};
+		AppCloudinary.find({
+			aplicativoId:FlowRouter.getParam('aplicativoId')
+		}).observe({
+			added:function(appC){
+				$('#cloudinaryForm').form('set values',appC);
+			}
+		});
 		Tracker.autorun(function(){
 			var aplicativo = Aplicativo.findOne(FlowRouter.getParam('aplicativoId'));
 			if (aplicativo) {
@@ -148,6 +132,38 @@ Controller('aplicativosFormView',{
 		}
 	},
 	events:{
+		'submit #cloudinaryForm':function(e,t){
+			e.preventDefault();
+			var fields = $(e.currentTarget).form('get values');
+			fields.aplicativoId = FlowRouter.getParam('aplicativoId');
+			Meteor.call("configCloudinary", fields, function(error, result){
+				if(error){
+					console.log("error", error);
+				}
+				if(result){
+					Bert.alert('Repositório de Arquivos configurado com sucesso','success');
+				}
+			});
+		},
+		'submit .aplicativosForm':function(e,t){
+			e.preventDefault();
+			var fields = $(e.currentTarget).form('get values');
+			console.log(fields);
+			var id = FlowRouter.getParam('aplicativoId');
+			fields.appBg = bgSelectedVar.get();
+			fields.appLogo = logoSelectedVar.get();
+			if (id) fields._id = id;
+			Meteor.call("aplicativosForm",fields, function(error, result){
+				if(error){
+					console.log("error", error);
+					//isLoadingVar.set(false);
+				}
+				if(result){
+					//isLoadingVar.set(false);
+					Bert.alert('O aplicativo foi salvo com sucesso!','success');
+				}
+			});
+		},
 		'click #bgUpEvent':function(e,t){
 			var max = Math.ceil(Counts.get('allWallpapers')/8);
 			if (arquivosPageVar.get() == max) return false;

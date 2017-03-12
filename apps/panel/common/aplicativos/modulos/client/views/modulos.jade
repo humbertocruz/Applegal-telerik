@@ -1,7 +1,17 @@
 template(name="aplicativosModulosView")
-	+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
-	.ui.block.top.attached.header Módulos
-	.ui.bottom.attached.segment
+	table.ui.blue.table
+		thead
+			tr
+				th Módulo
+		tbody
+			each modulos_ativos
+				tr
+					td #{icon} - #{title}
+		tfooter
+			tr
+				td
+					.ui.blue.button#addAppModulo Adicionar Módulo
+	//.ui.bottom.attached.segment
 		.ui.grid
 			if isModAdmin
 				.four.wide.column
@@ -28,8 +38,8 @@ template(name="aplicativosModulosView")
 			else
 				.twelve.wide.column
 					+modulosConfigPanel
-				
-template(name="modulosConfigPanel")
+
+//template(name="modulosConfigPanel")
 	.ui.header Configuração
 	form.ui.form#appModuloForm(method="post")
 		.field

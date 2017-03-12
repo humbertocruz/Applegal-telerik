@@ -23,8 +23,8 @@ template(name="leftMenuApp")
 					i.setting.icon
 					.content
 						.header Configuração
-		.ui.divider
 	if appModulos
+		.ui.divider
 		.ui.vertical.fluid.inverted.menu(class="#{appInfo.sidebarBackgroundColor}")
 			each appModulos
 				if userHasPerm modulo.path

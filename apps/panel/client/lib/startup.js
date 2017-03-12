@@ -13,10 +13,9 @@ Meteor.startup(function() {
 		return TestaCPF(value);
 	};
 	Tracker.autorun(function(){
+		// subscribe o app quando seu ID estiver na URL
 		var appId = FlowRouter.getParam('aplicativoId');
-		if (!appId) return false;
-		var app = Aplicativo.findOne(appId);
-		if (!app) {
+		if (appId) {
 			Meteor.subscribe("oneAplicativo", appId);
 		}
 	});

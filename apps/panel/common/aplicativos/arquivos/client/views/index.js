@@ -26,13 +26,6 @@ Controller('aplicativosArquivosView',{
 	},
 	rendered:function(){
 		$('.ui.dropdown').dropdown();
-		AppCloudinary.find({
-			aplicativoId:FlowRouter.getParam('aplicativoId')
-		}).observe({
-			added:function(appC){
-				$('#cloudinaryForm').form('set values',appC);
-			}
-		})
 	},
 	helpers:{
 		ready:function(){
@@ -106,25 +99,9 @@ Controller('aplicativosArquivosView',{
 				data:arquivos.fetch(),
 				pages:Math.ceil(Counts.get('appArquivos')/qtd)
 			}
-		},
-		cl:function(){
-			return cloudinary.Cloudinary.new({cloud_name:'technotronics'});
 		}
 	},
 	events:{
-		'submit #cloudinaryForm':function(e,t){
-			e.preventDefault();
-			var fields = $(e.currentTarget).form('get values');
-			fields.aplicativoId = FlowRouter.getParam('aplicativoId');
-			Meteor.call("configCloudinary", fields, function(error, result){
-				if(error){
-					console.log("error", error);
-				}
-				if(result){
-					Bert.alert('Repositório de Arquivos configurado com sucesso','success');
-				}
-			});
-		},
 		'click .removePreviewEvent':function(e,t){
 			Cloudinary.collection.remove(this._id);
 		},

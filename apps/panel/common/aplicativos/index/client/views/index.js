@@ -1,10 +1,9 @@
 Controller('aplicativosView',{
 	created:function() {
 		subMenuTitleVar.set({
-			title:'Confogurações',
-			icon:'settings'
+			title:'Aplicativos',
+			icon:'android'
 		});
-		saveLinkVar.set();
 		sint = 0;
 		aplicativosSearchVar = new ReactiveVar({});
 		if (Roles.userIsInRole(Meteor.userId(),'admin')) {
@@ -12,17 +11,6 @@ Controller('aplicativosView',{
 				Meteor.subscribe("allAplicativos", aplicativosSearchVar.get(),FlowRouter.getQueryParam('page'));
 			});
 		}
-		subMenuTitleVar.set({
-			title:'Aplicativos',
-			icon:'android'
-		});
-		extraLinksVar.set([
-			{
-				title:'Novo App',
-				id: 'addAppEvent',
-				icon:'add'
-			}
-		]);
 	},
 	rendered:function(){
 		$('.ui.dropdown').dropdown();

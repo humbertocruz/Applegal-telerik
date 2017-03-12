@@ -1,11 +1,11 @@
 template(name="indexInfoPaginator")
 		unless ready
-			.ui.secondary.segment(class="#{addClassIf 'bottom attached' noattached true 'ne'}",style="min-height:100px !important;")
+			.ui.secondary.segment(style="min-height:100px !important;")
 				.ui.active.inverted.dimmer
-					.ui.text.loader #{_ 'loading'}...
+					.ui.text.loader Carregando...
 		else
 			if compare count 'eq' 0
-				.ui.secondary.segment.grid(class="#{addClassIf 'bottom attached' noattached true 'ne'}",style="min-height:100px !important;")
+				.ui.secondary.segment.grid(style="min-height:100px !important;")
 					.middle.aligned.row
 						.sixteen.wide.center.aligned.column
 							.ui.header
@@ -13,7 +13,7 @@ template(name="indexInfoPaginator")
 								|#{nothingFound}
 			else
 
-				.ui.secondary.segment.grid(class="#{addClassIf 'bottom attached' noattached true 'ne'}")
+				.ui.secondary.segment.grid
 					.middle.aligned.row
 						.eight.wide.column
 							.ui.header #{singular_plural count singularForm pluralForm}

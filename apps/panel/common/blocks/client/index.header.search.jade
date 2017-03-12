@@ -14,11 +14,11 @@ template(name="indexHeaderSearch")
 				if route
 					a.item(href="#{pathFor route params}",id="#{id}")
 						i.icon(class="#{icon}")
-						|#{_ title}
+						|Título
 				else
 					a.item(id="#{id}")
 						i.icon(class="#{icon}")
-						|#{_ title}
+						|Título
 			if search
 				a.item#searchBtn
 					i.search.icon
@@ -27,7 +27,7 @@ template(name="indexHeaderSearch")
 				if newLink.route
 					a.item#addBtn(href="#{pathFor newLink.route newLink.params}")
 						i.plus.icon
-						|#{_ newLink.title}
+						|#{newLink.title}
 				else
 					a.item#addBtn
 						i.plus.icon

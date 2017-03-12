@@ -51,7 +51,6 @@ mrt:gm
 raix:push
 mrt:moment-timezone
 london:body-class
-tap:i18n
 benjaminrh:jquery-cookie
 meteorhacks:cluster
 meteorhacks:kadira

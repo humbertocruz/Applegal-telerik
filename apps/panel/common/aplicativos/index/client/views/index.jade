@@ -1,19 +1,14 @@
 template(name="aplicativosView")
 	+addAppModal
-	//+indexHeaderSearch header=header newLink=newLink extraLinks=extraLinks
-	table.ui.top.attached.single.line.selectable.striped.padded.table
+	table.ui.blue.top.attached.single.line.selectable.striped.padded.table
 		thead
 			tr
 				th.one.wide
-				th.one.wide
-				th.three.wide #{_ 'app_creation'}
-				th #{_ 'app_name'}
+				th.three.wide Data
+				th Nome
 		tbody
 			each aplicativos.data
 				tr.selectAppEvent(style="cursor:pointer;")
-					td
-						.ui.small.blue.icon.button#selectApp(data-tooltip="Selecionar Aplicativo", data-inverted)
-							i.play.icon
 					td
 						img.ui.mini.image(src="#{clUrl appLogo crop='scale' width=35 cloud_name=cloud_name}")
 					td #{dateTimeBr createdAt}

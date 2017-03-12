@@ -1,7 +1,6 @@
 template(name="arquivosView")
 	form.ui.form#uploadForm(method="post",enctype="multipart/form-data")
 		input#uploadField(type="file",name="files",style="display:none;",multiple="multiple")
-	+indexHeaderSearch header=header htmlItems=htmlItems
 	.ui.eight.cards
 		if ready
 			each arquivos.data

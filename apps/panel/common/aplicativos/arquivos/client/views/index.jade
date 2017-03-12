@@ -1,19 +1,5 @@
 template(name="aplicativosArquivosView")
 	//+indexHeaderSearch header=header htmlItems=htmlItems
-	form.ui.form#cloudinaryForm(method="post")
-		.three.fields
-			.field
-				label Cloud Name
-				input(type="text",name="cloud_name")
-			.field
-				label Api Key
-				input(type="text",name="api_key")
-			.field
-				label Api Secret
-				input(type="text",name="api_secret")
-		.field
-			button.ui.blue.button(type="submit") Gravar
-	.ui.clearing.divider
 	input#uploadField(type="file",name="files",style="display:none;",multiple="multiple")
 	.ui.eight.cards
 		if ready

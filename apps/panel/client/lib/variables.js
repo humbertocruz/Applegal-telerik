@@ -27,6 +27,3 @@ subMenuTitleVar = new ReactiveVar({
 	title:'Home',
 	icon:'home'
 });
-extraLinksVar = new ReactiveVar([]);
-headerSaveVar = new ReactiveVar();
-saveLinkVar = new ReactiveVar();

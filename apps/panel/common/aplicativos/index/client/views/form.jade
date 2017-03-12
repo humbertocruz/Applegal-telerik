@@ -1,13 +1,17 @@
 template(name="aplicativosFormView")
 	//+indexHeaderSearch header=header saveLink=saveLink
-	form.ui.form#aplicativosForm(method="post")
-		.ui.top.attached.tabular.menu
-			.active.item(data-tab="info") Informações
-			.item(data-tab="design") Aparência do App
-			.item(data-tab="home") Home Page
-			.item(data-tab="login") Login
-			.item(data-tab="privacy") Privacidade
-		.ui.bottom.attached.active.tab.segment(data-tab="info")
+	.ui.blue.top.attached.secondary.pointing.tabular.menu
+		.active.item(data-tab="info") Informações
+		.item(data-tab="cloudinary") Cloudinary
+		.item(data-tab="design") Aparência
+		.item(data-tab="home") Home Page
+		.item(data-tab="login") Login
+		.item(data-tab="stores") Stores
+		.right.item(data-tab="delete")
+			i.trash.icon
+			|Remover
+	.ui.bottom.attached.active.tab.segment(data-tab="info")
+		form.ui.form.aplicativosForm#infoForm(method="post")
 			.ui.grid
 				.three.wide.column
 					.field
@@ -20,12 +24,9 @@ template(name="aplicativosFormView")
 							label Nome
 							input#nameField(type="text",name="name")
 						.field
-							label APP ID (Google Play e Apple Store)
-							input#appInfoIdField(type="text",name="appInfoId",placeholder="br.com.dominio.nome")
-					.three.fields
-						.field
 							label Email
 							input#emailField(type="text",name="mailFrom")
+					.two.fields
 						.field
 							label Domínio Opcional
 							input#domainField(type="text",name="domain",placeholder="https://site.com.br")
@@ -41,15 +42,26 @@ template(name="aplicativosFormView")
 							.extra
 								.ui.blue.icon.button.logoSelectEvent
 									i.checkmark.icon
-			.ui.divider
+			.ui.clearing.divider
 			.field
-				.ui.buttons
-					.ui.icon.button#logoDownEvent
-						i.chevron.left.icon
-					.ui.icon.button#logoUpEvent
-						i.chevron.right.icon
-
-		.ui.bottom.attached.tab.segment(data-tab="design")
+				button.ui.blue.button(type="submit",form="infoForm") Gravar
+	.ui.bottom.attached.tab.segment(data-tab="cloudinary")
+		form.ui.form#cloudinaryForm(method="post")
+			.three.fields
+				.field
+					label Cloud Name
+					input(type="text",name="cloud_name")
+				.field
+					label Api Key
+					input(type="text",name="api_key")
+				.field
+					label Api Secret
+					input(type="text",name="api_secret")
+			.ui.clearing.divider
+			.field
+				button.ui.blue.button(type="submit",form="cloudinaryForm") Gravar
+	.ui.bottom.attached.tab.segment(data-tab="design")
+		form.ui.form.aplicativosForm#designForm(method="post")
 			.two.fields
 				.field
 					label Cor de Fundo do Cabeçalho
@@ -85,56 +97,28 @@ template(name="aplicativosFormView")
 						option(value="") Escolha o Tema
 						option(value="lighten") Claro
 						option(value="darken") Escuro
+			.ui.clearing.divider
 			.field
-				label Imagem de Fundo
-			.ui.top.attached.tabular.menu
-				.active.item(data-tab="bgChoose") Galerias
-				.item(data-tab="bgUploaded") Enviadas
-			.ui.bottom.attached.tab.active.segment(data-tab="bgChoose")
-				.ui.eight.cards
-					if ready
-						each wallpapers.data
-							.ui.card(class="#{isBgSelected}")
-								.image
-									img.ui.bgSelectEvent(src="#{clUrl public_id crop='scale' width=150}")
-								.extra
-									.ui.blue.icon.button.bgSelectEvent
-										i.checkmark.icon
-				.ui.divider
-				.field
-					.ui.buttons
-						.ui.icon.button#bgDownEvent
-							i.chevron.left.icon
-						.ui.icon.button#bgUpEvent
-							i.chevron.right.icon
-			.ui.bottom.attached.tab.segment(data-tab="bgUploaded")
-				.ui.eight.cards
-					if ready
-						each wallpapersUp.data
-							.ui.card(class="#{isBgSelected}")
-								.image
-									img.bgSelectEvent(src="#{clUrl public_id crop=scale width=150}")
-								.extra
-									.ui.blue.icon.button.bgSelectEvent
-										i.checkmark.icon
-		.ui.bottom.attached.tab.segment(data-tab="home")
+			button.ui.blue.button(type="submit",form="designForm") Gravar
+	.ui.bottom.attached.tab.segment(data-tab="home")
+		form.ui.form.aplicativosForm#homeForm(method="post")
 			.three.fields
 				.field
 					label Quantidade por Linha
-					select.ui.search.dropdown#iconQuantityField(name="iconQuantity")
+					select.ui.select.dropdown#iconQuantityField(name="iconQuantity")
 						option(value="") Escolha uma opção
 						option(value="two") Dois Por Linha
 						option(value="three") Três Por Linha
 						option(value="four") Quatro Por Linha
 				.field
 					label Cor dos Ícones
-					select.ui.search.dropdown#iconColorField(name="iconColor")
+					select.ui.select.dropdown#iconColorField(name="iconColor")
 						option(value="") Escolha uma Cor
 						each semanticColors
 							option(value="#{className}") #{title}
 				.field
 					label Transparência dos Icones
-					select.ui.search.dropdown#iconOpacityField(name="iconOpacity")
+					select.ui.select.dropdown#iconOpacityField(name="iconOpacity")
 						option(value="") Escolha a Opacidade do ícone
 						option(value="0") 100%
 						option(value=".1") 90%
@@ -150,13 +134,13 @@ template(name="aplicativosFormView")
 			.two.fields
 				.field
 					label Tipo dos Ícones
-					select.ui.search.dropdown#iconTypeField(name="iconType")
+					select.ui.select.dropdown#iconTypeField(name="iconType")
 						option(value="") Escolha um Tipo
 						option(value="circular") Circular
 						option(value="bordered") Quadrado
 				.field
 					label Animação dos Ícones
-					select.ui.search.dropdown#iconAnimationField(name="iconAnimation")
+					select.ui.select.dropdown#iconAnimationField(name="iconAnimation")
 						option(value="") Escolha a Animação
 						option(value="fade") Aparecer
 						option(value="drop") Cair
@@ -170,7 +154,11 @@ template(name="aplicativosFormView")
 				.field
 					label Intervalo entre as Animações
 					input#iconIntervalField(type="number",name="iconInterval")
-		.ui.bottom.attached.tab.segment(data-tab="login")
+			.ui.clearing.divider
+			.field
+			button.ui.blue.button(type="submit",form="homeForm") Gravar
+	.ui.bottom.attached.tab.segment(data-tab="login")
+		form.ui.form.aplicativosForm#loginForm(method="post")
 			.field
 				label Tipo de Login
 				select.ui.dropdown#loginTypeField(name="loginType")
@@ -203,7 +191,14 @@ template(name="aplicativosFormView")
 						option(value="") Escolha uma opção
 						option(value="text") Normal
 						option(value="tel") Numérico
-		.ui.bottom.attached.tab.segment(data-tab="privacy")
+			.ui.clearing.divider
+			.field
+			button.ui.blue.button(type="submit",form="loginForm") Gravar
+	.ui.bottom.attached.tab.segment(data-tab="stores")
+		form.ui.form.aplicativosForm#storesForm(method="post")
+			.field
+				label APP ID (Google Play e Apple Store)
+				input#appInfoIdField(type="text",name="appInfoId",placeholder="br.com.dominio.nome")
 			.field
 				label Privacidade
 				textarea#privacyField(name="privacy",rows="15")
@@ -211,3 +206,16 @@ template(name="aplicativosFormView")
 					|<p>- O aplicativo poder&aacute; detectar o n&uacute;mero do celular em uso para controle de acesso de usu&aacute;rios</p>
 					|<p>- As informa&ccedil;&otilde;es do us&aacute;rios fornecidas no aplicativo n&atilde;o ser&atilde;o compartilhadas com terceiros com excess&ccedil;&atilde;o:</p>
 					|<p>- O preenchimento do Anivers&aacute;rio aparecer&aacute; para outros usu&aacute;rios</p>
+			.ui.clearing.divider
+			.field
+				button.ui.blue.button(type="submit",form="storesForm") Gravar
+	.ui.bottom.attached.tab.segment(data-tab="delete")
+			.red.field
+				label Remover Aplicativo
+				input#removeApp(type="text")
+				.ui.red.message
+					i.exclamation.icon
+					span Digite o nome do aplicativo para remove-lo do sistema. Essa ação não poderá ser desfeita.
+			.field
+				label &nbsp;
+				.ui.red.button Remover

@@ -1,26 +1,28 @@
 template(name="mainMenu")
-	.ui.blue.secondary.labeled.icon.transition.hidden.menu#adminMenu
-		a.item(class="#{isActiveRoute regex='^home'}",href="#{pathFor 'homeRoute'}")
-			img.ui.tiny.image(src="#{clUrl appLogoByDomain crop='scale' ,width=80}")
-		h3.item.header applegal.com.br
+	.ui.violet.top.fixed.transition.hidden.menu#adminMenu
+		a.icon.item(class="#{isActiveRoute regex='^home'}",href="#{pathFor 'homeRoute'}")
+			img.ui.mini.image(src="#{clUrl 'technotronics' width=80 crop='scale'}")
+			|&nbsp;AppLegal
+		.ui.icon.dropdown.item
+			i.sidebar.icon
+			.menu
+				a.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
+					i.android.icon
+					|Aplicativos
+				if isInRole 'admin'
+					a.item(class="#{isActiveRoute regex='^modulos'}",href="#{pathFor 'modulosRoute'}")
+						i.puzzle.icon
+						|Módulos
+					a.item(class="#{isActiveRoute regex='^arquivos'}",href="#{pathFor 'arquivosRoute'}")
+						i.file.icon
+						|Arquivos
+					a.item(class="#{isActiveRoute regex='^admins'}",href="#{pathFor 'adminsRoute'}")
+						i.users.icon
+						|Admins
 		.right.menu
-			a.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
-				i.android.icon
-				|Aplicativos
-			if isInRole 'admin'
-				a.item(class="#{isActiveRoute regex='^modulos'}",href="#{pathFor 'modulosRoute'}")
-					i.puzzle.icon
-					|Módulos
-				a.item(class="#{isActiveRoute regex='^arquivos'}",href="#{pathFor 'arquivosRoute'}")
-					i.file.icon
-					|Arquivos
-				a.item(class="#{isActiveRoute regex='^admins'}",href="#{pathFor 'adminsRoute'}")
-					i.users.icon
-					|Admins
 			if currentUserId
 				a.item(class="#{isActiveRoute regex='^profile'}",href="#{pathFor 'profileRoute'}")
-					i.sign.out.icon
-					|#{currentUser.profile.name}
+					img.ui.avatar.image(src="#{gravatar user.emails}")
 			else
 				a.item(href="#{pathFor 'loginRoute'}")
 					i.sign.in.icon

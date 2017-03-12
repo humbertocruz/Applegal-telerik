@@ -1,5 +1,10 @@
 Controller('aplicativosView',{
 	created:function() {
+		subMenuTitleVar.set({
+			title:'Confogurações',
+			icon:'settings'
+		});
+		saveLinkVar.set();
 		sint = 0;
 		aplicativosSearchVar = new ReactiveVar({});
 		if (Roles.userIsInRole(Meteor.userId(),'admin')) {
@@ -7,37 +12,38 @@ Controller('aplicativosView',{
 				Meteor.subscribe("allAplicativos", aplicativosSearchVar.get(),FlowRouter.getQueryParam('page'));
 			});
 		}
+		subMenuTitleVar.set({
+			title:'Aplicativos',
+			icon:'android'
+		});
+		extraLinksVar.set([
+			{
+				title:'Novo App',
+				id: 'addAppEvent',
+				icon:'add'
+			}
+		]);
 	},
 	rendered:function(){
 		$('.ui.dropdown').dropdown();
-
+		$('#addAppModal').modal({
+			onApprove:function(){
+				var name = $('#nameField').val();
+				Meteor.call("aplicativosForm", {name:name}, function(error, result){
+					if(error){
+						console.log("error", error);
+					}
+					if(result){
+						Bert.alert('Aplicativo criado com sucesso','success');
+					}
+				});
+			}
+		});
 		$('.usernameField').mask('999.999.999-99');
 	},
 	helpers:{
-		aplicativoId:function(){
-			return aplicativoVar.get()._id;
-		},
 		ready:function(){
 			return true;
-		},
-		header:function(){
-			return {
-				title:'Aplicativos',
-				icon:'android'
-			}
-		},
-		newLink:function(){
-			return false;
-		},
-		extraLinks:function(){
-			return [
-				{
-					title:'app_add',
-					route:'aplicativosInsertRoute',
-					id: 'addBtn',
-					icon:'add'
-				}
-			]
 		},
 		aplicativos:function(){
 			var page = FlowRouter.getQueryParam('page');
@@ -55,35 +61,10 @@ Controller('aplicativosView',{
 	events:{
 		'click .selectAppEvent':function(e,t){
 			// Todo
-			FlowRouter.go('aplicativosIndexRoute',{aplicativoId:this._id});
+			FlowRouter.go('aplicativosUpdateRoute',{aplicativoId:this._id});
 		},
-		/*'click .editBtn':function(e,t){
-			e.preventDefault();
-			aplicativoVar.set(Aplicativo.findOne(this._id));
-			FlowRouter.go('aplicativosUpdateRoute');
-		},
-		'click .modulosBtn':function(e,t){
-			e.preventDefault();
-			aplicativoVar.set(Aplicativo.findOne(this._id));
-			FlowRouter.go('aplicativosModulosRoute');
-		},
-		'click .usuariosBtn':function(e,t){
-			e.preventDefault();
-			aplicativoVar.set(Aplicativo.findOne(this._id));
-			FlowRouter.go('aplicativosUsuariosRoute');
-		},
-		'click .removeBtn':function(e,t){
-			var me = this;
-			htmlConfirm('Aviso','Você tem certeza?',function(){
-				Meteor.call('aplicativosRemove', me._id, function(error, result){
-					if(error){
-						console.log("error", error);
-					}
-					if(result){
-						Bert.alert('Aplicativo excluído com sucesso','success');
-					}
-				});
-			});
-		}*/
+		'click #addAppEvent':function(e,t){
+			$('#addAppModal').modal('show');
+		}
 	}
 });

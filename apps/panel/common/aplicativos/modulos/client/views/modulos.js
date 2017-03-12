@@ -2,6 +2,10 @@ Controller('aplicativosModulosView',{
 	created:function(){
 		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
 		updateModuloVar = new ReactiveVar(false);
+		subMenuTitleVar.set({
+			title:'Módulos',
+			icon:'puzzle'
+		});
 	},
 	helpers:{
 		updateModulo:function(){

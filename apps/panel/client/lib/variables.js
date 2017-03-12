@@ -23,3 +23,10 @@ userRoles = {
 
 topTitleVar = new ReactiveVar('Home');
 appInfoVar = new ReactiveVar({});
+subMenuTitleVar = new ReactiveVar({
+	title:'Home',
+	icon:'home'
+});
+extraLinksVar = new ReactiveVar([]);
+headerSaveVar = new ReactiveVar();
+saveLinkVar = new ReactiveVar();

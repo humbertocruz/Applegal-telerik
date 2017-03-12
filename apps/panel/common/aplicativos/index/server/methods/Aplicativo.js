@@ -15,9 +15,10 @@ Meteor.methods({
 		});
 	},
 	aplicativosForm: function(fields) {
-		var user = Meteor.users.findOne(this.userId);
-		fields.createdAt = moment().toDate();
+
 		if (!fields._id) {
+			fields.createdAt = moment().toDate();
+			fields.createddBy = Meteor.userId();
 			// Grava aplicativo
 			var appId = Aplicativo.insert(fields);
 			// Se nao for usuario ADMIN

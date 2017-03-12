@@ -1,5 +1,9 @@
 Controller('aplicativosUsuariosView', {
 	created:function() {
+		subMenuTitleVar.set({
+			title:'Usuários',
+			icon:'user'
+		});
 		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
 		usuariosSearchVar = new ReactiveVar({});
 		var appId = FlowRouter.getParam('aplicativoId');

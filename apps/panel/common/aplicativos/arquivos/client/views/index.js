@@ -1,5 +1,9 @@
 Controller('aplicativosArquivosView',{
 	created:function() {
+		subMenuTitleVar.set({
+			title:'Arquivos do Aplicativo',
+			icon:'file'
+		});
 		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
 		// Monitora os arquivos enviados
 		Cloudinary.collection.find().observe({

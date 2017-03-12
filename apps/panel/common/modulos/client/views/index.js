@@ -2,6 +2,10 @@ Controller('modulosView',{
 	created:function() {
 		sint = 0;
 		modulosSearchVar = new ReactiveVar({});
+		subMenuTitleVar.set({
+			title:'Módulos',
+			icon:'puzzle'
+		});
 	},
 	helpers:{
 		ready:function(){

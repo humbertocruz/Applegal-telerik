@@ -3,6 +3,10 @@ Controller('adminsFormView', {
 		Tracker.autorun(function(){
 			oneUsuario = Meteor.subscribe("oneUsuario", FlowRouter.getParam('id'));
 		});
+		subMenuTitleVar.set({
+			title:'Admins',
+			icon:'users'
+		});
 	},
 	rendered:function() {
 		$('#adminsForm .ui.dropdown').dropdown();
@@ -86,8 +90,6 @@ Controller('adminsFormView', {
 			fields: fields
 		});
 
-		$('#usernameField').mask('999.999.999-99');
-		$('#password1Field,#password2Field').mask('9999999999999999');
 		$('#phoneField').mask('(99) 99999-9999');
 
 
@@ -96,7 +98,6 @@ Controller('adminsFormView', {
 			var usuario = {
 				username: fields.username,
 				nome: fields.profile.name,
-				tipo: fields.roles,
 				birth: moment(fields.profile.birth).format('YYYY-MM-DD'),
 				phone: fields.profile.phone
 			};
@@ -145,32 +146,31 @@ Controller('adminsFormView', {
 			e.preventDefault();
 			var fields = $(e.target).form('get values');
 			var usuario = {
-				id: FlowRouter.getParam('id'),
+				_id: FlowRouter.getParam('id'),
 				email: fields.email,
 				username: fields.username,
 				password: fields.password1,
-				tipo: fields.tipo,
 				profile: {
 					name: fields.nome,
 					birth: fields.birth,
-					phone: fields.phone,
-					filialId: fields.filialId
+					phone: fields.phone
 				}
 			};
-			Meteor.call('formUsuario', usuario, aplicativoVar.get()._id, function(error, result) {
+			console.log(usuario);
+			Meteor.call('formAdmin', usuario, function(error, result) {
 				if (error) {
 					console.log("error", error);
 					if (error.reason == 'Email already exists.') {
-						Bert.alert('Já existe um usuário cadastrado com este email!', 'danger', 'growl-top-right');
+						Bert.alert('Já existe um usuário cadastrado com este email!', 'danger');
 					} else if (error.reason == 'Username already exists.') {
-						Bert.alert('Já existe um usuário cadastrado com este CPF!', 'danger', 'growl-top-right');
+						Bert.alert('Já existe um usuário cadastrado com este CPF!', 'danger');
 					} else {
-						Bert.alert('Houve um erro ao tentar adicionar o usuário!', 'danger', 'growl-top-right');
+						Bert.alert('Houve um erro ao tentar adicionar o usuário!', 'danger');
 					}
 				}
 				if (result) {
 					FlowRouter.go('usuariosRoute');
-					Bert.alert('Usuário adicionado com sucesso!', 'success', 'growl-top-right');
+					Bert.alert('Admin adicionado com sucesso!', 'success');
 				}
 			});
 		}

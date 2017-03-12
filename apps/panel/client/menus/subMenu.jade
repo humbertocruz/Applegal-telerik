@@ -1,0 +1,19 @@
+template(name="subMenu")
+	.ui.blue.secondary.menu#subMenu
+		.ui.active.item
+			i.icon(class="#{subMenuTitle.icon}")
+			|#{subMenuTitle.title}
+		.right.menu
+			each extraLinks
+				if route
+					a.ui.item(href="#{pathFor route params}",id="#{id}")
+						i.icon(class="#{icon}")
+						|#{_ title}
+				else
+					.ui.link.item(id="#{id}")
+						i.icon(class="#{icon}")
+						|#{_ title}
+			if saveLink
+				.ui.link.item(id="headerSaveEvent")
+					i.icon(class="#{saveLink.icon}")
+					|#{_ saveLink.title}

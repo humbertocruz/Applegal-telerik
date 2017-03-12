@@ -1,16 +1,15 @@
 template(name="leftEmulatorApp")
-	.ui.header #{appInfo.name}
 	if isManagerOrAdmin
 		.ui.blue.vertical.fluid.inverted.menu
 			if aplicativoId
-				a.item(class="#{isActiveRoute regex='^aplicativosArquivos'}",href="#{pathFor 'aplicativosArquivosRoute' aplicativoId=appInfo._id}")
-					i.file.icon
-					.content
-						.header Arquivos
 				a.item(class="#{isActiveRoute regex='^aplicativosUpdate'}",href="#{pathFor 'aplicativosUpdateRoute' aplicativoId=appInfo._id}")
 					i.setting.icon
 					.content
 						.header Configuração
+				a.item(class="#{isActiveRoute regex='^aplicativosArquivos'}",href="#{pathFor 'aplicativosArquivosRoute' aplicativoId=appInfo._id}")
+					i.file.icon
+					.content
+						.header Arquivos
 				if isAdmin
 					a.item(class="#{isActiveRoute regex='^aplicativosModulos'}",href="#{pathFor 'aplicativosModulosRoute' aplicativoId=appInfo._id}")
 						i.puzzle.icon

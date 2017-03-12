@@ -1,5 +1,6 @@
 template(name="aplicativosView")
-	+indexHeaderSearch header=header newLink=newLink extraLinks=extraLinks
+	+addAppModal
+	//+indexHeaderSearch header=header newLink=newLink extraLinks=extraLinks
 	table.ui.top.attached.single.line.selectable.striped.padded.table
 		thead
 			tr
@@ -18,3 +19,19 @@ template(name="aplicativosView")
 					td #{dateTimeBr createdAt}
 					td #{name}
 	+indexInfoPaginator ready=ready nothingFound='Nenhum aplicativo cadastrado.' count=aplicativos.count page=aplicativos.count pages=aplicativos.pages singularForm='Aplicativo' pluralForm='Aplicativos'
+
+template(name="addAppModal")
+	.ui.small.modal.transition.hidden#addAppModal
+		.header Criar Novo Aplicativo
+		.content
+			form.ui.form#addAppForm(method="post")
+				.field
+					label Nome
+					input#nameField(type="text", name="name")
+		.actions
+			.ui.negative.right.labeled.icon.button
+				|Cancelar
+				i.close.icon
+			.ui.positive.right.labeled.icon.button
+				|Salvar
+				i.checkmark.icon

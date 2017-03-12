@@ -1,5 +1,9 @@
 Controller('arquivosView',{
 	created:function() {
+		subMenuTitleVar.set({
+			title:'Arquivos',
+			icon:'file'
+		});
 		//Configura App Mestre
 		var appM = Aplicativo.findOne({
 			appInfoId:'br.com.applegal.applegal'

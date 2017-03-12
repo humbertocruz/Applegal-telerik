@@ -1,5 +1,34 @@
 Controller('aplicativosFormView',{
 	created:function(){
+		subMenuTitleVar.set({
+			title:'Configuração do Aplicativo',
+			icon:'setting'
+		});
+		extraLinksVar.set([]);
+		saveLinkVar.set({
+			title:'Salvar',
+			icon:'save'
+		});
+		var appSave = function(e,t){
+			var fields = $('#aplicativosForm').form('get values');
+			var id = FlowRouter.getParam('aplicativoId');
+			fields.appBg = bgSelectedVar.get();
+			fields.appLogo = logoSelectedVar.get();
+			if (id) fields._id = id;
+			Meteor.call("aplicativosForm",fields, function(error, result){
+				if(error){
+					console.log("error", error);
+					//isLoadingVar.set(false);
+				}
+				if(result){
+					//isLoadingVar.set(false);
+					Bert.alert('O aplicativo foi salvo com sucesso!','success');
+					FlowRouter.go('aplicativosUpdateRoute',{aplicativoId:result});
+				}
+			});
+		};
+		headerSaveVar.set(appSave);
+
 		arquivosPageVar = new ReactiveVar(1);
 		arquivosLogoPageVar = new ReactiveVar(1);
 		bgSelectedVar = new ReactiveVar(false);
@@ -66,13 +95,6 @@ Controller('aplicativosFormView',{
 		},
 		semanticColors:function(){
 			return _.sortBy(semanticColors,'title');
-		},
-		saveLink:function(){
-			return {
-				title:'Salvar',
-				icon:'save',
-				form:'aplicativosForm'
-			}
 		},
 		wallpapers:function(){
 			var wallpapers = Arquivo.find({
@@ -145,26 +167,6 @@ Controller('aplicativosFormView',{
 		},
 		'click .logoSelectEvent':function(e,t){
 			logoSelectedVar.set(this.public_id);
-		},
-		'submit #aplicativosForm':function(e,t){
-			e.preventDefault();
-			//isLoadingVar.set('Salvando Aplicativo!');
-			var fields = $(e.target).form('get values');
-			var id = FlowRouter.getParam('aplicativoId');
-			fields.appBg = bgSelectedVar.get();
-			fields.appLogo = logoSelectedVar.get();
-			if (id) fields._id = id;
-			Meteor.call("aplicativosForm",fields, function(error, result){
-				if(error){
-					console.log("error", error);
-					//isLoadingVar.set(false);
-				}
-				if(result){
-					//isLoadingVar.set(false);
-					Bert.alert('O aplicativo foi salvo com sucesso!','success');
-					FlowRouter.go('aplicativosUpdateRoute',{aplicativoId:result});
-				}
-			});
 		}
 	}
 });

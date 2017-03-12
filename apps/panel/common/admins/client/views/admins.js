@@ -4,6 +4,10 @@ Controller('adminsView', {
 		Meteor.autorun(function() {
 			allAdmins = Meteor.subscribe('allAdmins', adminsSearchVar.get());
 		});
+		subMenuTitleVar.set({
+			title:'Admins',
+			icon:'users'
+		});
 	},
 	helpers: {
 		ready: function() {

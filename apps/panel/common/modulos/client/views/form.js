@@ -7,6 +7,10 @@ Controller('modulosFormView',{
 				$('#modulosForm').form('set values',modulo);
 			});
 		}
+		subMenuTitleVar.set({
+			title:'Módulos',
+			icon:'puzzle'
+		});
 	},
 	helpers:{
 		header:function(){

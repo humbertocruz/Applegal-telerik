@@ -16,7 +16,12 @@ Meteor.startup(function() {
 		// subscribe o app quando seu ID estiver na URL
 		var appId = FlowRouter.getParam('aplicativoId');
 		if (appId) {
-			Meteor.subscribe("oneAplicativo", appId);
+			Meteor.subscribe("oneAplicativo", appId,function(err,result){
+				if (result){
+					console.log(result);
+					appInfoVar.set(result);
+				}
+			});
 		}
 	});
 });

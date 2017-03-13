@@ -1,6 +1,6 @@
 Controller('loginView', {
 	rendered: function() {
-		$('#loginGrid').transition('fade in');
+		$('#loginGrid').transition('horizontal flip in');
 	},
 	events: {
 		'submit #loginForm' (e, t) {

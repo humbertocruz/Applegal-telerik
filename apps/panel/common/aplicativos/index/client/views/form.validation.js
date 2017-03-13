@@ -1,5 +1,22 @@
 Controller('aplicativosFormView',{
 	rendered:function(){
+		$('#removeForm').form({
+			onFailure(p,v){
+				return false;
+			},
+			inline:true,
+			fields:{
+				removeAppField:{
+					indentifier:'removeAppField',
+					rules:[
+						{
+							type:'isExactly['+appInfoVar.get().name+']',
+							prompt:'Você precisa confirmar o nome do Aplicativo.'
+						}
+					]
+				}
+			}
+		});
 		$('#aplicativosForm').form({
 			onFailure(prompts,values){
 				return false;

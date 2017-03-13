@@ -1,8 +1,8 @@
 Controller('aplicativosView',{
 	created:function() {
 		subMenuTitleVar.set({
-			title:'Aplicativos',
-			icon:'android'
+			title:'Seus Apps',
+			icon:'list'
 		});
 		sint = 0;
 		aplicativosSearchVar = new ReactiveVar({});

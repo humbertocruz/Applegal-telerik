@@ -36,8 +36,8 @@ Controller('usuariosFormView',{
 				username: {
 					identifier: 'usernameField',
 					rules: [{
-						type: 'cpf',
-						prompt: 'Digite o CPF corretamente.'
+						type: 'empty',
+						prompt: 'Digite o nome de usuário corretamente.'
 					}]
 				},
 				nome: {

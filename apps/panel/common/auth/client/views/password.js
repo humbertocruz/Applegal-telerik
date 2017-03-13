@@ -1,7 +1,6 @@
 Controller('passwordView', {
 	rendered: function() {
-		$('#usernameField').mask('999.999.999-99');
-		$('#passwordGrid').transition('fade in');
+		$('#passwordGrid').transition('horizontal flip in');
 		$('#passwordForm').form({
 			inline:true,
 			fields:{

@@ -2,17 +2,18 @@ template(name="loginView")
 	.ui.container.three.column.desktop.one.column.mobile.centered.hidden.transition.grid#loginGrid(style="height:100%;")
 		.middle.aligned.row
 			.left.aligned.column
-				img.ui.small.centered.image(src="#{clUrl appLogoByDomain crop='scale' width=150}")
-				form.ui.form#loginForm(method="post")
-					.field
-						label Email
-						input#emailField(type="text",name="email",placeholder="Digite seu Email",autocomplete="off")
-					.field
-						label Senha
-						input#passwordField(type="password",name="password",placeholder="Digite sua senha",autocomplete="off")
-				.ui.divider
-				button.ui.blue.big.fluid.button(type="submit",form="loginForm") Entrar
-				.ui.divider
-				.ui.two.item.secondary.menu
-					a.item(href="#{pathFor 'passwordRoute'}") Esqueceu sua senha ?
-					//a.item(href="#{pathFor 'registerRoute'}") Cadastre-se
+				.ui.raised.segment
+					img.ui.small.centered.image(src="#{clUrl appLogoByDomain crop='scale' width=150}")
+					form.ui.form#loginForm(method="post")
+						.field
+							label Email
+							input#emailField(type="text",name="email",placeholder="Digite seu Email",autocomplete="off")
+						.field
+							label Senha
+							input#passwordField(type="password",name="password",placeholder="Digite sua senha",autocomplete="off")
+					.ui.divider
+					button.ui.blue.big.fluid.button(type="submit",form="loginForm") Entrar
+					.ui.divider
+					.ui.two.item.secondary.menu
+						a.item(href="#{pathFor 'passwordRoute'}") Esqueceu sua senha ?
+						//a.item(href="#{pathFor 'registerRoute'}") Cadastre-se

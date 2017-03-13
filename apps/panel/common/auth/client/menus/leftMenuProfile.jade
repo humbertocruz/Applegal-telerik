@@ -1,5 +1,7 @@
 template(name="leftMenuProfile")
 	.ui.vertical.fluid.menu
+		.item
+			img.ui.fluid.rounded.image(src="#{gravatar user.emails}")
 		a.item Trocar Senha
 		a.item Alterar Email
 		.item

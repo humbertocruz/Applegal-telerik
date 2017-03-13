@@ -1,15 +1,27 @@
 template(name="aplicativosFormView")
 	//+indexHeaderSearch header=header saveLink=saveLink
-	.ui.blue.top.attached.secondary.pointing.tabular.menu
-		.active.item(data-tab="info") Informações
-		.item(data-tab="cloudinary") Cloudinary
-		.item(data-tab="design") Aparência
-		.item(data-tab="home") Home Page
-		.item(data-tab="login") Login
-		.item(data-tab="stores") Stores
-		.right.item(data-tab="delete")
+	.ui.top.attached.secondary.pointing.tabular.menu
+		.blue.active.link.item(data-tab="info")
+			i.info.icon
+			|Informações
+		.blue.link.item(data-tab="cloudinary")
+			i.cloud.icon
+			|Cloudinary
+		.blue.link.item(data-tab="design")
+			i.theme.icon
+			|Aparência
+		.blue.link.item(data-tab="home")
+			i.home.icon
+			|Home Page
+		.blue.link.item(data-tab="login")
+			i.user.icon
+			|Login
+		.blue.link.item(data-tab="stores")
+			i.android.icon
+			|Stores
+		.right.red.link.item(data-tab="delete")
 			i.trash.icon
-			|Remover
+			|Excluir
 	.ui.bottom.attached.active.tab.segment(data-tab="info")
 		form.ui.form.aplicativosForm#infoForm(method="post")
 			.ui.grid
@@ -39,6 +51,17 @@ template(name="aplicativosFormView")
 			.ui.clearing.divider
 			button.ui.blue.button(type="submit",form="infoForm") Gravar
 	.ui.bottom.attached.tab.segment(data-tab="cloudinary")
+		.ui.message
+			i.exclamation.icon
+			span Todos os arquivos do aplicativos ficam armazenados numa conta Cloudinary. É necessário configurar o acesso a esta conta.
+			br
+			span
+				|Faça o cadastro gratuito em 
+				a(href="") http://cloudinary.com 
+			span e copie aqui os dados apresentados no "Dashboard" - "Account Details".
+			br
+			br
+			strong Não esqueça de clicar no link de verificação de email para que a conta não seja suspensa em 24hs.
 		form.ui.form#cloudinaryForm(method="post")
 			.three.fields
 				.field
@@ -203,12 +226,14 @@ template(name="aplicativosFormView")
 			.field
 				button.ui.blue.button(type="submit",form="storesForm") Gravar
 	.ui.bottom.attached.tab.segment(data-tab="delete")
+		form.ui.form#removeForm(method="post")
+			.ui.red.message
+				i.exclamation.icon
+				span Digite o nome do aplicativo para excluí-lo do sistema. 
+				br
+				strong Essa ação não poderá ser desfeita.
 			.red.field
-				label Remover Aplicativo
-				input#removeApp(type="text")
-				.ui.red.message
-					i.exclamation.icon
-					span Digite o nome do aplicativo para remove-lo do sistema. Essa ação não poderá ser desfeita.
-			.field
-				label &nbsp;
-				.ui.red.button Remover
+				label Excluir Aplicativo
+				input#removeAppField(type="text",placeholder="Digite #{appInfo.name}")
+			.ui.clearing.divider
+			button.ui.red.button#removeAppEvent(type="submit",form="removeForm") Excluir

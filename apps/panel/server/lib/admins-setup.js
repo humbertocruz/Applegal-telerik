@@ -1,6 +1,6 @@
 Meteor.startup(function() {
-	var appLegal = Aplicativo.findOne();
-	if (!appLegal) {
+	var userAdm = Roles.getUsersInRole('admin').fetch();
+	if (!userAdm) {
 		var admin = {
 			username: 'admin',
 			password: 'WcmJLc2017',
@@ -16,7 +16,11 @@ Meteor.startup(function() {
 		};
 		var ida = Accounts.createUser(admin);
 		Accounts.addEmail(ida, 'admin@applegal.com.br', true);
-		// InitDB
+	} else {
+		var ida = userAdm[0]._id;
+	}
+	var appLegal = Aplicativo.findOne();
+	if (!appLegal) {	// InitDB
 		var app = {
 			"name" : "Techno App",
 			"domain" : "",
@@ -43,16 +47,16 @@ Meteor.startup(function() {
 			"loginTitleKeyboard" : "tel",
 			"loginPasswordKeyboard" : "tel",
 			"privacy" : "<p>Pol&iacute;tica de Privacidade</p>\n<p>- O aplicativo poder&aacute; detectar o n&uacute;mero do celular em uso para controle de acesso de usu&aacute;rios</p>\n<p>- As informa&ccedil;&otilde;es do us&aacute;rios fornecidas no aplicativo n&atilde;o ser&atilde;o compartilhadas com terceiros com excess&ccedil;&atilde;o:</p>\n<p>- O preenchimento do Anivers&aacute;rio aparecer&aacute; para outros usu&aacute;rios</p>\n<p>- O aplicativo detecta a posi&ccedil;&atilde;o atual do usu&aacute;rio via GPS para posicionamento das informa&ccedil;&otilde;es mas n&atilde;o salva essa informa&ccedil;&atilde;o</p>",
-			"appBg" : "technoapp-background",
-			"appLogo" : "technoapp-logo"
+			"appBg" : "background",
+			"appLogo" : "applegal"
 		};
 		appId = Aplicativo.insert(app);
 		Roles.addUsersToRoles(ida, ['admin']);
 		var cloudApp = {
 			aplicativoId: appId,
-			api_key: "682511396465386",
-			api_secret: "DGYelhLmboXBQ2MvRlUI49kKU1o",
-			cloud_name:"technotronics"
+			api_key: "736491884223886",
+			api_secret: "tF11P67FRg9jT-TB9PerfMZq7Y8",
+			cloud_name:"technoapp"
 		};
 		cloudId = AppCloudinary.insert(cloudApp);
 	}

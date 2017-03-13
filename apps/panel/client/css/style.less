@@ -1,9 +1,16 @@
 body {
+	transition: all .25s linear;
 	padding:10px 10px 10px 10px !important;
 	min-width: 320px;
 	min-height: 100vh;
+	background-color:#fff;
 }
-
+body.loginRoute {
+	background-color:#2185d0;
+}
+body.passwordRoute {
+	background-color:#fbbd08;
+}
 div#emulatorFloatDiv {
 	position: fixed;
 	display: block;

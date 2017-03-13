@@ -2,30 +2,16 @@ Meteor.publish('appArquivos', function (page,aplicativoId) {
 	if (!aplicativoId) return [];
 	if (!page) page = 1;
 	search = {
-		$or:[
-			{
-				tags:{
-					$all:[
-						aplicativoId,
-						'logotype'
-					]
-				}
-			},{
-				tags:{
-					$all:[
-						aplicativoId,
-						'wallpaper'
-					]
-				}
-			},{
-				tags:{
-					$all:[
-						aplicativoId,
-						'noticia'
-					]
-				}
-			}
-		]
+		tags:{
+			$in:[
+				'logotype',
+				'wallpaper',
+				'noticia',
+				'documento',
+				'galeria',
+				'enquete'
+			]
+		}
 	};
 	var qtd = 8;
 	Counts.publish(this, 'appArquivos', Arquivo.find(search), {

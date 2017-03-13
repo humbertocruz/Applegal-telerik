@@ -3,16 +3,18 @@ template(name="aplicativosArquivosView")
 	input#uploadField(type="file",name="files",style="display:none;",multiple="multiple")
 	.ui.green.button#rebuildCloudinary Recuperar Arquivos
 	.ui.clearing.divider
-	.ui.eight.cards
+	.ui.four.cards
 		if ready
 			each arquivos.data
 				.ui.card
 					.image
-						img.ui.image(src="#{clUrl public_id crop='scale' width=150 cloud_name=cloud_name}")
+						img.ui.image(src="#{clUrl public_id crop='scale' width=210 cloud_name=cloud_name}")
 					.content
 					.extra
-						.ui.blue.tiny.icon.button.arquivoEffectEvent
-							i.wizard.icon
+						.ui.blue.tiny.icon.button.arquivoBackgroudEvent(data-tooltip="Usar como Fundo do App",data-inverted)
+							i.image.icon
+						.ui.blue.tiny.icon.button.arquivoLogotypeEvent(data-tooltip="Usar como Logotipo do App",data-inverted)
+							i.facebook.icon
 						.ui.red.tiny.icon.button.arquivoRemoveEvent
 							i.trash.icon
 			each uploads.data
@@ -28,4 +30,7 @@ template(name="aplicativosArquivosView")
 						else
 							.ui.fluid.green.icon.tiny.button.removePreviewEvent
 								i.checkmark.icon
-	+indexInfoPaginator ready=ready noattached=true nothingFound='Nenhum arquivo cadastrado.' count=arquivos.count page=arquivos.count pages=arquivos.pages singularForm='Arquivo' pluralForm='Arquivos'
+	.ui.clearing.divider
+	.ui.button.uploadEvent(data-value="wallpaper") Enviar Papel de Parede
+	.ui.button.uploadEvent(data-value="logotype") Enviar Logotipo
+	//+indexInfoPaginator ready=ready noattached=true nothingFound='Nenhum arquivo cadastrado.' count=arquivos.count page=arquivos.count pages=arquivos.pages singularForm='Arquivo' pluralForm='Arquivos'

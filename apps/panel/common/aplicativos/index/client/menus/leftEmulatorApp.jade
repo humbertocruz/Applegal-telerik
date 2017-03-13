@@ -1,6 +1,6 @@
 template(name="leftEmulatorApp")
 	if isManagerOrAdmin
-		.ui.vertical.fluid.menu
+		.ui.blue.pointing.vertical.fluid.menu
 			if aplicativoId
 				a.item(class="#{isActiveRoute regex='^aplicativosUpdate'}",href="#{pathFor 'aplicativosUpdateRoute' aplicativoId=appInfo._id}")
 					i.setting.icon

@@ -132,6 +132,18 @@ Controller('aplicativosFormView',{
 		}
 	},
 	events:{
+		'submit #removeForm':function(e,t){
+			e.preventDefault();
+			Meteor.call("appRemoveAll", FlowRouter.getParam('aplicativoId'), function(error, result){ 
+				if(error){
+					console.log("error", error);
+				}
+				if(result){
+					Bert.alert('Aplicativo e todos os dados relacionados removidos com sucesso.','success');
+					FlowRouter.go('homeRoute');
+				}
+			});
+		},
 		'submit #cloudinaryForm':function(e,t){
 			e.preventDefault();
 			var fields = $(e.currentTarget).form('get values');

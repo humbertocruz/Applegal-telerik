@@ -8,13 +8,21 @@ Meteor.methods({
 			aplicativoId:aplicativoId
 		});
 		Cloudinary.api.resources(Meteor.bindEnvironment(function(result){
+			var saved = 0;
 			_.each(result.resources,function(image){
-				image.aplicativoId = aplicativoId;
-				image.cloud_name = Cloudinary.config().cloud_name;
-				Arquivo.insert(image);
+				if (image.tags.length > 0) {
+					image.aplicativoId = aplicativoId;
+					image.cloud_name = Cloudinary.config().cloud_name;
+					Arquivo.insert(image);
+					saved++;
+				}
 			});
-			myFuture.return(result);
+			myFuture.return({
+				saved:saved,
+				returned:result.resources.length
+			});
 		}),{
+			max_results:500,
 			type:'upload',
 			tags:true
 		});

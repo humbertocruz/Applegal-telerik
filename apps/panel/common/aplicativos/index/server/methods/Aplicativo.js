@@ -1,4 +1,65 @@
 Meteor.methods({
+	appRemoveAll:function(aplicativoId){
+
+		// Removendo Arquivos
+		Arquivo.remove({
+			aplicativoId:aplicativoId
+		});
+		// Removendo Modulos do Aplicativo
+		AplicativoModulo.remove({
+			aplicativoId:aplicativoId
+		});
+		// Removendo dados do Cloudinary
+		AppCloudinary.remove({
+			aplicativoId:aplicativoId
+		});
+		// Removendo dados de Redes Sociais
+		Social.remove({
+			aplicativoId:aplicativoId
+		});
+		// Removendo Modulo Documentos
+		Documento.remove({
+			aplicativoId:aplicativoId
+		});
+		// Removendo Tipos de Documentos
+		Tipo.remove({
+			aplicativoId:aplicativoId
+		});
+		// Removendo Enquetes
+		Enquete.remove({
+			aplicativoId:aplicativoId
+		});
+		//Removendo Respostas das Enquetes
+		EnqueteResposta.remove({
+			aplicativoId:aplicativoId
+		});
+		// Removendo Galerias
+		Galeria.remove({
+			aplicativoId:aplicativoId
+		});
+		// Removendo Assuntos de Noticias
+		Assunto.remove({
+			aplicativoId:aplicativoId
+		});
+		// Removendo Noticias
+		Noticia.remove({
+			aplicativoId:aplicativoId
+		});
+		// Removendo Aplicativo
+		Aplicativo.remove({
+			_id:aplicativoId
+		});
+
+		// Removendo permissoes de cada usuário do app
+		var users = Meteor.users.find({
+			roles:aplicativoId
+		}).fetch();
+		_.each(users,function(u){
+			var roles = Roles.getRolesForUser(u._id, aplicativoId);
+			Roles.removeUsersFromRoles(u._ud,roles,aplicativoId);
+		});
+		return true;
+	},
 	setServerAppId:function(aplicativoId){
 		aplicativoIdServerVar = aplicativoId;
 	},

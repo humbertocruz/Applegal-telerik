@@ -22,24 +22,26 @@ template(name="aplicativosUsuariosView")
 					td #{userAppPerm}
 					td #{profile.name}
 					td #{dateBr profile.birth}
-	+indexInfoPaginator ready=ready nothingFound='Nenhum Usuário Cadastrado' count=usuarios.count page=usuarios.count pages=usuarios.pages singularForm='Usuário' pluralForm='Usuários'
-	.ui.divider
-	.ui.blue.button#addUsersApp
-		i.plus.icon
-		|Adicionar Usuário Existente
-	.ui.large.popup
-		form.ui.form#addUserToAppForm(method="post")
-			.field
-				label Email
-				input#emailField(type="text",name="email")
-			.field
-				label Permissões
-				select.ui.dropdown.tipoField(name="tipo",multiple)
-					option(value="") Escolha as permissões do Usuário
-					option(value="guest") Visitante
-					option(value="subscriber") Assinante
-					option(value="manager") Gerente
-					each appModulos
-						option(value="#{modulo.path}") #{modulo.title}
-			.field
-				.ui.primary.fluid.button#addUserToAppEvent Adicionar
+	.ui.secondary.bottom.attached.segment
+		a.ui.blue.button(href="#{pathFor 'aplicativosUsuariosInsertRoute' aplicativoId=appInfo._id}")
+			i.plus.icon
+			|Novo Usuário
+		.ui.blue.button#addUsersApp
+			i.plus.icon
+			|Usuário Existente
+		.ui.large.popup
+			form.ui.form#addUserToAppForm(method="post")
+				.field
+					label Email
+					input#emailField(type="text",name="email")
+				.field
+					label Permissões
+					select.ui.dropdown.tipoField(name="tipo",multiple)
+						option(value="") Escolha as permissões do Usuário
+						option(value="guest") Visitante
+						option(value="subscriber") Assinante
+						option(value="manager") Gerente
+						each appModulos
+							option(value="#{modulo.path}") #{modulo.title}
+				.field
+					.ui.primary.fluid.button#addUserToAppEvent Adicionar

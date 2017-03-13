@@ -14,14 +14,10 @@ Controller('aplicativosArquivosView',{
 			}
 		});
 		uploadTypeVar = new ReactiveVar();
-
-		arquivosSearchVar = new ReactiveVar({});
 		Tracker.autorun(function(){
 			var page = FlowRouter.getQueryParam('page');
-			var search = arquivosSearchVar.get();
 			var aplicativoId = FlowRouter.getParam('aplicativoId');
 			Meteor.subscribe("appArquivos", page, aplicativoId);
-			Meteor.subscribe("AppCloudinary", aplicativoId);
 		});
 	},
 	rendered:function(){
@@ -66,30 +62,16 @@ Controller('aplicativosArquivosView',{
 			var page = FlowRouter.getQueryParam('page');
 			if (!page) page = 1;
 			var arquivos = Arquivo.find({
-				$or:[
-					{
-						tags:{
-							$all:[
-								FlowRouter.getParam('aplicativoId'),
-								'logotype'
-							]
-						}
-					},{
-						tags:{
-							$all:[
-								FlowRouter.getParam('aplicativoId'),
-								'wallpaper'
-							]
-						}
-					},{
-						tags:{
-							$all:[
-								FlowRouter.getParam('aplicativoId'),
-								'noticia'
-							]
-						}
-					}
-				]
+				tags:{
+					$in:[
+						'logotype',
+						'wallpaper',
+						'noticia',
+						'documento',
+						'galeria',
+						'enquete'
+					]
+				}
 			},{
 				limit:8
 			});
@@ -102,6 +84,30 @@ Controller('aplicativosArquivosView',{
 		}
 	},
 	events:{
+		'click .arquivoBackgroudEvent':function(e,t){
+			console.log('change bg');
+			var bg = this.public_id;
+			Meteor.call("aplicativosForm", {_id:FlowRouter.getParam('aplicativoId'), appBg:bg}, function(error, result){
+				if(error){
+					console.log("error", error);
+				}
+				if(result){
+					Bert.alert('Fundo do Aplicativo alterado com sucesso.','success');
+				}
+			});
+		},
+		'click .arquivoLogotypeEvent':function(e,t){
+			var lg = this.public_id;
+			console.log(lg);
+			Meteor.call("aplicativosForm", {_id:FlowRouter.getParam('aplicativoId'), appLogo:lg}, function(error, result){
+				if(error){
+					console.log("error", error);
+				}
+				if(result){
+					Bert.alert('Logotipo do Aplicativo alterado com sucesso.','success');
+				}
+			});
+		},
 		'click #rebuildCloudinary':function(e,t){
 			htmlConfirm('Aviso','Você tem certeza?<br>Todas as imagens serão recuperadas da conta Cloudinary.',function(){
 				Meteor.call("rebuildCloudinary", FlowRouter.getParam('aplicativoId'), function(error, result){
@@ -109,8 +115,7 @@ Controller('aplicativosArquivosView',{
 						console.log("error", error);
 					}
 					if(result){
-						console.log(result);
-						Bert.alert('Documentos recuperados com sucesso.','success');
+						Bert.alert('Foram recuperados '+result.saved+' documentos de um total de '+result.returned+'.','success');
 					}
 				});
 			});

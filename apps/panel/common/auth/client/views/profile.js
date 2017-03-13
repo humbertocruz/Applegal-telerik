@@ -40,13 +40,6 @@ Controller('profileView', {
 					}]
 				},
 				tipo: {
-					identifier: 'tipoField',
-					rules: [{
-						type: 'empty',
-						prompt: 'Escolha o tipo de usuário!'
-					}]
-				},
-				tipo: {
 					identifier: 'phoneField',
 					rules: [{
 						type: 'empty',
@@ -63,10 +56,7 @@ Controller('profileView', {
 			fields: fields
 		});
 
-		$('#usernameField').mask('999.999.999-99');
-		$('#password1Field,#password2Field').mask('9999999999999999');
 		$('#phoneField').mask('(99) 99999-9999');
-
 
 		var fields = Meteor.users.findOne(userIdVar.get());
 		var usuario = {

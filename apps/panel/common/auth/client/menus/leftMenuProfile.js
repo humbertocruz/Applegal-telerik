@@ -1,4 +1,9 @@
 Controller('leftMenuProfile',{
+	helpers:{
+		user:function(){
+			return Meteor.user();
+		}
+	},
 	events:{
 		'click #logoutEvent':function(e,t){
 			htmlConfirm('Sair do Sistema', 'Você tem certeza?', function() {

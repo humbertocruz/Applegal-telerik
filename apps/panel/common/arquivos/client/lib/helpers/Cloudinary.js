@@ -6,7 +6,7 @@ Template.registerHelper("clUrl", function(public_id, options){
 		var hash = {};
 	}
 	// Se não enviar o cloud_name, tentar com o Cloudinary Technotronics
-	if (!hash.cloud_name) hash.cloud_name = 'technoapp';
+	if (!hash.cloud_name) hash.cloud_name = 'technotronics';
 	// Inicializa cloudinary
 	var cl = cloudinary.Cloudinary.new({cloud_name:hash.cloud_name});
 

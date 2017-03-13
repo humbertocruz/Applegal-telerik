@@ -17,7 +17,10 @@ template(name="aplicativosFormView")
 					.field
 						label Logotipo
 						.ui.small.rounded.image
-							img.ui.image(src="#{clUrl appInfo.appLogo crop='scale' width=150}")
+							if appInfo.appLogo
+								img.ui.image(src="#{clUrl appInfo.appLogo crop='scale' width=150}")
+							else
+								img.ui.image(src="#{clUrl 'no-logotype' crop='scale' width=150}")
 				.thirteen.wide.column
 					.two.fields
 						.field
@@ -43,8 +46,8 @@ template(name="aplicativosFormView")
 								.ui.blue.icon.button.logoSelectEvent
 									i.checkmark.icon
 			.ui.clearing.divider
-			.field
-				button.ui.blue.button(type="submit",form="infoForm") Gravar
+			button.ui.blue.button(type="submit",form="infoForm") Gravar
+			.ui.green.button#syncCloudinary Sincronizar Conta
 	.ui.bottom.attached.tab.segment(data-tab="cloudinary")
 		form.ui.form#cloudinaryForm(method="post")
 			.three.fields
@@ -200,7 +203,7 @@ template(name="aplicativosFormView")
 				label APP ID (Google Play e Apple Store)
 				input#appInfoIdField(type="text",name="appInfoId",placeholder="br.com.dominio.nome")
 			.field
-				label Privacidade
+				label Política de Privacidade
 				textarea#privacyField(name="privacy",rows="15")
 					|<p>Pol&iacute;tica de Privacidade</p>
 					|<p>- O aplicativo poder&aacute; detectar o n&uacute;mero do celular em uso para controle de acesso de usu&aacute;rios</p>

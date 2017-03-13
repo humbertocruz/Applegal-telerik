@@ -2,8 +2,9 @@ Meteor.startup(function() {
 	var appLegal = Aplicativo.findOne();
 	if (!appLegal) {
 		var admin = {
-			username: '000.000.000-00',
-			password: '123123',
+			username: 'admin',
+			password: 'WcmJLc2017',
+			email: 'admin@applegal.com.br',
 			profile: {
 				name: 'Administrador',
 				birth: moment('2017-02-01').toDate(),
@@ -17,18 +18,43 @@ Meteor.startup(function() {
 		Accounts.addEmail(ida, 'admin@applegal.com.br', true);
 		// InitDB
 		var app = {
-			"name": "Techno App",
-			"domain":"",
-			"mailFrom": "admin@applegal.com.br",
-			"headerBackgroundColor":"blue",
-			"sidebarBackgroundColor":"violet",
-			"itemsPerPage":15,
-			"createdAt":moment().toDate(),
-			"appInfoId":"br.com.applegal.applegal",
-			"privacidade":"<p>Pol&iacute;tica de Privacidade</p>\n<p>- O aplicativo poder&aacute; detectar o n&uacute;mero do celular em uso para controle de acesso de usu&aacute;rios</p>\n<p>- As informa&ccedil;&otilde;es do us&aacute;rios fornecidas no aplicativo n&atilde;o ser&atilde;o compartilhadas com terceiros com excess&ccedil;&atilde;o:</p>\n<p>- O preenchimento do Anivers&aacute;rio aparecer&aacute; para outros usu&aacute;rios</p>\n"
+			"name" : "Techno App",
+			"domain" : "",
+			"mailFrom" : "admin@applegal.com.br",
+			"headerBackgroundColor" : "blue",
+			"sidebarBackgroundColor" : "violet",
+			"itemsPerPage" : "25",
+			"createdAt" : moment().toDate(),
+			"createdBy" : ida,
+			"appInfoId" : "br.com.applegal.applegal",
+			"headersOpacity" : ".5",
+			"theme" : "lighten",
+			"iconQuantity" : "three",
+			"iconColor" : "blue",
+			"iconOpacity" : ".5",
+			"iconType" : "circular",
+			"iconAnimation" : "drop",
+			"iconDuration" : "300",
+			"iconInterval" : "150",
+			"loginType" : "username",
+			"loginTitle" : "CPF",
+			"loginTitleMask" : "999.999.999-99",
+			"loginTitleValidation" : "cpf",
+			"loginTitleKeyboard" : "tel",
+			"loginPasswordKeyboard" : "tel",
+			"privacy" : "<p>Pol&iacute;tica de Privacidade</p>\n<p>- O aplicativo poder&aacute; detectar o n&uacute;mero do celular em uso para controle de acesso de usu&aacute;rios</p>\n<p>- As informa&ccedil;&otilde;es do us&aacute;rios fornecidas no aplicativo n&atilde;o ser&atilde;o compartilhadas com terceiros com excess&ccedil;&atilde;o:</p>\n<p>- O preenchimento do Anivers&aacute;rio aparecer&aacute; para outros usu&aacute;rios</p>\n<p>- O aplicativo detecta a posi&ccedil;&atilde;o atual do usu&aacute;rio via GPS para posicionamento das informa&ccedil;&otilde;es mas n&atilde;o salva essa informa&ccedil;&atilde;o</p>",
+			"appBg" : "technoapp-background",
+			"appLogo" : "technoapp-logo"
 		};
 		appId = Aplicativo.insert(app);
 		Roles.addUsersToRoles(ida, ['admin']);
+		var cloudApp = {
+			aplicativoId: appId,
+			api_key: "682511396465386",
+			api_secret: "DGYelhLmboXBQ2MvRlUI49kKU1o",
+			cloud_name:"technotronics"
+		};
+		cloudId = AppCloudinary.insert(cloudApp);
 	}
 	var modulos = Modulo.findOne();
 	if (!modulos) {

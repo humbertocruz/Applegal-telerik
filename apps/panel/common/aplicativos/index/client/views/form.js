@@ -148,7 +148,6 @@ Controller('aplicativosFormView',{
 		'submit .aplicativosForm':function(e,t){
 			e.preventDefault();
 			var fields = $(e.currentTarget).form('get values');
-			console.log(fields);
 			var id = FlowRouter.getParam('aplicativoId');
 			fields.appBg = bgSelectedVar.get();
 			fields.appLogo = logoSelectedVar.get();
@@ -162,6 +161,10 @@ Controller('aplicativosFormView',{
 					//isLoadingVar.set(false);
 					Bert.alert('O aplicativo foi salvo com sucesso!','success');
 				}
+			});
+		},
+		'click #syncCloudinary':function(e,t){
+			htmlConfirm('Aviso','Você tem certeza?<br>Todas as imagens serão sincronizadas da conta Cloudinary.',function(){
 			});
 		},
 		'click #bgUpEvent':function(e,t){

@@ -4,12 +4,8 @@ template(name="modulosView")
 			tr
 				th.three.wide &nbsp;
 				th.one.wide Ícone
+				th Nome
 				th Título
-				th Path
-				th.one.wide
-					i.desktop.icon
-				th.one.wide
-					i.mobile.icon
 		tbody
 			each modulos.data
 				tr
@@ -20,8 +16,6 @@ template(name="modulosView")
 							i.trash.icon
 					td
 						i.large.icon(class="#{icon}")
-					td #{title}
 					td #{path}
-					td #{admin}
-					td #{mobile}
+					td #{title}
 	+indexInfoPaginator ready=ready nothingFound='Nenhum módulo cadastrado.' count=modulos.count page=modulos.count pages=modulos.pages singularForm='Módulo' pluralForm='Módulos'

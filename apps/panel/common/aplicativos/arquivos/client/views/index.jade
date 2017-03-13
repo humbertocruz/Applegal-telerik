@@ -1,6 +1,8 @@
 template(name="aplicativosArquivosView")
 	//+indexHeaderSearch header=header htmlItems=htmlItems
 	input#uploadField(type="file",name="files",style="display:none;",multiple="multiple")
+	.ui.green.button#rebuildCloudinary Recuperar Arquivos
+	.ui.clearing.divider
 	.ui.eight.cards
 		if ready
 			each arquivos.data

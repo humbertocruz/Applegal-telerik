@@ -163,10 +163,6 @@ Controller('aplicativosFormView',{
 				}
 			});
 		},
-		'click #syncCloudinary':function(e,t){
-			htmlConfirm('Aviso','Você tem certeza?<br>Todas as imagens serão sincronizadas da conta Cloudinary.',function(){
-			});
-		},
 		'click #bgUpEvent':function(e,t){
 			var max = Math.ceil(Counts.get('allWallpapers')/8);
 			if (arquivosPageVar.get() == max) return false;

@@ -1,4 +1,25 @@
 Meteor.methods({
+	rebuildCloudinary: function(aplicativoId){
+		Future = Npm.require('fibers/future');
+		var myFuture = new Future();
+
+		// Remover Arquivos do App
+		Arquivo.remove({
+			aplicativoId:aplicativoId
+		});
+		Cloudinary.api.resources(Meteor.bindEnvironment(function(result){
+			_.each(result.resources,function(image){
+				image.aplicativoId = aplicativoId;
+				image.cloud_name = Cloudinary.config().cloud_name;
+				Arquivo.insert(image);
+			});
+			myFuture.return(result);
+		}),{
+			type:'upload',
+			tags:true
+		});
+		return myFuture.wait();
+	},
 	setCloudinary:function(aplicativoId){
 		if (!this.userId) return 'technotronics';
 		if (!aplicativoId) return 'technotronics';

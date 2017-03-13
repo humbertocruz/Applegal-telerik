@@ -18,7 +18,7 @@ template(name="aplicativosFormView")
 						label Logotipo
 						.ui.small.rounded.image
 							if appInfo.appLogo
-								img.ui.image(src="#{clUrl appInfo.appLogo crop='scale' width=150}")
+								img.ui.image(src="#{clUrl appInfo.appLogo cloud_name=cloud_name crop='scale' width=150}")
 							else
 								img.ui.image(src="#{clUrl 'no-logotype' crop='scale' width=150}")
 				.thirteen.wide.column
@@ -36,18 +36,8 @@ template(name="aplicativosFormView")
 						.field
 							label Quantidade Paginação
 							input#itemsPerPageField(type="number",name="itemsPerPage")
-			.ui.eight.cards
-				if ready
-					each logotipos.data
-						.ui.card(class="#{isLogoSelected}")
-							.image
-								img.ui.tiny.image.logoSelectEvent(src="#{clUrl public_id crop='scale' width=150}")
-							.extra
-								.ui.blue.icon.button.logoSelectEvent
-									i.checkmark.icon
 			.ui.clearing.divider
 			button.ui.blue.button(type="submit",form="infoForm") Gravar
-			.ui.green.button#syncCloudinary Sincronizar Conta
 	.ui.bottom.attached.tab.segment(data-tab="cloudinary")
 		form.ui.form#cloudinaryForm(method="post")
 			.three.fields

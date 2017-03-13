@@ -102,6 +102,19 @@ Controller('aplicativosArquivosView',{
 		}
 	},
 	events:{
+		'click #rebuildCloudinary':function(e,t){
+			htmlConfirm('Aviso','Você tem certeza?<br>Todas as imagens serão recuperadas da conta Cloudinary.',function(){
+				Meteor.call("rebuildCloudinary", FlowRouter.getParam('aplicativoId'), function(error, result){
+					if(error){
+						console.log("error", error);
+					}
+					if(result){
+						console.log(result);
+						Bert.alert('Documentos recuperados com sucesso.','success');
+					}
+				});
+			});
+		},
 		'click .removePreviewEvent':function(e,t){
 			Cloudinary.collection.remove(this._id);
 		},

@@ -1,0 +1,29 @@
+template(name="bibliotecaView")
+	input#uploadField(type="file",name="files",style="display:none;",multiple="multiple")
+	.ui.green.button#rebuildCloudinary Recuperar Arquivos
+	.ui.button.uploadEvent(data-value="wallpaper") Enviar Papel de Parede
+	.ui.button.uploadEvent(data-value="logotype") Enviar Logotipo
+	.ui.clearing.divider
+	.ui.five.column.grid
+		each biblioteca.data
+			.column(id="imageColumn_#{_id}")
+				.ui.fluid.rounded.image.dim
+					.ui.inverted.dimmer
+						.content
+							.center
+								.ui.header Gerenciar
+								.ui.red.mini.icon.button.arquivoRemoveEvent
+									i.trash.icon
+					img.ui.image(src="#{clUrl public_id crop='scale' width=210 cloud_name=cloud_name}")
+		each uploads.data
+			.column
+				.ui.fluid.rounded.image.dim
+					.ui.active.inverted.dimmer
+						.content
+							.center
+								.ui.header Enviando
+								.ui.tiny.progress(id="progress_#{_id}")
+									.bar
+					img.ui.image(src="#{preview}")
+	.ui.clearing.divider
+	.ui.blue.button#loadMore Carregar mais...

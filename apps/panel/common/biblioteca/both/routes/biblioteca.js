@@ -1,6 +1,10 @@
+/*
+** Rotas para a Biblioteca de Arquivos
+** Apenas para Admins
+*/
 arquivosRoutes = FlowRouter.group({
-	name: 'arquivosRoutes',
-	prefix: '/arquivos',
+	name: 'bibliotecaRoutes',
+	prefix: '/biblioteca',
 	triggersEnter: [
 		function(obj, redirect) {
 			if (!Roles.userIsInRole(Meteor.userId(), ['admin'])) {
@@ -12,34 +16,34 @@ arquivosRoutes = FlowRouter.group({
 });
 
 arquivosRoutes.route('/', {
-	name: 'arquivosRoute',
+	name: 'bibliotecaRoute',
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
 			left: 'leftMenuAdmin',
-			main: 'arquivosView'
+			main: 'bibliotecaView'
 		});
 	}
 });
 
 arquivosRoutes.route('/novo', {
-	name: 'arquivosInsertRoute',
+	name: 'bibliotecaInsertRoute',
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
 			left: 'leftMenuAdmin',
-			main: 'arquivosFormView'
+			main: 'bibliotecaFormView'
 		});
 	}
 });
 
 arquivosRoutes.route('/:id', {
-	name: 'arquivosUpdateRoute',
+	name: 'bibliotecaUpdateRoute',
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
 			left: 'leftMenuAdmin',
-			main: 'arquivosFormView'
+			main: 'bibliotecaFormView'
 		});
 	}
 });

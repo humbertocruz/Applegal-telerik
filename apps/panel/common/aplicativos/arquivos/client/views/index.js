@@ -123,9 +123,6 @@ Controller('aplicativosArquivosView',{
 				});
 			});
 		},
-		'click .removePreviewEvent':function(e,t){
-			Cloudinary.collection.remove(this._id);
-		},
 		'click .uploadEvent':function(e,t){
 			uploadTypeVar.set($(e.currentTarget).data('value'));
 			$('#uploadField').click();
@@ -144,7 +141,7 @@ Controller('aplicativosArquivosView',{
 						} else {
 							res.cloud_name = $.cloudinary.config.cloud_name;
 							Arquivo.insert(res);
-							Meteor.setTimeout(function(){ 
+							Meteor.setTimeout(function(){
 								$('.column.arquivo').not('.dimmable').dimmer({
 									on: 'hover'
 								});
@@ -171,7 +168,6 @@ Controller('aplicativosArquivosView',{
 						});
 					}
 				});
-
 			});
 		}
 	}

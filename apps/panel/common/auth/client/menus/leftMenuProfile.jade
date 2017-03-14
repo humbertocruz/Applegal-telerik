@@ -1,8 +1,23 @@
 template(name="leftMenuProfile")
+	.ui.fluid.image#changeAvatarShow
+		.ui.dimmer
+			.content
+				.center
+					.ui.inverted.header Avatar
+					.ui.mini.icon.button
+						i.sidebar.icon
+					.ui.mini.icon.button
+						i.upload.icon
+					.ui.red.mini.icon.button
+						i.trash.icon
+		img.ui.image(src="#{gravatar user.emails}")
 	.ui.vertical.fluid.menu
-		.item
-			img.ui.fluid.rounded.image(src="#{gravatar user.emails}")
-		a.item Trocar Senha
-		a.item Alterar Email
-		.item
-			.ui.red.fluid.button#logoutEvent Sair
+		.link.item
+			i.key.icon
+			|Alterar Senha
+		.link.item
+			i.mail.icon
+			|Alterar Email
+		.link.item
+			i.sign.out.icon
+			|Sair

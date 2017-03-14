@@ -4,6 +4,11 @@ Controller('leftMenuProfile',{
 			return Meteor.user();
 		}
 	},
+	rendered:function(){
+		$('#changeAvatarShow').dimmer({
+			on: 'hover'
+		});
+	},
 	events:{
 		'click #logoutEvent':function(e,t){
 			htmlConfirm('Sair do Sistema', 'Você tem certeza?', function() {

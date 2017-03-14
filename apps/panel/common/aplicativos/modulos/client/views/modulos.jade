@@ -11,6 +11,12 @@ template(name="aplicativosModulosView")
 			tr
 				td
 					.ui.blue.button#addAppModulo Adicionar Módulo
+					.ui.large.popup
+						.ui.vertical.text.menu
+							each modulos_disponiveis
+								.ui.link.item#addModuloEvent
+									i.icon(class="#{icon}")
+									|#{title}
 	//.ui.bottom.attached.segment
 		.ui.grid
 			if isModAdmin

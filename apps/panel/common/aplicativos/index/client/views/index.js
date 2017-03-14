@@ -14,18 +14,10 @@ Controller('aplicativosView',{
 	},
 	rendered:function(){
 		$('.ui.dropdown').dropdown();
-		$('#addAppModal').modal({
-			onApprove:function(){
-				var name = $('#nameField').val();
-				Meteor.call("aplicativosForm", {name:name}, function(error, result){
-					if(error){
-						console.log("error", error);
-					}
-					if(result){
-						Bert.alert('Aplicativo criado com sucesso','success');
-					}
-				});
-			}
+		$('#addAppShow').popup({
+			inline:true,
+			hoverable:true,
+			position: 'right center'
 		});
 		$('.usernameField').mask('999.999.999-99');
 	},
@@ -47,12 +39,22 @@ Controller('aplicativosView',{
 		}
 	},
 	events:{
+		'submit #addAppForm':function(e,t){
+			e.preventDefault();
+			var fields = $(e.currentTarget).form('get values');
+			Meteor.call("aplicativosForm", fields, function(error, result){
+				if(error){
+					console.log("error", error);
+				}
+				if(result){
+					Bert.alert('Aplicativo criado com sucesso.','success');
+					FlowRouter.go('aplicativosUpdateRoute',{aplicativoId:result})
+				}
+			});
+		},
 		'click .selectAppEvent':function(e,t){
 			// Todo
 			FlowRouter.go('aplicativosUpdateRoute',{aplicativoId:this._id});
-		},
-		'click #addAppEvent':function(e,t){
-			$('#addAppModal').modal('show');
 		}
 	}
 });

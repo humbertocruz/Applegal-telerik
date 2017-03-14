@@ -1,36 +1,30 @@
 template(name="aplicativosArquivosView")
-	//+indexHeaderSearch header=header htmlItems=htmlItems
 	input#uploadField(type="file",name="files",style="display:none;",multiple="multiple")
 	.ui.green.button#rebuildCloudinary Recuperar Arquivos
-	.ui.clearing.divider
-	.ui.four.cards
-		if ready
-			each arquivos.data
-				.ui.card
-					.image
-						img.ui.image(src="#{clUrl public_id crop='scale' width=210 cloud_name=cloud_name}")
-					.content
-					.extra
-						.ui.blue.tiny.icon.button.arquivoBackgroudEvent(data-tooltip="Usar como Fundo do App",data-inverted)
-							i.image.icon
-						.ui.blue.tiny.icon.button.arquivoLogotypeEvent(data-tooltip="Usar como Logotipo do App",data-inverted)
-							i.facebook.icon
-						.ui.red.tiny.icon.button.arquivoRemoveEvent
-							i.trash.icon
-			each uploads.data
-				.ui.card(id="wallpaper_#{_id}")
-					.image
-						img.ui.image(src="#{preview}")
-					.content
-					.extra
-						if compare status 'eq' 'uploading'
-							.ui.tiny.progress(id="progress_#{_id}")
-								.bar
-								.label Enviando...
-						else
-							.ui.fluid.green.icon.tiny.button.removePreviewEvent
-								i.checkmark.icon
-	.ui.clearing.divider
 	.ui.button.uploadEvent(data-value="wallpaper") Enviar Papel de Parede
 	.ui.button.uploadEvent(data-value="logotype") Enviar Logotipo
-	//+indexInfoPaginator ready=ready noattached=true nothingFound='Nenhum arquivo cadastrado.' count=arquivos.count page=arquivos.count pages=arquivos.pages singularForm='Arquivo' pluralForm='Arquivos'
+	.ui.clearing.divider
+	.ui.six.column.grid
+		if ready
+			each arquivos.data
+				.column.arquivo
+					.ui.dimmer
+						.content
+							.center
+								.ui.inverted.header Gerenciar
+								.ui.mini.icon.button.arquivoBackgroudEvent(data-tooltip="Usar como Fundo",data-inverted)
+									i.image.icon
+								.ui.mini.icon.button.arquivoLogotypeEvent(data-tooltip="Usar como Logotipo",data-inverted)
+									i.facebook.icon
+								.ui.red.mini.icon.button.arquivoRemoveEvent
+									i.trash.icon
+					img.ui.image(src="#{clUrl public_id crop='scale' width=210 cloud_name=cloud_name}")
+			each uploads.data
+				.column.arquivo
+					.ui.active.dimmer
+						.content
+							.center
+								.ui.inverted.header Enviando
+								.ui.tiny.progress(id="progress_#{_id}")
+									.bar
+					img.ui.image(src="#{preview}")

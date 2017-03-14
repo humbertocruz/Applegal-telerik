@@ -1,5 +1,5 @@
 Meteor.startup(function() {
-	var userAdm = Roles.getUsersInRole('admin').fetch();
+	var userAdm = Accounts.findUserByEmail('admin@applegal.com.br');
 	if (!userAdm) {
 		var admin = {
 			username: 'admin',
@@ -17,7 +17,7 @@ Meteor.startup(function() {
 		var ida = Accounts.createUser(admin);
 		Accounts.addEmail(ida, 'admin@applegal.com.br', true);
 	} else {
-		var ida = userAdm[0]._id;
+		var ida = userAdm._id;
 	}
 	var appLegal = Aplicativo.findOne();
 	if (!appLegal) {	// InitDB

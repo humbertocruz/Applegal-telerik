@@ -7,6 +7,13 @@ Controller('aplicativosModulosView',{
 			icon:'puzzle'
 		});
 	},
+	rendered:function(){
+		$('#addAppModulo').popup({
+			inline:true,
+			hoverable:true,
+			position: 'right center'
+		});
+	},
 	helpers:{
 		updateModulo:function(){
 			return updateModuloVar.get();

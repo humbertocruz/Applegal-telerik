@@ -8,9 +8,10 @@ template(name="mainMenu")
 
 				.right.menu
 					if isInRole 'admin'
-						.ui.dropdown.item
+						.ui.item#adminSubMenuShow
 							i.sidebar.icon
-							.menu
+						.ui.large.popup
+							.ui.vertical.text.menu
 								a.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
 									i.android.icon
 									|Aplicativos
@@ -23,6 +24,14 @@ template(name="mainMenu")
 								a.item(class="#{isActiveRoute regex='^admins'}",href="#{pathFor 'adminsRoute'}")
 									i.users.icon
 									|Admins
-					a.ui.item(class="#{isActiveRoute regex='^profile'}",href="#{pathFor 'profileRoute'}")
+					a.ui.item#profileSubMenuShow(class="#{isActiveRoute regex='^profile'}",href="#{pathFor 'profileRoute'}")
 						img.ui.avatar.image(src="#{gravatar user.emails}")
+					.ui.large.popup
+						.ui.vertical.text.menu
+							.link.item
+								i.key.icon
+								|Alterar Senha
+							.link.item
+								i.sign.out.icon
+								|Sair
 		+subMenu

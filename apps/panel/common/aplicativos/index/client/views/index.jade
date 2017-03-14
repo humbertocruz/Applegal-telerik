@@ -1,5 +1,4 @@
 template(name="aplicativosView")
-	+addAppModal
 	table.ui.blue.top.attached.single.line.selectable.striped.padded.table
 		thead
 			tr
@@ -13,20 +12,14 @@ template(name="aplicativosView")
 						img.ui.mini.image(src="#{clUrl appLogo crop='scale' width=35 cloud_name=cloud_name}")
 					td #{dateTimeBr createdAt}
 					td #{name}
-	+indexInfoPaginator ready=ready nothingFound='Nenhum aplicativo cadastrado.' count=aplicativos.count page=aplicativos.count pages=aplicativos.pages singularForm='Aplicativo' pluralForm='Aplicativos'
-
-template(name="addAppModal")
-	.ui.small.modal.transition.hidden#addAppModal
-		.header Criar Novo Aplicativo
-		.content
+	.ui.secondary.bottom.attached.segment
+		.ui.primary.button#addAppShow Novo Aplicativo
+		.ui.large.popup
 			form.ui.form#addAppForm(method="post")
-				.field
-					label Nome
-					input#nameField(type="text", name="name")
-		.actions
-			.ui.negative.right.labeled.icon.button
-				|Cancelar
-				i.close.icon
-			.ui.positive.right.labeled.icon.button
-				|Salvar
-				i.checkmark.icon
+					.field
+						label Nome
+						input#nameField(type="text", name="name")
+					.field
+						button.ui.primary.fluid.right.labeled.icon.button(type="submit",form="addAppForm")
+							|Salvar
+							i.checkmark.icon

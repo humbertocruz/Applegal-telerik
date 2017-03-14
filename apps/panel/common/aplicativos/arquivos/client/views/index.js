@@ -17,11 +17,14 @@ Controller('aplicativosArquivosView',{
 		Tracker.autorun(function(){
 			var page = FlowRouter.getQueryParam('page');
 			var aplicativoId = FlowRouter.getParam('aplicativoId');
-			Meteor.subscribe("appArquivos", page, aplicativoId);
+			appArquivos = Meteor.subscribe("appArquivos", page, aplicativoId);
 		});
 	},
 	rendered:function(){
 		$('.ui.dropdown').dropdown();
+		$('.column.arquivo').not('.dimmable').dimmer({
+			on: 'hover'
+		});
 	},
 	helpers:{
 		ready:function(){
@@ -141,6 +144,11 @@ Controller('aplicativosArquivosView',{
 						} else {
 							res.cloud_name = $.cloudinary.config.cloud_name;
 							Arquivo.insert(res);
+							Meteor.setTimeout(function(){ 
+								$('.column.arquivo').not('.dimmable').dimmer({
+									on: 'hover'
+								});
+							}, 1000);
 						}
 					}
 				);

@@ -1,15 +1,15 @@
 template(name="leftMenuAdmin")
-		.ui.blue.pointing.fluid.vertical.menu
-			a.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
-				i.android.icon
-				|Aplicativos
-			if isInRole 'admin'
-				a.item(class="#{isActiveRoute regex='^modulos'}",href="#{pathFor 'modulosRoute'}")
-					i.puzzle.icon
-					|Módulos
-				a.item(class="#{isActiveRoute regex='^arquivos'}",href="#{pathFor 'arquivosRoute'}")
-					i.file.icon
-					|Arquivos
-				a.item(class="#{isActiveRoute regex='^admins'}",href="#{pathFor 'adminsRoute'}")
-					i.users.icon
-					|Admins
+	.ui.blue.pointing.fluid.vertical.menu
+		a.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
+			i.android.icon
+			|Seus Apps
+		if isInRole 'admin'
+			a.item(class="#{isActiveRoute regex='^modulos'}",href="#{pathFor 'modulosRoute'}")
+				i.puzzle.icon
+				|Módulos
+			a.item(class="#{isActiveRoute regex='^arquivos'}",href="#{pathFor 'arquivosRoute'}")
+				i.file.icon
+				|Arquivos
+			a.item(class="#{isActiveRoute regex='^admins'}",href="#{pathFor 'adminsRoute'}")
+				i.users.icon
+				|Admins

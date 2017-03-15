@@ -20,6 +20,9 @@ Controller('aplicativosFormView',{
 		});
 	},
 	rendered:function(){
+		$('.dim').dimmer({
+			on:'hover'
+		});
 		var loadApp = function(aplicativo){
 			$('.aplicativosForm').form('set values',aplicativo);
 			bgSelectedVar.set(aplicativo.appBg);
@@ -134,7 +137,7 @@ Controller('aplicativosFormView',{
 	events:{
 		'submit #removeForm':function(e,t){
 			e.preventDefault();
-			Meteor.call("appRemoveAll", FlowRouter.getParam('aplicativoId'), function(error, result){ 
+			Meteor.call("appRemoveAll", FlowRouter.getParam('aplicativoId'), function(error, result){
 				if(error){
 					console.log("error", error);
 				}

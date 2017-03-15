@@ -41,9 +41,6 @@ Controller('bibliotecaView',{
 	},
 	rendered:function(){
 		$('.ui.dropdown').dropdown();
-		$('.image.dim').not('.dimmable').dimmer({
-			on: 'hover'
-		});
 	},
 	helpers:{
 		biblioteca: function(){
@@ -100,19 +97,25 @@ Controller('bibliotecaView',{
 				);
 			});
 		},
-		'click .removeArquivoEvent':function(e,t){
+		'click .arquivoRemoveEvent':function(e,t){
 			var me = this;
+			console.log('#imageColumn_'+me._id);
 			htmlConfirm('Aviso','Você tem certeza?',function(){
-				Cloudinary.delete(me.public_id,function(err,result){
-					Arquivo.remove(me._id,function(error, result){
-						if(error){
-							console.log("error", error);
-						}
-						if(result){
-							Bert.alert('Arquivo excluído com sucesso','success');
-						}
-					});
-				});
+				$('#imageColumn_'+me._id).
+				transition({
+					onComplete:function(){
+						Cloudinary.delete(me.public_id,function(err,result){
+							Arquivo.remove(me._id,function(error, result){
+								if(error){
+									console.log("error", error);
+								}
+								if(result){
+									Bert.alert('Arquivo excluído com sucesso','success');
+								}
+							});
+						});
+					}
+				}).transition('fade out');
 			});
 		},
 		'click #rebuildCloudinary':function(e,t){
@@ -123,26 +126,6 @@ Controller('bibliotecaView',{
 					}
 					if(result){
 						Bert.alert('Foram recuperados '+result.saved+' documentos de um total de '+result.returned+'.','success');
-					}
-				});
-			});
-		},
-		'click .arquivoRemoveEvent':function(e,t){
-			var me = this;
-			htmlConfirm('Aviso','Você tem certeza?',function(){
-				Cloudinary.delete(me.public_id,function(err,result){
-					if (err) {
-						console.log(err);
-					} else {
-						$('#imageColumn_'+me._id).transition('fade out');
-						Arquivo.remove(me._id,function(error, result){
-							if(error){
-								console.log("error", error);
-							}
-							if(result){
-								Bert.alert('Arquivo excluído com sucesso','success');
-							}
-						});
 					}
 				});
 			});

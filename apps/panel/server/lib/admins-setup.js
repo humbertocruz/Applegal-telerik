@@ -60,9 +60,9 @@ Meteor.startup(function() {
 		};
 		cloudId = AppCloudinary.insert(cloudApp);
 	}
-	var modulos = Modulo.findOne();
-	if (!modulos) {
-		var modulos = [{
+	var plugins = Plugin.findOne();
+	if (!plugins) {
+		var plugins = [{
 			"admin": true,
 			"mobile": true,
 			"path": "noticias",
@@ -134,8 +134,8 @@ Meteor.startup(function() {
 			"route": "filiaisRoute",
 			"icon": "building"
 		}];
-		_.each(modulos, function(mod){
-			Modulo.insert(mod);
+		_.each(plugins, function(mod){
+			Plugin.insert(mod);
 		});
 	}
 });

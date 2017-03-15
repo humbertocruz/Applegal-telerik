@@ -29,6 +29,11 @@ template(name="aplicativosFormView")
 					.field
 						label Logotipo
 						.ui.small.rounded.image
+							.ui.image.dim
+								.ui.dimmer
+									.content
+										.center
+											.ui.blue.button Trocar Logotipo
 							if appInfo.appLogo
 								img.ui.image(src="#{clUrl appInfo.appLogo cloud_name=cloud_name crop='scale' width=150}")
 							else
@@ -56,8 +61,8 @@ template(name="aplicativosFormView")
 			span Todos os arquivos do aplicativos ficam armazenados numa conta Cloudinary. É necessário configurar o acesso a esta conta.
 			br
 			span
-				|Faça o cadastro gratuito em 
-				a(href="") http://cloudinary.com 
+				|Faça o cadastro gratuito em
+				a(href="") http://cloudinary.com
 			span e copie aqui os dados apresentados no "Dashboard" - "Account Details".
 			br
 			br
@@ -229,7 +234,7 @@ template(name="aplicativosFormView")
 		form.ui.form#removeForm(method="post")
 			.ui.red.message
 				i.exclamation.icon
-				span Digite o nome do aplicativo para excluí-lo do sistema. 
+				span Digite o nome do aplicativo para excluí-lo do sistema.
 				br
 				strong Essa ação não poderá ser desfeita.
 			.red.field

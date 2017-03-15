@@ -1,7 +1,7 @@
 Aplicativo = new Mongo.Collection('aplicativos');
 Aplicativo.helpers({
 	appModulos:function(){
-		return AplicativoModulo.find({
+		return AplicativoPlugin.find({
 			aplicativoId:this._id
 		},{
 			sort:{

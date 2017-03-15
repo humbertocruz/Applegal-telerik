@@ -1,0 +1,21 @@
+template(name="pluginsView")
+	table.ui.blue.top.attached.table
+		thead
+			tr
+				th.three.wide &nbsp;
+				th.one.wide Ícone
+				th Nome
+				th Título
+		tbody
+			each plugins.data
+				tr
+					td
+						a.ui.icon.button.editBtn(href="#{pathFor 'pluginsUpdateRoute' id=_id}")
+							i.edit.icon
+						.ui.icon.button.removeBtn
+							i.trash.icon
+					td
+						i.large.icon(class="#{icon}")
+					td #{path}
+					td #{title}
+	+indexInfoPaginator ready=ready nothingFound='Nenhum plugin cadastrado.' count=plugins.count page=plugins.count pages=plugins.pages singularForm='Plugin' pluralForm='Plugins'

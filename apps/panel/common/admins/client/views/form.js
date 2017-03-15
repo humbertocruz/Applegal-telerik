@@ -117,28 +117,6 @@ Controller('adminsFormView', {
 				icon: 'user',
 				corner: 'add'
 			}
-		},
-		saveLink: function() {
-			return {
-				title: 'Salvar',
-				icon: 'save',
-				form: 'usuariosForm'
-			}
-		},
-		extraLinks: function() {
-			return [{
-				title: 'Cancelar',
-				route: 'adminsRoute',
-				icon: 'close'
-			}]
-		},
-		filiais: function() {
-			var filiais = Filial.find({}, {
-				sort: {
-					name: 1
-				}
-			}).fetch();
-			return filiais;
 		}
 	},
 	events: {

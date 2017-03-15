@@ -1,8 +1,8 @@
 template(name="leftMenuAdmin")
-	.ui.blue.pointing.fluid.vertical.menu
+	.ui.violet.fluid.vertical.menu
 		a.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
 			i.android.icon
-			|Seus Apps
+			|Apps
 		if isInRole 'admin'
 			a.item(class="#{isActiveRoute regex='^plugins'}",href="#{pathFor 'pluginsRoute'}")
 				i.puzzle.icon

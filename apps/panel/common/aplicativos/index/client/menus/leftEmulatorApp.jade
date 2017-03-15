@@ -11,10 +11,10 @@ template(name="leftEmulatorApp")
 					.content
 						.header Arquivos
 				if isAdmin
-					a.item(class="#{isActiveRoute regex='^aplicativosModulos'}",href="#{pathFor 'aplicativosModulosRoute' aplicativoId=appInfo._id}")
+					a.item(class="#{isActiveRoute regex='^aplicativosPlugins'}",href="#{pathFor 'aplicativosPluginsRoute' aplicativoId=appInfo._id}")
 						i.puzzle.icon
 						.content
-							.header Módulos
+							.header Plugins
 				a.item(class="#{isActiveRoute regex='^aplicativosUsuarios'}",href="#{pathFor 'aplicativosUsuariosRoute' aplicativoId=appInfo._id}")
 					i.users.icon
 					.content

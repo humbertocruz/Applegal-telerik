@@ -1,7 +1,7 @@
 Controller('aplicativosView',{
 	created:function() {
 		subMenuTitleVar.set({
-			title:'Seus Apps',
+			title:(Roles.userIsInRole(Meteor.userId(),'admin'))?'Apps':'Seus Apps',
 			icon:'list'
 		});
 		sint = 0;

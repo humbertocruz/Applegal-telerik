@@ -61,14 +61,6 @@ Controller('usuariosFormView', {
 				}
 			}]
 		},
-		filiais: function() {
-			var filiais = Filial.find({}, {
-				sort: {
-					name: 1
-				}
-			}).fetch();
-			return filiais;
-		},
 		appRoles: function(){
 			var app = Aplicativo.findOne(FlowRouter.getParam('aplicativoId'));
 			if (!app) return false;

@@ -104,14 +104,6 @@ Controller('profileView', {
 		},
 		extraLinks: function() {
 			return [];
-		},
-		filiais: function() {
-			var filiais = Filial.find({}, {
-				sort: {
-					name: 1
-				}
-			}).fetch();
-			return filiais;
 		}
 	},
 	events: {

@@ -4,17 +4,12 @@ template(name="bibliotecaView")
 	.ui.button.uploadEvent(data-value="wallpaper") Enviar Papel de Parede
 	.ui.button.uploadEvent(data-value="logotype") Enviar Logotipo
 	.ui.clearing.divider
-	.ui.five.column.grid
+	.ui.ten.column.grid
 		each biblioteca.data
 			.column(id="imageColumn_#{_id}")
-				.ui.fluid.rounded.image.dim
-					.ui.inverted.dimmer
-						.content
-							.center
-								.ui.header Gerenciar
-								.ui.red.mini.icon.button.arquivoRemoveEvent
-									i.trash.icon
-					img.ui.image(src="#{clUrl public_id crop='scale' width=210 cloud_name=cloud_name}")
+				i.red.link.trash.icon.arquivoRemoveEvent
+				img.ui.rounded.image(src="#{clUrl public_id crop='scale' width=210 cloud_name=cloud_name}")
+
 		each uploads.data
 			.column
 				.ui.fluid.rounded.image.dim
@@ -25,5 +20,6 @@ template(name="bibliotecaView")
 								.ui.tiny.progress(id="progress_#{_id}")
 									.bar
 					img.ui.image(src="#{preview}")
-	.ui.clearing.divider
-	.ui.blue.button#loadMore Carregar mais...
+	if compare biblioteca.count 'gt' biblioteca.data.length
+		.ui.clearing.divider
+		.ui.blue.button#loadMore Carregar mais...

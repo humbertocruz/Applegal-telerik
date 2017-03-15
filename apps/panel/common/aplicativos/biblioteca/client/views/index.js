@@ -1,4 +1,4 @@
-Controller('aplicativosArquivosView',{
+Controller('aplicativosBibliotecaView',{
 	created:function() {
 		subMenuTitleVar.set({
 			title:'Arquivos do Aplicativo',
@@ -14,57 +14,33 @@ Controller('aplicativosArquivosView',{
 			}
 		});
 		uploadTypeVar = new ReactiveVar();
+		publicityVar = new ReactiveVar('private');
 		Tracker.autorun(function(){
 			var page = FlowRouter.getQueryParam('page');
 			var aplicativoId = FlowRouter.getParam('aplicativoId');
-			appArquivos = Meteor.subscribe("appArquivos", page, aplicativoId);
+			appBiblioteca = Meteor.subscribe("appBiblioteca", page, aplicativoId, 12);
 		});
 	},
 	rendered:function(){
-		$('.ui.dropdown').dropdown();
-		$('.column.arquivo').not('.dimmable').dimmer({
-			on: 'hover'
-		});
+
 	},
 	helpers:{
 		ready:function(){
-			return true;
+			return appBiblioteca.ready();
 		},
-		header:function(){
-			return {
-				title:'Arquivos',
-				icon:'file'
-			}
-		},
-		htmlItems:function(){
-			return [
-				{
-					html:'Eviar Arquivo<i class="dropdown icon"></i><div class="menu"><a class="item uploadEvent" data-value="logotype">Logotipo</a><a class="item uploadEvent" data-value="wallpaper">Papel de Parede</a></div>'
-				}
-			]
-		},
-		extraLinks:function(){
-			return [
-				{
-					title:'Enviar Arquivo',
-					icon:'upload',
-					id:'enviarArquivoEvent'
-				}
-			]
-		},
-		uploads:function(){
+		/*uploads:function(){
 			var arquivos = Cloudinary.collection.find({
 				status:'uploading'
 			});
 			return {
 				data:arquivos.fetch(),
 			};
-		},
-		arquivos:function(){
-			var qtd = 8;
+		},*/
+		biblioteca:function(){
+			var qtd = 12;
 			var page = FlowRouter.getQueryParam('page');
 			if (!page) page = 1;
-			var arquivos = Arquivo.find({
+			var biblioteca = Biblioteca.find({
 				tags:{
 					$in:[
 						'logotype',
@@ -76,39 +52,57 @@ Controller('aplicativosArquivosView',{
 					]
 				}
 			},{
-				limit:8
+				limit:12
 			});
+			var data = biblioteca.fetch();
 			return {
 				page:page,
-				count:Counts.get('appArquivos'),
-				data:arquivos.fetch(),
-				pages:Math.ceil(Counts.get('appArquivos')/qtd)
+				count:Counts.get('appBiblioteca'),
+				data:data,
+				pages:Math.ceil(Counts.get('appBiblioteca')/qtd)
 			}
 		}
 	},
 	events:{
-		'click .arquivoBackgroudEvent':function(e,t){
-			console.log('change bg');
-			var bg = this.public_id;
-			Meteor.call("aplicativosForm", {_id:FlowRouter.getParam('aplicativoId'), appBg:bg}, function(error, result){
-				if(error){
-					console.log("error", error);
-				}
-				if(result){
-					Bert.alert('Fundo do Aplicativo alterado com sucesso.','success');
-				}
-			});
+		'click #prevPageEvent':function(e,t){
+			var page = FlowRouter.getQueryParam('page');
+			if (!page) page = 1;
+			if (page == 1) return false;
+			page--;
+			FlowRouter.go('aplicativosBibliotecaRoute',{aplicativoId:FlowRouter.getParam('aplicativoId')},{page:page});
 		},
-		'click .arquivoLogotypeEvent':function(e,t){
-			var lg = this.public_id;
-			console.log(lg);
-			Meteor.call("aplicativosForm", {_id:FlowRouter.getParam('aplicativoId'), appLogo:lg}, function(error, result){
-				if(error){
-					console.log("error", error);
+		'click #nextPageEvent':function(e,t){
+			var page = FlowRouter.getQueryParam('page');
+			if (!page) page = 1;
+			var maxPages = Math.ceil(Counts.get('appBiblioteca')/12);
+			if (page == maxPages) return false;
+			page++;
+			FlowRouter.go('aplicativosBibliotecaRoute',{aplicativoId:FlowRouter.getParam('aplicativoId')},{page:page});
+		},
+		'click .useOnAppEvent':function(e,t){
+			var me = this;
+			htmlConfirm('Aviso','Você tem certeza?',function(){
+				var doc = me.public_id;
+				if (_.contains(me.tags,'wallpaper')) {
+					var data = {
+						_id:FlowRouter.getParam('aplicativoId'),
+						appBg:doc
+					};
 				}
-				if(result){
-					Bert.alert('Logotipo do Aplicativo alterado com sucesso.','success');
+				if (_.contains(me.tags,'logotype')) {
+					var data = {
+						_id:FlowRouter.getParam('aplicativoId'),
+						appLogo:doc
+					};
 				}
+				Meteor.call("aplicativosForm", data, function(error, result){
+					if(error){
+						console.log("error", error);
+					}
+					if(result){
+						Bert.alert('Aplicativo alterado com sucesso.','success');
+					}
+				});
 			});
 		},
 		'click #rebuildCloudinary':function(e,t){
@@ -127,43 +121,42 @@ Controller('aplicativosArquivosView',{
 			uploadTypeVar.set($(e.currentTarget).data('value'));
 			$('#uploadField').click();
 		},
+		'change #publicityField':function(e,t){
+			publicityVar.set($(e.currentTarget).val());
+		},
 		'change #uploadField': function(e) {
 			var files = e.currentTarget.files;
 			_.each(files,function(ff,idx){
 				Cloudinary.upload(ff,
 					{
-						folder:FlowRouter.getParam('aplicativoId'),
-						tags:[uploadTypeVar.get(),FlowRouter.getParam('aplicativoId')],
+						folder:uploadTypeVar.get(),
+						tags:[uploadTypeVar.get(),publicityVar.get()]
 					},
 					function(err,res) {
 						if (err) {
 							console.log(err);
 						} else {
 							res.cloud_name = $.cloudinary.config.cloud_name;
-							Arquivo.insert(res);
-							Meteor.setTimeout(function(){
-								$('.column.arquivo').not('.dimmable').dimmer({
-									on: 'hover'
-								});
-							}, 1000);
+							res.aplicativoId = FlowRouter.getParam('aplicativoId');
+							Biblioteca.insert(res);
 						}
 					}
 				);
 			});
 		},
-		'click .arquivoRemoveEvent':function(e,t){
+		'click .RemoveEvent':function(e,t){
 			var me = this;
 			htmlConfirm('Aviso','Você tem certeza?',function(){
 				Cloudinary.delete(me.public_id,function(err,result){
 					if (err) {
 						console.log(err);
 					} else {
-						Arquivo.remove(me._id,function(error, result){
+						Biblioteca.remove(me._id,function(error, result){
 							if(error){
 								console.log("error", error);
 							}
 							if(result){
-								Bert.alert('Arquivo excluído com sucesso','success');
+								Bert.alert('Documento excluído com sucesso','success');
 							}
 						});
 					}

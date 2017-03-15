@@ -30,7 +30,7 @@ Meteor.publishComposite("allAplicativos", function(search,page){
 		children:[
 			{
 				find:function(app){
-					return AplicativoModulo.find({
+					return AplicativoPlugin.find({
 						aplicativoId:app._id
 					});
 				}
@@ -38,24 +38,28 @@ Meteor.publishComposite("allAplicativos", function(search,page){
 		]
 	}
 });
-Meteor.publishComposite("oneAplicativo", function(id){
+Meteor.publishComposite("oneAplicativo", function(aplicativoId){
 	// Apenas usuário logado
 	if (!this.userId) return false;
 	// Apenas para ADMIN
-	if (!Roles.userIsInRole(this.userId,'admin')) return false;
+	// if (!Roles.userIsInRole(this.userId,'admin')) return false;
 	return {
 		find: function() {
-			var aplicativo = Aplicativo.find(id);
+			var aplicativo = Aplicativo.find(aplicativoId);
 			return aplicativo;
 		},
 		children:[
 			{
 				find:function(app){
-					return AplicativoModulo.find({
+					return AplicativoPlugin.find({
 						aplicativoId:app._id
 					});
 				}
 			}
 		]
 	}
+});
+
+Meteor.publish("AppCloudinary", function(aplicativoId){
+	return AppCloudinary.find({aplicativoId:aplicativoId});
 });

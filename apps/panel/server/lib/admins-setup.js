@@ -46,7 +46,7 @@ Meteor.startup(function() {
 			"loginTitleValidation" : "cpf",
 			"loginTitleKeyboard" : "tel",
 			"loginPasswordKeyboard" : "tel",
-			"privacy" : "<p>Pol&iacute;tica de Privacidade</p>\n<p>- O aplicativo poder&aacute; detectar o n&uacute;mero do celular em uso para controle de acesso de usu&aacute;rios</p>\n<p>- As informa&ccedil;&otilde;es do us&aacute;rios fornecidas no aplicativo n&atilde;o ser&atilde;o compartilhadas com terceiros com excess&ccedil;&atilde;o:</p>\n<p>- O preenchimento do Anivers&aacute;rio aparecer&aacute; para outros usu&aacute;rios</p>\n<p>- O aplicativo detecta a posi&ccedil;&atilde;o atual do usu&aacute;rio via GPS para posicionamento das informa&ccedil;&otilde;es mas n&atilde;o salva essa informa&ccedil;&atilde;o</p>",
+			"privacy" : "<p>Pol&iacute;tica de Privacidade</p>\n<p>- O aplicativo poder&aacute; detectar o n&uacute;mero do celular em uso para controle de acesso de usu&aacute;rios</p>\n<p>- As informa&ccedil;&otilde;es do us&aacute;rios fornecidas no aplicativo n&atilde;o ser&atilde;o compartilhadas com terceiros com excess&ccedil;&atilde;o:</p>\n<p>- O preenchimento do Anivers&aacute;rio aparecer&aacute; para outros usu&aacute;rios</p>\n",
 			"appBg" : "background",
 			"appLogo" : "applegal"
 		};

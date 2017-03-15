@@ -1,0 +1,20 @@
+template(name="uploadStatus")
+	if isUploading
+		.ui.green.inverted.top.attached.vertical.menu
+			.ui.item
+				|Fazendo Upload
+		.ui.green.bottom.attached.vertical.menu
+			.ui.item
+				|Total
+				.ui.label #{total}
+			.ui.item
+				|Restantes
+				.ui.label #{restantes}
+			.ui.item
+				.ui.tiny.progress(id="progress_all")
+					.bar
+					.label 10%
+			.ui.item
+				.ui.red.fluid.button
+					i.close.icon
+					|Interromper

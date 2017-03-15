@@ -17,7 +17,7 @@ Controller('emulatorHomeView', {
 			return Meteor.userId();
 		},
 		modulos:function(){
-			var appMods = AplicativoModulo.find().fetch();
+			var appMods = AplicativoPlugin.find().fetch();
 			return appMods;
 		}
 	},

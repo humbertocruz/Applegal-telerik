@@ -1,6 +1,6 @@
 template(name="aplicativosFormView")
 	//+indexHeaderSearch header=header saveLink=saveLink
-	.ui.top.attached.secondary.pointing.tabular.menu
+	.ui.small.secondary.tabular.menu
 		.blue.active.link.item(data-tab="info")
 			i.info.icon
 			|Informações
@@ -22,22 +22,15 @@ template(name="aplicativosFormView")
 		.right.red.link.item(data-tab="delete")
 			i.trash.icon
 			|Excluir
-	.ui.bottom.attached.active.tab.segment(data-tab="info")
+	.ui.active.tab.blue.segment(data-tab="info")
 		form.ui.form.aplicativosForm#infoForm(method="post")
 			.ui.grid
 				.three.wide.column
-					.field
-						label Logotipo
-						.ui.small.rounded.image
-							.ui.image.dim
-								.ui.dimmer
-									.content
-										.center
-											.ui.blue.button Trocar Logotipo
-							if appInfo.appLogo
-								img.ui.image(src="#{clUrl appInfo.appLogo cloud_name=cloud_name crop='scale' width=150}")
-							else
-								img.ui.image(src="#{clUrl 'no-logotype' crop='scale' width=150}")
+					if appInfo.appLogo
+						img.ui.image(src="#{clUrl appInfo.appLogo cloud_name=cloud_name crop='scale' width=150}")
+					else
+						img.ui.image(src="#{clUrl 'no-logotype' crop='scale' width=150}")
+					.ui.blue.small.fluid.button Trocar Logotipo
 				.thirteen.wide.column
 					.two.fields
 						.field
@@ -55,7 +48,7 @@ template(name="aplicativosFormView")
 							input#itemsPerPageField(type="number",name="itemsPerPage")
 			.ui.clearing.divider
 			button.ui.blue.button(type="submit",form="infoForm") Gravar
-	.ui.bottom.attached.tab.segment(data-tab="cloudinary")
+	.ui.tab.blue.segment(data-tab="cloudinary")
 		.ui.message
 			i.exclamation.icon
 			span Todos os arquivos do aplicativos ficam armazenados numa conta Cloudinary. É necessário configurar o acesso a esta conta.
@@ -81,7 +74,7 @@ template(name="aplicativosFormView")
 			.ui.clearing.divider
 			.field
 				button.ui.blue.button(type="submit",form="cloudinaryForm") Gravar
-	.ui.bottom.attached.tab.segment(data-tab="design")
+	.ui.tab.blue.segment(data-tab="design")
 		form.ui.form.aplicativosForm#designForm(method="post")
 			.two.fields
 				.field
@@ -121,7 +114,7 @@ template(name="aplicativosFormView")
 			.ui.clearing.divider
 			.field
 			button.ui.blue.button(type="submit",form="designForm") Gravar
-	.ui.bottom.attached.tab.segment(data-tab="home")
+	.ui.tab.blue.segment(data-tab="home")
 		form.ui.form.aplicativosForm#homeForm(method="post")
 			.three.fields
 				.field
@@ -178,7 +171,7 @@ template(name="aplicativosFormView")
 			.ui.clearing.divider
 			.field
 			button.ui.blue.button(type="submit",form="homeForm") Gravar
-	.ui.bottom.attached.tab.segment(data-tab="login")
+	.ui.blue.tab.segment(data-tab="login")
 		form.ui.form.aplicativosForm#loginForm(method="post")
 			.field
 				label Tipo de Login
@@ -215,7 +208,7 @@ template(name="aplicativosFormView")
 			.ui.clearing.divider
 			.field
 			button.ui.blue.button(type="submit",form="loginForm") Gravar
-	.ui.bottom.attached.tab.segment(data-tab="stores")
+	.ui.blue.tab.segment(data-tab="stores")
 		form.ui.form.aplicativosForm#storesForm(method="post")
 			.field
 				label APP ID (Google Play e Apple Store)
@@ -230,7 +223,7 @@ template(name="aplicativosFormView")
 			.ui.clearing.divider
 			.field
 				button.ui.blue.button(type="submit",form="storesForm") Gravar
-	.ui.bottom.attached.tab.segment(data-tab="delete")
+	.ui.red.tab.segment(data-tab="delete")
 		form.ui.form#removeForm(method="post")
 			.ui.red.message
 				i.exclamation.icon

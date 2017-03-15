@@ -1,0 +1,35 @@
+template(name="aplicativosBibliotecaView")
+	input#uploadField(type="file",name="files",style="display:none;",multiple="multiple")
+	.center
+		.ui.green.button#rebuildCloudinary Recuperar Arquivos
+		select.ui.compact.selection.dropdown#publicityField
+			option(value="private") Particular
+			option(value="public") Público
+		.ui.button.uploadEvent(data-value="wallpaper") Enviar Papel de Parede
+		.ui.button.uploadEvent(data-value="logotype") Enviar Logotipo
+		.ui.right.floated.buttons
+			.ui.icon.button#prevPageEvent
+				i.left.arrow.icon
+			.ui.disabled.button #{biblioteca.page} de #{biblioteca.pages}
+			.ui.icon.button#nextPageEvent
+				i.right.arrow.icon
+	.ui.clearing.divider
+	.ui.six.cards
+		if Template.subscriptionsReady
+			each biblioteca.data
+				.ui.card
+					.image
+						img(src="#{clUrl public_id crop='scale' width=210 cloud_name=cloud_name}")
+					.content
+						|#{tags}
+					.extra.content
+						i.link.large.mobile.icon.useOnAppEvent
+						i.link.right.floated.large.trash.icon.RemoveEvent
+			//each uploads.data
+				.ui.card
+					.image
+						img(src="#{preview}")
+					.content
+					.extra.content
+						.ui.tiny.progress(id="progress_#{_id}")
+							.bar

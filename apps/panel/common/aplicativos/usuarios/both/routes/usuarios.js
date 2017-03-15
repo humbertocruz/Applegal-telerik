@@ -29,7 +29,7 @@ aplicativosRoutes.route('/:aplicativoId/usuarios', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'aplicativosUsuariosView'
 		});
 	}
@@ -40,7 +40,7 @@ aplicativosRoutes.route('/:aplicativoId/usuarios/novo', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'usuariosFormView'
 		});
 	}
@@ -51,7 +51,7 @@ aplicativosRoutes.route('/:aplicativoId/usuarios/:userId', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'usuariosFormView'
 		});
 	}

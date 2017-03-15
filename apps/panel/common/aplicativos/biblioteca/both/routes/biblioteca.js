@@ -4,12 +4,12 @@ aplicativosRoutes = FlowRouter.group({
 });
 
 aplicativosRoutes.route('/:aplicativoId/arquivos', {
-	name: 'aplicativosArquivosRoute',
+	name: 'aplicativosBibliotecaRoute',
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
-			main: 'aplicativosArquivosView'
+			left: 'leftMenu',
+			main: 'aplicativosBibliotecaView'
 		});
 	}
 });

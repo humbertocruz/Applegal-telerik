@@ -26,7 +26,7 @@ Meteor.publishComposite('', function(){
 				children:[
 					{
 						find:function(app){
-							return AplicativoModulo.find({
+							return AplicativoPlugin.find({
 								aplicativoId:app._id
 							});
 						}

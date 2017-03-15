@@ -5,7 +5,7 @@
 */
 Tracker.autorun(function(){
 	console.log('Configurando Permissões de Arquivos Cloudinary');
-	Arquivo.allow({
+	Biblioteca.allow({
 		insert: function(){
 			// Admin podem inserir em qualquer App
 			if (Roles.userIsInRole(Meteor.userId(), 'admin')) return true;

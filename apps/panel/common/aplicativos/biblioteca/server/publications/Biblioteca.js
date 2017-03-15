@@ -1,7 +1,8 @@
-Meteor.publish('appArquivos', function (page,aplicativoId) {
+Meteor.publish('appBiblioteca', function (page,aplicativoId,qtd) {
 	if (!aplicativoId) return [];
 	if (!page) page = 1;
 	search = {
+		aplicativoId:aplicativoId,
 		tags:{
 			$in:[
 				'logotype',
@@ -13,12 +14,11 @@ Meteor.publish('appArquivos', function (page,aplicativoId) {
 			]
 		}
 	};
-	var qtd = 8;
-	Counts.publish(this, 'appArquivos', Arquivo.find(search), {
+	Counts.publish(this, 'appBiblioteca', Biblioteca.find(search), {
 		noReady: true
 	});
 
-	return Arquivo.find(search,{
+	return Biblioteca.find(search,{
 		limit:qtd,
 		skip: (page - 1) * qtd
 	});

@@ -16,7 +16,7 @@ pluginsRoutes.route('/', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuAdmin',
+			left: 'leftMenu',
 			main: 'pluginsView'
 		});
 	}
@@ -27,7 +27,7 @@ pluginsRoutes.route('/novo', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuAdmin',
+			left: 'leftMenu',
 			main: 'pluginsFormView'
 		});
 	}
@@ -38,7 +38,7 @@ pluginsRoutes.route('/:id', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuAdmin',
+			left: 'leftMenu',
 			main: 'pluginsFormView'
 		});
 	}

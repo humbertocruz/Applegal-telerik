@@ -6,7 +6,7 @@ Meteor.methods({
 			aplicativoId:aplicativoId
 		});
 		// Removendo Modulos do Aplicativo
-		AplicativoModulo.remove({
+		AplicativoPlugin.remove({
 			aplicativoId:aplicativoId
 		});
 		// Removendo dados do Cloudinary

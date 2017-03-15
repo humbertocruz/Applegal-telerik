@@ -1,0 +1,54 @@
+template(name="leftMenu")
+	+uploadStatus
+
+	if aplicativoId
+		if isManagerOrAdmin
+			if showEmulator
+				div#emulatorFloatDiv
+					+emulatorFrame
+			
+			.ui.blue.inverted.top.attached.vertical.menu
+				.ui.item
+					i.mobile.icon#showEmulatorEvent
+					|#{appInfo.name}
+			.ui.blue.bottom.attached.vertical.menu
+				a.item(class="#{isActiveRoute regex='^aplicativosUpdate'}",href="#{pathFor 'aplicativosUpdateRoute' aplicativoId=appInfo._id}")
+					i.setting.icon
+					.content
+						.header Configuração
+				a.item(class="#{isActiveRoute regex='^aplicativosBiblioteca'}",href="#{pathFor 'aplicativosBibliotecaRoute' aplicativoId=appInfo._id}")
+					i.book.icon
+					.content
+						.header Biblioteca
+				a.item(class="#{isActiveRoute regex='^aplicativosPlugins'}",href="#{pathFor 'aplicativosPluginsRoute' aplicativoId=appInfo._id}")
+					i.puzzle.icon
+					.content
+						.header Plugins
+				a.item(class="#{isActiveRoute regex='^aplicativosUsuarios'}",href="#{pathFor 'aplicativosUsuariosRoute' aplicativoId=appInfo._id}")
+					i.users.icon
+					.content
+						.header Usuários
+	if appModulos
+		.ui.divider
+		.ui.vertical.fluid.inverted.menu(class="#{appInfo.sidebarBackgroundColor}")
+			each appModulos
+				if userHasPerm modulo.path
+					a.item(href="#{pathFor modulo.route aplicativoId=appInfo._id}")
+						i.icon(class="#{icon}")
+						.content
+							.header #{title}
+
+	.ui.violet.inverted.top.attached.vertical.menu
+		.ui.item
+			|Admin
+	.ui.violet.bottom.attached.vertical.menu
+		a.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
+			i.android.icon
+			|Apps
+		if isInRole 'admin'
+			a.item(class="#{isActiveRoute regex='^plugins'}",href="#{pathFor 'pluginsRoute'}")
+				i.puzzle.icon
+				|Plugins
+			a.item(class="#{isActiveRoute regex='^admins'}",href="#{pathFor 'adminsRoute'}")
+				i.users.icon
+				|Admins

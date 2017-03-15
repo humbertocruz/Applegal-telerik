@@ -6,10 +6,10 @@ template(name="leftEmulatorApp")
 					i.setting.icon
 					.content
 						.header Configuração
-				a.item(class="#{isActiveRoute regex='^aplicativosArquivos'}",href="#{pathFor 'aplicativosArquivosRoute' aplicativoId=appInfo._id}")
-					i.file.icon
+				a.item(class="#{isActiveRoute regex='^aplicativosBiblioteca'}",href="#{pathFor 'aplicativosBibliotecaRoute' aplicativoId=appInfo._id}")
+					i.book.icon
 					.content
-						.header Arquivos
+						.header Biblioteca
 				if isAdmin
 					a.item(class="#{isActiveRoute regex='^aplicativosPlugins'}",href="#{pathFor 'aplicativosPluginsRoute' aplicativoId=appInfo._id}")
 						i.puzzle.icon

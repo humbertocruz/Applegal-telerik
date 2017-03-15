@@ -4,18 +4,16 @@ Meteor.methods({
 		var myFuture = new Future();
 
 		// Remover Arquivos do App
-		Arquivo.remove({
+		Biblioteca.remove({
 			aplicativoId:aplicativoId
 		});
 		Cloudinary.api.resources(Meteor.bindEnvironment(function(result){
 			var saved = 0;
-			_.each(result.resources,function(image){
-				if (image.tags.length > 0) {
-					image.aplicativoId = aplicativoId;
-					image.cloud_name = Cloudinary.config().cloud_name;
-					Arquivo.insert(image);
-					saved++;
-				}
+			_.each(result.resources,function(document){
+				document.aplicativoId = aplicativoId;
+				document.cloud_name = Cloudinary.config().cloud_name;
+				Biblioteca.insert(document);
+				saved++;
 			});
 			myFuture.return({
 				saved:saved,
@@ -29,8 +27,8 @@ Meteor.methods({
 		return myFuture.wait();
 	},
 	setCloudinary:function(aplicativoId){
-		if (!this.userId) return 'technotronics';
-		if (!aplicativoId) return 'technotronics';
+		if (!this.userId) return 'technoapp';
+		if (!aplicativoId) return 'technoapp';
 		var Cl = AppCloudinary.findOne({
 			aplicativoId:aplicativoId
 		});
@@ -38,7 +36,6 @@ Meteor.methods({
 
 		needReconf = true;
 		//if (Cloudinary.config() && Cloudinary.config().cloud_name == Cl.cloud_name) needReconf = false;
-
 		//else if (Cloudinary.config().cloud_name != Cl.cloud_name) needReconf = true;
 
 		if (needReconf) {
@@ -47,7 +44,6 @@ Meteor.methods({
 				api_key: Cl.api_key,
 				api_secret: Cl.api_secret
 			});
-			console.log('Config Cloudinary: '+Cl.cloud_name);
 			return Cl.cloud_name;
 		}
 

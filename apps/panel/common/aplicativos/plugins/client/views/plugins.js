@@ -13,53 +13,62 @@ Controller('aplicativosPluginsView',{
 			hoverable:true,
 			position: 'right center'
 		});
+		$('.ui.checkbox').checkbox();
 	},
 	helpers:{
 		updateModulo:function(){
 			return updatePluginVar.get();
 		},
-		header:function(){
-			return {
-				title:'Plugins do Aplicativos',
-				icon:'android'
-			}
-		},
-		newLink:function(){
-			return false;
-		},
 		isModAdmin:function(){
 			if (Roles.userIsInRole(Meteor.userId(),'admin')) return true;
 			return false;
 		},
-		extraLinks:function(){
-			return [
-				{
-					title:'Retornar',
-					route:'aplicativosRoute',
-					icon:'close'
-				}
-			]
-		},
-		modulos_disponiveis:function(){
+
+		plugins_disponiveis:function(){
 			var app = Aplicativo.findOne(FlowRouter.getParam('aplicativoId'));
 			if (!app) return false;
-			var plugAtivos = _.pluck(app.appPLugins(),'moduloId');
-			var plugins = Plugin.find({_id:{$nin:PlugAtivos}}).fetch();
+			var plugAtivos = _.pluck(app.appPlugins(),'pluginId');
+			var plugins = Plugin.find({_id:{$nin:plugAtivos}}).fetch();
 			return plugins;
 		},
-		modulos_ativos:function(){
+		plugins_ativos:function(){
 			var app = Aplicativo.findOne(FlowRouter.getParam('aplicativoId'));
 			if (!app) return false;
 			return app.appPlugins();
 		}
 	},
 	events:{
-		'submit #appModuloForm':function(e,t){
+		'click .activeEvent':function(e,t){
+			Meteor.call("aplicativosActivePlugin", this._id, this.active, function(error, result){ 
+				if(error){
+					console.log("error", error);
+				}
+				if(result){
+
+				}
+			});
+		},
+		'click .removeEvent':function(e,t){
+			e.preventDefault();
+			var me = this;
+			htmlConfirm('Remover Módulo','Você tem Certeza?',function(){
+				Meteor.call("aplicativosRemovePlugin", FlowRouter.getParam('aplicativoId'), me.pluginId, function(error, result){
+					if(error){
+						console.log("error", error);
+					}
+					if(result){
+						Bert.alert('Plugin removido com sucesso.','success');
+					}
+				});
+			});
+		},
+		'submit #appPluginForm':function(e,t){
 			var me = this;
 			e.preventDefault();
 			var fields = $('#appPluginForm').form('get values');
 			fields._id = updatePluginVar.get();
 			fields.aplicativoId = FlowRouter.getParam('aplicativoId');
+			fields.active = false;
 			Meteor.call("aplicativosUpdatePlugin", fields, function(error, result){
 				if(error){
 					console.log("error", error);
@@ -72,14 +81,15 @@ Controller('aplicativosPluginsView',{
 		'click .updatePlugin':function(e,t){
 			var me = this;
 			e.preventDefault();
-			updateModuloVar.set(me._id);
+			updatePluginVar.set(me._id);
 			var fields = AplicativoPlugin.findOne(me._id);
 			$('#appPluginForm').form('set values',fields);
 		},
-		'click .addModulo':function(e,t){
+		'click .addPluginEvent':function(e,t){
+			e.preventDefault();
 			var me = this;
 			if (!Roles.userIsInRole(Meteor.userId(),'admin')) return false;
-			e.preventDefault();
+			$('#addAppPlugin').popup('hide');
 			htmlConfirm('Adicionar Módulo','Você tem Certeza?',function(){
 				var fields = {
 					aplicativoId:FlowRouter.getParam('aplicativoId'),

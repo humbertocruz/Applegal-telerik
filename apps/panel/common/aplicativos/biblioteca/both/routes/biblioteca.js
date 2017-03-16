@@ -3,7 +3,7 @@ aplicativosRoutes = FlowRouter.group({
 	prefix: '/aplicativos'
 });
 
-aplicativosRoutes.route('/:aplicativoId/arquivos', {
+aplicativosRoutes.route('/:aplicativoId/biblioteca', {
 	name: 'aplicativosBibliotecaRoute',
 	action: function() {
 		BlazeLayout.render('adminLayout', {

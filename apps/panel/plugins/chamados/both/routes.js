@@ -24,7 +24,7 @@ chamadosRoutes.route('/',{
 	action: function() {
 		BlazeLayout.render('adminLayout',{
 			menu:'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main:'chamadosView'
 		});
 	}
@@ -36,7 +36,7 @@ chamadosRoutes.route('/:id',{
 	action: function() {
 		BlazeLayout.render('adminLayout',{
 			menu:'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main:'talkView'
 		});
 	}

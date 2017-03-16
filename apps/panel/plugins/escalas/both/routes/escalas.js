@@ -24,7 +24,7 @@ escalasRoutes.route('/', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'escalasView'
 		});
 	}
@@ -36,7 +36,7 @@ escalasRoutes.route('/nova', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'escalasFormView'
 		});
 	}
@@ -47,7 +47,7 @@ escalasRoutes.route('/:id/edita', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'escalasFormView'
 		});
 	}

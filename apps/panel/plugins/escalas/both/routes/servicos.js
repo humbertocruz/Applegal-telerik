@@ -24,7 +24,7 @@ servicosRoutes.route('/', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'escalasServicosView'
 		});
 	}
@@ -35,7 +35,7 @@ servicosRoutes.route('/nova', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'escalasServicosFormView'
 		});
 	}
@@ -46,7 +46,7 @@ servicosRoutes.route('/:id', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'escalasServicosFormView'
 		});
 	}

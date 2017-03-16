@@ -15,11 +15,13 @@ Controller('aplicativosBibliotecaView',{
 		});
 		uploadTypeVar = new ReactiveVar();
 		publicityVar = new ReactiveVar('private');
-		Tracker.autorun(function(){
-			var page = FlowRouter.getQueryParam('page');
-			var aplicativoId = FlowRouter.getParam('aplicativoId');
-			appBiblioteca = Meteor.subscribe("appBiblioteca", page, aplicativoId, 12);
-		});
+		if (FlowRouter.getRouteName() == 'aplicativosBibliotecaRoute') {
+			Tracker.autorun(function(){
+				var page = FlowRouter.getQueryParam('page');
+				var aplicativoId = FlowRouter.getParam('aplicativoId');
+				appBiblioteca = Meteor.subscribe("appBiblioteca", page, aplicativoId, 12);
+			});
+		}
 	},
 	rendered:function(){
 
@@ -40,18 +42,7 @@ Controller('aplicativosBibliotecaView',{
 			var qtd = 12;
 			var page = FlowRouter.getQueryParam('page');
 			if (!page) page = 1;
-			var biblioteca = Biblioteca.find({
-				tags:{
-					$in:[
-						'logotype',
-						'wallpaper',
-						'noticia',
-						'documento',
-						'galeria',
-						'enquete'
-					]
-				}
-			},{
+			var biblioteca = Biblioteca.find({},{
 				limit:12
 			});
 			var data = biblioteca.fetch();
@@ -69,7 +60,7 @@ Controller('aplicativosBibliotecaView',{
 			if (!page) page = 1;
 			if (page == 1) return false;
 			page--;
-			FlowRouter.go('aplicativosBibliotecaRoute',{aplicativoId:FlowRouter.getParam('aplicativoId')},{page:page});
+			FlowRouter.go(FlowRouter.getRouteName(),{aplicativoId:FlowRouter.getParam('aplicativoId')},{page:page});
 		},
 		'click #nextPageEvent':function(e,t){
 			var page = FlowRouter.getQueryParam('page');
@@ -77,7 +68,7 @@ Controller('aplicativosBibliotecaView',{
 			var maxPages = Math.ceil(Counts.get('appBiblioteca')/12);
 			if (page == maxPages) return false;
 			page++;
-			FlowRouter.go('aplicativosBibliotecaRoute',{aplicativoId:FlowRouter.getParam('aplicativoId')},{page:page});
+			FlowRouter.go(FlowRouter.getRouteName(),{aplicativoId:FlowRouter.getParam('aplicativoId')},{page:page});
 		},
 		'click .useOnAppEvent':function(e,t){
 			var me = this;

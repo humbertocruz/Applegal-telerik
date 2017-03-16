@@ -1,20 +1,34 @@
 template(name="aplicativosPluginsView")
-	table.ui.blue.table
+	table.ui.blue.single.line.table
 		thead
 			tr
+				th.two.wide
 				th Plugin
+				th Título
 		tbody
 			each plugins_ativos
 				tr
-					td #{icon} - #{title}
+					td.middle.aligned
+						if active
+							.ui.green.mini.icon.button.activeEvent(data-tooltip="Desativar Plugin",data-inverted)
+								i.check.icon
+						else
+							.ui.red.mini.icon.button.activeEvent(data-tooltip="Ativar Plugin",data-inverted)
+								i.close.icon
+						a.ui.mini.icon.button(href="#{pathFor 'aplicativosPluginsUpdateRoute' aplicativoId=appInfo._id id=_id}")
+							i.edit.icon
+						.ui.mini.icon.button.removeEvent
+							i.trash.icon
+					td #{plugin.title}
+					td #{title}
 		tfooter
 			tr
 				td
-					.ui.blue.button#addAppPlugin Adicionar Módulo
+					.ui.blue.button#addAppPlugin Adicionar Plugin
 					.ui.large.popup
 						.ui.vertical.text.menu
 							each plugins_disponiveis
-								.ui.link.item#addPluginEvent
+								.ui.link.item.addPluginEvent
 									i.icon(class="#{icon}")
 									|#{title}
 	//.ui.bottom.attached.segment

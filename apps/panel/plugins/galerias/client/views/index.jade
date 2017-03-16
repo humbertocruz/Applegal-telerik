@@ -1,6 +1,6 @@
 template(name="galeriasView")
-	+indexHeaderSearch header=header extraLinks=extraLinks
-	table.ui.top.attached.table
+	//+indexHeaderSearch header=header extraLinks=extraLinks
+	table.ui.blue.top.attached.table
 		thead
 			tr
 				th.three.wide &nbsp;
@@ -27,4 +27,8 @@ template(name="galeriasView")
 							.ui.red.small.header Sem Capa
 					td #{title}
 					td #{fotos.length}
-	+indexInfoPaginator ready=ready nothingFound='Nenhuma galeria cadastrada.' count=galerias.count page=galerias.count pages=galerias.pages singularForm='Galeria' pluralForm='Galerias'
+	.ui.secondary.bottom.attached.segment
+		a.ui.blue.button(href="#{pathFor 'galeriasInsertRoute' aplicativoId=appInfo._id}")
+			i.plus.icon
+			|Nova Galeria
+	//+indexInfoPaginator ready=ready nothingFound='Nenhuma galeria cadastrada.' count=galerias.count page=galerias.count pages=galerias.pages singularForm='Galeria' pluralForm='Galerias'

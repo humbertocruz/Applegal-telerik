@@ -24,7 +24,7 @@ enquetesRoutes.route('/', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'enquetesView'
 		});
 	}
@@ -36,7 +36,7 @@ enquetesRoutes.route('/nova', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'enquetesFormView'
 		});
 	}
@@ -47,7 +47,7 @@ enquetesRoutes.route('/:id', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'enquetesFormView'
 		});
 	}
@@ -58,7 +58,7 @@ enquetesRoutes.route('/qa/:id', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'enquetesQAView'
 		});
 	}
@@ -69,7 +69,7 @@ enquetesRoutes.route('/resultados/:id', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'enquetesResultView'
 		});
 	}

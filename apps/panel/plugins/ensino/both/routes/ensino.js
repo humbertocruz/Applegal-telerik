@@ -25,7 +25,7 @@ ensinoRoutes.route('/', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'turmasView'
 		});
 	}
@@ -36,7 +36,7 @@ ensinoRoutes.route('/cursos', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'ensinoCursosView'
 		});
 	}
@@ -47,7 +47,7 @@ ensinoRoutes.route('/cursos/novo', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'ensinoCursosFormView'
 		});
 	}
@@ -58,7 +58,7 @@ ensinoRoutes.route('/cursos/:id/edita', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'ensinoCursosFormView'
 		});
 	}

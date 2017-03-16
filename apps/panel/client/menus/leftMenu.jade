@@ -6,7 +6,7 @@ template(name="leftMenu")
 			if showEmulator
 				div#emulatorFloatDiv
 					+emulatorFrame
-			
+
 			.ui.blue.inverted.top.attached.vertical.menu
 				.ui.item
 					i.mobile.icon#showEmulatorEvent
@@ -28,15 +28,18 @@ template(name="leftMenu")
 					i.users.icon
 					.content
 						.header Usuários
-	if appModulos
-		.ui.divider
-		.ui.vertical.fluid.inverted.menu(class="#{appInfo.sidebarBackgroundColor}")
-			each appModulos
-				if userHasPerm modulo.path
-					a.item(href="#{pathFor modulo.route aplicativoId=appInfo._id}")
-						i.icon(class="#{icon}")
-						.content
-							.header #{title}
+	if appPlugins
+		.ui.teal.inverted.top.attached.vertical.menu
+			.ui.item
+				|Plugins
+		.ui.teal.bottom.attached.vertical.menu
+			each appPlugins
+				if userHasPerm plugin.path
+					if active
+						a.item(class="#{isActiveRoute regex=plugin.path}", href="#{pathFor plugin.route aplicativoId=appInfo._id}")
+							i.icon(class="#{icon}")
+							.content
+								.header #{title}
 
 	.ui.violet.inverted.top.attached.vertical.menu
 		.ui.item

@@ -12,11 +12,11 @@ Controller('aplicativosFormView',{
 		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
 
 		Tracker.autorun(function(){
-			var page = arquivosPageVar.get();
-			allWallpapers = Meteor.subscribe("allWallpapers", page);
-			var Logopage = arquivosLogoPageVar.get();
-			appArquivos = Meteor.subscribe("appArquivos", Logopage, FlowRouter.getParam('aplicativoId'));
 			appCloudinary = Meteor.subscribe("AppCloudinary", FlowRouter.getParam('aplicativoId'));
+
+			var page = FlowRouter.getQueryParam('page');
+			var aplicativoId = FlowRouter.getParam('aplicativoId');
+			appBiblioteca = Meteor.subscribe("appBiblioteca", page, aplicativoId, 12, 'wallpaper');
 		});
 	},
 	rendered:function(){

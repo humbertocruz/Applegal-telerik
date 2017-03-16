@@ -1,52 +1,27 @@
 template(name="formNoticiasView")
-	+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
-	
+	//+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
 	form.ui.form#noticiasForm(method="post")
 		input#uploadField(type="file",style="display:none;")
-		.ui.grid
-			.three.wide.column
-				.field
-					.ui.fluid.card
-						.image
-							img#noticiasFoto(src="#{arquivoPath noticia.imagem 'c_scale,w_180'}")
-						.extra.content
-							.ui.blue.icon.button#addFotoNoticiaEvent(data-tooltip="Trocar Foto",data-inverted)
-								i.upload.icon
-							.ui.red.icon.button#removeFotoNoticiaEvent(data-tooltip="Remover Foto",data-inverted)
-								i.trash.icon
-					each uploaded
-						.ui.fluid.card
-							.image
-								img.ui.image(src="#{preview}")
-							.extra
-								if compare status 'eq' 'uploading'
-									.ui.tiny.progress(id="progress_#{_id}")
-										.bar
-										.label Enviando...
-								else
-									.ui.fluid.green.icon.tiny.button.removePreviewEvent
-										i.checkmark.icon
-			.thirteen.wide.column
-				.two.fields
-					.field
-						label Título
-						input#titleField(type="text",name="title")
-					.field
-						label Data
-						input#dateField(type="date",name="date")
-				.two.fields
-					.field
-						label Assunto
-						select.ui.search.dropdown#assuntoField(name="assunto_id")
-							option(value="") Escolha um Assunto
-							each assuntos
-								option(value="#{_id}") #{name}
-					.field
-						label Cor
-						select.ui.search.dropdown#corField(name="cor")
-							option(value="") Escolha uma Cor
-							each semanticColors
-								option(value="#{className}") #{title}
-				.field
-					label Mensagem
-					textarea#bodyField(name="mensagem",rows="15")
+		.two.fields
+			.field
+				label Título
+				input#titleField(type="text",name="title")
+			.field
+				label Data
+				input#dateField(type="date",name="date")
+		.two.fields
+			.field
+				label Assunto
+				select.ui.search.dropdown#assuntoField(name="assunto_id")
+					option(value="") Escolha um Assunto
+					each assuntos
+						option(value="#{_id}") #{name}
+			.field
+				label Cor
+				select.ui.search.dropdown#corField(name="cor")
+					option(value="") Escolha uma Cor
+					each semanticColors
+						option(value="#{className}") #{title}
+		.field
+			label Mensagem
+			textarea#bodyField(name="mensagem",rows="15")

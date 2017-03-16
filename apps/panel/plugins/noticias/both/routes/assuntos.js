@@ -10,7 +10,7 @@ assuntosRoutes.route('/', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'noticiasAssuntosView'
 		});
 	}
@@ -21,7 +21,7 @@ assuntosRoutes.route('/nova', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'noticiasAssuntosFormView'
 		});
 	}
@@ -32,7 +32,7 @@ assuntosRoutes.route('/:id', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'noticiasAssuntosFormView'
 		});
 	}

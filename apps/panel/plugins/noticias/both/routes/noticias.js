@@ -24,7 +24,7 @@ noticiasRoutes.route('/', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'noticiasView'
 		});
 	}
@@ -35,7 +35,7 @@ noticiasRoutes.route('/nova', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'formNoticiasView'
 		});
 	}
@@ -46,7 +46,7 @@ noticiasRoutes.route('/editar/:noticiaId', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'formNoticiasView'
 		});
 	}

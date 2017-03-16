@@ -1,17 +1,22 @@
-Meteor.publish('appBiblioteca', function (page,aplicativoId,qtd) {
+Meteor.publish('appBiblioteca', function (page,aplicativoId,qtd,typePreselected) {
 	if (!aplicativoId) return [];
 	if (!page) page = 1;
+	if (!typePreselected) {
+		var typePreselected = [
+			'logotype',
+			'wallpaper',
+			'noticia',
+			'documento',
+			'galeria',
+			'enquete'
+		];
+	} else {
+		typePreselected = [typePreselected];
+	}
 	search = {
 		aplicativoId:aplicativoId,
 		tags:{
-			$in:[
-				'logotype',
-				'wallpaper',
-				'noticia',
-				'documento',
-				'galeria',
-				'enquete'
-			]
+			$in: typePreselected
 		}
 	};
 	Counts.publish(this, 'appBiblioteca', Biblioteca.find(search), {

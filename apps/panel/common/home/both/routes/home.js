@@ -1,4 +1,5 @@
 FlowRouter.notFound = {
+	name: 'notFoundRoute',
 	action: function() {
 		BlazeLayout.render('loginLayout',{
 			menu:'siteMenu',
@@ -17,6 +18,17 @@ homeRoutes = FlowRouter.group({
 		}
 	]
 });
+
+homeRoutes.route('/nao-encontrado',{
+	name: 'notFoundRouteHome',
+	action: function() {
+		BlazeLayout.render('loginLayout',{
+			menu:'siteMenu',
+			main:'notFoundView'
+		});
+	}
+});
+
 homeRoutes.route('/',{
 	name: 'homeRoute',
 	triggersEnter: [
@@ -30,5 +42,4 @@ homeRoutes.route('/',{
 			main:'homeView'
 		});
 	}
-
 });

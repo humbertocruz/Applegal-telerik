@@ -21,9 +21,9 @@ Controller('leftMenu',{
 			if (Roles.userIsInRole(Meteor.userId(),'admin')) return true;
 			return false;
 		},
-		appModulos:function(){
+		appPlugins:function(){
 			var app = Aplicativo.findOne(FlowRouter.getParam('aplicativoId'));
-			if (app) return app.appModulos();
+			if (app) return app.appPlugins();
 		},
 		userHasPerm:function(modulo){
 			if (Roles.userIsInRole(Meteor.userId(),'admin')) return true;

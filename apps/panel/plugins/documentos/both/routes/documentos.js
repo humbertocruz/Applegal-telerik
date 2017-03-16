@@ -24,7 +24,7 @@ documentosRoutes.route('/', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'documentosView'
 		});
 	}
@@ -36,7 +36,7 @@ documentosRoutes.route('/nova', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'documentosFormView'
 		});
 	}
@@ -47,7 +47,7 @@ documentosRoutes.route('/:id/edita', {
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
-			left: 'leftMenuApp',
+			left: 'leftMenu',
 			main: 'documentosFormView'
 		});
 	}

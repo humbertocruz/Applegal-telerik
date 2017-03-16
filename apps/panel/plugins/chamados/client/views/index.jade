@@ -1,6 +1,6 @@
 template(name="chamadosView")
-	+indexHeaderSearch header=header extraLinks=extraLinks
-	table.ui.top.attached.table
+	//+indexHeaderSearch header=header extraLinks=extraLinks
+	table.ui.blue.top.attached.table
 		thead
 			tr
 				th.two.wide
@@ -20,4 +20,8 @@ template(name="chamadosView")
 							.ui.green.circular.button.ctrlChamadoEvent(data-tooltip="Reabrir Chamado",data-inverted) Sim
 					td #{dateTimeBr date}
 					td #{remetente.profile.name}
-	+indexInfoPaginator ready=ready nothingFound='Nenhum Chamado Cadastrado' count=chamados.count page=chamados.count pages=chamados.pages singularForm='Chamado' pluralForm='Chamados'
+	.ui.secondary.bottom.attached.segment
+		a.ui.blue.button(href="#{pathFor 'chamadosInsertRoute' aplicativoId=appInfo._id}")
+			i.plus.icon 
+			|Novo Chat
+	//+indexInfoPaginator ready=ready nothingFound='Nenhum Chamado Cadastrado' count=chamados.count page=chamados.count pages=chamados.pages singularForm='Chamado' pluralForm='Chamados'

@@ -1,6 +1,6 @@
 template(name="documentosView")
-	+indexHeaderSearch header=header newLink=newLink extraLinks=extraLinks
-	table.ui.top.attached.table
+	//+indexHeaderSearch header=header newLink=newLink extraLinks=extraLinks
+	table.ui.blue.top.attached.table
 		thead
 			tr
 				th.two.wide &nbsp;
@@ -23,4 +23,8 @@ template(name="documentosView")
 					td #{tipo.name}
 					td #{title}
 					td #{uploaded.originalname}
-	+indexInfoPaginator ready=ready nothingFound='Nenhum documento encontrado.' count=documentos.count page=documentos.count pages=documentos.pages singularForm='Documento' pluralForm='Documentos'
+	.ui.secondary.bottom.attached.segment
+		a.ui.blue.button(href="#{pathFor 'documentosInsertRoute' aplicativoId=appInfo._id}")
+			i.plug.icon
+			|Novo Documento
+	//+indexInfoPaginator ready=ready nothingFound='Nenhum documento encontrado.' count=documentos.count page=documentos.count pages=documentos.pages singularForm='Documento' pluralForm='Documentos'

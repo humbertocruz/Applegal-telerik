@@ -30,7 +30,6 @@ template(name="aplicativosFormView")
 						img.ui.image(src="#{clUrl appInfo.appLogo cloud_name=cloud_name crop='scale' width=150}")
 					else
 						img.ui.image(src="#{clUrl 'no-logotype' crop='scale' width=150}")
-					.ui.blue.small.fluid.button Trocar Logotipo
 				.thirteen.wide.column
 					.two.fields
 						.field
@@ -112,8 +111,10 @@ template(name="aplicativosFormView")
 						option(value="lighten") Claro
 						option(value="darken") Escuro
 			.ui.clearing.divider
-			.field
 			button.ui.blue.button(type="submit",form="designForm") Gravar
+		.ui.clearing.divider
+		.ui.header Escolha uma imagem de Fundo
+		+aplicativosBibliotecaView typePreselected='wallpaper'
 	.ui.tab.blue.segment(data-tab="home")
 		form.ui.form.aplicativosForm#homeForm(method="post")
 			.three.fields

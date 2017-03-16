@@ -1,4 +1,13 @@
 Meteor.methods({
+	aplicativosActivePlugin:function(id, status){
+		AplicativoPlugin.update(id,{$set:{active:!status}});
+	},
+	aplicativosRemovePlugin:function(aplicativoId, id){
+		return AplicativoPlugin.remove({
+			aplicativoId:aplicativoId,
+			pluginId: id
+		});
+	},
 	aplicativosUpdatePlugin:function(fields){
 
 		// se não estiver logado
@@ -21,7 +30,6 @@ Meteor.methods({
 		if (Roles.userIsInRole(this.userId,'admin')) canDoIt = true;
 
 		if (!canDoIt) return false;
-
 		var mod = Plugin.findOne(fields.pluginId);
 		var lastPlug = AplicativoPlugin.findOne({
 			aplicativoId:fields.aplicativoId

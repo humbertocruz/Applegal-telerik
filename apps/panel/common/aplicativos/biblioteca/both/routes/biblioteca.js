@@ -9,7 +9,7 @@ aplicativosRoutes.route('/:aplicativoId/biblioteca', {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
 			left: 'leftMenu',
-			main: 'aplicativosBibliotecaView'
+			main: 'aplicativosBibliotecaAllView'
 		});
 	}
 });

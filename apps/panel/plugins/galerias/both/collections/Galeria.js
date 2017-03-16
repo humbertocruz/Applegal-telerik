@@ -1,7 +1,7 @@
 Galeria = new Mongo.Collection('galerias');
 Galeria.helpers({
 	fotos:function(){
-		return Arquivo.find({
+		return Biblioteca.find({
 			galeriaId:this._id,
 			tags:{
 				$all:[

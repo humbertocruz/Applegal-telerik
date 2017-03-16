@@ -12,7 +12,7 @@ template(name="leftMenu")
 					i.mobile.icon#showEmulatorEvent
 					|#{appInfo.name}
 			.ui.blue.bottom.attached.vertical.menu
-				a.item(class="#{isActiveRoute regex='^aplicativosUpdate'}",href="#{pathFor 'aplicativosUpdateRoute' aplicativoId=appInfo._id}")
+				a.item(class="#{isActiveRoute regex='^aplicativosUpdateInfoRoute'}",href="#{pathFor 'aplicativosUpdateInfoRoute' aplicativoId=appInfo._id}")
 					i.setting.icon
 					.content
 						.header Configuração

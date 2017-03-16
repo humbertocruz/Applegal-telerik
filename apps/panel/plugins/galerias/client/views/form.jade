@@ -1,58 +1,15 @@
 template(name="formGaleriasView")
-	+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
-	form.ui.form#galeriasForm(method="post")
-		.three.fields
-			.field
-				label Data
-				input#dateField(type="date",name="date")
-			.field
-				label Título
-				input#titleField(type="text",name="title")
-			if compare fotos.length 'lt' 50
+	.ui.blue.segment
+		form.ui.form#galeriasForm(method="post")
+			.two.fields
 				.field
-					label &nbsp;
-					if galeria_id
-						input#uploadField(type="file")
-					else
-						.ui.blue.disabled.fluid.button Enviar Fotos
-			else
+					label Data
+					input#dateField(type="date",name="date")
 				.field
-					label &nbsp;
-					.ui.red.fluid.button Limite de 50 Fotos
+					label Título
+					input#titleField(type="text",name="title")
+			.ui.divider
+			.ui.blue.button(type="submit",form="galeriasForm") Salvar
 	if galeria_id
 		.ui.large.header Fotos da Galeria
-		if fotos
-			if compare fotos.length 'gt' 0
-				.ui.five.cards
-					each fotos
-						.card
-							.ui.fluid.image
-								img(src="#{arquivoPath public_id 'c_scale,w_150'}")
-							.content
-								.extra
-									.ui.blue.icon.button.capaBtn(data-tooltip="Capa da Galeria",data-inverted)
-										i.image.icon
-									.ui.blue.icon.button.capaBtn(data-tooltip="Efeitos",data-inverted)
-										i.wizard.icon
-									.ui.red.icon.button.deleteBtn(data-tooltip="Excluir Foto",data-inverted)
-										i.trash.icon
-		else
-			.ui.red.message Nenhuma foto encontrada nesta galeria
-	else
-		.ui.blue.message
-			i.warning.icon
-			span É necessário Salvar para poder fazer o Upload de Fotos na Galeria.
-	.ui.ten.cards
-		each uploads.data
-			.ui.card(id="photo_#{_id}")
-				.image
-					img.ui.image(src="#{preview}")
-				.extra
-					if compare status 'eq' 'uploading'
-						.ui.tiny.progress(id="progress_#{_id}")
-							.bar
-							.label Enviando...
-					else
-						.ui.fluid.green.icon.tiny.button.removePreviewEvent
-							i.checkmark.icon
-	.ui.divider
+		+bibliotecaView

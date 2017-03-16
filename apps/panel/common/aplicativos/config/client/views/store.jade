@@ -1,0 +1,16 @@
+template(name="aplicativosUpdateStoreView")
+	+configMenu
+	form.ui.form.aplicativosForm#storesForm(method="post")
+		.field
+			label APP ID (Google Play e Apple Store)
+			input#appInfoIdField(type="text",name="appInfoId",placeholder="br.com.dominio.nome")
+		.field
+			label Política de Privacidade
+			textarea#privacyField(name="privacy",rows="15")
+				|<p>Pol&iacute;tica de Privacidade</p>
+				|<p>- O aplicativo poder&aacute; detectar o n&uacute;mero do celular em uso para controle de acesso de usu&aacute;rios</p>
+				|<p>- As informa&ccedil;&otilde;es do us&aacute;rios fornecidas no aplicativo n&atilde;o ser&atilde;o compartilhadas com terceiros com excess&ccedil;&atilde;o:</p>
+				|<p>- O preenchimento do Anivers&aacute;rio aparecer&aacute; para outros usu&aacute;rios</p>
+		.ui.clearing.divider
+		.field
+			button.ui.blue.button(type="submit",form="storesForm") Gravar

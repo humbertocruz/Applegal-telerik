@@ -1,0 +1,14 @@
+Controller('aplicativosBibliotecaAllView',{
+	created:function(){
+		bibliotecaTypesVar.set([
+			'logotype',
+			'wallpaper',
+			'noticia',
+			'documento',
+			'galeria',
+			'enquete'
+		]);
+	},
+	helpers:{
+	}
+});

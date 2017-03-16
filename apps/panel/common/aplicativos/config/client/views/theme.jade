@@ -1,0 +1,43 @@
+template(name="aplicativosUpdateThemeView")
+	+configMenu
+	form.ui.form.aplicativosForm#designForm(method="post")
+		.two.fields
+			.field
+				label Cor de Fundo do Cabeçalho
+				select.ui.search.dropdown#headerField(name="headerBackgroundColor")
+					option(value="") Escolha uma Cor
+					each semanticColors
+						option(value="#{className}") #{title}
+			.field
+				label Transparência dos Menus
+				select.ui.search.dropdown#headersOpacityField(name="headersOpacity")
+					option(value="") Escolha uma opção
+					option(value="0") 100%
+					option(value=".1") 90%
+					option(value=".2") 80%
+					option(value=".3") 70%
+					option(value=".4") 60%
+					option(value=".5") 50%
+					option(value=".6") 40%
+					option(value=".7") 30%
+					option(value=".8") 20%
+					option(value=".9") 10%
+					option(value="1") 0%
+		.two.fields
+			.field
+				label Cor de Fundo do Menu Lateral
+				select.ui.search.dropdown#sidebarField(name="sidebarBackgroundColor")
+					option(value="") Escolha uma Cor
+					each semanticColors
+						option(value="#{className}") #{title}
+			.field
+				label Tema
+				select.ui.search.dropdown#themeField(name="theme")
+					option(value="") Escolha o Tema
+					option(value="lighten") Claro
+					option(value="darken") Escuro
+		.ui.clearing.divider
+		button.ui.blue.button(type="submit",form="designForm") Gravar
+	.ui.clearing.divider
+	.ui.header Escolha uma imagem de Fundo
+	+bibliotecaView

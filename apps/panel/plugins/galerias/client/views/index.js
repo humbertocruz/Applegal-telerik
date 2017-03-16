@@ -11,30 +11,6 @@ Controller('galeriasView', {
 	destroyed:function() {
 	},
 	helpers: {
-		ready:function(){
-			return allGalerias.ready();
-		},
-		header:function(){
-			return {
-				title:'Galerias',
-				icon:'picture'
-			}
-		},
-		newLink:function(){
-			return {}
-		},
-		extraLinks:function(){
-			return [
-				{
-					title: 'Adicionar',
-					icon: 'plus',
-					route: 'galeriasInsertRoute',
-					params:{
-						aplicativoId:FlowRouter.getParam('aplicativoId')
-					}
-				}
-			]
-		},
 		galerias: function() {
 			var qtd = 10;
 			var page = FlowRouter.getQueryParam('page');

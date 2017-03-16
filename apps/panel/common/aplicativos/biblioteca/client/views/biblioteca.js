@@ -1,10 +1,5 @@
-Controller('aplicativosBibliotecaView',{
+Controller('bibliotecaView',{
 	created:function() {
-		subMenuTitleVar.set({
-			title:'Arquivos do Aplicativo',
-			icon:'file'
-		});
-		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
 		// Monitora os arquivos enviados
 		Cloudinary.collection.find().observe({
 			changed:function(newc,oldc){
@@ -15,34 +10,41 @@ Controller('aplicativosBibliotecaView',{
 		});
 		uploadTypeVar = new ReactiveVar();
 		publicityVar = new ReactiveVar('private');
-		if (FlowRouter.getRouteName() == 'aplicativosBibliotecaRoute') {
-			Tracker.autorun(function(){
-				var page = FlowRouter.getQueryParam('page');
-				var aplicativoId = FlowRouter.getParam('aplicativoId');
-				appBiblioteca = Meteor.subscribe("appBiblioteca", page, aplicativoId, 12);
-			});
-		}
 	},
 	rendered:function(){
-
+		$('.ui.dropdown').dropdown();
+		$('.ui.hasPopup').popup({
+			inline:true,
+			hoverable:true,
+			position: 'right center'
+		});
 	},
 	helpers:{
-		ready:function(){
-			return appBiblioteca.ready();
+		route:function(){
+			return FlowRouter.getRouteName();
 		},
-		/*uploads:function(){
-			var arquivos = Cloudinary.collection.find({
-				status:'uploading'
+		libTypes: function(){
+			var libs = [];
+			console.log(bibliotecaTypesVar.get());
+			_.each(bibliotecaTypesVar.get(),function(lType){
+				var data = {
+					title:libTypes[lType].name,
+					name:lType,
+					icon:libTypes[lType].icon
+				};
+				libs.push(data);
 			});
-			return {
-				data:arquivos.fetch(),
-			};
-		},*/
+			return libs;
+		},
 		biblioteca:function(){
 			var qtd = 12;
 			var page = FlowRouter.getQueryParam('page');
 			if (!page) page = 1;
-			var biblioteca = Biblioteca.find({},{
+			var biblioteca = Biblioteca.find({
+				tags:{
+					$in:bibliotecaTypesVar.get()
+				}
+			},{
 				limit:12
 			});
 			var data = biblioteca.fetch();

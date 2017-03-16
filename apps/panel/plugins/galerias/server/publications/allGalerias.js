@@ -1,4 +1,5 @@
 Meteor.publishComposite('allGalerias', function(search,page,aplicativoId){
+	console.log(search,page,aplicativoId);
 	if (typeof(aplicativoId) == 'undefined') return false;
 	return {
 		find:function(){
@@ -12,12 +13,11 @@ Meteor.publishComposite('allGalerias', function(search,page,aplicativoId){
 		children:[
 			{
 				find:function(galeria){
-					return Arquivo.find({
+					return Biblioteca.find({
 						galeriaId:galeria._id,
 						tags:{
-							$all:[
-								'photo',
-								aplicativoId
+							$in:[
+								'galeria'
 							]
 						}
 					});
@@ -40,12 +40,11 @@ Meteor.publishComposite('oneGaleria', function(id,aplicativoId){
 		children:[
 			{
 				find:function(galeria){
-					return Arquivo.find({
+					return Bibioteca.find({
 						galeriaId:galeria._id,
 						tags:{
-							$all:[
-								'photo',
-								aplicativoId
+							$in:[
+								'photo'
 							]
 						}
 					});

@@ -30,9 +30,9 @@ Controller('aplicativosUsuariosView', {
 			});
 			return txt.join(' - ');
 		},
-		appModulos:function(){
+		appPlugins:function(){
 			var app = Aplicativo.findOne(FlowRouter.getParam('aplicativoId'));
-			if (app) return app.appModulos();
+			if (app) return app.appPlugins();
 		},
 		ready: function() {
 			return allUsuariosApp.ready();

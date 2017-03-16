@@ -54,7 +54,7 @@ Controller('aplicativosView',{
 		},
 		'click .selectAppEvent':function(e,t){
 			// Todo
-			FlowRouter.go('aplicativosUpdateRoute',{aplicativoId:this._id});
+			FlowRouter.go('aplicativosUpdateInfoRoute',{aplicativoId:this._id});
 		}
 	}
 });

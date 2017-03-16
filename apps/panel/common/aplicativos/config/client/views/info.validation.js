@@ -1,4 +1,4 @@
-Controller('aplicativosFormView',{
+Controller('aplicativosUpdateInfoView',{
 	rendered:function(){
 		$('#removeForm').form({
 			onFailure(p,v){

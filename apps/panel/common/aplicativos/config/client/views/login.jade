@@ -1,0 +1,39 @@
+template(name="aplicativosUpdateLoginView")
+	//+indexHeaderSearch header=header saveLink=saveLink
+	+configMenu
+	form.ui.form.aplicativosForm#loginForm(method="post")
+		.field
+			label Tipo de Login
+			select.ui.dropdown#loginTypeField(name="loginType")
+				option(value="") Escolha uma opção
+				option(value="email") Email
+				option(value="username") Username
+		.three.fields
+			.field
+				label Título
+				input#loginTitleField(type="text",name="loginTitle")
+			.field
+				label Máscara do Título
+				input#loginTitleMaskField(type="text",name="loginTitleMask")
+			.field
+				label Validador do Título
+				select.ui.dropdown#loginTitleValidationField(name="loginTitleValidation")
+					option(value="") Escolha uma opção
+					option(value="none") Sem Validção
+					option(value="cpf") CPF
+		.two.fields
+			.field
+				label Teclado do Título
+				select.ui.dropdown#loginTitleKeyboardField(name="loginTitleKeyboard")
+					option(value="") Escolha uma opção
+					option(value="text") Normal
+					option(value="tel") Numérico
+			.field
+				label Teclado da Senha
+				select.ui.dropdown#loginPasswordKeyboardField(name="loginPasswordKeyboard")
+					option(value="") Escolha uma opção
+					option(value="text") Normal
+					option(value="tel") Numérico
+		.ui.clearing.divider
+		.field
+		button.ui.blue.button(type="submit",form="loginForm") Gravar

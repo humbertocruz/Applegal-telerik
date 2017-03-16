@@ -1,5 +1,6 @@
 body {
-	transition: all .25s linear;
+	overflow: auto;
+	transition: all .5s linear;
 	padding:10px 10px 10px 10px !important;
 	min-width: 320px;
 	min-height: 100vh;
@@ -7,12 +8,15 @@ body {
 }
 body.loginRoute {
 	background-color:#2185d0;
+	overflow: hidden;
 }
 body.passwordRoute {
 	background-color:#fbbd08;
+	overflow: hidden;
 }
 body.notFoundRoute {
 	background-color:#db2828;
+	overflow: hidden;
 }
 div#emulatorFloatDiv {
 	position: fixed;

@@ -8,6 +8,10 @@ Controller('formGaleriasView',{
 				});
 			}
 		});
+		bibliotecaTypesVar.set([
+			'galeria',
+			FlowRouter.getParam('aplicativoId')
+		]);
 		Tracker.autorun(function(){
 			oneGaleria = Meteor.subscribe('oneGaleria',FlowRouter.getParam('id'),FlowRouter.getParam('aplicativoId'));
 		});
@@ -107,7 +111,7 @@ Controller('formGaleriasView',{
 					} else {
 						res.galeriaId = FlowRouter.getParam('id');
 						res.likes = 0;
-						Arquivo.insert(res);
+						Biblioteca.insert(res);
 					}
 				}
 			);

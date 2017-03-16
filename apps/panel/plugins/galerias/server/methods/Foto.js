@@ -1,6 +1,6 @@
 Meteor.methods({
 	fotosRemove:function(id,aplicativoId) {
-		return	Arquivo.remove({
+		return	Biblioteca.remove({
 			_id:id,
 			'metadata.aplicativoId': aplicativoId
 		});

@@ -1,15 +1,14 @@
-Meteor.publishComposite("allAplicativos", function(search,page){
+Meteor.publishComposite("allAplicativos", function(page,pages,search){
+	if (!page) page = 1;
+	if (!pages) pages = 10;
+	if (!search) search = {};
 	// Apenas usuário logado
 	if (!this.userId) return false;
 	// Apenas para ADMIN
-	if (!Roles.userIsInRole(this.userId,'admin')) return false;
+	// if (!Roles.userIsInRole(this.userId,'admin')) return false;
 	return {
 		find: function() {
-			if (!page) page = 1;
-			if (!search) search = {};
-			var pages = 10;
-			if (Roles.userIsInRole(this.userId,'admin')) {
-			} else {
+			if (!Roles.userIsInRole(this.userId,'admin')) {
 				var groups = Roles.getGroupsForUser(this.userId, 'manager');
 				search._id = {
 					$in:groups
@@ -20,7 +19,7 @@ Meteor.publishComposite("allAplicativos", function(search,page){
 			});
 			var aplicativos = Aplicativo.find(search, {
 				sort: {
-					name: 1
+					'info.name': 1
 				},
 				limit: pages,
 				skip: (page - 1) * pages

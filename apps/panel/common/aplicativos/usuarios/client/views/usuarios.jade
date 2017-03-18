@@ -1,5 +1,5 @@
 template(name="aplicativosUsuariosView")
-	table.ui.blue.top.attached.table
+	table.ui.blue.top.attached.single.line.table
 		thead
 			tr
 				th.three.wide &nbsp;
@@ -41,7 +41,7 @@ template(name="aplicativosUsuariosView")
 						option(value="guest") Visitante
 						option(value="subscriber") Assinante
 						option(value="manager") Gerente
-						each appModulos
+						each appPlugins
 							option(value="#{modulo.path}") #{modulo.title}
 				.field
 					.ui.primary.fluid.button#addUserToAppEvent Adicionar

@@ -8,13 +8,19 @@ Controller('aplicativosUpdateStoreView',{
 	},
 	rendered:function(){
 		var loadApp = function(aplicativo){
-			$('.aplicativosForm').form('set values',aplicativo);
+			$('.aplicativosForm').form('set values',aplicativo.store);
 		};
 		Tracker.autorun(function(){
 			var aplicativo = Aplicativo.findOne(FlowRouter.getParam('aplicativoId'));
 			if (aplicativo) {
 				loadApp(aplicativo);
 			}
+		});
+		tinymce.remove();
+		tinymce.init({
+			selector: 'textarea',
+			//language: 'pt_BR',
+			skin_url: '/packages/teamon_tinymce/skins/lightgray',
 		});
 	},
 	helpers:{
@@ -23,9 +29,10 @@ Controller('aplicativosUpdateStoreView',{
 		'submit .aplicativosForm':function(e,t){
 			e.preventDefault();
 			var fields = $(e.currentTarget).form('get values');
-			var id = FlowRouter.getParam('aplicativoId');
-			if (id) fields._id = id;
-			Meteor.call("aplicativosForm",fields, function(error, result){
+			Meteor.call("aplicativosForm", {
+				_id:FlowRouter.getParam('aplicativoId'),
+				store:fields
+			}, function(error, result){
 				if(error){
 					console.log("error", error);
 				}

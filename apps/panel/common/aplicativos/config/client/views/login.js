@@ -13,7 +13,7 @@ Controller('aplicativosUpdateLoginView',{
 		Tracker.autorun(function(){
 			var aplicativo = Aplicativo.findOne(FlowRouter.getParam('aplicativoId'));
 			if (aplicativo) {
-				loadApp(aplicativo);
+				loadApp(aplicativo.login);
 			}
 		});
 	},
@@ -23,9 +23,10 @@ Controller('aplicativosUpdateLoginView',{
 		'submit .aplicativosForm':function(e,t){
 			e.preventDefault();
 			var fields = $(e.currentTarget).form('get values');
-			var id = FlowRouter.getParam('aplicativoId');
-			if (id) fields._id = id;
-			Meteor.call("aplicativosForm",fields, function(error, result){
+			Meteor.call("aplicativosForm", {
+				_id: FlowRouter.getParam('aplicativoId'),
+				login:fields
+			}, function(error, result){
 				if(error){
 					console.log("error", error);
 				}

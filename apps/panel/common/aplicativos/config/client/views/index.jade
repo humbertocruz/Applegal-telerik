@@ -9,9 +9,9 @@ template(name="aplicativosView")
 			each aplicativos.data
 				tr.selectAppEvent(style="cursor:pointer;")
 					td
-						img.ui.mini.image(src="#{clUrl appLogo crop='scale' width=35 cloud_name=cloud_name}")
+						img.ui.mini.image(src="#{clUrl logotype.public_id crop='scale' width=35 cloud_name=logotype.cloud_name}")
 					td #{dateTimeBr createdAt}
-					td #{name}
+					td #{info.name}
 	.ui.secondary.bottom.attached.segment
 		.ui.primary.button#addAppShow Novo Aplicativo
 		.ui.large.popup

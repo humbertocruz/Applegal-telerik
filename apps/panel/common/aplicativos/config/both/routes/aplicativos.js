@@ -61,6 +61,17 @@ aplicativosRoutes.route('/:aplicativoId/config/aparencia', {
 	}
 });
 
+aplicativosRoutes.route('/:aplicativoId/config/wallpaper', {
+	name: 'aplicativosUpdateWallpaperRoute',
+	action: function() {
+		BlazeLayout.render('adminLayout', {
+			menu: 'mainMenu',
+			left: 'leftMenu',
+			main: 'aplicativosUpdateWallpaperView'
+		});
+	}
+});
+
 aplicativosRoutes.route('/:aplicativoId/config/home', {
 	name: 'aplicativosUpdateHomeRoute',
 	action: function() {

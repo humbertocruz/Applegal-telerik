@@ -15,12 +15,9 @@ template(name="mainMenu")
 								a.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
 									i.android.icon
 									|Aplicativos
-								a.item(class="#{isActiveRoute regex='^modulos'}",href="#{pathFor 'modulosRoute'}")
+								a.item(class="#{isActiveRoute regex='^plugins'}",href="#{pathFor 'pluginsRoute'}")
 									i.puzzle.icon
 									|Plugins
-								a.item(class="#{isActiveRoute regex='^plugins'}",href="#{pathFor 'pluginsRoute'}")
-									i.book.icon
-									|Biblioteca
 								a.item(class="#{isActiveRoute regex='^admins'}",href="#{pathFor 'adminsRoute'}")
 									i.users.icon
 									|Admins

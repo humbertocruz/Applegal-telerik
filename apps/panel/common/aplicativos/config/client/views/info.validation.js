@@ -10,7 +10,7 @@ Controller('aplicativosUpdateInfoView',{
 					indentifier:'removeAppField',
 					rules:[
 						{
-							type:'isExactly['+appInfoVar.get().name+']',
+							type:'isExactly['+appInfoVar.get().info.name+']',
 							prompt:'Você precisa confirmar o nome do Aplicativo.'
 						}
 					]

@@ -64,7 +64,7 @@ Controller('usuariosFormView', {
 		appRoles: function(){
 			var app = Aplicativo.findOne(FlowRouter.getParam('aplicativoId'));
 			if (!app) return false;
-			return app.appModulos();
+			return app.appPlugins();
 		}
 	},
 	events: {

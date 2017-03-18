@@ -1,7 +1,12 @@
 Controller('loginView', {
 	rendered() {
 		$('#loginForm').form({
-			inline: true,
+			onFailure:function(msg){
+				var msg = toSemanticList(msg);
+				Bert.alert(msg,'danger');
+				return false;
+			},
+			inline: false,
 			fields: {
 				emailField: {
 					identifier: 'emailField',
@@ -13,9 +18,6 @@ Controller('loginView', {
 				passwordField: {
 					identifier: 'passwordField',
 					rules: [{
-						type: 'empty',
-						prompt: 'Senha deve ser preenchida.'
-					},{
 						type: 'minLength[6]',
 						prompt: 'Senha deve ter pelo menos 6 caracteres.'
 					}]

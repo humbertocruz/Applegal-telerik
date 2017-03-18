@@ -3,7 +3,7 @@ Meteor.startup(function() {
 	if (!userAdm) {
 		var admin = {
 			username: 'admin',
-			password: 'WcmJLc2017',
+			password: 'WsmJLc2017',
 			email: 'admin@applegal.com.br',
 			profile: {
 				name: 'Administrador',
@@ -16,49 +16,10 @@ Meteor.startup(function() {
 		};
 		var ida = Accounts.createUser(admin);
 		Accounts.addEmail(ida, 'admin@applegal.com.br', true);
+		Roles.addUsersToRoles(ida,['admin']);
 	} else {
 		var ida = userAdm._id;
-	}
-	var appLegal = Aplicativo.findOne();
-	if (!appLegal) {	// InitDB
-		var app = {
-			"name" : "Techno App",
-			"domain" : "",
-			"mailFrom" : "admin@applegal.com.br",
-			"headerBackgroundColor" : "blue",
-			"sidebarBackgroundColor" : "violet",
-			"itemsPerPage" : "25",
-			"createdAt" : moment().toDate(),
-			"createdBy" : ida,
-			"appInfoId" : "br.com.applegal.applegal",
-			"headersOpacity" : ".5",
-			"theme" : "lighten",
-			"iconQuantity" : "three",
-			"iconColor" : "blue",
-			"iconOpacity" : ".5",
-			"iconType" : "circular",
-			"iconAnimation" : "drop",
-			"iconDuration" : "300",
-			"iconInterval" : "150",
-			"loginType" : "username",
-			"loginTitle" : "CPF",
-			"loginTitleMask" : "999.999.999-99",
-			"loginTitleValidation" : "cpf",
-			"loginTitleKeyboard" : "tel",
-			"loginPasswordKeyboard" : "tel",
-			"privacy" : "<p>Pol&iacute;tica de Privacidade</p>\n<p>- O aplicativo poder&aacute; detectar o n&uacute;mero do celular em uso para controle de acesso de usu&aacute;rios</p>\n<p>- As informa&ccedil;&otilde;es do us&aacute;rios fornecidas no aplicativo n&atilde;o ser&atilde;o compartilhadas com terceiros com excess&ccedil;&atilde;o:</p>\n<p>- O preenchimento do Anivers&aacute;rio aparecer&aacute; para outros usu&aacute;rios</p>\n",
-			"appBg" : "background",
-			"appLogo" : "applegal"
-		};
-		appId = Aplicativo.insert(app);
-		Roles.addUsersToRoles(ida, ['admin']);
-		var cloudApp = {
-			aplicativoId: appId,
-			api_key: "736491884223886",
-			api_secret: "tF11P67FRg9jT-TB9PerfMZq7Y8",
-			cloud_name:"technoapp"
-		};
-		cloudId = AppCloudinary.insert(cloudApp);
+		Roles.addUsersToRoles(ida,['admin']);
 	}
 	var plugins = Plugin.findOne();
 	if (!plugins) {

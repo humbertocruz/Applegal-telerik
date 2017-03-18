@@ -18,4 +18,5 @@ template(name="pluginsView")
 						i.large.icon(class="#{icon}")
 					td #{path}
 					td #{title}
-	+indexInfoPaginator ready=ready nothingFound='Nenhum plugin cadastrado.' count=plugins.count page=plugins.count pages=plugins.pages singularForm='Plugin' pluralForm='Plugins'
+	.ui.bottom.attached.segment
+		a.ui.blue.button(href="#{pathFor 'pluginsInsertRoute'}") Novo Plugin

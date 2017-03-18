@@ -10,7 +10,7 @@ template(name="leftMenu")
 			.ui.blue.inverted.top.attached.vertical.menu
 				.ui.item
 					i.mobile.icon#showEmulatorEvent
-					|#{appInfo.name}
+					|#{appInfo.info.name}
 			.ui.blue.bottom.attached.vertical.menu
 				a.item(class="#{isActiveRoute regex='^aplicativosUpdateInfoRoute'}",href="#{pathFor 'aplicativosUpdateInfoRoute' aplicativoId=appInfo._id}")
 					i.setting.icon
@@ -20,6 +20,10 @@ template(name="leftMenu")
 					i.book.icon
 					.content
 						.header Biblioteca
+				a.item(class="#{isActiveRoute regex='^aplicativosUpdateWallpaper'}",href="#{pathFor 'aplicativosUpdateWallpaperRoute' aplicativoId=appInfo._id}")
+					i.image.icon
+					.content
+						.header Wallpapers
 				a.item(class="#{isActiveRoute regex='^aplicativosPlugins'}",href="#{pathFor 'aplicativosPluginsRoute' aplicativoId=appInfo._id}")
 					i.puzzle.icon
 					.content

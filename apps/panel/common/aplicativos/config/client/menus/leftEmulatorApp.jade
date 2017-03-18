@@ -10,6 +10,10 @@ template(name="leftEmulatorApp")
 					i.book.icon
 					.content
 						.header Biblioteca
+				a.item(class="#{isActiveRoute regex='^aplicativosWallpaper'}",href="#{pathFor 'aplicativosUpdateWallpaperRoute' aplicativoId=appInfo._id}")
+					i.image.icon
+					.content
+						.header Wallpapers
 				if isAdmin
 					a.item(class="#{isActiveRoute regex='^aplicativosPlugins'}",href="#{pathFor 'aplicativosPluginsRoute' aplicativoId=appInfo._id}")
 						i.puzzle.icon

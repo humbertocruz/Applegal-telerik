@@ -25,7 +25,6 @@ Controller('bibliotecaView',{
 		},
 		libTypes: function(){
 			var libs = [];
-			console.log(bibliotecaTypesVar.get());
 			_.each(bibliotecaTypesVar.get(),function(lType){
 				var data = {
 					title:libTypes[lType].name,
@@ -79,13 +78,19 @@ Controller('bibliotecaView',{
 				if (_.contains(me.tags,'wallpaper')) {
 					var data = {
 						_id:FlowRouter.getParam('aplicativoId'),
-						appBg:doc
+						wallpaper:{
+							public_id:doc,
+							cloud_name:me.cloud_name
+						}
 					};
 				}
 				if (_.contains(me.tags,'logotype')) {
 					var data = {
 						_id:FlowRouter.getParam('aplicativoId'),
-						appLogo:doc
+						logotype:{
+							public_id:doc,
+							cloud_name:me.cloud_name
+						}
 					};
 				}
 				Meteor.call("aplicativosForm", data, function(error, result){

@@ -3,8 +3,14 @@ Meteor.publishComposite('appByDomain', function(protocol,domain) {
 		find: function() {
       var app = Aplicativo.find({
         domain:protocol+'//'+domain
-      });
-      return app;
+      },{
+				fields:[
+					'info',
+					'appLogo',
+					'appBg'
+				]
+			});
+			return app;
 		}
 	}
 });

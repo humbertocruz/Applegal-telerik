@@ -1,9 +1,12 @@
 Controller('loginView', {
 	rendered: function() {
-		$('#loginGrid').transition('horizontal flip in');
+		//$('#loginGrid').transition('horizontal flip in');
 	},
 	events: {
-		'submit #loginForm' (e, t) {
+		'click #flipToPassword':function(e,t){
+			$('.ui.shape').shape('flip over');
+		},
+		'submit #loginForm':function(e, t) {
 			e.preventDefault();
 			isLoadingVar.set(true);
 			var fields = $(e.target).form('get values');

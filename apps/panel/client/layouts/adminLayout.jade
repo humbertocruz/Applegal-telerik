@@ -4,7 +4,7 @@ template(name="adminLayout")
 			.ui.text.loader #{isLoading}
 	+confirmView
 	+promptView
-	.ui.container
+	.ui.container(style="min-width:933px;")
 		+Template.dynamic template=menu
 		.ui.grid
 			.three.wide.column

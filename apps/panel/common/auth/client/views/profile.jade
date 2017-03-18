@@ -20,8 +20,8 @@ template(name="profileView")
 							select.ui.dropdown.tipoField(id="app_#{_id}",name="tipo",multiple)
 								option(value="") Escolha as permissões do Usuário
 								option(value="manager") Gerente
-								each appModulos
+								each appPlugins
 									option(value="#{modulo.path}") #{modulo.title}
-					
+
 	.ui.bottom.attached.secondary.segment
 		button.ui.primary.button(type="submit",form="profileForm") Salvar

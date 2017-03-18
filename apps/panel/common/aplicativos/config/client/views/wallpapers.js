@@ -1,7 +1,7 @@
-Controller('aplicativosUpdateThemeView',{
+Controller('aplicativosUpdateWallpaperView',{
 	created:function(){
 		subMenuTitleVar.set({
-			title:'Configuração do Aplicativo - Aparência',
+			title:'Configuração do Aplicativo - Wallpaper',
 			icon:'theme'
 		});
 		bibliotecaTypesVar.set([
@@ -10,8 +10,7 @@ Controller('aplicativosUpdateThemeView',{
 		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
 		Tracker.autorun(function(){
 			var page = FlowRouter.getQueryParam('page');
-			var aplicativoId = FlowRouter.getParam('aplicativoId');
-			appBiblioteca = Meteor.subscribe("appBiblioteca", page, aplicativoId, 12, ['wallpaper']);
+			appBiblioteca = Meteor.subscribe("pubBiblioteca", page, 12, ['wallpaper']);
 		});
 	},
 	rendered:function(){

@@ -1,3 +1,12 @@
+FlowRouter.route('/auth', {
+	name: 'authRoute',
+	action: function() {
+		BlazeLayout.render('loginLayout', {
+			main: 'authView'
+		});
+	}
+});
+
 FlowRouter.route('/login', {
 	name: 'loginRoute',
 	action: function() {

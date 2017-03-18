@@ -1,6 +1,5 @@
 Controller('passwordView', {
 	rendered: function() {
-		$('#passwordGrid').transition('horizontal flip in');
 		$('#passwordForm').form({
 			inline:true,
 			fields:{
@@ -15,6 +14,9 @@ Controller('passwordView', {
 		})
 	},
 	events: {
+		'click #flipToLogin':function(e,t){
+			$('.ui.shape').shape('flip back');
+		},
 		'submit #passwordForm' (e, t) {
 			e.preventDefault();
 			isLoadingVar.set(true);

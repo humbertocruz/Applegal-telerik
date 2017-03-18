@@ -4,8 +4,8 @@ adminsRoutes = FlowRouter.group({
 	triggersEnter:[
 		function(obj,redirect){
 			if (!Meteor.userId()){
-				Bert.alert('Você precisa fazer o login para ter permissão de acesso.','warning');
-				redirect('loginRoute');
+				Bert.alert('Você precisa fazer o login para ter permissão de acesso.','warning','growl-top-right');
+				redirect('authRoute');
 			}
 		}
 	]

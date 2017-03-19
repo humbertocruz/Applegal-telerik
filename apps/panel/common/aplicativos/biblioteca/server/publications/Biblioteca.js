@@ -11,7 +11,6 @@ Meteor.publish('appBiblioteca', function (page,aplicativoId,qtd,typePreselected)
 	Counts.publish(this, 'appBiblioteca', Biblioteca.find(search), {
 		noReady: true
 	});
-
 	return Biblioteca.find(search,{
 		limit:qtd,
 		skip: (page - 1) * qtd
@@ -31,11 +30,11 @@ Meteor.publish('pubBiblioteca', function (page,qtd,typePreselected) {
 		}
 	};
 
-	Counts.publish(this, 'appBiblioteca', Biblioteca.find(search), {
+	Counts.publish(this, 'pubBiblioteca', PubBiblioteca.find(search), {
 		noReady: true
 	});
 
-	return Biblioteca.find(search,{
+	return PubBiblioteca.find(search,{
 		limit:qtd,
 		skip: (page - 1) * qtd
 	});

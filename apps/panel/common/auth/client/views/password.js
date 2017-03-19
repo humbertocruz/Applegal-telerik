@@ -1,7 +1,12 @@
 Controller('passwordView', {
 	rendered: function() {
 		$('#passwordForm').form({
-			inline:true,
+			onFailure:function(msg){
+				var msg = toSemanticList(msg);
+				Bert.alert(msg,'danger');
+				return false;
+			},
+			inline:false,
 			fields:{
 				emailField:{
 					identifier: 'emailField',
@@ -14,9 +19,6 @@ Controller('passwordView', {
 		})
 	},
 	events: {
-		'click #flipToLogin':function(e,t){
-			$('.ui.shape').shape('flip back');
-		},
 		'submit #passwordForm' (e, t) {
 			e.preventDefault();
 			isLoadingVar.set(true);
@@ -28,9 +30,7 @@ Controller('passwordView', {
 						Bert.alert("Email não encontrado.",'danger');
 					}
 				} else {
-
 					Bert.alert('Você receberá um email com um link para definir uma nova senha.','success');
-					FlowRouter.go('loginRoute');
 				}
 			});
 		}

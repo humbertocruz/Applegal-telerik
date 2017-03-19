@@ -11,7 +11,8 @@ Controller('aplicativosUpdateThemeView',{
 		Tracker.autorun(function(){
 			var page = FlowRouter.getQueryParam('page');
 			var aplicativoId = FlowRouter.getParam('aplicativoId');
-			appBiblioteca = Meteor.subscribe("appBiblioteca", page, aplicativoId, 12, ['wallpaper']);
+			var libType = bibliotecaTypesVar.get();
+			appBiblioteca = Meteor.subscribe("appBiblioteca", page, aplicativoId, 12, libType);
 		});
 	},
 	rendered:function(){

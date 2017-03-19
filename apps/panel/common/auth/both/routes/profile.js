@@ -5,7 +5,7 @@ profileRoutes = FlowRouter.group({
 		function(obj,redirect){
 			if (!Meteor.userId()){
 				Bert.alert('Você precisa fazer o login para ter permissão de acesso.','warning','growl-top-right');
-				redirect('authRoute');
+				redirect('loginRoute');
 			}
 		}
 	]

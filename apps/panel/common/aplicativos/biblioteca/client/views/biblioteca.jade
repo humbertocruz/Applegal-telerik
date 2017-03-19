@@ -1,9 +1,12 @@
 template(name="bibliotecaView")
 	.ui.violet.segment
-		unless noUpload
+		unless publicLib
 			input#uploadField(type="file",name="files",style="display:none;",multiple="multiple")
 			if compare route 'eq' 'aplicativosBibliotecaRoute'
 				.ui.green.button#rebuildCloudinary Recuperar Arquivos
+			if compare route 'eq' 'aplicativosUpdateWallpaperRoute'
+				.ui.green.button#rebuildCloudinary Recuperar Arquivos
+		unless publicLib
 			.ui.button.hasPopup Enviar
 			.ui.large.popup
 				.ui.vertical.text.menu
@@ -11,7 +14,8 @@ template(name="bibliotecaView")
 						.link.item.uploadEvent(data-value="#{name}")
 							i.icon(class="#{icon}")
 							|#{title}
-
+		else
+			.ui.disabled.button Galeria
 		if compare biblioteca.pages 'gt' 1
 			.ui.right.floated.buttons
 				.ui.icon.button#prevPageEvent
@@ -29,4 +33,5 @@ template(name="bibliotecaView")
 						|!{toSemanticList tags}
 					.extra.content
 						i.link.large.mobile.icon.useOnAppEvent
-						i.link.right.floated.large.trash.icon.RemoveEvent
+						unless publicLib
+							i.link.right.floated.large.trash.icon.RemoveEvent

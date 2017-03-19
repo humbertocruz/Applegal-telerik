@@ -13,7 +13,7 @@ homeRoutes = FlowRouter.group({
 		function(obj, redirect) {
 			if (!Meteor.userId()) {
 				Bert.alert('Você precisa fazer o login!', 'warning','growl-top-right');
-				redirect('authRoute');
+				redirect('loginRoute');
 			}
 		}
 	]

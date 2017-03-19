@@ -12,7 +12,8 @@ Controller('aplicativosUpdateInfoView',{
 			var page = FlowRouter.getQueryParam('page');
 			var aplicativoId = FlowRouter.getParam('aplicativoId');
 			oneAplicativo = Meteor.subscribe("oneAplicativo", aplicativoId);
-			appBiblioteca = Meteor.subscribe("appBiblioteca", page, aplicativoId, 12, bibliotecaTypesVar.get());
+			var libType = bibliotecaTypesVar.get();
+			appBiblioteca = Meteor.subscribe("appBiblioteca", page, aplicativoId, 12, libType);
 		});
 	},
 	rendered:function(){

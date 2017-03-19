@@ -1,7 +1,7 @@
 Controller('aplicativosUpdateWallpaperView',{
 	created:function(){
 		subMenuTitleVar.set({
-			title:'Configuração do Aplicativo - Wallpaper',
+			title:'Galeria de Wallpapers',
 			icon:'theme'
 		});
 		bibliotecaTypesVar.set([
@@ -10,19 +10,10 @@ Controller('aplicativosUpdateWallpaperView',{
 		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
 		Tracker.autorun(function(){
 			var page = FlowRouter.getQueryParam('page');
-			appBiblioteca = Meteor.subscribe("pubBiblioteca", page, 12, ['wallpaper']);
+			pubBiblioteca = Meteor.subscribe("pubBiblioteca", page, 12, ['wallpaper']);
 		});
 	},
 	rendered:function(){
-		var loadApp = function(aplicativo){
-			$('.aplicativosForm').form('set values',aplicativo);
-		};
-		Tracker.autorun(function(){
-			var aplicativo = Aplicativo.findOne(FlowRouter.getParam('aplicativoId'));
-			if (aplicativo) {
-				loadApp(aplicativo.theme);
-			}
-		});
 	},
 	helpers:{
 		semanticColors:function(){

@@ -49,6 +49,10 @@ template(name="leftMenu")
 		.ui.item
 			|Admin
 	.ui.violet.bottom.attached.vertical.menu
+		if isInRole 'admin'
+			a.item(class="#{isActiveRoute regex='^options'}",href="#{pathFor 'optionsRoute'}")
+				i.options.icon
+				|Opções
 		a.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
 			i.android.icon
 			|Apps

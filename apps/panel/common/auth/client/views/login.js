@@ -1,11 +1,7 @@
 Controller('loginView', {
 	rendered: function() {
-		//$('#loginGrid').transition('horizontal flip in');
 	},
 	events: {
-		'click #flipToPassword':function(e,t){
-			$('.ui.shape').shape('flip over');
-		},
 		'submit #loginForm':function(e, t) {
 			e.preventDefault();
 			isLoadingVar.set(true);
@@ -15,6 +11,7 @@ Controller('loginView', {
 					Bert.alert('Usuário ou Senha não encontrados!', 'danger');
 					isLoadingVar.set(false);
 				} else {
+					$('body').css('backgroundColor','#fff');
 					isLoadingVar.set(false);
 					FlowRouter.go('homeRoute');
 				}

@@ -60,5 +60,7 @@ Meteor.publishComposite("oneAplicativo", function(aplicativoId){
 });
 
 Meteor.publish("AppCloudinary", function(aplicativoId){
+	// Apenas usuário logado
+	if (!this.userId) return false;
 	return AppCloudinary.find({aplicativoId:aplicativoId});
 });

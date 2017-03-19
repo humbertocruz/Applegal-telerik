@@ -4,7 +4,7 @@ Accounts.onResetPasswordLink(function(token, done){
 });
 //Meteor.startup(function(){
 	Accounts.onLogout(function(){
-		FlowRouter.go('authRoute');
+		FlowRouter.go('loginRoute');
 		return true;
 	});
 	Accounts.onLogin(function(){

@@ -12,9 +12,12 @@ template(name="mainMenu")
 							i.sidebar.icon
 						.ui.large.popup
 							.ui.vertical.text.menu
+								a.item(class="#{isActiveRoute regex='^options'}",href="#{pathFor 'optionsRoute'}")
+									i.options.icon
+									|Opções
 								a.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
 									i.android.icon
-									|Aplicativos
+									|Apps
 								a.item(class="#{isActiveRoute regex='^plugins'}",href="#{pathFor 'pluginsRoute'}")
 									i.puzzle.icon
 									|Plugins
@@ -25,10 +28,10 @@ template(name="mainMenu")
 						img.ui.avatar.image(src="#{gravatar user.emails}")
 					.ui.large.popup
 						.ui.vertical.text.menu
-							.link.item
+							.link.item#changePwdEvent
 								i.key.icon
 								|Alterar Senha
-							.link.item
+							.link.item#logoutEvent
 								i.sign.out.icon
 								|Sair
 		+subMenu

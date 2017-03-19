@@ -20,6 +20,9 @@ Controller('bibliotecaView',{
 		});
 	},
 	helpers:{
+		publicLib:function(){
+			return FlowRouter.getParam('public');
+		},
 		route:function(){
 			return FlowRouter.getRouteName();
 		},
@@ -39,19 +42,27 @@ Controller('bibliotecaView',{
 			var qtd = 12;
 			var page = FlowRouter.getQueryParam('page');
 			if (!page) page = 1;
-			var biblioteca = Biblioteca.find({
+			var search = {
 				tags:{
 					$in:bibliotecaTypesVar.get()
 				}
-			},{
+			};
+			if (FlowRouter.getParam('public')) {
+				search.cloud_name = 'technoapp';
+				libCounter = 'pubBiblioteca';
+			} else {
+				search.aplicativoId = FlowRouter.getParam('aplicativoId');
+				libCounter = 'appBiblioteca';
+			}
+			var biblioteca = Biblioteca.find(search,{
 				limit:12
 			});
 			var data = biblioteca.fetch();
 			return {
 				page:page,
-				count:Counts.get('appBiblioteca'),
+				count:Counts.get(libCounter),
 				data:data,
-				pages:Math.ceil(Counts.get('appBiblioteca')/qtd)
+				pages:Math.ceil(Counts.get(libCounter)/qtd)
 			}
 		}
 	},
@@ -61,7 +72,7 @@ Controller('bibliotecaView',{
 			if (!page) page = 1;
 			if (page == 1) return false;
 			page--;
-			FlowRouter.go(FlowRouter.getRouteName(),{aplicativoId:FlowRouter.getParam('aplicativoId')},{page:page});
+			FlowRouter.go(FlowRouter.getRouteName(),{aplicativoId:FlowRouter.getParam('aplicativoId'),public:FlowRouter.getParam('public')},{page:page});
 		},
 		'click #nextPageEvent':function(e,t){
 			var page = FlowRouter.getQueryParam('page');
@@ -69,7 +80,7 @@ Controller('bibliotecaView',{
 			var maxPages = Math.ceil(Counts.get('appBiblioteca')/12);
 			if (page == maxPages) return false;
 			page++;
-			FlowRouter.go(FlowRouter.getRouteName(),{aplicativoId:FlowRouter.getParam('aplicativoId')},{page:page});
+			FlowRouter.go(FlowRouter.getRouteName(),{aplicativoId:FlowRouter.getParam('aplicativoId'),public:FlowRouter.getParam('public')},{page:page});
 		},
 		'click .useOnAppEvent':function(e,t){
 			var me = this;

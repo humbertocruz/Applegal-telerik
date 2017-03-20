@@ -1,7 +1,7 @@
 template(name="leftMenu")
 	+uploadStatus
 
-	if aplicativoId
+	if appInfo._id
 		if isManagerOrAdmin
 			if showEmulator
 				div#emulatorFloatDiv
@@ -20,10 +20,6 @@ template(name="leftMenu")
 					i.book.icon
 					.content
 						.header Biblioteca
-				a.item(class="#{isActiveRoute regex='^aplicativosUpdateWallpaper'}",href="#{pathFor 'aplicativosUpdateWallpaperRoute' aplicativoId=appInfo._id}")
-					i.image.icon
-					.content
-						.header Wallpapers
 				a.item(class="#{isActiveRoute regex='^aplicativosPlugins'}",href="#{pathFor 'aplicativosPluginsRoute' aplicativoId=appInfo._id}")
 					i.puzzle.icon
 					.content
@@ -49,14 +45,17 @@ template(name="leftMenu")
 		.ui.item
 			|Admin
 	.ui.violet.bottom.attached.vertical.menu
-		if isInRole 'admin'
-			a.item(class="#{isActiveRoute regex='^options'}",href="#{pathFor 'optionsRoute'}")
-				i.options.icon
-				|Opções
+			
 		a.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
 			i.android.icon
 			|Apps
 		if isInRole 'admin'
+			a.item(class="#{isActiveRoute regex='^options'}",href="#{pathFor 'optionsRoute'}")
+				i.options.icon
+				|Opções
+			a.item(class="#{isActiveRoute regex='^pubGaleriaRoute'}",href="#{pathFor 'pubGaleriaRoute'}")
+				i.image.icon
+				|Galeria
 			a.item(class="#{isActiveRoute regex='^plugins'}",href="#{pathFor 'pluginsRoute'}")
 				i.puzzle.icon
 				|Plugins

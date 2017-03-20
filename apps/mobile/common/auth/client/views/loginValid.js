@@ -4,17 +4,14 @@ Controller('loginView',{
 		var usernameValidation = [];
 		usernameValidation.push({
 			type:'empty',
-			prompt:app.loginTitle+' não pode estar em branco.'
+			prompt:app.login.loginTitle+' não pode estar em branco.'
 		});
-		if (app.loginTitleValidation == 'cpf') {
+		if (app.login.loginTitleValidation == 'cpf') {
 			usernameValidation.push({
 				type:'cpf',
 				prompt:'CPF inválido'
 			});
 		}
-		$.fn.form.settings.rules.cpf = function(value) {
-			return TestaCPF(value);
-		};
 		$('#loginForm').form({
 			onFailure:function(a,b,c){
 				var msg = toSemanticList(a);
@@ -41,7 +38,7 @@ Controller('loginView',{
 					rules:[
 						{
 							type:'minLength[5]',
-							prompt:'Senha deve ter 8 ou mais caracteres'
+							prompt:'Senha deve ter 6 ou mais caracteres'
 						}
 					]
 				}

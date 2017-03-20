@@ -4,7 +4,7 @@ Controller('loginView', {
 	},
 	rendered: function() {
 		var app = Aplicativo.findOne();
-		if (app.loginTitleMask) $('#usernameField').mask(app.loginTitleMask);
+		if (app.login.loginTitleMask) $('#usernameField').mask(app.login.loginTitleMask);
 		//if (app.loginPasswordMask) $('#passwordField').mask(app.loginPasswordMask);
 	},
 	helpers: {
@@ -31,7 +31,7 @@ Controller('loginView', {
 			}
 			Meteor.loginWithPassword(loginField, fields.password, function(err, result) {
 				if (err) {
-					Bert.alert('Confira seu CPF e sua Senha!', 'danger');
+					Bert.alert('Não foi possível fazer o login!', 'danger');
 					isLoadingVar.set(false);
 				} else {
 					isLoadingVar.set(false);

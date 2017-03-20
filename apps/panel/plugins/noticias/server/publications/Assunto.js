@@ -1,11 +1,12 @@
-Meteor.publishComposite('appAssuntos', function(aplicativoId) {
+Meteor.publishComposite('appAssuntos', function(page, aplicativoId) {
 	if (typeof(aplicativoId) == 'undefined') return false;
 	if (!this.userId) return false;
+	if (page == null) page = 1;
 	return {
 		find: function() {
-			if (typeof(search) == 'undefined') search = {};
+			var search = {};
 			search.aplicativoId = aplicativoId;
-			Counts.publish(this, 'allAssuntos', Assunto.find(
+			Counts.publish(this, 'appAssuntos', Assunto.find(
 				search
 			), {
 				noReady: true

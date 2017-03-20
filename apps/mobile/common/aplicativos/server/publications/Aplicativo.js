@@ -7,29 +7,25 @@ Meteor.publishComposite('clientApp', function(appInfo) {
 	}
 	return {
 		find: function() {
+			console.log(appInfo);
 			var app = Aplicativo.find({
-				appInfoId:appInfo.identifier
+				'store.appInfoId':appInfo.identifier
 			});
 			aplicativoVar = app.fetch()[0];
 			return app;
 		},
 		children: [
 			{
-				find: function(app) {
-					return Arquivo.find(app.appLogo,{limit:1});
-				},
-			},
-			{
 			find: function(app) {
-				return AplicativoModulo.find({
+				return AplicativoPlugin.find({
 					aplicativoId:app._id
 				});
 			},
 			children: [
 				{
-					find: function(appMod){
-						return Modulo.find({
-							_id:appMod.moduloId
+					find: function(appPlug){
+						return Plugin.find({
+							_id:appPlug.pluginId
 						});
 					}
 				}

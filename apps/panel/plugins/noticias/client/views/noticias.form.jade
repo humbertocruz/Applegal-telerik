@@ -1,27 +1,30 @@
 template(name="formNoticiasView")
-	//+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
-	form.ui.form#noticiasForm(method="post")
-		input#uploadField(type="file",style="display:none;")
-		.two.fields
+	.ui.blue.top.attached.segment
+		form.ui.form#noticiasForm(method="post")
+			input#uploadField(type="file",style="display:none;")
+			.two.fields
+				.field
+					label Título
+					input#titleField(type="text",name="title")
+				.field
+					label Data
+					input#dateField(type="date",name="date")
+			.two.fields
+				.field
+					label Assunto
+					select.ui.search.dropdown#assuntoField(name="assunto_id")
+						option(value="") Escolha um Assunto
+						each assuntos
+							option(value="#{_id}") #{name}
+				.field
+					label Cor
+					select.ui.search.dropdown#corField(name="cor")
+						option(value="") Escolha uma Cor
+						each semanticColors
+							option(value="#{className}") #{title}
 			.field
-				label Título
-				input#titleField(type="text",name="title")
-			.field
-				label Data
-				input#dateField(type="date",name="date")
-		.two.fields
-			.field
-				label Assunto
-				select.ui.search.dropdown#assuntoField(name="assunto_id")
-					option(value="") Escolha um Assunto
-					each assuntos
-						option(value="#{_id}") #{name}
-			.field
-				label Cor
-				select.ui.search.dropdown#corField(name="cor")
-					option(value="") Escolha uma Cor
-					each semanticColors
-						option(value="#{className}") #{title}
-		.field
-			label Mensagem
-			textarea#bodyField(name="mensagem",rows="15")
+				label Mensagem
+				textarea#bodyField(name="mensagem",rows="15")
+	.ui.bottom.attached.secondary.segment
+		button.ui.blue.button(type="submit",form="noticiasForm") Salvar
+		a.ui.button(href="#{pathFor 'noticiasAssuntosRoute' aplicativoId=appInfo._id}") Assuntos

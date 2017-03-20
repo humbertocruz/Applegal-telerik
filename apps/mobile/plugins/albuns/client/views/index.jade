@@ -1,0 +1,16 @@
+template(name="albunsView")
+	.ui.info.message(style="background-color:#{appThemeBgColor}")
+		i.large.image.icon
+		|Álbuns de Fotos
+	if compare albuns.count 'eq' 0
+		.ui.red.message(style="background-color:#{appThemeBgColor}")
+			p Nenhuma álbum encontrado
+	.ui.two.cards
+		each albuns.data
+			a.ui.link.fluid.card(href="#{pathFor 'fotosRoute' id=_id}",class="#{appThemeText}",style="background-color:#{appThemeBgColor}")
+				.image
+					img(src="#{clUrl capaId crop='scale' width=120}")
+				.content
+					.meta #{title}
+				.extra.content
+					|#{fotos.length} fotos

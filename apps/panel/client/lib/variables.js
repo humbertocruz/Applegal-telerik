@@ -30,8 +30,8 @@ libTypes = {
 		name:'Papel de Parede',
 		icon:'image'
 	},
-	galeria:{
-		name: 'Foto da Galeria',
+	album:{
+		name: 'Álbum de Fotos',
 		icon: 'image'
 	},
 	enquete:{
@@ -49,6 +49,7 @@ libTypes = {
 };
 
 bibliotecaTypesVar = new ReactiveVar([]);
+bibliotecaRelationsVar = new ReactiveVar([]);
 canRecoverLibVar = new ReactiveVar(false);
 topTitleVar = new ReactiveVar('Home');
 appInfoVar = new ReactiveVar({});

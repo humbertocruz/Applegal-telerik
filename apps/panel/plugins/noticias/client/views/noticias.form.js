@@ -9,8 +9,9 @@ Controller('formNoticiasView',{
 			}
 		});
 		Tracker.autorun(function(){
+			var page = FlowRouter.getQueryParam('page');
 			Meteor.subscribe("oneNoticia", FlowRouter.getParam('noticiaId'));
-			Meteor.subscribe("appAssuntos", FlowRouter.getParam('aplicativoId'));
+			Meteor.subscribe("appAssuntos", page, FlowRouter.getParam('aplicativoId'));
 		});
 	},
 	rendered:function(){
@@ -51,40 +52,6 @@ Controller('formNoticiasView',{
 		},
 		assuntos:function(){
 			return Assunto.find({},{sort:{name:1}}).fetch();
-		},
-		header:function(){
-			return {
-				title:(FlowRouter.getParam('noticiaId')==undefined?'Inserir Notícia':'Editar Notícia'),
-				icon:'newspaper',
-				corner:'add'
-			}
-		},
-		saveLink:function(){
-			return {
-				title:'Salvar',
-				icon:'save',
-				form:'noticiasForm'
-			}
-		},
-		extraLinks:function(){
-			return [
-				{
-					title:'Cancelar',
-					route:'noticiasRoute',
-					params: {
-						aplicativoId: FlowRouter.getParam('aplicativoId')
-					},
-					icon:'close'
-				},
-				{
-					title:'Assuntos',
-					params: {
-						aplicativoId: FlowRouter.getParam('aplicativoId')
-					},
-					route:'noticiasAssuntosRoute',
-					icon:'sidebar'
-				}
-			]
 		}
 	},
 	events:{
@@ -106,31 +73,6 @@ Controller('formNoticiasView',{
 					}
 				});
 			});
-		},
-		'change #uploadField': function(e) {
-			var files = e.currentTarget.files;
-			Cloudinary.upload(files,
-				{
-					folder:FlowRouter.getParam('aplicativoId'),
-					tags:['noticia',FlowRouter.getParam('aplicativoId')],
-				},
-				function(err,res) {
-					if (err) {
-						console.log(err);
-					} else {
-						res.noticiaId = FlowRouter.getParam('noticiaId');
-						Arquivo.insert(res);
-						Meteor.call("noticiasAddFoto", res, function(error, result){
-							if(error){
-								console.log("error", error);
-							}
-							if(result){
-
-							}
-						});
-					}
-				}
-			);
 		},
 		'submit #noticiasForm'(e,t){
 			e.preventDefault();

@@ -1,0 +1,15 @@
+template(name="formAlbunsView")
+	.ui.blue.segment
+		form.ui.form#albunsForm(method="post")
+			.two.fields
+				.field
+					label Data
+					input#dateField(type="date",name="date")
+				.field
+					label Título
+					input#titleField(type="text",name="title")
+			.ui.divider
+			button.ui.blue.button(type="submit",form="albunsForm") Salvar
+	if fotoId
+		.ui.large.header Fotos do Álbum
+		+bibliotecaView

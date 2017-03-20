@@ -1,0 +1,32 @@
+template(name="albunsView")
+	table.ui.blue.top.attached.table
+		thead
+			tr
+				th.three.wide &nbsp;
+				th.one.wide Ativa
+				th.two.wide Data
+				th.two.wide Capa
+				th Título
+				th Qtd Fotos
+		tbody
+			each albuns.data
+				tr
+					td
+						a.ui.icon.button.editBtn(href="#{pathFor 'albunsUpdateRoute' aplicativoId=aplicativoId id=_id}")
+							i.edit.icon
+						.ui.icon.button.removeBtn
+							i.trash.icon
+					td
+						+indexActivateButton active=active id=_id
+					td #{dateBr date}
+					td
+						if capa_id
+							img.ui.rounded.tiny.image(src="#{clUrl capaId crop='scale' width=80}")
+						else
+							.ui.red.small.header Sem Capa
+					td #{title}
+					td #{fotos.length}
+	.ui.secondary.bottom.attached.segment
+		a.ui.blue.button(href="#{pathFor 'albunsInsertRoute' aplicativoId=appInfo._id}")
+			i.plus.icon
+			|Novo Álbum

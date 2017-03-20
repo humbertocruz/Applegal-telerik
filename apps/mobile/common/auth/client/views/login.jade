@@ -1,11 +1,11 @@
 template(name="loginView")
-	img.ui.small.centered.image(src="#{arquivoPath appInfo.appLogo 'c_scale,w_150'}")
+	img.ui.small.centered.image(src="#{clUrl appInfo.logotype.public_id crop='scale' width=150}")
 	.ui.hidden.divider
 	form.ui.form#loginForm(class="#{appThemeText}",style="background-color:#{appThemeBgColor}", method="post")
 		if compare appInfo.loginType 'eq' 'username'
 			.field
-				label #{appInfo.loginTitle}
-				input#usernameField(type="#{appInfo.loginTitleKeyboard}",name="username",autocomplete="off")
+				label #{appInfo.login.loginTitle}
+				input#usernameField(type="#{appInfo.login.loginTitleKeyboard}",name="username",autocomplete="off")
 		else
 			.field
 				label Email
@@ -13,7 +13,7 @@ template(name="loginView")
 		.field
 			label Senha
 			.ui.action.input
-				input#passwordField.hidePwd(type="#{appInfo.loginPasswordKeyboard}",name="password",autocomplete="off")
+				input#passwordField.hidePwd(type="#{appInfo.login.loginPasswordKeyboard}",name="password",autocomplete="off")
 				.ui.icon.button.showPasswordBtn
 					i.eye.icon
 		.ui.divider

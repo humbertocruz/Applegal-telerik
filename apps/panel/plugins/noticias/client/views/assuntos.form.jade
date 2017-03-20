@@ -1,6 +1,9 @@
 template(name="noticiasAssuntosFormView")
-	+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
-	form.ui.form#assuntosForm(method="post")
-		.field
-			label Nome
-			input#nomeField(type="text",name="name")
+	.ui.blue.top.attached.segment
+		form.ui.form#assuntosForm(method="post")
+			.field
+				label Nome
+				input#nomeField(type="text",name="name")
+	.ui.bottom.attached.secondary.segment
+		button.ui.blue.button(type="submit",form="assuntosForm") Salvar
+		a.ui.button(href="#{pathFor 'noticiasAssuntosRoute' aplicativoId=appInfo._id}") Cancelar

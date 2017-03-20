@@ -1,1 +1,1 @@
-Arquivo = new Mongo.Collection('arquivos');
+Biblioteca = new Mongo.Collection('biblioteca');

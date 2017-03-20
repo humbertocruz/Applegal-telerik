@@ -2,7 +2,6 @@ Controller('sidebar', {
 	rendered:function(){
 		Meteor.setTimeout(function(){
 			$('.ui.left.sidebar').sidebar('attach events', '.toggleSidebar');
-			//$('.ui.bottom.sidebar').sidebar('attach events', '.toggleTechnotronics');
 		}, 1000);
 	},
 	helpers: {
@@ -18,8 +17,8 @@ Controller('sidebar', {
 		isManager: function() {
 			return Roles.userIsInRole(Meteor.userId(), 'manager', Aplicativo.findOne()._id);
 		},
-		modulos: function() {
-			return AplicativoModulo.find().fetch();
+		plugins: function() {
+			return AplicativoPlugin.find().fetch();
 		}
 	},
 	events: {

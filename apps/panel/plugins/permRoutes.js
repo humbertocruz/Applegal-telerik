@@ -1,4 +1,4 @@
 export const permRoutes = FlowRouter.group({
 	name: 'permRoutes',
-	prefix: '/aplicativos/:aplicativoId'
+	prefix: '/app/:aplicativoId'
 });

@@ -27,4 +27,4 @@ template(name="noticiasView")
 		a.ui.blue.button(href="#{pathFor 'noticiasInsertRoute' aplicativoId=appInfo._id}")
 			i.plus.icon
 			|Nova Notícia
-	//+indexInfoPaginator ready=ready nothingFound='Nenhuma notícia cadastrada.' count=noticias.count page=noticias.count pages=noticias.pages singularForm='Notícia' pluralForm='Notícias'
+		a.ui.button(href="#{pathFor 'noticiasAssuntosRoute' aplicativoId=appInfo._id}") Assuntos

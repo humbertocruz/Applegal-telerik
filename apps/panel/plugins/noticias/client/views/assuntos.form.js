@@ -1,4 +1,9 @@
 Controller('noticiasAssuntosFormView',{
+	created:function(){
+		Tracker.autorun(function(){
+			appAssuntos = Meteor.subscribe("appAssuntos", FlowRouter.getParam('aplicativoId'));
+		});
+	},
 	rendered:function(){
 		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
 		if (id = FlowRouter.getParam('id')){
@@ -13,25 +18,6 @@ Controller('noticiasAssuntosFormView',{
 				icon:'sidebar',
 				corner:'add'
 			}
-		},
-		saveLink:function(){
-			return {
-				title:'Salvar',
-				icon:'save',
-				form:'assuntosForm'
-			}
-		},
-		extraLinks:function(){
-			return [
-				{
-					title:'Cancelar',
-					params: {
-						aplicativoId: FlowRouter.getParam('aplicativoId')
-					},
-					route:'noticiasAssuntosRoute',
-					icon:'close'
-				}
-			]
 		}
 	},
 	events:{

@@ -8,25 +8,25 @@ Controller('homeView', {
 		var app = Aplicativo.findOne();
 
 		$('.iconAlpha').transition({
-			animation: app.iconAnimation,
-			durantion: app.iconDuration,
-			interval: app.iconInterval
+			animation: app.home.iconAnimation,
+			durantion: app.home.iconDuration,
+			interval: app.home.iconInterval
 		});
 	},
 	helpers: {
 		userId: function() {
 			return Meteor.userId();
 		},
-		modulos:function(){
-			var appMods = AplicativoModulo.find().fetch();
-			return appMods;
+		plugins:function(){
+			var appPlugs = AplicativoPlugin.find().fetch();
+			return appPlugs;
 		}
 	},
 	events: {
-		'click .moduloClickEvent':function(e,t){
+		'click .pluginClickEvent':function(e,t){
 			var me = this;
 			$(e.currentTarget).transition('jiggle',function(){
-				FlowRouter.go(me.modulo().route);
+				FlowRouter.go(me.plugin().route);
 			});
 		},
 		'click #showPhoneNumber': function(e, t) {

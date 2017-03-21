@@ -53,7 +53,6 @@ Meteor.methods({
 		}, enquete);
 	},
 	enquetesRemoveOpcao:function(enquete_id,pergunta_order,opcao_order,aplicativoId){
-		console.log(enquete_id,pergunta_order,opcao_order);
 		var enquete = Enquete.findOne({
 			_id:enquete_id,
 			aplicativoId:aplicativoId

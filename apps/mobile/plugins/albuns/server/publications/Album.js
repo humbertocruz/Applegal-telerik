@@ -11,10 +11,10 @@ Meteor.publishComposite('appAlbuns',function(aplicativoId){
 			{
 				find:function(album){
 					return Biblioteca.find({
-						albumId:album._id,
 						tags:{
-							$in:[
-								'album'
+							$all:[
+								'album',
+								album._id
 							]
 						}
 					});
@@ -36,14 +36,16 @@ Meteor.publishComposite('oneAlbum',function(id, aplicativoId){
 		children:[
 			{
 				find:function(album){
-					return Biblioteca.find({
-						albumId:album._id,
+					var bib = Biblioteca.find({
 						tags:{
-							$in:[
-								'album'
+							$all:[
+								'album',
+								album._id
 							]
 						}
 					});
+					console.log(bib.fetch());
+					return bib;
 				}
 			}
 		]

@@ -12,7 +12,6 @@ Controller('aniversariantesView',{
 				'roles':FlowRouter.getParam('aplicativoId')
 			};
 			var users = Meteor.users.find(search);
-			console.log(users.fetch());
 			return {
 				data:users.fetch()
 			};

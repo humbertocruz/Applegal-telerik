@@ -9,7 +9,7 @@ template(name="albunsView")
 		each albuns.data
 			a.ui.link.fluid.card(href="#{pathFor 'fotosRoute' id=_id}",class="#{appThemeText}",style="background-color:#{appThemeBgColor}")
 				.image
-					img(src="#{clUrl capaId crop='scale' width=120}")
+					img(src="#{clUrl capa.public_id cloud_name=capa.cloud_name crop='scale' width=120}")
 				.content
 					.meta #{title}
 				.extra.content

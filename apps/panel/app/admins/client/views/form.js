@@ -134,7 +134,6 @@ Controller('adminsFormView', {
 					phone: fields.phone
 				}
 			};
-			console.log(usuario);
 			Meteor.call('formAdmin', usuario, function(error, result) {
 				if (error) {
 					console.log("error", error);

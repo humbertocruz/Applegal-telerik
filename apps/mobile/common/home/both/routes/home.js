@@ -12,6 +12,12 @@ homeRoutes = FlowRouter.group({
 	name: 'homeRoutes',
 	triggersEnter:[
 		function(obj,redirect){
+			if (!Meteor.userId()){
+				Bert.alert('Faça o Login ou Cadastre-se.','info');
+				redirect('loginRoute');
+			}
+		},
+		function(obj,redirect){
 			if (Roles.userIsInRole(Meteor.userId(),'guest',Aplicativo.findOne()._id)){
 				Bert.alert('Seu acesso ainda não foi confirmado.','warning');
 				redirect('suspensoRoute');

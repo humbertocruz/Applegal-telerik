@@ -1,13 +1,11 @@
 Meteor.publishComposite('clientApp', function(appInfo) {
 	if (!appInfo) {
 		appInfo = {
-			identifier: Meteor.settings.public.defaultAppInfoId,
-			identfier: Meteor.settings.public.defaultAppInfoId
+			identifier: Meteor.settings.public.defaultAppInfoId
 		};
 	}
 	return {
 		find: function() {
-			console.log(appInfo);
 			var app = Aplicativo.find({
 				'store.appInfoId':appInfo.identifier
 			});

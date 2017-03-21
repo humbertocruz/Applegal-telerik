@@ -51,7 +51,11 @@ Controller('bibliotecaView',{
 				search.cloud_name = 'technoapp';
 				libCounter = 'pubBiblioteca';
 			} else {
-				search.aplicativoId = FlowRouter.getParam('aplicativoId');
+				if (id = FlowRouter.getParam('id')) {
+					if (!_.contains(search.tags['$in'],id)){
+						search.tags['$all'] = [id];
+					}
+				}
 				libCounter = 'appBiblioteca';
 			}
 			var biblioteca = Biblioteca.find(search,{
@@ -86,6 +90,57 @@ Controller('bibliotecaView',{
 			var me = this;
 			htmlConfirm('Aviso','Você tem certeza?',function(){
 				var doc = me.public_id;
+				if (_.contains(me.tags,'enquete')) {
+					var data = {
+						_id:FlowRouter.getParam('id'),
+						foto:{
+							public_id:doc,
+							cloud_name:me.cloud_name
+						}
+					};
+					Meteor.call("enquetesForm", data, function(error, result){
+						if(error){
+							console.log("error", error);
+						}data
+						if(result){
+							Bert.alert('Foto da Enquete marcada com sucesso','success');
+						}
+					});
+				}
+				if (_.contains(me.tags,'noticia')) {
+					var data = {
+						_id:FlowRouter.getParam('id'),
+						capa:{
+							public_id:doc,
+							cloud_name:me.cloud_name
+						}
+					};
+					Meteor.call("noticiasForm", data, function(error, result){
+						if(error){
+							console.log("error", error);
+						}
+						if(result){
+							Bert.alert('Capa do Notícia marcada com sucesso','success');
+						}
+					});
+				}
+				if (_.contains(me.tags,'album')) {
+					var data = {
+						_id:FlowRouter.getParam('id'),
+						capa:{
+							public_id:doc,
+							cloud_name:me.cloud_name
+						}
+					};
+					Meteor.call("albunsForm", data, FlowRouter.getParam('aplicativoId'), function(error, result){
+						if(error){
+							console.log("error", error);
+						}
+						if(result){
+							Bert.alert('Capa do Álbum marcada com sucesso','success');
+						}
+					});
+				}
 				if (_.contains(me.tags,'wallpaper')) {
 					var data = {
 						_id:FlowRouter.getParam('aplicativoId'),
@@ -94,6 +149,14 @@ Controller('bibliotecaView',{
 							cloud_name:me.cloud_name
 						}
 					};
+					Meteor.call("aplicativosForm", data, function(error, result){
+						if(error){
+							console.log("error", error);
+						}
+						if(result){
+							Bert.alert('Aplicativo alterado com sucesso.','success');
+						}
+					});
 				}
 				if (_.contains(me.tags,'logotype')) {
 					var data = {
@@ -103,15 +166,15 @@ Controller('bibliotecaView',{
 							cloud_name:me.cloud_name
 						}
 					};
+					Meteor.call("aplicativosForm", data, function(error, result){
+						if(error){
+							console.log("error", error);
+						}
+						if(result){
+							Bert.alert('Aplicativo alterado com sucesso.','success');
+						}
+					});
 				}
-				Meteor.call("aplicativosForm", data, function(error, result){
-					if(error){
-						console.log("error", error);
-					}
-					if(result){
-						Bert.alert('Aplicativo alterado com sucesso.','success');
-					}
-				});
 			});
 		},
 		'click #rebuildCloudinary':function(e,t){
@@ -139,18 +202,14 @@ Controller('bibliotecaView',{
 				Cloudinary.upload(ff,
 					{
 						folder:uploadTypeVar.get(),
-						tags:[uploadTypeVar.get(),publicityVar.get()]
+						tags:[uploadTypeVar.get(),publicityVar.get(),FlowRouter.getParam('id')]
 					},
 					function(err,res) {
 						if (err) {
 							console.log(err);
 						} else {
-							_.each(bibliotecaRelationsVar.get(),function(relat){
-								res[relat.field] = relat.value;
-							});
 							res.cloud_name = $.cloudinary.config().cloud_name;
 							res.aplicativoId = FlowRouter.getParam('aplicativoId');
-							console.log(res);
 							Biblioteca.insert(res);
 						}
 					}

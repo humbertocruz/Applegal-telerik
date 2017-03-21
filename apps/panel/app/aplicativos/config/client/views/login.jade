@@ -1,39 +1,72 @@
 template(name="aplicativosUpdateLoginView")
-	//+indexHeaderSearch header=header saveLink=saveLink
 	+configMenu
-	form.ui.form.aplicativosForm#loginForm(method="post")
-		.field
-			label Tipo de Login
-			select.ui.dropdown#loginTypeField(name="loginType")
-				option(value="") Escolha uma opção
-				option(value="email") Email
-				option(value="username") Username
-		.three.fields
+	+configFacebookModal
+	.ui.blue.segment
+		form.ui.form.aplicativosForm#loginForm(method="post")
+			.two.fields
+				.field
+					label Tipo de Login
+					select.ui.dropdown#loginTypeField(name="loginType")
+						option(value="") Escolha uma opção
+						option(value="email") Email
+						option(value="username") Username
+				.field
+					label Grupo ao se Cadastrar
+					select.ui.select.dropdown#roleRegisterField(name="roleRegister")
+						option(value="") Escolha uma opção
+						option(value="guest") Convidado
+						option(value="subscriber") Assinante
+			.three.fields
+				.field
+					label Título
+					input#loginTitleField(type="text",name="loginTitle")
+				.field
+					label Máscara do Título
+					input#loginTitleMaskField(type="text",name="loginTitleMask")
+				.field
+					label Validador do Título
+					select.ui.dropdown#loginTitleValidationField(name="loginTitleValidation")
+						option(value="") Escolha uma opção
+						option(value="none") Sem Validção
+						option(value="cpf") CPF
+			.two.fields
+				.field
+					label Teclado do Título
+					select.ui.dropdown#loginTitleKeyboardField(name="loginTitleKeyboard")
+						option(value="") Escolha uma opção
+						option(value="text") Normal
+						option(value="tel") Numérico
+				.field
+					label Teclado da Senha
+					select.ui.dropdown#loginPasswordKeyboardField(name="loginPasswordKeyboard")
+						option(value="") Escolha uma opção
+						option(value="text") Normal
+						option(value="tel") Numérico
+			.ui.clearing.divider
 			.field
-				label Título
-				input#loginTitleField(type="text",name="loginTitle")
-			.field
-				label Máscara do Título
-				input#loginTitleMaskField(type="text",name="loginTitleMask")
-			.field
-				label Validador do Título
-				select.ui.dropdown#loginTitleValidationField(name="loginTitleValidation")
-					option(value="") Escolha uma opção
-					option(value="none") Sem Validção
-					option(value="cpf") CPF
-		.two.fields
-			.field
-				label Teclado do Título
-				select.ui.dropdown#loginTitleKeyboardField(name="loginTitleKeyboard")
-					option(value="") Escolha uma opção
-					option(value="text") Normal
-					option(value="tel") Numérico
-			.field
-				label Teclado da Senha
-				select.ui.dropdown#loginPasswordKeyboardField(name="loginPasswordKeyboard")
-					option(value="") Escolha uma opção
-					option(value="text") Normal
-					option(value="tel") Numérico
-		.ui.clearing.divider
-		.field
-		button.ui.blue.button(type="submit",form="loginForm") Gravar
+			button.ui.blue.button(type="submit",form="loginForm") Gravar
+			.ui.right.floated.twitter.icon.button#configTwitterEvent
+				i.twitter.icon
+			.ui.right.floated.google.plus.icon.button#configGoogleEvent
+				i.google.plus.icon
+			.ui.right.floated.facebook.icon.button#configFacebookEvent
+				i.facebook.icon
+
+template(name="configFacebookModal")
+	.ui.small.modal.transition.hidden#configFacebookModal
+		.header Configurar Acesso Facebook
+		.content
+			form.ui.form#configFacebookForm(method="post")
+				.field
+					label App Id
+					input#appIdField(name="appId",type="text")
+				.field
+					label App Secret
+					input#appSecretField(name="secret",type="text")
+		.actions
+			.ui.negative.right.labeled.icon.button
+				|Cancelar
+				i.close.icon
+			.ui.positive.right.labeled.icon.button
+				|Salvar
+				i.checkmark.icon

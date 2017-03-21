@@ -22,8 +22,9 @@ Meteor.methods({
 			}
 		};
 		var id = Accounts.createUser(userObject);
+		var app = Aplicativo.findOne(aplicativoId);
 		Accounts.addEmail(id, fieldsTwo.email, true);
-		Roles.addUsersToRoles(id, ['guest'], aplicativoId);
+		Roles.addUsersToRoles(id, [app.login.roleRegister], aplicativoId);
 		return id;
 	},
 	usersFindByCPF: function(fields) {

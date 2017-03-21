@@ -1,21 +1,15 @@
 Controller('formAlbunsView',{
 	created:function(){
 		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
-		Cloudinary.collection.find().observe({
+		/*Cloudinary.collection.find().observe({
 			changed:function(newc,oldc){
 				$('#progress_'+newc._id).progress({
 					percent: newc.percent_uploaded
 				});
 			}
-		});
+		});*/
 		bibliotecaTypesVar.set([
 			'album'
-		]);
-		bibliotecaRelationsVar.set([
-			{
-				field:'albumId',
-				value:FlowRouter.getParam('id')
-			}
 		]);
 		Tracker.autorun(function(){
 			oneFoto = Meteor.subscribe('oneAlbum', FlowRouter.getParam('id'), FlowRouter.getParam('aplicativoId'));
@@ -52,17 +46,6 @@ Controller('formAlbunsView',{
 	helpers:{
 		fotoId:function(){
 			return FlowRouter.getParam('id');
-		},
-		fotos:function(){
-			if (!FlowRouter.getParam('id')) return false;
-			var album = Album.findOne(FlowRouter.getParam('id'));
-			if (!album) return false;
-			return album.fotos();
-		},
-		capaId:function(){
-			if (!FlowRouter.getParam('id')) return false;
-			var album = Album.findOne(FlowRouter.getParam('id'));
-			return album.capaId;
 		}
 	},
 	events:{

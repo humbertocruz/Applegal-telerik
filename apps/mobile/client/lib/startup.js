@@ -10,6 +10,9 @@ Meteor.startup(function() {
 		style: 'fixed-bottom',
 		type: 'default'
 	};
+	$.fn.form.settings.rules.cpf = function(value) {
+		return TestaCPF(value);
+	};
 	Tracker.autorun(function(){
 		var app = Aplicativo.findOne();
 		if (isAppVar.get()) return false;

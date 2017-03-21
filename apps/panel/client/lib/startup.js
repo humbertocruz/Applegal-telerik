@@ -18,7 +18,6 @@ Meteor.startup(function() {
 		if (appId) {
 			Meteor.subscribe("oneAplicativo", appId,function(err,result){
 				if (result){
-					console.log(result);
 					appInfoVar.set(result);
 				}
 			});

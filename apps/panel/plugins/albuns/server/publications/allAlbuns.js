@@ -14,10 +14,10 @@ Meteor.publishComposite('allAlbuns', function(search,page,aplicativoId){
 			{
 				find:function(album){
 					return Biblioteca.find({
-						albumId:album._id,
 						tags:{
-							$in:[
-								'album'
+							$all:[
+								'album',
+								album._id,
 							]
 						}
 					});
@@ -40,11 +40,11 @@ Meteor.publishComposite('oneAlbum', function(id,aplicativoId){
 		children:[
 			{
 				find:function(galeria){
-					return Bibioteca.find({
-						galeriaId:galeria._id,
+					return Biblioteca.find({
 						tags:{
-							$in:[
-								'album'
+							$all:[
+								'album',
+								galeria._id
 							]
 						}
 					});

@@ -49,7 +49,6 @@ libTypes = {
 };
 
 bibliotecaTypesVar = new ReactiveVar([]);
-bibliotecaRelationsVar = new ReactiveVar([]);
 canRecoverLibVar = new ReactiveVar(false);
 topTitleVar = new ReactiveVar('Home');
 appInfoVar = new ReactiveVar({});

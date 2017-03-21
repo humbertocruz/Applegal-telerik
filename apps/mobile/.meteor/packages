@@ -61,3 +61,6 @@ mobile-status-bar@1.0.14
 rocketchat:streamer
 lepozepo:cloudinary
 jparker:gravatar
+accounts-facebook
+accounts-google
+accounts-twitter

@@ -21,6 +21,23 @@ Controller('aplicativosUpdateLoginView',{
 	helpers:{
 	},
 	events:{
+		'click #configFacebookEvent':function(e,t){
+			console.log('event');
+			$('#configFacebookModal').modal({
+				onApprove:function(){
+					var fields = $('#configFacebookForm').form('get values');
+					fields.social = 'facebook';
+					Meteor.call("configAppFaceBook", fields, FlowRouter.getParam('aplicativoId'), function(error, result){
+						if(error){
+							console.log("error", error);
+						}
+						if(result){
+							Bert.alert('Login pelo Facebook configurado.','success');
+						}
+					});
+				}
+			}).modal('show');
+		},
 		'submit .aplicativosForm':function(e,t){
 			e.preventDefault();
 			var fields = $(e.currentTarget).form('get values');

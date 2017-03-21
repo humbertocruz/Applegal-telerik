@@ -201,7 +201,7 @@ Controller('registerTwoView', {
 				if (result) {
 					Meteor.loginWithPassword(fields.username, fields.password1, function() {
 						isLoadingVar.set(false);
-						FlowRouter.go('suspensoRoute');
+						FlowRouter.go('homeRoute');
 						Bert.alert('Usuário adicionado com sucesso e registro concluído!', 'success');
 					});
 				}

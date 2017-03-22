@@ -1,5 +1,5 @@
 template(name="recoveryView")
-	img.ui.small.centered.image(src="#{clUrl appInfo.logotype.public_id crop='scale' width=150}")
+	img.ui.small.centered.image(src="#{clUrl appInfo.logotype.public_id cloud_name=appInfo.logotype.cloud_name crop='scale' width=150}")
 	.ui.hidden.divider
 	form.ui.form#recoveryForm(method="post",class="#{appThemeText}",style="background-color:#{appThemeBgColor}")
 		.field

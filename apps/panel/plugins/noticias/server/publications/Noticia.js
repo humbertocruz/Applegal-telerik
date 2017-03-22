@@ -18,6 +18,7 @@ Meteor.publishComposite('appNoticias', function(search, page, aplicativoId) {
 				limit: pages,
 				skip: (page - 1) * pages
 			});
+			console.log(noticias);
 			return noticias;
 		},
 		children:[
@@ -26,13 +27,6 @@ Meteor.publishComposite('appNoticias', function(search, page, aplicativoId) {
 					return Assunto.find({
 						_id:noticia.assunto_id,
 						aplicativoId:aplicativoId
-					});
-				}
-			},
-			{
-				find:function(noticia){
-					return Arquivo.find({
-						noticiaId:noticia._id
 					});
 				}
 			}
@@ -58,14 +52,6 @@ Meteor.publishComposite('oneNoticia', function(id,aplicativoId) {
 						_id:noticia.assunto_id,
 						aplicativoId:aplicativoId
 					});
-				}
-			},
-			{
-				find:function(noticia){
-					var arqs = Arquivo.find({
-						noticiaId:noticia._id
-					});
-					return arqs;
 				}
 			}
 		]

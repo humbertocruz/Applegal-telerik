@@ -3,8 +3,8 @@ template(name="mainMenu")
 		.ui.secondary.segment#adminMenu(style="padding:0px;")
 			.ui.secondary.menu
 				a.ui.item(class="#{isActiveRoute regex='^home'}",href="#{pathFor 'homeRoute'}")
-					img.ui.mini.image(src="#{clUrl 'technotronics' width=80 crop='scale'}")
-					|&nbsp; AppLegal
+					img.ui.mini.image(src="#{clUrl appByDomain.public_id cloud_name=appByDomain.cloud_name crop='scale' width=80}")
+					|&nbsp; #{appByDomain.name}
 
 				.right.menu
 					if isInRole 'admin'

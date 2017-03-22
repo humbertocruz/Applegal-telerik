@@ -40,25 +40,25 @@ template(name="leftMenu")
 							i.icon(class="#{icon}")
 							.content
 								.header #{title}
-
-	.ui.violet.inverted.top.attached.vertical.menu
-		.ui.item
-			|Admin
-	.ui.violet.bottom.attached.vertical.menu
-			
-		a.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
-			i.android.icon
-			|Apps
-		if isInRole 'admin'
-			a.item(class="#{isActiveRoute regex='^options'}",href="#{pathFor 'optionsRoute'}")
-				i.options.icon
-				|Opções
-			a.item(class="#{isActiveRoute regex='^pubGaleriaRoute'}",href="#{pathFor 'pubGaleriaRoute'}")
-				i.image.icon
-				|Galeria
-			a.item(class="#{isActiveRoute regex='^plugins'}",href="#{pathFor 'pluginsRoute'}")
-				i.puzzle.icon
-				|Plugins
-			a.item(class="#{isActiveRoute regex='^admins'}",href="#{pathFor 'adminsRoute'}")
-				i.users.icon
-				|Admins
+	if isAdmin
+		.ui.violet.inverted.top.attached.vertical.menu
+			.ui.item
+				|Admin
+		.ui.violet.bottom.attached.vertical.menu
+				
+			a.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
+				i.android.icon
+				|Apps
+			if isInRole 'admin'
+				a.item(class="#{isActiveRoute regex='^options'}",href="#{pathFor 'optionsRoute'}")
+					i.options.icon
+					|Opções
+				a.item(class="#{isActiveRoute regex='^pubGaleriaRoute'}",href="#{pathFor 'pubGaleriaRoute'}")
+					i.image.icon
+					|Galeria
+				a.item(class="#{isActiveRoute regex='^plugins'}",href="#{pathFor 'pluginsRoute'}")
+					i.puzzle.icon
+					|Plugins
+				a.item(class="#{isActiveRoute regex='^admins'}",href="#{pathFor 'adminsRoute'}")
+					i.users.icon
+					|Admins

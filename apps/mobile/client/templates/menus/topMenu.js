@@ -21,6 +21,11 @@ Controller('topMenu',{
 		}
 	},
 	events:{
+		'click .toggleSidebar':function(e,t){
+			$('.ui.left.sidebar')
+			.sidebar('setting', 'transition', 'overlay')
+			.sidebar('show');
+		},
 		'click #logoutBtn':function(e,t){
 			htmlConfirm('Atenção','Tem certeza que deseja sair?',function(){
 				isLoadingVar.set('Fazendo logout...');

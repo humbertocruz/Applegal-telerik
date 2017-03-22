@@ -1,20 +1,4 @@
 Meteor.methods({
-	removeNoticiaFoto:function(id){
-		var not = Noticia.update(id,{
-			$set:{
-				imagem:''
-			}
-		});
-		return not;
-	},
-	noticiasAddFoto:function(arquivo, noticiaId){
-		var not = Noticia.update(arquivo.noticiaId,{
-			$set:{
-				imagem:arquivo.public_id
-			}
-		});
-		return not;
-	},
 	noticiasForm: function(fields,aplicativoId) {
 		fields.date = moment(fields.date, 'YYYY-MM-DD').toDate();
 		fields.aplicativoId = aplicativoId;

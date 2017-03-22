@@ -1,13 +1,9 @@
 Controller('formNoticiasView',{
 	created:function(){
 		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
-		Cloudinary.collection.find().observe({
-			changed:function(newc,oldc){
-				$('#progress_'+newc._id).progress({
-					percent: newc.percent_uploaded
-				});
-			}
-		});
+		bibliotecaTypesVar.set([
+			'noticia'
+		]);
 		Tracker.autorun(function(){
 			var page = FlowRouter.getQueryParam('page');
 			Meteor.subscribe("oneNoticia", FlowRouter.getParam('noticiaId'));
@@ -55,23 +51,18 @@ Controller('formNoticiasView',{
 		}
 	},
 	events:{
-		'click .removePreviewEvent':function(e,t){
-			Cloudinary.collection.remove(this._id);
-		},
-		'click #addFotoNoticiaEvent':function(e,t){
-			$('#uploadField').click();
-		},
-		'click #removeFotoNoticiaEvent':function(e,t){
-			var not = Noticia.findOne(FlowRouter.getParam('noticiaId'));
-			htmlConfirm('Aviso','Você tem certeza?',function(){
-				Meteor.call("removeNoticiaFoto", not._id, FlowRouter.getParam('aplicativoId'), function(error, result){
-					if(error){
-						console.log("error", error);
-					}
-					if(result){
-						 Bert.alert('Foto excluída com sucesso','success');
-					}
-				});
+		'click .fotoBtn'(e,t){
+			var fields = {
+				_id:FlowRouter.getParam('noticiaId'),
+				fotoId:this.public_id
+			}
+			Meteor.call("noticiasForm", fields, FlowRouter.getParam('aplicativoId'), function(error, result){
+				if(error){
+					console.log("error", error);
+				}
+				if(result){
+					Bert.alert('Foto inserida na notícia com sucesso.','success');
+				}
 			});
 		},
 		'submit #noticiasForm'(e,t){

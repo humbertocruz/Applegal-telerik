@@ -16,6 +16,15 @@ Controller('aplicativosPluginsView',{
 		$('.ui.checkbox').checkbox();
 	},
 	helpers:{
+		isManagerOrAdmin:function(){
+			if (Roles.userIsInRole(Meteor.userId(),'admin')) return true;
+			if (Roles.userIsInRole(Meteor.userId(),'manager', FlowRouter.getParam('aplicativoId'))) return true;
+			return false;
+		},
+		isAdmin:function(){
+			if (Roles.userIsInRole(Meteor.userId(),'admin')) return true;
+			return false;
+		},
 		updateModulo:function(){
 			return updatePluginVar.get();
 		},
@@ -39,7 +48,7 @@ Controller('aplicativosPluginsView',{
 	},
 	events:{
 		'click .activeEvent':function(e,t){
-			Meteor.call("aplicativosActivePlugin", this._id, this.active, function(error, result){ 
+			Meteor.call("aplicativosActivePlugin", this._id, this.active, function(error, result){
 				if(error){
 					console.log("error", error);
 				}

@@ -1,11 +1,9 @@
 Controller('noticiasView', {
 	created:function() {
 		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
-		sint = 0;
-		noticiasSearchVar = new ReactiveVar({});
 		Tracker.autorun(function(){
 			var appId = FlowRouter.getParam('aplicativoId');
-			Meteor.subscribe("appNoticias", noticiasSearchVar.get(), FlowRouter.getQueryParam('page'), appId);
+			Meteor.subscribe("appNoticias", {}, FlowRouter.getQueryParam('page'), appId);
 		});
 	},
 	rendered:function(){
@@ -16,43 +14,11 @@ Controller('noticiasView', {
 		ready:function(){
 			return true;
 		},
-		header:function(){
-			return {
-				title:'Notícias',
-				icon:'newspaper'
-			}
-		},
-		newLink:function(){
-			return {}
-		},
-		extraLinks:function(){
-			return [
-				{
-					title:'Assuntos',
-					route:'noticiasAssuntosRoute',
-					icon:'sidebar',
-					params:{
-						aplicativoId:FlowRouter.getParam('aplicativoId')
-					}
-				},
-				{
-					title:'Adicionar',
-					route:'noticiasInsertRoute',
-					icon:'add',
-					params:{
-						aplicativoId:FlowRouter.getParam('aplicativoId')
-					}
-				}
-			]
-		},
-		searchFields:function(){
-			return noticiasSearchVar.get();
-		},
 		noticias: function() {
 			var page = FlowRouter.getQueryParam('page');
 			if (!page) page = 1;
 			var qtd = 10;
-			var noticias = Noticia.find(noticiasSearchVar.get(),{sort:{date:-1},limit:qtd,skip:(page-1)*qtd}).fetch();
+			var noticias = Noticia.find({},{sort:{date:-1},limit:qtd,skip:(page-1)*qtd}).fetch();
 
 			$('.ui.progress').progress({
 				duration	: 200,

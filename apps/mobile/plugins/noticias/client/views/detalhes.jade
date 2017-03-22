@@ -2,10 +2,10 @@ template(name="noticiasDetalheView")
 	.ui.info.message(style="background-color:#{appThemeBgColor}")
 		i.large.newspaper.icon
 		|Notícias
-	.ui.segment(class="#{appThemeText}",style="background-color:#{appThemeBgColor}")
+	.ui.segment(class="#{appThemeText} #{noticia.cor}",style="background-color:#{appThemeBgColor}")
 		.ui.left.floated.header #{noticia.title}
 		.ui.clearing.divider
-		if noticia.imagem
-			img.ui.fluid.image(src="#{arquivoPath noticia.imagem 'c_scale,w_320'}")
+		if noticia.fotoId
+			img.ui.fluid.image(src="#{clUrl noticia.fotoId.public_id cloud_name=noticia.fotoId.cloud_name crop='scale' width=320}")
 			.ui.divider
 		p(style="background-color:transparent !important;") !{noticia.mensagem}

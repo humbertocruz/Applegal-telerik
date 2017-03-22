@@ -1,6 +1,14 @@
 Controller('mensagensView',{
 	created:function(){
-
+		backBtnRouteVar.set({
+			route:'chamadosRoute',
+			params:{}
+		});
+		Tracker.autorun(function(){
+			var app = Aplicativo.findOne();
+			if (!app) return false;
+			Meteor.subscribe("appChamados", app._id);
+		});
 	},
 	helpers:{
 		chamado:function(){

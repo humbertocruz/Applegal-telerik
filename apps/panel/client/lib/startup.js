@@ -13,6 +13,8 @@ Meteor.startup(function() {
 		return TestaCPF(value);
 	};
 	Tracker.autorun(function(){
+		// subscribe apps pelo dominio acessado
+		appByDomainSubs = Meteor.subscribe("appByDomain", location.protocol, location.hostname);
 		// subscribe o app quando seu ID estiver na URL
 		var appId = FlowRouter.getParam('aplicativoId');
 		if (appId) {

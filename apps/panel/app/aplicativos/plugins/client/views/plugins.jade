@@ -1,5 +1,5 @@
 template(name="aplicativosPluginsView")
-	table.ui.blue.single.line.table
+	table.ui.blue.single.line.top.attached.table
 		thead
 			tr
 				th.two.wide
@@ -21,16 +21,15 @@ template(name="aplicativosPluginsView")
 							i.trash.icon
 					td #{plugin.title}
 					td #{title}
-		tfooter
-			tr
-				td
-					.ui.blue.button#addAppPlugin Adicionar Plugin
-					.ui.large.popup
-						.ui.vertical.text.menu
-							each plugins_disponiveis
-								.ui.link.item.addPluginEvent
-									i.icon(class="#{icon}")
-									|#{title}
+	.ui.secondary.bottom.attached.segment
+		if isAdmin
+			.ui.blue.button#addAppPlugin Adicionar Plugin
+			.ui.large.popup
+				.ui.vertical.text.menu
+					each plugins_disponiveis
+						.ui.link.item.addPluginEvent
+							i.icon(class="#{icon}")
+							|#{title}
 	//.ui.bottom.attached.segment
 		.ui.grid
 			if isModAdmin

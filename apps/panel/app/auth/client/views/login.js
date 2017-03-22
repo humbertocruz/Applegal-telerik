@@ -9,7 +9,7 @@ Controller('loginView', {
 		);
 	},
 	helpers:{
-
+		
 	},
 	events: {
 		'submit #loginForm':function(e, t) {

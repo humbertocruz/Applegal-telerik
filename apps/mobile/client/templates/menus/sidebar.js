@@ -1,8 +1,6 @@
 Controller('sidebar', {
 	rendered:function(){
-		Meteor.setTimeout(function(){
-			$('.ui.left.sidebar').sidebar('attach events', '.toggleSidebar');
-		}, 1000);
+		
 	},
 	helpers: {
 		userId: function() {

@@ -22,10 +22,10 @@ Controller('leftMenu',{
 			var app = Aplicativo.findOne(FlowRouter.getParam('aplicativoId'));
 			if (app) return app.appPlugins();
 		},
-		userHasPerm:function(modulo){
+		userHasPerm:function(plugin){
 			if (Roles.userIsInRole(Meteor.userId(),'admin')) return true;
 			if (Roles.userIsInRole(Meteor.userId(),'manager',FlowRouter.getParam('aplicativoId'))) return true;
-			if (Roles.userIsInRole(Meteor.userId(),modulo,FlowRouter.getParam('aplicativoId'))) return true;
+			if (Roles.userIsInRole(Meteor.userId(),plugin,FlowRouter.getParam('aplicativoId'))) return true;
 			return false;
 		}
 	},

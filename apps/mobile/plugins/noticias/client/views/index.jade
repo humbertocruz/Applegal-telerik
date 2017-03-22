@@ -11,9 +11,9 @@ template(name="noticiasView")
 			.ui.segment(style="background-color:#{appThemeBgColor}",class="#{appThemeText} #{cor}")
 				.ui.divided.items
 						a.item(href="#{pathFor 'noticiasDetalheRoute' id=_id}")
-							if imagem
-								.image
-									img(src="#{arquivoPath imagem 'c_scale,w_320'}")
+							if fotoId
+								.fluid.image
+									img(src="#{clUrl fotoId.public_id cloud_name=fotoId.cloud_name crop='scale' width=320}")
 							.content
 								.header #{title}
 								.meta #{assunto.name}

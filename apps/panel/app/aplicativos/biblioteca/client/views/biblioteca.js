@@ -109,18 +109,18 @@ Controller('bibliotecaView',{
 				}
 				if (_.contains(me.tags,'noticia')) {
 					var data = {
-						_id:FlowRouter.getParam('id'),
-						capa:{
+						_id:FlowRouter.getParam('noticiaId'),
+						fotoId:{
 							public_id:doc,
 							cloud_name:me.cloud_name
 						}
 					};
-					Meteor.call("noticiasForm", data, function(error, result){
+					Meteor.call("noticiasForm", data, FlowRouter.getParam('aplicativoId'), function(error, result){
 						if(error){
 							console.log("error", error);
 						}
 						if(result){
-							Bert.alert('Capa do Notícia marcada com sucesso','success');
+							Bert.alert('Foto da Notícia inserida com sucesso','success');
 						}
 					});
 				}

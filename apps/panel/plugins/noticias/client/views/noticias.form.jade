@@ -1,7 +1,6 @@
 template(name="formNoticiasView")
 	.ui.blue.top.attached.segment
 		form.ui.form#noticiasForm(method="post")
-			input#uploadField(type="file",style="display:none;")
 			.two.fields
 				.field
 					label Título
@@ -28,3 +27,6 @@ template(name="formNoticiasView")
 	.ui.bottom.attached.secondary.segment
 		button.ui.blue.button(type="submit",form="noticiasForm") Salvar
 		a.ui.button(href="#{pathFor 'noticiasAssuntosRoute' aplicativoId=appInfo._id}") Assuntos
+	if noticiaId
+		.ui.large.header Foto da Notícia
+		+bibliotecaView

@@ -3,7 +3,7 @@ module.exports = {
     one: {
       host: 'm.applegal.com.br',
       username: 'root',
-      pem: '/Users/humberto/.ssh/id_rsa'
+      // pem: '/Users/humberto/.ssh/id_rsa'
       // password:
       // or leave blank for authenticate from ssh-agent
     }
@@ -29,7 +29,7 @@ module.exports = {
     docker: {
       image: 'abernix/meteord:base',
     },
-    deployCheckWaitTime: 60,
+    deployCheckWaitTime: 45,
 
     // Show progress bar while uploading bundle to server
     // You might need to disable it on CI servers

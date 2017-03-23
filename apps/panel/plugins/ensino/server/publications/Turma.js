@@ -1,18 +1,18 @@
-Meteor.publishComposite('allTurmas', function(search, page, aplicativoId) {
+Meteor.publishComposite('appTurmas', function(page, cursoId, aplicativoId) {
 	if (typeof(aplicativoId) == 'undefined') return false;
 	return {
 		find: function() {
-			if (!search) search = {};
-			search.approved = false;
+			var search = {};
 			search.aplicativoId = aplicativoId;
+			search.cursoId = cursoId;
 			if (!page) page = 1;
 			var pages = 10;
-			Counts.publish(this, 'allTurmas', Turma.find(search), {
+			Counts.publish(this, 'appTurmas', Turma.find(search), {
 				noReady: true
 			});
 			var turmas = Turma.find(search, {
 				sort: {
-					date: -1
+					year: -1
 				},
 				limit: pages,
 				skip: (page - 1) * pages
@@ -20,9 +20,16 @@ Meteor.publishComposite('allTurmas', function(search, page, aplicativoId) {
 			return turmas;
 		},
 		children: [{
+			find: function(turma){
+				return Curso.find({
+					_id:turma.cursoId,
+					aplicativoId:aplicativoId
+				});
+			}
+		},{
 			find: function(turma) {
-				return Meteor.users.find({
-					_id:turma.userId,
+				return Aluno.find({
+					turmaId:turma._id,
 					aplicativoId:aplicativoId
 				});
 			}

@@ -1,0 +1,24 @@
+template(name="ensinoTurmasFormView")
+	.ui.blue.segment
+		form.ui.form#turmasForm(method="post")
+			.field
+				label Nome
+				input#nameField(type="text",name="name")
+			.field
+				label Ano
+				input#anoField(type="text",name="year")
+			.ui.two.column.grid
+				.column
+					table.ui.table
+						caption Provas
+						thead
+							tr
+								th Data
+				.column
+					table.ui.table
+						caption Trabalhos
+						thead
+							tr
+								th Data
+	.ui.bottom.attached.secondary.segment
+		button.ui.blue.button(type="submit", form="turmasForm") Salvar

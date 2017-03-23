@@ -5,5 +5,8 @@ Curso.helpers({
 			cursoId: this._id,
 			aplicativoId: FlowRouter.getParam('aplicativoId')
 		}).fetch();
+	},
+	reqCurso: function(){
+		return Curso.findOne(this.requisito);
 	}
 });

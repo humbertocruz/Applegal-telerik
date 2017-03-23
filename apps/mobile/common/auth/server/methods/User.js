@@ -27,8 +27,13 @@ Meteor.methods({
 		Roles.addUsersToRoles(id, [app.login.roleRegister], aplicativoId);
 		return id;
 	},
-	usersFindByCPF: function(fields) {
+	usersFindByUsername: function(fields) {
 		var user = Accounts.findUserByUsername(fields.username);
+		if (user == undefined) return false;
+		else return user;
+	},
+	usersFindByEmail: function(fields) {
+		var user = Accounts.findUserByEmail(fields.email);
 		if (user == undefined) return false;
 		else return user;
 	},

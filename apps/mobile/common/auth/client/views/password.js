@@ -21,14 +21,14 @@ Controller('passwordView',{
 		'submit #passwordForm'(e,t){
 			e.preventDefault();
 			var fields = $(e.currentTarget).form('get values');
-			Meteor.call("usersFindByCPF", fields, function(error, result){
+			Meteor.call("usersFindByEmail", fields, function(error, result){
 				if(error){
 					console.log("error", error);
 				}
 				if (result === false) {
-					Bert.alert('CPF não encontrado!','danger');
+					Bert.alert('Email não encontrado!','danger');
 				} else {
-					Bert.alert('CPF encontrado! Verifique o código no seu email e altere sua senha.','success');
+					Bert.alert('Email encontrado! Verifique o código no seu email e altere sua senha.','success');
 					Meteor.call("emailSendPasswordCode", result._id, result.emails[0].address);
 					FlowRouter.go('recoveryRoute',{id:result._id});
 				}

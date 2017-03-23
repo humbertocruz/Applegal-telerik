@@ -4,7 +4,7 @@ template(name="recoveryView")
 	form.ui.form#recoveryForm(method="post",class="#{appThemeText}",style="background-color:#{appThemeBgColor}")
 		.field
 			label Código do Email
-			input#codeField(type="tel",name="code",autocomplete="off")
+			input#codeField(type="text",maxlength="6" name="code",autocomplete="off")
 		.field
 			label Nova Senha
 			.ui.action.input

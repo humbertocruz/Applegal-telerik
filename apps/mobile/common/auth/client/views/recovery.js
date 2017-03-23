@@ -3,9 +3,6 @@ Controller('recoveryView',{
 		topTitleVar.set('Recuperar Senha');
 	},
 	rendered:function(){
-		$('#password1Field').mask('9999999999999999');
-		$('#password2Field').mask('9999999999999999');
-		$('#codeField').mask('9999');
 	},
 	helpers:{
 		recovery:function(){

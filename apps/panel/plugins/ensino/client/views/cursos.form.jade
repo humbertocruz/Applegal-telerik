@@ -1,32 +1,21 @@
 template(name="ensinoCursosFormView")
-	+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
-	form.ui.form#cursosForm(method="post")
-		.two.fields
+	.ui.blue.top.attached.segment
+		form.ui.form#cursosForm(method="post")
+			.two.fields
+				.field
+					label Ordem
+					input#orderField(type="number",name="order")
+				.field
+					label Requisito
+					select.ui.dropdown#requisitoField(name="requisito")
+						option(value="") Nenhum
+						each requisitos
+							option(value="#{_id}") #{name}
 			.field
-				label Ordem
-				input#orderField(type="number",name="order")
+				label Nome
+				input#nameField(type="text",name="name")
 			.field
-				label Requisito
-				select.ui.dropdown#requisitoField(name="requisito")
-					option(value="") Nenhum
-					each requisitos
-						option(value="#{_id}") #{name}
-		.field
-			label Nome
-			input#nameField(type="text",name="name")
-		.field
-			label Descrição
-			textarea#descriptionField(name="description")
-		.ui.two.column.grid
-			.column
-				table.ui.table
-					caption Provas
-					thead
-						tr
-							th Data
-			.column
-				table.ui.table
-					caption Trabalhos
-					thead
-						tr
-							th Data
+				label Descrição
+				textarea#descriptionField(name="description")
+	.ui.bottom.attached.secondary.segment
+		button.ui.blue.button(type="submit", form="cursosForm") Salvar

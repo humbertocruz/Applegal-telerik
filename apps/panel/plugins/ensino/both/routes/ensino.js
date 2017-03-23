@@ -19,25 +19,13 @@ ensinoRoutes = permRoutes.group({
 	]
 });
 
-
 ensinoRoutes.route('/', {
 	name: 'ensinoRoute',
 	action: function() {
 		BlazeLayout.render('adminLayout', {
 			menu: 'mainMenu',
 			left: 'leftMenu',
-			main: 'turmasView'
-		});
-	}
-});
-
-ensinoRoutes.route('/cursos', {
-	name: 'ensinoCursosRoute',
-	action: function() {
-		BlazeLayout.render('adminLayout', {
-			menu: 'mainMenu',
-			left: 'leftMenu',
-			main: 'ensinoCursosView'
+			main: 'cursosView'
 		});
 	}
 });
@@ -53,7 +41,8 @@ ensinoRoutes.route('/cursos/novo', {
 	}
 });
 
-ensinoRoutes.route('/cursos/:id/edita', {
+
+ensinoRoutes.route('/cursos/:cursoId/edita', {
 	name: 'ensinoCursosUpdateRoute',
 	action: function() {
 		BlazeLayout.render('adminLayout', {
@@ -63,4 +52,26 @@ ensinoRoutes.route('/cursos/:id/edita', {
 		});
 	}
 
+});
+
+ensinoRoutes.route('/:cursoId/turmas', {
+	name: 'ensinoTurmasRoute',
+	action: function() {
+		BlazeLayout.render('adminLayout', {
+			menu: 'mainMenu',
+			left: 'leftMenu',
+			main: 'ensinoTurmasView'
+		});
+	}
+});
+
+ensinoRoutes.route('/:cursoId/turmas/novo', {
+	name: 'ensinoTurmasInsertRoute',
+	action: function() {
+		BlazeLayout.render('adminLayout', {
+			menu: 'mainMenu',
+			left: 'leftMenu',
+			main: 'ensinoTurmasFormView'
+		});
+	}
 });

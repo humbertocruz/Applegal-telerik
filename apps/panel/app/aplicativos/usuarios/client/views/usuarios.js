@@ -5,9 +5,11 @@ Controller('aplicativosUsuariosView', {
 			icon:'user'
 		});
 		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
-		usuariosSearchVar = new ReactiveVar({});
-		var appId = FlowRouter.getParam('aplicativoId');
-		allUsuariosApp = Meteor.subscribe('allUsuariosApp', usuariosSearchVar.get(), FlowRouter.getQueryParam('page'), appId);
+		Tracker.autorun(function(){
+			usuariosSearchVar = new ReactiveVar({});
+			var appId = FlowRouter.getParam('aplicativoId');
+			allUsuariosApp = Meteor.subscribe('allUsuariosApp', usuariosSearchVar.get(), FlowRouter.getQueryParam('page'), appId);
+		});
 	},
 	rendered:function(){
 		$('#usernameField').mask('999.999.999-99');

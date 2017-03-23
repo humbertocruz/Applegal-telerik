@@ -9,7 +9,7 @@ template(name="registerView")
 		button.ui.blue.fluid.button(type="submit",form="registerForm") Continuar
 
 template(name="registerAuthView")
-	img.ui.small.centered.image(src="#{clUrl appInfo.logotype.public_id crop='scale' width=150}")
+	img.ui.small.centered.image(src="#{clUrl appInfo.logotype.public_id cloud_name=appInfo.logotype.cloud_name crop='scale' width=150}")
 	.ui.hidden.divider
 	.ui.info.message(style="background-color:#{appThemeBgColor}")
 		i.large.exclamation.icon
@@ -22,7 +22,7 @@ template(name="registerAuthView")
 		button.ui.blue.fluid.button(type="submit",form="registerAuthForm") Continuar
 
 template(name="registerOneView")
-	img.ui.small.centered.image(src="#{clUrl appInfo.logotype.public_id crop='scale' width=150}")
+	img.ui.small.centered.image(src="#{clUrl appInfo.logotype.public_id cloud_name=appInfo.logotype.cloud_name crop='scale' width=150}")
 	.ui.hidden.divider
 	form.ui.form#registerOneForm(style="background-color:#{appThemeBgColor}", class="#{appThemeText}",method="post",novalidate="novalidate")
 		.field
@@ -44,8 +44,8 @@ template(name="registerOneView")
 		button.ui.blue.fluid.button(type="submit",form="registerOneForm") Continuar
 
 template(name="registerTwoView")
-	img.ui.small.centered.image(src="#{clUrl appInfo.logotype.public_id crop='scale' width=150}")
-	br
+	img.ui.small.centered.image(src="#{clUrl appInfo.logotype.public_id cloud_name=appInfo.logotype.cloud_name crop='scale' width=150}")
+	.ui.hidden.divider
 	form.ui.stackable.form#registerTwoForm(style="background-color:#{appThemeBgColor}", class="#{appThemeText}",method="post",novalidate="novalidate")
 		.field
 			label Nome

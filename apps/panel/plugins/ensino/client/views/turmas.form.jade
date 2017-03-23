@@ -22,3 +22,4 @@ template(name="ensinoTurmasFormView")
 								th Data
 	.ui.bottom.attached.secondary.segment
 		button.ui.blue.button(type="submit", form="turmasForm") Salvar
+		a.ui.button(href="#{pathFor 'ensinoTurmasRoute' cursoId=curso._id aplicativoId=appInfo._id}") Voltar

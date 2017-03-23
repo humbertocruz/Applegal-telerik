@@ -12,4 +12,9 @@ template(name="ensinoTurmasView")
 							i.right.arrow.icon
 					td #{name}
 	.ui.bottom.attached.secondary.segment
-		a.ui.blue.button(href="#{pathFor 'ensinoTurmasInsertRoute' aplicativoId=appInfo._id cursoId=curso._id}") Nova Turma
+		a.ui.blue.button(href="#{pathFor 'ensinoTurmasInsertRoute' aplicativoId=appInfo._id cursoId=curso._id}")
+			i.add.icon
+			|Nova Turma
+		a.ui.button(href="#{pathFor 'ensinoRoute' aplicativoId=appInfo._id}")
+			i.left.arrow.icon
+			|Cursos

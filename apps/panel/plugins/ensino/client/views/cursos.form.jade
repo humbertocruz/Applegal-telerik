@@ -19,3 +19,4 @@ template(name="ensinoCursosFormView")
 				textarea#descriptionField(name="description")
 	.ui.bottom.attached.secondary.segment
 		button.ui.blue.button(type="submit", form="cursosForm") Salvar
+		a.ui.button(href="#{pathFor 'ensinoRoute' aplicativoId=appInfo._id}") Voltar

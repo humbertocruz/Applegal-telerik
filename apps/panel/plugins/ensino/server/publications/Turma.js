@@ -36,3 +36,28 @@ Meteor.publishComposite('appTurmas', function(page, cursoId, aplicativoId) {
 		}]
 	}
 });
+
+Meteor.publishComposite('appTurmas', function(turmaId, aplicativoId) {
+	if (typeof(aplicativoId) == 'undefined') return false;
+	return {
+		find: function() {
+			var turma = Turma.find(turmaId);
+			return turmas;
+		},
+		children: [{
+			find: function(turma){
+				return Curso.find({
+					_id:turma.cursoId,
+					aplicativoId:aplicativoId
+				});
+			}
+		},{
+			find: function(turma) {
+				return Aluno.find({
+					turmaId:turma._id,
+					aplicativoId:aplicativoId
+				});
+			}
+		}]
+	}
+});

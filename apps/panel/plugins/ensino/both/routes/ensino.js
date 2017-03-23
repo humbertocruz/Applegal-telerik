@@ -51,7 +51,6 @@ ensinoRoutes.route('/cursos/:cursoId/edita', {
 			main: 'ensinoCursosFormView'
 		});
 	}
-
 });
 
 ensinoRoutes.route('/:cursoId/turmas', {
@@ -72,6 +71,30 @@ ensinoRoutes.route('/:cursoId/turmas/novo', {
 			menu: 'mainMenu',
 			left: 'leftMenu',
 			main: 'ensinoTurmasFormView'
+		});
+	}
+});
+
+ensinoRoutes.route('/:cursoId/turmas/:turmaId/edita', {
+	name: 'ensinoTurmasUpdateRoute',
+	action: function() {
+		BlazeLayout.render('adminLayout', {
+			menu: 'mainMenu',
+			left: 'leftMenu',
+			main: 'ensinoTurmasFormView'
+		});
+	}
+
+});
+
+
+ensinoRoutes.route('/:turmaId/turmas', {
+	name: 'ensinoAlunosRoute',
+	action: function() {
+		BlazeLayout.render('adminLayout', {
+			menu: 'mainMenu',
+			left: 'leftMenu',
+			main: 'ensinoAlunosView'
 		});
 	}
 });

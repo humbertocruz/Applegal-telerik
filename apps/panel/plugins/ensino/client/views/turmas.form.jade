@@ -1,5 +1,5 @@
 template(name="ensinoTurmasFormView")
-	.ui.blue.segment
+	.ui.blue.top.attached.segment
 		form.ui.form#turmasForm(method="post")
 			.field
 				label Nome
@@ -9,17 +9,33 @@ template(name="ensinoTurmasFormView")
 				input#anoField(type="text",name="year")
 			.ui.two.column.grid
 				.column
-					table.ui.table
+					table.ui.violet.top.attached.table
 						caption Provas
 						thead
 							tr
 								th Data
+						tbody
+							each turmaProvas
+								tr
+									td #{dateBr date}
+					.ui.secondary.bottom.attached.segment
+						.ui.action.input
+							input#newProvaDate(type="date",name="new_prova_date")
+							.ui.blue.button#newProvaEvent Salvar
 				.column
-					table.ui.table
+					table.ui.violet.top.attached.table
 						caption Trabalhos
 						thead
 							tr
 								th Data
+						tbody
+							each turmaTrabalhos
+								tr
+									td #{date}
+					.ui.secondary.bottom.attached.segment
+						.ui.action.input
+							input#newTrabalhoDate(type="date",name="new_trabalho_date")
+							.ui.blue.button#newTrabalhoEvent Salvar
 	.ui.bottom.attached.secondary.segment
 		button.ui.blue.button(type="submit", form="turmasForm") Salvar
 		a.ui.button(href="#{pathFor 'ensinoTurmasRoute' cursoId=curso._id aplicativoId=appInfo._id}") Voltar

@@ -1,5 +1,5 @@
 template(name="ensinoTurmasView")
-	table.ui.blue.top.attached.table
+	table.ui.blue.top.attached.single.line.table
 		thead
 			tr
 				th.two.wide
@@ -8,6 +8,8 @@ template(name="ensinoTurmasView")
 			each turmas
 				tr
 					td
+						a.ui.blue.icon.button(href="#{pathFor 'ensinoTurmasUpdateRoute' cursoId=curso._id turmaId=_id aplicativoId=appInfo._id}")
+							i.pencil.icon
 						a.ui.icon.button(href="#{pathFor 'ensinoAlunosRoute' aplicativoId=appInfo._id turmaId=_id}")
 							i.right.arrow.icon
 					td #{name}

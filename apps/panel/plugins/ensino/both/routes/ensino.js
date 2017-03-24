@@ -88,7 +88,7 @@ ensinoRoutes.route('/:cursoId/turmas/:turmaId/edita', {
 });
 
 
-ensinoRoutes.route('/:turmaId/turmas', {
+ensinoRoutes.route('/:turmaId/alunos', {
 	name: 'ensinoAlunosRoute',
 	action: function() {
 		BlazeLayout.render('adminLayout', {

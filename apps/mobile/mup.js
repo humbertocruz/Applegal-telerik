@@ -21,7 +21,7 @@ module.exports = {
     env: {
       ROOT_URL: 'https://m.applegal.com.br',
       MONGO_URL: 'mongodb://10.132.62.239/applegal_final',
-      MAIL_URL:'smtp://suporte%40mg.applegal.com.br:Prijoka1318@smtp.mailgun.org:587',
+      MAIL_URL:'smtp://postmaster%40mg.applegal.com.br:afdef17f2edd9ec26c2fc070b2976605@smtp.mailgun.org:587',
       PORT: 4050
     },
 

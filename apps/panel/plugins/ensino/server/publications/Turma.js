@@ -22,15 +22,13 @@ Meteor.publishComposite('appTurmas', function(page, cursoId, aplicativoId) {
 		children: [{
 			find: function(turma){
 				return Curso.find({
-					_id:turma.cursoId,
-					aplicativoId:aplicativoId
+					_id:turma.cursoId
 				});
 			}
 		},{
 			find: function(turma) {
 				return Aluno.find({
-					turmaId:turma._id,
-					aplicativoId:aplicativoId
+					turmaId:turma._id
 				});
 			}
 		}]

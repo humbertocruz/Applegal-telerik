@@ -20,7 +20,14 @@ Controller('aplicativosUpdateInfoView',{
 		var loadApp = function(aplicativo){
 			$('.aplicativosForm').form('set values',aplicativo);
 			$('.ui.dropdown').dropdown();
+			appInfoVar.set(Aplicativo.findOne(FlowRouter.getParam('aplicativoId')));
+			Meteor.call('setCloudinary',FlowRouter.getParam('aplicativoId'), function(err,result){
+				$.cloudinary.config({
+					cloud_name:result
+				});
+			});
 		};
+
 		Tracker.autorun(function(){
 			var aplicativo = Aplicativo.findOne(FlowRouter.getParam('aplicativoId'));
 			if (aplicativo) {

@@ -6,7 +6,7 @@ template(name="fotosView")
 		each fotos
 			.transition.hidden.fotos.card(style="background-color:#{appThemeBgColor}")
 				.image
-					img(src="#{clUrl public_id crop='scale' width=320 effect='improve'}")
+					img(src="#{clUrl public_id cloud_name=cloud_name crop='scale' width=320 effect='improve'}")
 				.extra.content
 					i.like.icon
 					|#{likes} likes
@@ -18,7 +18,5 @@ template(name="fotosView")
 			unless hasLiked
 				.ui.red.icon.ok.button
 					i.like.icon#likeArquivo
-			//a.ui.blue.icon.button(href="#{arquivoPath imageZoom.public_id}",download="photo.jpg")
-				i.download.icon
 			.ui.close.cancel.icon.button
 				i.close.icon

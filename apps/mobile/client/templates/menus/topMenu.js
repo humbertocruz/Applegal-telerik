@@ -21,6 +21,9 @@ Controller('topMenu',{
 		}
 	},
 	events:{
+		'click #backRouteEvent':function(e,t){
+			FlowRouter.go(backBtnRouteVar.get().route, backBtnRouteVar.get().params);
+		},
 		'click .toggleSidebar':function(e,t){
 			$('.ui.left.sidebar')
 			.sidebar('setting', 'transition', 'overlay')

@@ -1,5 +1,5 @@
 template(name="homeView")
-	img.ui.small.centered.image(src="#{clUrl appInfo.logotype.public_id crop='scale' width=150}")
+	img.ui.small.centered.image(src="#{clUrl appInfo.logotype.public_id cloud_name=appInfo.logotype.cloud_name crop='scale' width=150}")
 	.ui.hidden.divider
 	.ui.fluid.grid(class="#{appInfo.home.iconQuantity} column")
 		each plugins

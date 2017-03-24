@@ -1,11 +1,11 @@
 App.info({
 	id: 'br.com.technotronics.igreja',
-	name: 'EscoladasNacoes',
+	name: 'Escola das Nações',
 	description: "Escola das Nações",
 	author: 'Humberto Cruz',
 	email: 'humberto.cruz@gmail.com',
 	website: 'https://applegal.com.br',
-	version: '0.1.0'
+	version: '0.1.1'
 });
 App.icons({
 	'android_mdpi': '../../../src-nacoes/Android/res/drawable-mdpi/icon.png',
@@ -20,7 +20,7 @@ App.launchScreens({
 	'android_xhdpi_portrait': '../../../src-nacoes/Android/res/drawable-xhdpi/screen.png',
 	'android_xxhdpi_portrait': '../../../src-nacoes/Android/res/drawable-xxhdpi/screen.png'
 });
-App.setPreference('android-minSdkVersion', '16');
+App.setPreference('android-minSdkVersion', '19');
 App.setPreference('BackgroundColor', '0xffffffff');
 App.setPreference('HideKeyboardFormAccessoryBar', true);
 App.setPreference('Orientation', 'portrait');

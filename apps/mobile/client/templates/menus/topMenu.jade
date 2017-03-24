@@ -3,7 +3,7 @@ template(name="topMenu")
 		.icon.item.toggleSidebar
 			i.sidebar.icon
 		if backBtnRouteHelper
-			a.item(href="#{backBtnRouteHelper}")
+			.link.item#backRouteEvent
 				i.left.arrow.icon
 		.header.item #{topTitle}
 		.right.menu

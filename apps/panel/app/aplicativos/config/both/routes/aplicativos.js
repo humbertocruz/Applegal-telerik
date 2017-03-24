@@ -1,7 +1,7 @@
 aplicativosRoutes = FlowRouter.group({
 	name: 'aplicativosRoutes',
 	prefix: '/app',
-	triggersEnter:[
+	/*triggersEnter:[
 		function(r){
 			if (!r.params.aplicativoId) return true;
 			appInfoVar.set(Aplicativo.findOne(r.params.aplicativoId));
@@ -11,7 +11,7 @@ aplicativosRoutes = FlowRouter.group({
 				});
 			});
 		}
-	]
+	]*/
 });
 
 aplicativosRoutes.route('/', {

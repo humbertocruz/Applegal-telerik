@@ -1,6 +1,11 @@
-Controller('alunosView', {
+Controller('ensinoView', {
 	created: function() {
-		topTitleVar.set('Alunos');
+		topTitleVar.set('Ensino');
+		Tracker.autorun(function(){
+			var app = Aplicativo.findOne();
+			if (!app) return false;
+			Meteor.subscribe('appCursos', app._id);
+		});
 	},
 	rendered: function() {
 
@@ -15,12 +20,13 @@ Controller('alunosView', {
 		},
 		status: function() {
 			var me = this;
-			var userCurso = Aluno.findOne({
+			var userTurma = Aluno.findOne({
 				userId: Meteor.userId(),
-				cursoId: me._id
+				cursoId: me.cursoId,
+				turmaId: me._id
 			});
-			if (!userCurso) return 'nothing';
-			if (userCurso.approved) return 'done';
+			if (!userTurma) return 'nothing';
+			if (userTurma.approved) return 'done';
 			else return 'doing';
 		},
 		nameCursoRequerido: function() {
@@ -29,14 +35,15 @@ Controller('alunosView', {
 		},
 		hasRequisitos: function() {
 			var me = this;
-			var userCursos = Aluno.find({
+			var userTurma = Aluno.find({
 				userId: Meteor.userId(),
+				cursoId: me.cursoId,
 				approved: true
 			}).fetch();
 			var requisito = me.requisito;
 			if (!requisito) return '';
 			var test = 'disabled'
-			_.each(userCursos, function(c, idx) {
+			_.each(userTurma, function(c, idx) {
 				if (c.cursoId == requisito) test = '';
 			});
 			return test;
@@ -47,7 +54,7 @@ Controller('alunosView', {
 			e.preventDefault();
 			var me = this;
 			htmlConfirm('Inscrição no Curso', 'Você tem Certeza?', function() {
-				Meteor.call("signUpEvent", me._id, function(error, result) {
+				Meteor.call("eventoCadastro", me._id, function(error, result) {
 					if (error) {
 						console.log("error", error);
 					}

@@ -1,5 +1,5 @@
 template(name="mainMenu")
-	.ui.segments
+	.ui.segments(style="margin:0px;")
 		.ui.secondary.segment#adminMenu(style="padding:0px;")
 			.ui.secondary.menu
 				a.ui.item(class="#{isActiveRoute regex='^home'}",href="#{pathFor 'homeRoute'}")

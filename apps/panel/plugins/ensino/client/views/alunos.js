@@ -17,10 +17,6 @@ Controller('ensinoAlunosView', {
 		alunos: function() {
 			return Aluno.find({
 				turmaId:FlowRouter.getParam('turmaId')
-			}, {
-				sort: {
-					name: 1
-				}
 			}).fetch();
 		}
 	},

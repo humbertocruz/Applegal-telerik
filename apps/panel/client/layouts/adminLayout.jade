@@ -2,9 +2,9 @@ template(name="adminLayout")
 	+confirmView
 	+promptView
 	+Template.dynamic template=menu
-	.ui.fluid.container(style="min-width:933px;")
-		.ui.relaxed.grid
-			.three.wide.column
-				+Template.dynamic template=left
-			.thirteen.wide.column
-				+Template.dynamic template=main
+	//.ui.fluid.container(style="min-width:933px;")
+	.ui.grid
+		.three.wide.column
+			+Template.dynamic template=left
+		.thirteen.wide.column
+			+Template.dynamic template=main

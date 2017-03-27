@@ -9,8 +9,8 @@ Controller('aplicativosPluginsView',{
 	},
 	rendered:function(){
 		$('#addAppPlugin').popup({
+			on: 'click',
 			inline:true,
-			hoverable:true,
 			position: 'right center'
 		});
 		$('.ui.checkbox').checkbox();

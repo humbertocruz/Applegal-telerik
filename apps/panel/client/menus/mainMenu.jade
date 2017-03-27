@@ -1,37 +1,50 @@
 template(name="mainMenu")
-	.ui.segments(style="margin:0px;")
-		.ui.secondary.segment#adminMenu(style="padding:0px;")
-			.ui.secondary.menu
-				a.ui.item(class="#{isActiveRoute regex='^home'}",href="#{pathFor 'homeRoute'}")
-					img.ui.mini.image(src="#{clUrl appByDomain.public_id cloud_name=appByDomain.cloud_name crop='scale' width=80}")
-					|&nbsp; #{appByDomain.name}
+	.ui.blue.menu#adminMenu(style="padding:0px;background-color:#f3f4f5;")
+		a.item(class="#{isActiveRoute regex='^home'}",href="#{pathFor 'homeRoute'}")
+			img.ui.mini.image(src="#{clUrl appByDomain.public_id cloud_name=appByDomain.cloud_name crop='scale' width=80}")
+			|&nbsp; #{appByDomain.name}
+		.item
+			.ui.breadcrumb
+				a.section(href="#{pathFor 'homeRoute'}")
+					i.android.icon
+					|Aplicativos
+				if appInfo
+					i.right.angle.icon.divider
+					.section #{appInfo.info.name}
+				i.right.angle.icon.divider
+				.section
+					i.icon(class="#{subMenuTitle.icon}")
+					|#{subMenuTitle.title}
+		.right.menu
+			if isInRole 'admin'
+				.ui.dropdown.item
+					i.sidebar.icon#adminSubMenuShow(data-variation="wide")
+					i.dropdown.icon
+					.menu
+						a.ui.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
+							i.android.icon
+							|Apps
+						a.ui.item(class="#{isActiveRoute regex='^options'}",href="#{pathFor 'optionsRoute'}")
+							i.options.icon
+							|Opções
+						a.ui.item(class="#{isActiveRoute regex='^plugins'}",href="#{pathFor 'pluginsRoute'}")
+							i.puzzle.icon
+							|Plugins
+						a.ui.item(class="#{isActiveRoute regex='^admins'}",href="#{pathFor 'adminsRoute'}")
+							i.users.icon
+							|Admins
+			.ui.dropdown.item(class="#{isActiveRoute regex='^profile'}")
+				img.ui.avatar.image#profileSubMenuShow(src="#{gravatar user.emails}")
+				i.dropdown.icon
+				.menu
+					a.ui.item(href="#{pathFor 'profileRoute'}")
+						img.ui.avatar.image#profileSubMenuShow(src="#{gravatar user.emails}")
+						|Profile
+					.link.item#changePwdEvent
+						i.key.icon
+						|Alterar Senha
+					.link.item#logoutEvent
+						i.sign.out.icon
+						|Sair
 
-				.right.menu
-					if isInRole 'admin'
-						.ui.item#adminSubMenuShow
-							i.sidebar.icon
-						.ui.large.popup
-							.ui.vertical.text.menu
-								a.item(class="#{isActiveRoute regex='^options'}",href="#{pathFor 'optionsRoute'}")
-									i.options.icon
-									|Opções
-								a.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
-									i.android.icon
-									|Apps
-								a.item(class="#{isActiveRoute regex='^plugins'}",href="#{pathFor 'pluginsRoute'}")
-									i.puzzle.icon
-									|Plugins
-								a.item(class="#{isActiveRoute regex='^admins'}",href="#{pathFor 'adminsRoute'}")
-									i.users.icon
-									|Admins
-					a.ui.item#profileSubMenuShow(class="#{isActiveRoute regex='^profile'}",href="#{pathFor 'profileRoute'}")
-						img.ui.avatar.image(src="#{gravatar user.emails}")
-					.ui.large.popup
-						.ui.vertical.text.menu
-							.link.item#changePwdEvent
-								i.key.icon
-								|Alterar Senha
-							.link.item#logoutEvent
-								i.sign.out.icon
-								|Sair
-		+subMenu
+		//+subMenu

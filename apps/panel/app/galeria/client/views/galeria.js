@@ -1,26 +1,30 @@
 Controller('pubGaleriaView',{
 	created:function(){
-		bibliotecaTypesVar.set([
-			'wallpaper'
-		]);
-		Tracker.autorun(function(){
-			var page = FlowRouter.getQueryParam('page');
-			var libType = bibliotecaTypesVar.get();
-			appBiblioteca = Meteor.subscribe("pubGaleria", page, 12, libType);
-		});
 		subMenuTitleVar.set({
 			title:'Galeria de Imagens',
 			icon:'theme'
 		});
+		Tracker.autorun(function(){
+			var page = FlowRouter.getQueryParam('page');
+			var libType = bibliotecaTypesVar.get();
+			pubBiblioteca = Meteor.subscribe("pubGaleria", page, 12, libType);
+		});
+		bibliotecaTypesVar.set([
+			'wallpaper'
+		]);
 		uploadTypeVar = new ReactiveVar();
 	},
 	rendered:function(){
 		$('.ui.dropdown').dropdown();
 		$('.ui.hasPopup').popup({
 			inline:true,
-			hoverable:true,
+			on:'click',
 			position: 'right center'
 		});
+	},
+	destroyed:function(){
+		// Ao sair da "route", remover dados da memória
+		pubBiblioteca.stop();
 	},
 	helpers:{
 		libTypes: function(){

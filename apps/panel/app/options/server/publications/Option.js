@@ -1,22 +1,17 @@
 /*
-** Publicação automática de todos os plugins existentes
-** Apenas para usuários logados com o perfil Admin
+** Publica dados das Opções da plataforma
+**
+** Apenas para usuários Admin
 **
 */
-Meteor.publishComposite('allOptions', function() {
-	if (!this.userId) return false;
+Meteor.publish("allOptions", function(){
+	// Se nao for "Admin" sair imediatamente
 	if (!Roles.userIsInRole(this.userId,'admin')) return false;
-	return {
-		find: function() {
-			Counts.publish(this, 'allPptions', Option.find(), {
-				noReady: true
-			});
-			var options = Option.find({}, {
-				sort: {
-					title: 1
-				}
-			});
-			return options;
-		}
-	}
+
+	// Le dados, sempre vai haver apenas um registro
+	var options = Option.find({},{
+		limit:1
+	});
+	// Retorna dados
+	return options;
 });

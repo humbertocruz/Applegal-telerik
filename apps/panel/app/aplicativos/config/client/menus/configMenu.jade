@@ -9,6 +9,9 @@ template(name="configMenu")
 		a.blue.link.item(class="#{isActiveRoute regex='^aplicativosUpdateThemeRoute'}",href="#{pathFor 'aplicativosUpdateThemeRoute' aplicativoId=appInfo._id}")
 			i.theme.icon
 			|Aparência
+		a.blue.link.item(class="#{isActiveRoute regex='^aplicativosUpdateFundoRoute'}",href="#{pathFor 'aplicativosUpdateFundoRoute' aplicativoId=appInfo._id}")
+			i.image.icon
+			|Fundo
 		a.blue.link.item(class="#{isActiveRoute regex='^aplicativosUpdateHomeRoute'}",href="#{pathFor 'aplicativosUpdateHomeRoute' aplicativoId=appInfo._id}")
 			i.home.icon
 			|Home Page

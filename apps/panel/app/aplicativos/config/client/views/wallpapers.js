@@ -2,10 +2,13 @@ Controller('pubWallpapersView',{
 	created:function() {
 		Tracker.autorun(function(){
 			var page = FlowRouter.getQueryParam('page');
-			appBiblioteca = Meteor.subscribe("pubGaleria", page, 12, ['wallpaper']);
+			pubBiblioteca = Meteor.subscribe("pubGaleria", page, 12, ['wallpaper']);
 		});
 	},
 	rendered:function(){
+	},
+	destroyed:function(){
+		pubBiblioteca.stop();
 	},
 	helpers:{
 		galeria:function(){

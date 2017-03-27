@@ -6,16 +6,20 @@ Controller('aplicativosView',{
 		});
 		Tracker.autorun(function(){
 			var page = FlowRouter.getQueryParam('page');
-			Meteor.subscribe('allAplicativos', page);
+			allAplicativos = Meteor.subscribe('allAplicativos', page);
 		});
 	},
 	rendered:function(){
 		$('.ui.dropdown').dropdown();
 		$('#addAppShow').popup({
+			on:'click',
 			inline:true,
-			hoverable:true,
 			position: 'right center'
 		});
+	},
+	destroyed:function(){
+		// Ao sair da "route", remover dados da memória
+		allAplicativos.stop();
 	},
 	helpers:{
 		ready:function(){

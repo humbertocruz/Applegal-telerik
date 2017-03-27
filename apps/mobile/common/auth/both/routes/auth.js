@@ -2,15 +2,24 @@ authRoutes = FlowRouter.group({
 	name:'authRoutes',
 	triggersEnter:[
 		function(obj,redirect){
-			if (!Meteor.userId()){
-				Bert.alert('Você precisa fazer o login para ter permissão de acesso.','danger','fixed-bottom');
-				redirect('loginRoute');
+			if (!Meteor.isCordova){
+				if (window == window.parent) {
+					console.log('nao é cordova');
+					FlowRouter.go('emulatorRoute');
+				}
 			}
 		}
 	]
 });
 
-FlowRouter.route('/login',{
+authRoutes.route('/emulator',{
+	name: 'emulatorRoute',
+	action: function() {
+		BlazeLayout.render('emulatorLayout');
+	}
+});
+
+authRoutes.route('/login',{
 	name: 'loginRoute',
 	action: function() {
 		BlazeLayout.render('adminLayout',{
@@ -32,7 +41,7 @@ authRoutes.route('/suspenso',{
 	}
 });
 
-FlowRouter.route('/registro',{
+authRoutes.route('/registro',{
 	name: 'registerRoute',
 	action: function() {
 		BlazeLayout.render('adminLayout',{
@@ -43,7 +52,7 @@ FlowRouter.route('/registro',{
 	}
 });
 
-FlowRouter.route('/senha',{
+authRoutes.route('/senha',{
 	name: 'passwordRoute',
 	action: function() {
 		BlazeLayout.render('adminLayout',{
@@ -54,7 +63,7 @@ FlowRouter.route('/senha',{
 	}
 });
 
-FlowRouter.route('/recupera/:id',{
+authRoutes.route('/recupera/:id',{
 	name: 'recoveryRoute',
 	action: function() {
 		BlazeLayout.render('adminLayout',{

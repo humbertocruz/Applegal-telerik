@@ -38,9 +38,17 @@ Controller('aplicativosUpdateInfoView',{
 	helpers:{
 	},
 	events:{
+		'click #generateCodeEvent':function(e,t){
+			var code = parseInt(Random.fraction()*1000000)+'';
+			var zeros = 6 - code.length;
+			var z = '';
+			for (i=0;i<zeros;i++) z+='0';
+			$('#codeField').val(z+code);
+		},
 		'submit .aplicativosForm':function(e,t){
 			e.preventDefault();
 			var fields = $(e.currentTarget).form('get values');
+			fields.code_time = moment().add(4,'hours').toDate();
 			Meteor.call("aplicativosForm", {
 				_id:FlowRouter.getParam('aplicativoId'),
 				info:fields

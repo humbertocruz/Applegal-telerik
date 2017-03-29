@@ -7,6 +7,10 @@ Meteor.methods({
 		PubGaleria.remove({});
 		// Lê Arquivos da conta Cloudinary
 		Cloudinary.api.resources(Meteor.bindEnvironment(function(result){
+			console.log(result);
+			if (!result) {
+				myFuture.return(false);
+			}
 			var saved = 0;
 			// Para cada arquivo, grava um registro local
 			_.each(result.resources,function(document){
@@ -30,6 +34,7 @@ Meteor.methods({
 	setPubCloudinary:function(){
 		if (!this.userId) return 'technoapp';
 		var options = Option.findOne();
+		if (!options) return 'technoapp';
 		Cloudinary.config({
 			cloud_name: options.cloud_name,
 			api_key: options.api_key,

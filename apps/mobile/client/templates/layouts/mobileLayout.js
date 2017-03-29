@@ -9,6 +9,9 @@ Controller('adminLayout',{
 
 	},
 	helpers:{
+		isApp:function(){
+			return isAppVar.get();
+		},
 		noApp:function(){
 			if (!Aplicativo.findOne()) return true;
 			else return false;

@@ -1,5 +1,6 @@
 Meteor.startup(function(){
 	Tracker.autorun(function(){
-		Meteor.subscribe("clientApp", navigator.appInfo);
+		var aInfo = navigator.appInfo;
+		Meteor.subscribe("clientApp", aInfo);
 	});
 });

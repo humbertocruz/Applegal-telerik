@@ -7,6 +7,9 @@ template(name="topMenu")
 				i.left.arrow.icon
 		.header.item #{topTitle}
 		.right.menu
+			if loadedApp
+				a.icon.item#unloadApp
+					i.android.icon
 			if isLogged
 				a.icon.item#logoutBtn
 					i.sign.out.icon

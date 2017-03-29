@@ -32,7 +32,7 @@ Controller('optionsView',{
 			e.preventDefault();
 			var fields = $(e.currentTarget).form('get values');
 			var curOption = Option.findOne();
-			if (curOption._id) {
+			if (curOption) {
 				Option.update(curOption._id, {
 					$set:fields
 				}, function(err,res){
@@ -44,7 +44,7 @@ Controller('optionsView',{
 					}
 				});
 			} else {
-				Option.inser(fields, function(err,res){
+				Option.insert(fields, function(err,res){
 					if(err){
 						console.log("error", err);
 					}

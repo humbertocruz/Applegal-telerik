@@ -48,6 +48,7 @@ mrt:moment-timezone
 peerlibrary:server-autorun
 benjaminrh:jquery-cookie
 swiper:swiper
+london:body-class
 
 semantic:ui
 juliancwirko:postcss

@@ -18,9 +18,17 @@ Controller('topMenu',{
 		},
 		topTitle:function(){
 			return topTitleVar.get();
+		},
+		loadedApp:function(){
+			return loadedApp.get();
 		}
 	},
 	events:{
+		'click #unloadApp':function(e,t){
+			clientApp.stop();
+			isAppVar.set(false);
+			location.reload();
+		},
 		'click #backRouteEvent':function(e,t){
 			FlowRouter.go(backBtnRouteVar.get().route, backBtnRouteVar.get().params);
 		},

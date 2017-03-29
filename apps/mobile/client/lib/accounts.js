@@ -8,7 +8,7 @@ Meteor.startup(function(){
 		if (Meteor.isCordova) {
 			window.plugins.sim.getSimInfo(
 				function(sim) {
-					console.log(sim);
+					simInfoVar.set(sim);
 				},
 				function(error) {
 					console.log(error);

@@ -4,19 +4,11 @@ authRoutes = FlowRouter.group({
 		function(obj,redirect){
 			if (!Meteor.isCordova){
 				if (window == window.parent) {
-					console.log('nao é cordova');
-					FlowRouter.go('emulatorRoute');
+					location.href = '/emulador.html';
 				}
 			}
 		}
 	]
-});
-
-authRoutes.route('/emulator',{
-	name: 'emulatorRoute',
-	action: function() {
-		BlazeLayout.render('emulatorLayout');
-	}
 });
 
 authRoutes.route('/login',{

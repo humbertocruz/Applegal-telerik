@@ -13,15 +13,17 @@ Meteor.startup(function() {
 	$.fn.form.settings.rules.cpf = function(value) {
 		return TestaCPF(value);
 	};
+	FlowRouter.initialize();
+
 	Tracker.autorun(function(){
 		var app = Aplicativo.findOne();
+		if (!app) return false;
 		if (isAppVar.get()) return false;
-		if (app) {
-			isAppVar.set(true);
-			userLikesVar = new ReactiveVar([]);
-			FlowRouter.initialize();
-			aplicativoIdVar.set(app._id);
-		}
+
+		isAppVar.set(true);
+		userLikesVar = new ReactiveVar([]);
+		aplicativoIdVar.set(app._id);
+
 	});
 
 });

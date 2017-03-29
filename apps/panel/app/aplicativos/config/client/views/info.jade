@@ -9,6 +9,11 @@ template(name="aplicativosUpdateInfoView")
 					else
 						img.ui.image(src="#{clUrl 'no-logotype' crop='scale' width=150}")
 				.thirteen.wide.column
+					.field
+						label Código de Desenvolvimento
+						.ui.action.input
+							input#codeField(type="text",name="code",readonly)
+							.ui.blue.button#generateCodeEvent Gerar Código
 					.two.fields
 						.field
 							label Nome

@@ -9,9 +9,9 @@ template(name="cursosView")
 			each cursos
 				tr
 					td
-						a.ui.blue.icon.button(href="#{pathFor 'ensinoCursosUpdateRoute' cursoId=_id aplicativoId=appInfo._id}")
+						a.ui.small.icon.button(href="#{pathFor 'ensinoCursosUpdateRoute' cursoId=_id aplicativoId=appInfo._id}")
 							i.pencil.icon
-						a.ui.icon.button(href="#{pathFor 'ensinoTurmasRoute' aplicativoId=appInfo._id cursoId=_id}")
+						a.ui.small.icon.button(href="#{pathFor 'ensinoTurmasRoute' aplicativoId=appInfo._id cursoId=_id}")
 							i.right.arrow.icon
 					td #{name}
 					td #{reqCurso.name}

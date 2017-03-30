@@ -1,1 +1,1 @@
-Turma = new Mongo.Collection('turmas');
+Turma = new Mongo.Collection('plg_ensino_turmas');

@@ -1,4 +1,4 @@
-Enquete = new Mongo.Collection('enquetes');
+Enquete = new Mongo.Collection('eplg_enquetes_nquetes');
 Enquete.helpers({
 	resposta:function(){
 		return EnqueteResposta.findOne({enquete_id:this._id});

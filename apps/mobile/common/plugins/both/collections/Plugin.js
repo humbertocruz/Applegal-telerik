@@ -1,1 +1,1 @@
-Plugin = new Mongo.Collection('plugins');
+Plugin = new Mongo.Collection('app_plugins');

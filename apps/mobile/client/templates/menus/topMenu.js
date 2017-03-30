@@ -27,6 +27,7 @@ Controller('topMenu',{
 		'click #unloadApp':function(e,t){
 			clientApp.stop();
 			isAppVar.set(false);
+			Meteor.logout();
 			location.reload();
 		},
 		'click #backRouteEvent':function(e,t){

@@ -7,11 +7,11 @@ template(name="leftMenu")
 				div#emulatorFloatDiv
 					+emulatorFrame
 
-			.ui.blue.inverted.top.attached.vertical.menu
+			.ui.blue.inverted.top.attached.fluid.vertical.menu
 				.ui.item
 					i.mobile.icon#showEmulatorEvent
 					|#{appInfo.info.name}
-			.ui.blue.bottom.attached.vertical.menu
+			.ui.blue.bottom.attached.fluid.vertical.menu
 				a.item(class="#{isActiveRoute regex='^aplicativosUpdateInfoRoute'}",href="#{pathFor 'aplicativosUpdateInfoRoute' aplicativoId=appInfo._id}")
 					i.setting.icon
 					.content
@@ -29,10 +29,10 @@ template(name="leftMenu")
 					.content
 						.header Usuários
 	if appPlugins
-		.ui.teal.inverted.top.attached.vertical.menu
+		.ui.teal.inverted.top.attached.fluid.vertical.menu
 			.ui.item
 				|Plugins
-		.ui.teal.bottom.attached.vertical.menu
+		.ui.teal.bottom.attached.fluid.vertical.menu
 			each appPlugins
 				if userHasPerm plugin.path
 					if active
@@ -41,11 +41,11 @@ template(name="leftMenu")
 							.content
 								.header #{title}
 	if isAdmin
-		.ui.violet.inverted.top.attached.vertical.menu
+		.ui.violet.inverted.top.attached.fluid.vertical.menu
 			.ui.item
 				|Admin
-		.ui.violet.bottom.attached.vertical.menu
-				
+		.ui.violet.bottom.attached.fluid.vertical.menu
+
 			a.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
 				i.android.icon
 				|Apps

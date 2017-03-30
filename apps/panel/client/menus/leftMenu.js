@@ -1,12 +1,5 @@
 Controller('leftMenu',{
 	created:function(){
-		showEmulatorVar = new ReactiveVar(false);
-		enteredVar = new ReactiveVar(false);
-		mouseVar = new ReactiveVar(false);
-		diff = {
-			x:0,
-			y:0
-		};
 	},
 	helpers:{
 		isManagerOrAdmin:function(){
@@ -30,37 +23,5 @@ Controller('leftMenu',{
 		}
 	},
 	events:{
-		'click #showEmulatorEvent':function(e,t){
-			showEmulatorVar.set(!showEmulatorVar.get());
-		},
-		'mousedown #emulatorFloatDiv':function(e,t){
-			e.preventDefault();
-			mouseVar.set(true);
-			if (enteredVar.get()) {
-				var mousePos = {
-					x:e.pageX,
-					y:e.pageY
-				};
-				var emuPos = {
-					x:parseInt($(e.currentTarget).css('left')),
-					y:parseInt($(e.currentTarget).css('top'))
-				};
-				diff = {
-					x:mousePos.x - emuPos.x,
-					y:mousePos.y - emuPos.y
-				};
-			}
-		},
-		'mouseup #emulatorFloatDiv':function(e,t){
-			mouseVar.set(false);
-		},
-		'mouseenter #emulatorFloatDiv':function(e,t){
-			enteredVar.set(true);
-			$(e.currentTarget).css('cursor','move');
-		},
-		'mouseleave #emulatorFloatDiv':function(e,t){
-			enteredVar.set(false);
-			$(e.currentTarget).css('cursor','');
-		}
 	}
 });

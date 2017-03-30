@@ -1,1 +1,1 @@
-Tipo = new Mongo.Collection('tipos');
+Tipo = new Mongo.Collection('plg_documentos_tipos');

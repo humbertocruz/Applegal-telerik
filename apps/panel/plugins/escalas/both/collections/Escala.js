@@ -1,4 +1,4 @@
-Escala = new Mongo.Collection('escalas');
+Escala = new Mongo.Collection('plg_escalas_escalas');
 Escala.helpers({
 	servico:function(){
 		return Servico.findOne({

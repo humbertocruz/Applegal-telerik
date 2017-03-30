@@ -1,4 +1,4 @@
-Option = new Mongo.Collection('options');
+Option = new Mongo.Collection('app_options');
 Option.allow({
 	insert: function(){
 		return Roles.userIsInRole(Meteor.userId(),'admin');

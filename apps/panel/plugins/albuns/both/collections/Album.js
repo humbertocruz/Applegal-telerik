@@ -1,4 +1,4 @@
-Album = new Mongo.Collection('albuns');
+Album = new Mongo.Collection('plg_albuns_albuns');
 Album.helpers({
 	fotos:function(){
 		return Biblioteca.find({

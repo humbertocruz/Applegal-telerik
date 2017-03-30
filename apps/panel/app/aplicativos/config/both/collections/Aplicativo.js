@@ -1,4 +1,4 @@
-Aplicativo = new Mongo.Collection('aplicativos');
+Aplicativo = new Mongo.Collection('app_aplicativos');
 Aplicativo.helpers({
 	appPlugins:function(){
 		return AplicativoPlugin.find({

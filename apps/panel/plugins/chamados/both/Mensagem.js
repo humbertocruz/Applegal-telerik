@@ -1,4 +1,4 @@
-Mensagem = new Mongo.Collection('mensagens');
+Mensagem = new Mongo.Collection('plg_chamados_mensagens');
 Mensagem.helpers({
 	remetente:function(){
 		return Meteor.users.findOne({

@@ -1,5 +1,5 @@
-Turma = new Mongo.Collection("turmas");
-Aluno = new Mongo.Collection('alunos');
+Turma = new Mongo.Collection("plg_ensino_turmas");
+Aluno = new Mongo.Collection('plg_ensino_alunos');
 Turma.helpers({
 	alunos: function() {
 		return Aluno.findOne({

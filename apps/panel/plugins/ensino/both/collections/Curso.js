@@ -1,4 +1,4 @@
-Curso = new Mongo.Collection("cursos");
+Curso = new Mongo.Collection("plg_ensino_cursos");
 Curso.helpers({
 	turmas: function() {
 		return Turma.find({

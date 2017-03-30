@@ -1,4 +1,4 @@
-Chamado = new Mongo.Collection('chamados');
+Chamado = new Mongo.Collection('plg_chamados_chamados');
 Chamado.helpers({
 	remetente:function(){
 		return Meteor.users.findOne(this.user_id);

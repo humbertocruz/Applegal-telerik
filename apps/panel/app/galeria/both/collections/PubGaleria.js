@@ -1,1 +1,1 @@
-PubGaleria = new Mongo.Collection("pub_galeria");
+PubGaleria = new Mongo.Collection("app_galeria");

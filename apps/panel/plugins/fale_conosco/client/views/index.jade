@@ -1,0 +1,31 @@
+template(name="chamadosView")
+	table.ui.blue.top.attached.table
+		thead
+			tr
+				th.two.wide
+				th.two.wide Fechado
+				th.two.wide Data
+				th Associado
+		unless Template.subscriptionsReady
+			tbody
+				tr
+					th(colspan="4")
+						+loadingView
+		else
+			tbody
+				each chamados.data
+					tr
+						td
+							a.ui.icon.button(href="#{pathFor 'mensagensRoute' aplicativoId=aplicativoId id=_id}")
+								i.talk.icon
+						td
+							unless close
+								.ui.red.circular.button.ctrlChamadoEvent(data-tooltip="Fechar Chamado",data-inverted) Não
+							else
+								.ui.green.circular.button.ctrlChamadoEvent(data-tooltip="Reabrir Chamado",data-inverted) Sim
+						td #{dateTimeBr date}
+						td #{remetente.profile.name}
+	.ui.secondary.bottom.attached.segment
+		a.ui.blue.button(href="#{pathFor 'chamadosInsertRoute' aplicativoId=appInfo._id}")
+			i.plus.icon 
+			|Novo Chat

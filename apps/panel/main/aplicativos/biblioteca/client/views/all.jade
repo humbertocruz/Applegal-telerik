@@ -1,0 +1,5 @@
+template(name="aplicativosBibliotecaAllView")
+	unless Template.subscriptionsReady
+		+loadingView
+	else
+		+bibliotecaView

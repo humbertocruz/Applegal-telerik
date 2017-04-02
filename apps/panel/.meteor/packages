@@ -29,7 +29,7 @@ dburles:collection-helpers
 kadira:flow-router
 kadira:blaze-layout
 arillo:flow-router-helpers
-reywood:publish-composite
+#reywood:publish-composite
 tmeasday:publish-counts
 
 dalgard:jade

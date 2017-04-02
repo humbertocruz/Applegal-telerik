@@ -1,31 +1,34 @@
 Controller('albunsView', {
 	created:function() {
+		var me = this;
 		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
 		sint = 0;
-		Tracker.autorun(function(){
-			allGalerias = Meteor.subscribe('allAlbuns',{},FlowRouter.getQueryParam('page'),FlowRouter.getParam('aplicativoId'));
+		me.autorun(function(){
+			appAlbuns = me.subscribe('appAlbuns',{},FlowRouter.getQueryParam('page'),FlowRouter.getParam('aplicativoId'));
 		});
-	},
-	rendered:function(){
-	},
-	destroyed:function() {
 	},
 	helpers: {
 		albuns: function() {
+			if (!appAlbuns.ready()) return [];
 			var qtd = 10;
 			var page = FlowRouter.getQueryParam('page');
 			if (!page) page = 1;
-			var albuns = Album.find({},{sort:{date:-1},limit:qtd,skip:(page-1)*qtd}).fetch();
-
-			$('.ui.progress').progress({
-				duration	: 200,
-				total			: Math.ceil(Counts.get('allAlbuns')/qtd),
-				value			: page
-			});
+			var albuns = Album.find(
+				{
+					aplicativoId:FlowRouter.getParam('aplicativoId')
+				},
+				{
+					sort:{
+						date:-1
+					},
+					limit:qtd
+				}
+			).fetch();
 			return {
 				data: albuns,
-				count: Counts.get('allAlbuns'),
-				pages: Math.ceil(Counts.get('allAlbuns')/qtd)
+				page: page,
+				count: Counts.get('appAlbuns'),
+				pages: Math.ceil(Counts.get('appAlbuns')/qtd)
 			};
 		}
 	},

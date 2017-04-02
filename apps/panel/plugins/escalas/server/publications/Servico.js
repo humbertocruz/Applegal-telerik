@@ -1,4 +1,4 @@
-Meteor.publishComposite('allServicos', function(search){
+/*Meteor.publish('allServicos', function(search){
 	if (typeof(DomainAppVar) == 'undefined') return false;
 	return {
 		find:function(){
@@ -10,3 +10,4 @@ Meteor.publishComposite('allServicos', function(search){
 		}
 	}
 });
+*/

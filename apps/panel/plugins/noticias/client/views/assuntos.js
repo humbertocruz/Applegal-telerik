@@ -1,8 +1,9 @@
 Controller('noticiasAssuntosView',{
 	created:function() {
+		var me = this;
 		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
-		Tracker.autorun(function(){
-			Meteor.subscribe("appAssuntos", FlowRouter.getQueryParam('page'), FlowRouter.getParam('aplicativoId'));
+		me.autorun(function(){
+			me.subscribe("appAssuntos", FlowRouter.getQueryParam('page'), FlowRouter.getParam('aplicativoId'));
 		});
 	},
 	helpers:{

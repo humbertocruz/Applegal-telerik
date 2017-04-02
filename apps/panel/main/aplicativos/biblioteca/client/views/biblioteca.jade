@@ -1,0 +1,41 @@
+template(name="bibliotecaView")
+	.ui.violet.segment
+		unless publicLib
+			input#uploadField(type="file",name="files",style="display:none;",multiple="multiple")
+			if compare route 'eq' 'aplicativosBibliotecaRoute'
+				.ui.green.button#rebuildCloudinary Recuperar Arquivos
+			if compare route 'eq' 'aplicativosUpdateWallpaperRoute'
+				.ui.green.button#rebuildCloudinary Recuperar Arquivos
+		unless publicLib
+			.ui.button.hasPopup Enviar
+			.ui.large.popup
+				.ui.vertical.secondary.menu
+					each libTypes
+						.link.item.uploadEvent(data-value="#{name}",style="margin:0px;")
+							i.icon(class="#{icon}")
+							|#{title}
+		else
+			.ui.disabled.button Galeria
+		if compare biblioteca.pages 'gt' 1
+			.ui.right.floated.buttons
+				.ui.icon.button#prevPageEvent
+					i.left.arrow.icon
+				.ui.disabled.button #{biblioteca.page} de #{biblioteca.pages}
+				.ui.icon.button#nextPageEvent
+					i.right.arrow.icon
+		unless biblioteca.count
+			.ui.warning.message
+				span Não há nenhuma imagem disponível.
+		else
+			.ui.clearing.divider
+			.ui.six.doubling.cards
+				each biblioteca.data
+					.ui.card
+						.image
+							img(src="#{clUrl public_id crop='scale' width=210 cloud_name=cloud_name format=format}")
+						.content
+							|!{toSemanticList tags}
+						.extra.content
+							i.link.large.mobile.icon.useOnAppEvent
+							unless publicLib
+								i.link.right.floated.large.trash.icon.RemoveEvent

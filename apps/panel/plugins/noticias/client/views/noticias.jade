@@ -1,16 +1,18 @@
 template(name="noticiasView")
-	unless Template.subscriptionsReady
-		+loadingView
-	else
-		table.ui.blue.top.attached.table
-			thead
-				tr
-					th.three.wide &nbsp;
-					th.one.wide Ativa
-					th.one.wide Cor
-					th.three.wide Data
-					th.three.wide Assunto
-					th Título
+	table.ui.blue.top.attached.table(style="transition:all .5s linear;")
+		thead
+			tr
+				th.three.wide &nbsp;
+				th.one.wide Ativa
+				th.one.wide Cor
+				th.three.wide Data
+				th.three.wide Assunto
+				th Título
+		unless Template.subscriptionsReady
+			tr
+				th(colspan="6")
+					+loadingView
+		else
 			tbody
 				each noticias.data
 					tr
@@ -26,8 +28,8 @@ template(name="noticiasView")
 						td #{dateBr date}
 						td #{assunto.name}
 						td #{title}
-		.ui.secondary.bottom.attached.segment
-			a.ui.blue.button(href="#{pathFor 'noticiasInsertRoute' aplicativoId=appInfo._id}")
-				i.plus.icon
-				|Nova Notícia
-			a.ui.button(href="#{pathFor 'noticiasAssuntosRoute' aplicativoId=appInfo._id}") Assuntos
+	.ui.secondary.bottom.attached.segment
+		a.ui.blue.small.button(href="#{pathFor 'noticiasInsertRoute' aplicativoId=appInfo._id}")
+			i.plus.icon
+			|Nova Notícia
+		a.ui.small.right.floated.button(href="#{pathFor 'noticiasAssuntosRoute' aplicativoId=appInfo._id}") Assuntos

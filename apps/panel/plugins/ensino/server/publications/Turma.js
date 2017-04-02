@@ -1,61 +1,31 @@
-Meteor.publishComposite('appTurmas', function(page, cursoId, aplicativoId) {
-	if (typeof(aplicativoId) == 'undefined') return false;
-	return {
-		find: function() {
-			var search = {};
-			search.aplicativoId = aplicativoId;
-			search.cursoId = cursoId;
-			if (!page) page = 1;
-			var pages = 10;
-			Counts.publish(this, 'appTurmas', Turma.find(search), {
-				noReady: true
-			});
-			var turmas = Turma.find(search, {
-				sort: {
-					year: -1
-				},
-				limit: pages,
-				skip: (page - 1) * pages
-			});
-			return turmas;
-		},
-		children: [{
-			find: function(turma){
-				return Curso.find({
-					_id:turma.cursoId
-				});
-			}
-		},{
-			find: function(turma) {
-				return Aluno.find({
-					turmaId:turma._id
-				});
-			}
-		}]
-	}
-});
+Meteor.publish('appTurmas', function(page, cursoId, aplicativoId) {
 
-Meteor.publishComposite('oneTurma', function(turmaId, aplicativoId) {
-	if (typeof(aplicativoId) == 'undefined') return false;
-	return {
-		find: function() {
-			var turma = Turma.find(turmaId);
-			return turmas;
+	if (!securityCheck(this.userId,['manager','ensino'],aplicativoId)) return this.ready();
+
+	var search = {};
+	search.aplicativoId = aplicativoId;
+	search.cursoId = cursoId;
+	if (!page) page = 1;
+	var pages = 10;
+	Counts.publish(this, 'appTurmas', Turma.find(search), {
+		noReady: true
+	});
+	var turmas = Turma.find(search, {
+		sort: {
+			year: -1
 		},
-		children: [{
-			find: function(turma){
-				return Curso.find({
-					_id:turma.cursoId,
-					aplicativoId:aplicativoId
-				});
-			}
-		},{
-			find: function(turma) {
-				return Aluno.find({
-					turmaId:turma._id,
-					aplicativoId:aplicativoId
-				});
-			}
-		}]
-	}
+		limit: pages,
+		skip: (page - 1) * pages
+	});
+	var cursos = Curso.find({
+		_id:{
+			$in:_.pluck(turmas,'cursoId')
+		}
+	});
+	var alunos = Aluno.find({
+		turmaId:{
+			$in:_.pluck(turmas,'_id')
+		}
+	});
+	return [turmas,cursos,alunos];
 });

@@ -9,5 +9,5 @@ Accounts.onLogout(function() {
     return true;
 });
 Accounts.onLogin(function() {
-    Bert.alert('Login efeutado com sucesso!', 'success');
+    //Bert.alert('Login efeutado com sucesso!', 'success');
 });

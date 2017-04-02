@@ -1,9 +1,24 @@
 template(name="mainMenu")
-	.ui.blue.menu#adminMenu(style="padding:0px;background-color:#f3f4f5;")
+	.ui.blue.secondary.stackable.menu#adminMenu(style="padding:0px;")
+		.ui.dropdown.item
+			i.sidebar.icon#adminSubMenuShow(data-variation="wide")
+			//i.dropdown.icon
+			.menu
+				a.ui.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
+					i.android.icon
+					|Apps
+				a.ui.item(class="#{isActiveRoute regex='^options'}",href="#{pathFor 'optionsRoute'}")
+					i.options.icon
+					|Opções
+				a.ui.item(class="#{isActiveRoute regex='^plugins'}",href="#{pathFor 'pluginsRoute'}")
+					i.puzzle.icon
+					|Plugins
+				a.ui.item(class="#{isActiveRoute regex='^admins'}",href="#{pathFor 'adminsRoute'}")
+					i.users.icon
+					|Admins
 		a.item(class="#{isActiveRoute regex='^home'}",href="#{pathFor 'homeRoute'}")
-			img.ui.mini.image(src="#{clUrl appByDomain.public_id cloud_name=appByDomain.cloud_name crop='scale' width=80}")
-			|&nbsp; #{appByDomain.name}
-		.item
+			//img.ui.mini.image(src="#{clUrl appByDomain.public_id cloud_name=appByDomain.cloud_name crop='scale' width=80}")
+			//|&nbsp; #{appByDomain.name}
 			.ui.breadcrumb
 				a.section(href="#{pathFor 'homeRoute'}")
 					i.android.icon
@@ -15,34 +30,17 @@ template(name="mainMenu")
 				.section
 					i.icon(class="#{subMenuTitle.icon}")
 					|#{subMenuTitle.title}
-		.right.menu
-			if isInRole 'admin'
-				.ui.dropdown.item
-					i.sidebar.icon#adminSubMenuShow(data-variation="wide")
-					i.dropdown.icon
-					.menu
-						a.ui.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
-							i.android.icon
-							|Apps
-						a.ui.item(class="#{isActiveRoute regex='^options'}",href="#{pathFor 'optionsRoute'}")
-							i.options.icon
-							|Opções
-						a.ui.item(class="#{isActiveRoute regex='^plugins'}",href="#{pathFor 'pluginsRoute'}")
-							i.puzzle.icon
-							|Plugins
-						a.ui.item(class="#{isActiveRoute regex='^admins'}",href="#{pathFor 'adminsRoute'}")
-							i.users.icon
-							|Admins
-			.ui.dropdown.item(class="#{isActiveRoute regex='^profile'}")
-				img.ui.avatar.image#profileSubMenuShow(src="#{gravatar user.emails}")
-				i.dropdown.icon
-				.menu
-					a.ui.item(href="#{pathFor 'profileRoute'}")
-						img.ui.avatar.image#profileSubMenuShow(src="#{gravatar user.emails}")
-						|Profile
-					.link.item#changePwdEvent
-						i.key.icon
-						|Alterar Senha
-					.link.item#logoutEvent
-						i.sign.out.icon
-						|Sair
+		if isInRole 'admin'
+			.ui.right.dropdown.item
+					img.ui.avatar.image#profileSubMenuShow(src="#{gravatar user.emails}")
+					//i.dropdown.icon
+					.ui.pointing.menu
+						a.ui.item(href="#{pathFor 'profileRoute'}")
+							img.ui.avatar.image#profileSubMenuShow(src="#{gravatar user.emails}")
+							|Profile
+						.link.item#changePwdEvent
+							i.key.icon
+							|Alterar Senha
+						.link.item#logoutEvent
+							i.sign.out.icon
+							|Sair

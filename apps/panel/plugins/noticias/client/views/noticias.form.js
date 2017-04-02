@@ -1,50 +1,38 @@
 Controller('formNoticiasView',{
 	created:function(){
+		var me = this;
 		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
 		bibliotecaTypesVar.set([
 			'noticia'
 		]);
-		Tracker.autorun(function(){
-			var page = FlowRouter.getQueryParam('page');
-			Meteor.subscribe("oneNoticia", FlowRouter.getParam('noticiaId'));
-			Meteor.subscribe("appAssuntos", page, FlowRouter.getParam('aplicativoId'));
-		});
+		if (FlowRouter.getParam('noticiaId')) {
+			me.autorun(function(){
+				var page = FlowRouter.getQueryParam('page');
+				var appId = FlowRouter.getParam('aplicativoId');
+				appNoticia = me.subscribe("appNoticias", {_id:FlowRouter.getParam('noticiaId')},page,appId,FlowRouter.getParam('noticiaId'));
+				appAssuntos = me.subscribe("appAssuntos", page, appId);
+				var libType = bibliotecaTypesVar.get();
+				appBiblioteca = me.subscribe("appBiblioteca", page, appId, 12, libType);
+			});
+		}
 	},
 	rendered:function(){
-		$('#noticiasForm .ui.dropdown').dropdown();
-		if (id = FlowRouter.getParam('noticiaId')) {
-			var noticia = Noticia.findOne(id);
-			if (!noticia) return false;
-			$('#noticiasForm').form('set values',noticia);
-			$('#dateField').val(moment(noticia.date).format('YYYY-MM-DD'));
-		} else {
-			$('#dateField').val(moment().format('YYYY-MM-DD'));
-		}
-
 		tinymce.remove();
 		tinymce.init({
 			selector: 'textarea',
 			//language: 'pt_BR',
 			skin_url: '/packages/teamon_tinymce/skins/lightgray',
 		});
+		$('#noticiasForm .ui.dropdown').dropdown();
 	},
 	helpers:{
-		noticiaId:function(){
-			return FlowRouter.getParam('noticiaId');
-		},
 		semanticColors:function(){
 			return _.sortBy(semanticColors,'title');
 		},
-		uploaded:function(){
-			return Cloudinary.collection.find({},{
-				limit:1,
-				sort:{
-					created_at:-1
-				}
-			}).fetch();
-		},
 		noticia:function(){
-			return Noticia.findOne(FlowRouter.getParam('noticiaId'));
+			var noticia = Noticia.findOne(FlowRouter.getParam('noticiaId'));
+			console.log(noticia);
+			return noticia;
 		},
 		assuntos:function(){
 			return Assunto.find({},{sort:{name:1}}).fetch();

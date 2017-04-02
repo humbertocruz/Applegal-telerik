@@ -1,4 +1,4 @@
-Meteor.publishComposite('allEscalas', function(search,page){
+/*Meteor.publishComposite('allEscalas', function(search,page){
 	if (typeof(DomainAppVar) == 'undefined') return false;
 	return {
 		find:function(){
@@ -34,3 +34,4 @@ Meteor.publishComposite('oneEscala', function(id){
 		}
 	}
 });
+*/

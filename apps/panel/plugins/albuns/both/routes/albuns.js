@@ -42,7 +42,7 @@ albunsRoutes.route('/nova', {
 	}
 });
 
-albunsRoutes.route('/:id', {
+albunsRoutes.route('/:albumId', {
 	name: 'albunsUpdateRoute',
 	action: function() {
 		BlazeLayout.render('adminLayout', {

@@ -1,9 +1,8 @@
-Meteor.publishComposite('allAdmins', function(search){
-	// apenas usuários logados
-	if (!this.userId) return false;
+Meteor.publishComposite('allAdmins', function(page){
+	// apenas usuários Admins
+	if (!Roles.userIsInRole(this.userId,'admin')) return this.ready();
 
-	// se não tiver parametros de busca
-	if (!search) search = {};
+	if (!page) page = 1;
 
 	return {
 		find:function(){

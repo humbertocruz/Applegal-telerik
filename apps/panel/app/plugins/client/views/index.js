@@ -1,7 +1,5 @@
 Controller('pluginsView',{
 	created:function() {
-		sint = 0;
-		modulosSearchVar = new ReactiveVar({});
 		subMenuTitleVar.set({
 			title:'Plugins',
 			icon:'puzzle'

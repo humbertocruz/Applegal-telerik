@@ -1,17 +1,16 @@
 Controller('pubWallpapersView',{
 	created:function() {
-		Tracker.autorun(function(){
-			var page = FlowRouter.getQueryParam('page');
-			pubBiblioteca = Meteor.subscribe("pubGaleria", page, 12, ['wallpaper']);
+		var me = this;
+		me.currentPage = function(){return FlowRouter.getQueryParam('page');};
+		me.autorun(function(){
+			pubBiblioteca = me.subscribe("pubGaleria", me.currentPage(), 12, ['wallpaper']);
 		});
 	},
 	rendered:function(){
 	},
-	destroyed:function(){
-		pubBiblioteca.stop();
-	},
 	helpers:{
 		galeria:function(){
+			if (!pubBiblioteca.ready()) return [];
 			var qtd = 12;
 			var page = FlowRouter.getQueryParam('page');
 			if (!page) page = 1;
@@ -23,13 +22,14 @@ Controller('pubWallpapersView',{
 			var galeria = PubGaleria.find(search,{
 				limit:12
 			});
-			var data = galeria.fetch();
-			return {
+			var data = {
 				page:page,
-				count:Counts.get('pubBiblioteca'),
-				data:data,
-				pages:Math.ceil(Counts.get('pubBiblioteca')/qtd)
-			}
+				count:Counts.get('pubGaleria'),
+				data:galeria.fetch(),
+				pages:Math.ceil(Counts.get('pubGaleria')/12)
+			};
+			console.log(data);
+			return data;
 		}
 	},
 	events:{

@@ -1,10 +1,11 @@
 Controller('chamadosView', {
 	created:function() {
-		chamadosSearchVar = new ReactiveVar({
-			aplicativoId:FlowRouter.getParam('aplicativoId')
-		});
-		Tracker.autorun(function(){
-			Meteor.subscribe("allChamados", chamadosSearchVar.get(), FlowRouter.getQueryParam('page'),FlowRouter.getParam('aplicativoId'));
+		var me = this;
+		chamadosSearchVar = new ReactiveVar({});
+		me.currentPage = function(){return FlowRouter.getQueryParam('page');};
+		me.appId = function(){return FlowRouter.getParam('aplicativoId');};
+		me.autorun(function(){
+			allChamados = me.subscribe("allChamados", {}, me.currentPage(), me.appId());
 		});
 	},
 	rendered:function() {

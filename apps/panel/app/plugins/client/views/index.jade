@@ -1,22 +1,25 @@
 template(name="pluginsView")
-	table.ui.blue.top.attached.table
-		thead
-			tr
-				th.three.wide &nbsp;
-				th.one.wide Ícone
-				th Nome
-				th Título
-		tbody
-			each plugins.data
+	unless Template.subscriptionsReady
+		+loadingView
+	else
+		table.ui.blue.top.attached.table
+			thead
 				tr
-					td
-						a.ui.icon.button.editBtn(href="#{pathFor 'pluginsUpdateRoute' id=_id}")
-							i.edit.icon
-						.ui.icon.button.removeBtn
-							i.trash.icon
-					td
-						i.large.icon(class="#{icon}")
-					td #{path}
-					td #{title}
-	.ui.bottom.attached.segment
-		a.ui.blue.button(href="#{pathFor 'pluginsInsertRoute'}") Novo Plugin
+					th.three.wide &nbsp;
+					th.one.wide Ícone
+					th Título
+					th Caminho
+			tbody
+				each plugins.data
+					tr
+						td
+							a.ui.icon.button.editBtn(href="#{pathFor 'pluginsUpdateRoute' id=_id}")
+								i.edit.icon
+							.ui.icon.button.removeBtn
+								i.trash.icon
+						td
+							i.large.icon(class="#{icon}")
+						td #{title}
+						td #{route}
+		.ui.bottom.attached.segment
+			a.ui.blue.button(href="#{pathFor 'pluginsInsertRoute'}") Novo Plugin

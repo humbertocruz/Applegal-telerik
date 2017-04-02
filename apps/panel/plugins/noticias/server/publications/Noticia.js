@@ -1,6 +1,12 @@
 Meteor.publishComposite('appNoticias', function(search, page, aplicativoId) {
-	if (typeof(aplicativoId) == 'undefined') return false;
-	if (!this.userId) return false;
+	if (typeof(aplicativoId) == 'undefined') return this.ready();
+	if (!this.userId) return this.ready();
+	var authorized = false;
+
+	if (Roles.userIsInRole(this.userId, ['admin'])) authorized = true;
+	if (Roles.userIsInRole(this.userId, ['manager','noticias'], aplicativoId)) authorized = true;
+
+	if (!authorized) return this.ready();
 
 	return {
 		find: function() {
@@ -18,7 +24,6 @@ Meteor.publishComposite('appNoticias', function(search, page, aplicativoId) {
 				limit: pages,
 				skip: (page - 1) * pages
 			});
-			console.log(noticias);
 			return noticias;
 		},
 		children:[
@@ -34,8 +39,14 @@ Meteor.publishComposite('appNoticias', function(search, page, aplicativoId) {
 	}
 });
 Meteor.publishComposite('oneNoticia', function(id,aplicativoId) {
-	if (typeof(aplicativoId) == 'undefined') return false;
-	if (!this.userId) return false;
+	if (typeof(aplicativoId) == 'undefined') return this.ready();
+	if (!this.userId) return this.ready();
+	var authorized = false;
+
+	if (Roles.userIsInRole(this.userId, ['admin'])) authorized = true;
+	if (Roles.userIsInRole(this.userId, ['manager','noticias'], aplicativoId)) authorized = true;
+
+	if (!authorized) return this.ready();
 
 	return {
 		find: function() {

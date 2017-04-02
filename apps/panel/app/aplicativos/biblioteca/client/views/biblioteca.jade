@@ -13,9 +13,9 @@ template(name="bibliotecaView")
 			unless publicLib
 				.ui.button.hasPopup Enviar
 				.ui.large.popup
-					.ui.vertical.text.menu
+					.ui.vertical.secondary.menu
 						each libTypes
-							.link.item.uploadEvent(data-value="#{name}")
+							.link.item.uploadEvent(data-value="#{name}",style="margin:0px;")
 								i.icon(class="#{icon}")
 								|#{title}
 			else

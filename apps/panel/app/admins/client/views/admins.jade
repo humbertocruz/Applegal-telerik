@@ -1,22 +1,27 @@
 template(name="adminsView")
-	table.ui.blue.single.line.table
-		thead
-			tr
-				th.three.wide &nbsp;
-				th.three.wide Email
-				th Nome
-
-		tbody
-			each admins.data
+	unless Template.subscriptionsReady
+		+loadingView
+	else
+		table.ui.blue.top.attached.single.line.table
+			thead
 				tr
-					td
-						a.ui.icon.button.editBtn(href="#{pathFor 'adminsUpdateRoute' id=_id}",data-tooltip="Editar Admin",data-inverted)
-							i.pencil.icon
-						a.ui.icon.button.chamadoBtn(data-tooltip="Abrir Chamado",data-inverted)
-							i.talk.icon
-						.ui.icon.button.removeBtn(data-tooltip="Excluir Admin",data-inverted)
-							i.trash.icon
-					td #{firstEmail emails}
-					td #{profile.name}
+					th.three.wide &nbsp;
+					th.three.wide Email
+					th Nome
 
-	+indexInfoPaginator ready=ready nothingFound='Nenhum Admin Cadastrado' count=admins.count page=admins.count pages=admins.pages singularForm='Admin' pluralForm='Admins'
+			tbody
+				each admins.data
+					tr
+						td
+							a.ui.icon.button.editBtn(href="#{pathFor 'adminsUpdateRoute' id=_id}",data-tooltip="Editar Admin",data-inverted)
+								i.pencil.icon
+							a.ui.icon.button.chamadoBtn(data-tooltip="Abrir Chamado",data-inverted)
+								i.talk.icon
+							.ui.icon.button.removeBtn(data-tooltip="Excluir Admin",data-inverted)
+								i.trash.icon
+						td #{firstEmail emails}
+						td #{profile.name}
+		.ui.secondary.bottom.attached.segment
+			a.ui.blue.button(href="#{pathFor 'adminsInsertRoute'}")
+				i.plus.icon
+				|Novo Administrador

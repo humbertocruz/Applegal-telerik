@@ -1,19 +1,19 @@
 Controller('aplicativosView',{
 	created:function() {
+		var me = this;
 		subMenuTitleVar.set({
 			title:(Roles.userIsInRole(Meteor.userId(),'admin'))?'Apps':'Seus Apps',
 			icon:'list'
 		});
-		Tracker.autorun(function(){
+		me.autorun(function(){
 			var page = FlowRouter.getQueryParam('page');
-			allAplicativos = Meteor.subscribe('allAplicativos', page);
+			allAplicativos = me.subscribe('allAplicativos', page, 5);
 		});
 	},
 	rendered:function(){
 		$('.ui.dropdown').dropdown();
 		$('#addAppShow').popup({
 			on:'click',
-			inline:true,
 			position: 'right center'
 		});
 	},
@@ -22,14 +22,11 @@ Controller('aplicativosView',{
 		allAplicativos.stop();
 	},
 	helpers:{
-		ready:function(){
-			return true;
-		},
 		aplicativos:function(){
 			var page = FlowRouter.getQueryParam('page');
 			if (!page) page = 1;
-			var qtd = 10;
-			var aplicativos = Aplicativo.find({},{sort:{name:1}}).fetch();
+			var qtd = 5;
+			var aplicativos = Aplicativo.find({},{limit:5,sort:{name:1}}).fetch();
 			return {
 				page:page,
 				count:Counts.get('allAplicativos'),
@@ -39,6 +36,16 @@ Controller('aplicativosView',{
 		}
 	},
 	events:{
+		'click #prevPage':function(){
+			var page = FlowRouter.getQueryParam('page');
+			if (page && page > 1) page--;
+			FlowRouter.go(FlowRouter.getRouteName(),FlowRouter.getParam(),{page:page});
+		},
+		'click #nextPage':function(){
+			var page = FlowRouter.getQueryParam('page');
+			if (page) page++; else page = 2;
+			FlowRouter.go(FlowRouter.getRouteName(),FlowRouter.getParam(),{page:page});
+		},
 		'submit #addAppForm':function(e,t){
 			e.preventDefault();
 			var fields = $(e.currentTarget).form('get values');

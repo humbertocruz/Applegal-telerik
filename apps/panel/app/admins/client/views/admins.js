@@ -1,32 +1,16 @@
 Controller('adminsView', {
 	created:function() {
-		adminsSearchVar = new ReactiveVar({});
-		Meteor.autorun(function() {
-			allAdmins = Meteor.subscribe('allAdmins', adminsSearchVar.get());
-		});
+		var me = this;
 		subMenuTitleVar.set({
 			title:'Admins',
 			icon:'users'
 		});
+		me.currentPage = function(){return FlowRouter.getQueryParam('page');};
+		me.autorun(function() {
+			allAdmins = me.subscribe('allAdmins', me.currentPage());
+		});
 	},
 	helpers: {
-		ready: function() {
-			return allAdmins.ready();
-		},
-		header: function() {
-			return {
-				title: 'Admins',
-				icon: 'users'
-			}
-		},
-		newLink: function() {
-			return {
-				title: 'Adicionar'
-			}
-		},
-		extraLinks: function() {
-			return false;
-		},
 		admins: function() {
 			var page = FlowRouter.getQueryParam('page');
 			if (!page) page = 1;
@@ -50,9 +34,6 @@ Controller('adminsView', {
 		}
 	},
 	events: {
-		'click #addBtn': function() {
-			FlowRouter.go('adminsInsertRoute');
-		},
 		'click .chamadoBtn': function(e, t) {
 			Meteor.call("startChamado", this._id, function(error, result) {
 				if (error) {

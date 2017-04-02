@@ -1,22 +1,25 @@
 template(name="optionsView")
-	.ui.blue.segment
-		form.ui.form#optionsForm(method="post")
-			.two.fields
-				.field
-					label Quantidae Registros por Página
-					input#recordsPerPageField(type="number",name="recordsPerPage")
-				.field
-					label Email Suporte
-					input#emailField(type="email",name="emailSuporte")
-			.three.fields
-				.field
-					label Cloud Name
-					input(type="text",name="cloud_name")
-				.field
-					label Api Key
-					input(type="text",name="api_key")
-				.field
-					label Api Secret
-					input(type="text",name="api_secret")
-		.ui.clearing.divider
-		button.ui.blue.button(type="submit",form="optionsForm") Gravar
+	unless Template.subscriptionsReady
+		+loadingView
+	else
+		.ui.blue.segment
+			form.ui.form#optionsForm(method="post")
+				.two.fields
+					.field
+						label Quantidae Registros por Página
+						input#recordsPerPageField(type="number",name="recordsPerPage",value="#{options.recordsPerPage}")
+					.field
+						label Email Suporte
+						input#emailField(type="email",name="emailSuporte",value="#{options.emailSuporte}")
+				.three.fields
+					.field
+						label Cloud Name
+						input(type="text",name="cloud_name",value="#{options.cloud_name}")
+					.field
+						label Api Key
+						input(type="text",name="api_key",value="#{options.api_key}")
+					.field
+						label Api Secret
+						input(type="password",name="api_secret")
+			.ui.clearing.divider
+			button.ui.blue.button(type="submit",form="optionsForm") Gravar

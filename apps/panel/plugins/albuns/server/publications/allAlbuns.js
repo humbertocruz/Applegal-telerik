@@ -7,7 +7,6 @@ Meteor.publishComposite('allAlbuns', function(search,page,aplicativoId){
 			search.aplicativoId = aplicativoId;
 			Counts.publish(this,'allAlbuns',Album.find(search));
 			var albuns = Album.find(search,{sort:{date:-1},limit:10,skip:(page-1)*10});
-			console.log(albuns.fetch());
 			return albuns;
 		},
 		children:[

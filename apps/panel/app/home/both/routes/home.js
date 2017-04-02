@@ -39,6 +39,7 @@ homeRoutes.route('/',{
 	action: function() {
 		BlazeLayout.render('adminLayout',{
 			menu:'mainMenu',
+			left:'leftMenu',
 			main:'homeView'
 		});
 	}

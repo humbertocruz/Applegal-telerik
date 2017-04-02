@@ -1,9 +1,9 @@
 aplicativosRoutes = FlowRouter.group({
 	name: 'aplicativosRoutes',
 	prefix: '/app',
-	/*triggersEnter:[
+	triggersEnter:[
 		function(r){
-			if (!r.params.aplicativoId) return true;
+			if (!r.params.aplicativoId) return false;
 			appInfoVar.set(Aplicativo.findOne(r.params.aplicativoId));
 			Meteor.call('setCloudinary', r.params.aplicativoId, function(err,result){
 				$.cloudinary.config({
@@ -11,7 +11,7 @@ aplicativosRoutes = FlowRouter.group({
 				});
 			});
 		}
-	]*/
+	]
 });
 
 aplicativosRoutes.route('/', {

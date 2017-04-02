@@ -1,17 +1,22 @@
 Controller('pubGaleriaView',{
 	created:function(){
+		var me = this;
 		subMenuTitleVar.set({
 			title:'Galeria de Imagens',
 			icon:'theme'
 		});
-		Tracker.autorun(function(){
-			var page = FlowRouter.getQueryParam('page');
-			var libType = bibliotecaTypesVar.get();
-			pubBiblioteca = Meteor.subscribe("pubGaleria", page, 12, libType);
-		});
 		bibliotecaTypesVar.set([
 			'wallpaper'
 		]);
+		me.currentPage = function(){return FlowRouter.getQueryParam('page');};
+		me.libType = function(){return bibliotecaTypesVar.get();};
+		me.autorun(function(){
+			pubBiblioteca = me.subscribe(
+				'pubGaleria',
+				me.currentPage(),
+				12,
+				me.libType());
+		});
 		uploadTypeVar = new ReactiveVar();
 	},
 	rendered:function(){
@@ -21,10 +26,6 @@ Controller('pubGaleriaView',{
 			on:'click',
 			position: 'right center'
 		});
-	},
-	destroyed:function(){
-		// Ao sair da "route", remover dados da memória
-		pubBiblioteca.stop();
 	},
 	helpers:{
 		libTypes: function(){

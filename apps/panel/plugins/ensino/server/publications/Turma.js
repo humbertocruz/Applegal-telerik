@@ -35,7 +35,7 @@ Meteor.publishComposite('appTurmas', function(page, cursoId, aplicativoId) {
 	}
 });
 
-Meteor.publishComposite('appTurmas', function(turmaId, aplicativoId) {
+Meteor.publishComposite('oneTurma', function(turmaId, aplicativoId) {
 	if (typeof(aplicativoId) == 'undefined') return false;
 	return {
 		find: function() {

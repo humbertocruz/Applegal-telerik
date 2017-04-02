@@ -4,26 +4,22 @@
 */
 Controller('optionsView',{
 	created:function() {
+		var me = this;
 		subMenuTitleVar.set({
 			title:'Options',
 			icon:'options'
 		});
 		// Subscribe para receber os dados configurados da plataforma
-		Tracker.autorun(function(){
-			allOptions = Meteor.subscribe("allOptions");
+		me.autorun(function(){
+			allOptions = me.subscribe("allOptions");
 		});
 	},
 	rendered:function(){
-		// Quando aparecer um dado, preencher o formulario
-		Option.find().observe({
-			added:function(newOptions){
-				$('#optionsForm').form('set values',newOptions);
-			}
-		});
 	},
-	destroyed:function(){
-		// Ao sair da "route" de configuração das opções, remover dados da memória
-		allOptions.stop();
+	helpers:{
+		options:function(){
+			return Option.findOne();
+		}
 	},
 	events:{
 		// Ao salvar os dados, inserior ou atualizar as informações

@@ -4,8 +4,8 @@
 **
 */
 Meteor.publishComposite('', function() {
-	if (!this.userId) return false;
-	if (!Roles.userIsInRole(this.userId,'admin')) return false;
+	if (!this.userId) return this.ready();
+	if (!Roles.userIsInRole(this.userId,'admin')) return this.ready();
 	return {
 		find: function() {
 			Counts.publish(this, 'allPlugins', Plugin.find(), {

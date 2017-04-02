@@ -14,8 +14,7 @@ Controller('bibliotecaView',{
 	rendered:function(){
 		$('.ui.dropdown').dropdown();
 		$('.ui.hasPopup').popup({
-			inline:true,
-			hoverable:true,
+			on:'click',
 			position: 'right center'
 		});
 	},
@@ -202,7 +201,7 @@ Controller('bibliotecaView',{
 				Cloudinary.upload(ff,
 					{
 						folder:uploadTypeVar.get(),
-						tags:[uploadTypeVar.get(),publicityVar.get(),FlowRouter.getParam('id')]
+						tags:[uploadTypeVar.get(),publicityVar.get()]
 					},
 					function(err,res) {
 						if (err) {

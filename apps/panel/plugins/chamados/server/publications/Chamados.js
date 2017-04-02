@@ -1,12 +1,19 @@
 Meteor.publishComposite('oneChamado', function(id,aplicativoId){
-	if (typeof(aplicativoId) == 'undefined') return false;
+	if (typeof(aplicativoId) == 'undefined') return this.ready();
+	if (!this.userId) return this.ready();
+	var authorized = false;
+
+	if (Roles.userIsInRole(this.userId, ['admin'])) authorized = true;
+	if (Roles.userIsInRole(this.userId, ['manager','chamados'], aplicativoId)) authorized = true;
+
+	if (!authorized) return this.ready();
 	return {
 		find:function(){
-			var chamado = Chamado.find({
+			return Chamado.find({
 				_id:id,
 				aplicativoId:aplicativoId
 			});
-			return chamado;
+			console.log('ready chamados');
 		},
 		children:[
 			{
@@ -15,6 +22,7 @@ Meteor.publishComposite('oneChamado', function(id,aplicativoId){
 						chamado_id:chamado._id,
 						aplicativoId:aplicativoId
 					});
+					console.log('ready msgs');
 					return mensagens;
 				},
 				children:[
@@ -30,8 +38,38 @@ Meteor.publishComposite('oneChamado', function(id,aplicativoId){
 		]
 	}
 });
-Meteor.publishComposite('allChamados', function(search,page,aplicativoId){
-	if (typeof(aplicativoId) == 'undefined') return false;
+Meteor.publish("allChamados", function(search,page,aplicativoId){
+	if (typeof(aplicativoId) == 'undefined') return this.ready();
+	if (!this.userId) return this.ready();
+	var authorized = false;
+
+	if (Roles.userIsInRole(this.userId, ['admin'])) authorized = true;
+	if (Roles.userIsInRole(this.userId, ['manager','chamados'], aplicativoId)) authorized = true;
+
+	if (!authorized) return this.ready();
+
+	var chamados = Chamado.find({
+		aplicativoId:aplicativoId
+	});
+	var associados = Meteor.users.find({
+		_id:{
+			$in:_.pluck(chamados.fetch(),'user_id')
+		}
+	});
+	return [chamados,associados];
+});
+/*
+publishComposite('allChamados', function(search,page,aplicativoId){
+
+	if (typeof(aplicativoId) == 'undefined') return this.ready();
+	if (!this.userId) return this.ready();
+	var authorized = false;
+
+	if (Roles.userIsInRole(this.userId, ['admin'])) authorized = true;
+	if (Roles.userIsInRole(this.userId, ['manager','chamados'], aplicativoId)) authorized = true;
+
+	if (!authorized) return this.ready();
+
 	return {
 		find:function(){
 			if (!search) search = {};
@@ -42,9 +80,11 @@ Meteor.publishComposite('allChamados', function(search,page,aplicativoId){
 		},
 		children:[
 			{
-				find:function(conversa){
+				find:function(chamado){
 					return Meteor.users.find({
-						_id:conversa.user_id
+						_id:chamado.user_id
+					},{
+						limit:1
 					});
 				}
 			},
@@ -59,3 +99,4 @@ Meteor.publishComposite('allChamados', function(search,page,aplicativoId){
 		]
 	}
 });
+*/

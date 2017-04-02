@@ -1,9 +1,11 @@
 Controller('noticiasView', {
 	created:function() {
+		var me = this;
 		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
-		Tracker.autorun(function(){
-			var appId = FlowRouter.getParam('aplicativoId');
-			Meteor.subscribe("appNoticias", {}, FlowRouter.getQueryParam('page'), appId);
+		me.appId = function(){ return FlowRouter.getParam('aplicativoId');};
+		me.currentPage = function(){return FlowRouter.getQueryParam('page');};
+		me.autorun(function(){
+			me.subscribe("appNoticias", {}, me.currentPage(), me.appId());
 		});
 	},
 	rendered:function(){
@@ -11,9 +13,6 @@ Controller('noticiasView', {
 	destroyed:function() {
 	},
 	helpers: {
-		ready:function(){
-			return true;
-		},
 		noticias: function() {
 			var page = FlowRouter.getQueryParam('page');
 			if (!page) page = 1;

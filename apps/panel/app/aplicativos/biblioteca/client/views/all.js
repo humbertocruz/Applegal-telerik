@@ -1,5 +1,6 @@
 Controller('aplicativosBibliotecaAllView',{
 	created:function(){
+		var me = this;
 		subMenuTitleVar.set({
 			title:'Toda sua Biblioteca',
 			icon:'theme'
@@ -12,11 +13,11 @@ Controller('aplicativosBibliotecaAllView',{
 			'album',
 			'enquete'
 		]);
-		Tracker.autorun(function(){
+		me.autorun(function(){
 			var page = FlowRouter.getQueryParam('page');
 			var aplicativoId = FlowRouter.getParam('aplicativoId');
 			var libType = bibliotecaTypesVar.get();
-			appBiblioteca = Meteor.subscribe("appBiblioteca", page, aplicativoId, 12, libType);
+			appBiblioteca = me.subscribe("appBiblioteca", page, aplicativoId, 12, libType);
 		});
 	},
 	helpers:{

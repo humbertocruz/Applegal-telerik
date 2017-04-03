@@ -23,7 +23,9 @@ module.exports = {
 			MONGO_URL: 'mongodb://applegal:flaiwoeijoa90293oiv23kijsdh093d@mongo.applegal.com.br/applegal?authSource=admin',
 			MAIL_URL: 'smtp://postmaster%40mg.applegal.com.br:afdef17f2edd9ec26c2fc070b2976605@smtp.mailgun.org:587',
 			PORT: 4000,
-			CLUSTER_WORKERS_COUNT: 'auto'
+			CLUSTER_WORKERS_COUNT: 'auto',
+			KADIRA_APP_ID: 'pE2aTg4fw5uqeTWYm',
+			KADIRA_APP_SECRET: 'fa3c304a-3cda-4a5a-aaae-ca5a81e7ccf7'
 		},
 
 		// change to 'kadirahq/meteord' if your app is not using Meteor 1.4

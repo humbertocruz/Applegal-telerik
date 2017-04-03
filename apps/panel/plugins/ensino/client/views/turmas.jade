@@ -5,14 +5,19 @@ template(name="ensinoTurmasView")
 				th.two.wide
 				th Nome
 		tbody
-			each turmas
+			unless Template.subscriptionsReady
 				tr
-					td
-						a.ui.blue.icon.button(href="#{pathFor 'ensinoTurmasUpdateRoute' cursoId=curso._id turmaId=_id aplicativoId=appInfo._id}")
-							i.pencil.icon
-						a.ui.icon.button(href="#{pathFor 'ensinoAlunosRoute' turmaId=_id aplicativoId=appInfo._id}")
-							i.right.arrow.icon
-					td #{name}
+					td(colspan="2")
+						+loadingView
+			else
+				each turmas
+					tr
+						td
+							a.ui.blue.icon.button(href="#{pathFor 'ensinoTurmasUpdateRoute' cursoId=curso._id turmaId=_id aplicativoId=appInfo._id}")
+								i.pencil.icon
+							a.ui.icon.button(href="#{pathFor 'ensinoAlunosRoute' turmaId=_id aplicativoId=appInfo._id}")
+								i.right.arrow.icon
+						td #{name}
 	.ui.bottom.attached.secondary.segment
 		a.ui.blue.button(href="#{pathFor 'ensinoTurmasInsertRoute' aplicativoId=appInfo._id cursoId=curso._id}")
 			i.add.icon

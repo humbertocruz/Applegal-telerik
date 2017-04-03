@@ -1,9 +1,10 @@
 Controller('cursosView', {
 	created: function() {
-		Tracker.autorun(function() {
+		var me = this;
+		me.autorun(function() {
 			var page = FlowRouter.getQueryParam('page');
 			var aplicativoId = FlowRouter.getParam('aplicativoId');
-			appCursos = Meteor.subscribe('appCursos', page, aplicativoId);
+			appCursos = me.subscribe('appCursos', page, aplicativoId);
 		});
 	},
 	rendered: function() {},

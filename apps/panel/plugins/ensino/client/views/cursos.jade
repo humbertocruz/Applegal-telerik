@@ -1,0 +1,26 @@
+template(name="cursosView")
+	table.ui.blue.top.attached.single.line.table
+		thead
+			tr
+				th
+				th Nome
+				th Requisito
+		tbody
+			unless Template.subscriptionsReady
+				tr
+					td(colspan="3")
+						+loadingView
+			else
+				each cursos
+					tr
+						td.three.wide
+							a.ui.small.icon.button(href="#{pathFor 'ensinoCursosUpdateRoute' cursoId=_id aplicativoId=appInfo._id}")
+								i.pencil.icon
+							a.ui.small.icon.button(href="#{pathFor 'ensinoTurmasRoute' aplicativoId=appInfo._id cursoId=_id}")
+								i.right.arrow.icon
+						td #{name}
+						td #{reqCurso.name}
+	.ui.bottom.attached.secondary.segment
+		a.ui.blue.button(href="#{pathFor 'ensinoCursosInsertRoute' aplicativoId=appInfo._id}")
+			i.add.icon
+			|Novo Curso

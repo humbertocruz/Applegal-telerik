@@ -1,9 +1,13 @@
 Controller('ensinoCursosFormView', {
 	created: function() {
-		Tracker.autorun(function() {
+		var me = this;
+		me.autorun(function() {
 			var aplicativoId = FlowRouter.getParam('aplicativoId');
 			var cursoId = FlowRouter.getParam('cursoId');
-			oneCurso = Meteor.subscribe("oneCurso", cursoId, aplicativoId);
+			var page = FlowRouter.getQueryParam('page');
+			oneCurso = me.subscribe("appCurso", 1, aplicativoId, cursoId);
+			appCursos = me.subscribe('appCursos', page, aplicativoId);
+
 		});
 	},
 	rendered: function() {

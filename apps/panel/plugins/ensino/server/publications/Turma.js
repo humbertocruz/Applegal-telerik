@@ -1,10 +1,17 @@
-Meteor.publish('appTurmas', function(page, cursoId, aplicativoId) {
+Meteor.publish('appTurmas', function(page, cursoId, aplicativoId, turmaId) {
 
 	if (!securityCheck(this.userId,['manager','ensino'],aplicativoId)) return this.ready();
 
-	var search = {};
-	search.aplicativoId = aplicativoId;
-	search.cursoId = cursoId;
+	if (turmaId) {
+		var search = {
+			_id: turmaId
+		};
+	} else {
+		var search = {
+			aplicativoId: aplicativoId,
+			cursoId:cursoId
+		}
+	}
 	if (!page) page = 1;
 	var pages = 10;
 	Counts.publish(this, 'appTurmas', Turma.find(search), {
@@ -17,6 +24,7 @@ Meteor.publish('appTurmas', function(page, cursoId, aplicativoId) {
 		limit: pages,
 		skip: (page - 1) * pages
 	});
+	if (turmas.count()==0) return this.ready();
 	var cursos = Curso.find({
 		_id:{
 			$in:_.pluck(turmas,'cursoId')

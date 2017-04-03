@@ -1,5 +1,17 @@
 Controller('leftMenu',{
 	created:function(){
+
+	},
+	rendered:function(){
+		$('.ui.accordion').accordion({
+			exclusive:true,
+			onOpening:function(){
+				if (this[0].id == 'admin') {
+					FlowRouter.go('aplicativosRoute');
+				}
+				return true;
+			}
+		});
 	},
 	helpers:{
 		isManagerOrAdmin:function(){

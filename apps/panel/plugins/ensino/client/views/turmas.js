@@ -1,11 +1,12 @@
 Controller('ensinoTurmasView', {
 	created: function() {
-		Tracker.autorun(function() {
+		var me = this;
+		me.autorun(function() {
 			var page = FlowRouter.getQueryParam('page');
 			var aplicativoId = FlowRouter.getParam('aplicativoId');
 			var cursoId = FlowRouter.getParam('cursoId');
-			appTurmas = Meteor.subscribe('appTurmas', page, cursoId, aplicativoId);
-			oneCurso = Meteor.subscribe("oneCurso", cursoId);
+			appTurmas = me.subscribe('appTurmas', page, cursoId, aplicativoId);
+			oneCurso = me.subscribe("appCurso", 1, aplicativoId, cursoId);
 		});
 	},
 	rendered: function() {},

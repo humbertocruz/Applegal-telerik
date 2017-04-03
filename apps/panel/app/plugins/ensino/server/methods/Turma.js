@@ -1,4 +1,11 @@
 Meteor.methods({
+	turmasCanAdd:function(data) {
+		return Turma.update(data.id,{
+			$set:{
+				canAdd:data.value
+			}
+		})
+	},
 	turmasForm: function(fields, aplicativoId) {
 		fields.aplicativoId = aplicativoId;
 		if (fields._id) {

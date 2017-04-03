@@ -17,7 +17,7 @@ template(name="albunsView")
 				each albuns.data
 					tr
 						td
-							a.ui.icon.button.editBtn(href="#{pathFor 'albunsUpdateRoute' aplicativoId=aplicativoId id=_id}")
+							a.ui.icon.button.editBtn(href="#{pathFor 'albunsUpdateRoute' aplicativoId=aplicativoId albumId=_id}")
 								i.edit.icon
 							.ui.icon.button.removeBtn
 								i.trash.icon

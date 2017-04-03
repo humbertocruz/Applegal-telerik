@@ -50,6 +50,8 @@ Controller('ensinoTurmasFormView', {
 			var fields = $(e.currentTarget).form('get values');
 			fields._id = FlowRouter.getParam('turmaId');
 			fields.cursoId = FlowRouter.getParam('cursoId');
+			fields.canAdd = false;
+			fields.isDone = false;
 			fields.provas = provasVar.get();
 			fields.trabalhos = trabalhosVar.get();
 
@@ -59,9 +61,8 @@ Controller('ensinoTurmasFormView', {
 				}
 				if (result) {
 					Bert.alert('Turma salva com sucesso', 'success');
-					FlowRouter.go('ensinoTurmasRoute',{
-						aplicativoId:FlowRouter.getParam('aplicativoId'),
-						cursoId:FlowRouter.getParam('cursoId')
+					FlowRouter.go('ensinoRoute',{
+						aplicativoId:FlowRouter.getParam('aplicativoId')
 					});
 				}
 			});

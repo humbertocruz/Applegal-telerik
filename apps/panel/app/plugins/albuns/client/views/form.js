@@ -5,9 +5,9 @@ Controller('formAlbunsView',{
 		bibliotecaTypesVar.set([
 			'album'
 		]);
-		if (!FlowRouter.getParam('albumId')) {
+		if (FlowRouter.getParam('albumId')) {
 			me.autorun(function(){
-				oneFoto = me.subscribe('appAlbuns', {}, 1, FlowRouter.getParam('aplicativoId'), FlowRouter.getParam('albumId'));
+				oneAlbum = me.subscribe('appAlbuns', {}, 1, FlowRouter.getParam('aplicativoId'), FlowRouter.getParam('albumId'));
 			});
 		}
 	},
@@ -41,7 +41,7 @@ Controller('formAlbunsView',{
 	},
 	helpers:{
 		fotoId:function(){
-			return FlowRouter.getParam('id');
+			return FlowRouter.getParam('albumId');
 		}
 	},
 	events:{

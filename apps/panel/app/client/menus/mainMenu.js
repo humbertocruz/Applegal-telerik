@@ -3,6 +3,10 @@ Controller('mainMenu',{
 	},
 	rendered:function(){
 		$('.ui.dropdown').dropdown();
+		$('#userPopupEvent').popup({
+			inline:true,
+			on:'click'
+		});
 	},
 	helpers:{
 		user:function(){

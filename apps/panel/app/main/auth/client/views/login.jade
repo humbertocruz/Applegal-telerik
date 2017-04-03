@@ -1,8 +1,8 @@
 template(name="loginView")
-	.ui.three.column.centered.grid(style="height:100vh;")
+	.ui.stackable.two.column.centered.grid(style="height:100vh;")
 		.middle.aligned.row
 			.left.aligned.column
-				.ui.black.segment
+				.ui.red.segment
 					img.ui.centered.image(src="#{clUrl appByDomain.public_id cloud_name=appByDomain.cloud_name crop='scale' width=180}",width="180")
 					form.ui.form#loginForm(method="post")
 						.field
@@ -11,6 +11,6 @@ template(name="loginView")
 						.field
 							label Senha
 							input#passwordField(type="password",name="password",placeholder="Digite sua senha",autocomplete="off")
-						button.ui.blue.big.fluid.button(type="submit",form="loginForm") Entrar
+						button.ui.blue.big.fluid.button(class="#{loginIsLoading}",type="submit",form="loginForm") Entrar
 					.ui.one.item.secondary.menu
 						a.link.item(href="#{pathFor 'passwordRoute'}") Esqueceu sua senha ?

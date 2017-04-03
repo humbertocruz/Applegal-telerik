@@ -1,6 +1,6 @@
 Controller('loginView', {
 	created:function(){
-
+		loginIsLoadingVar = new ReactiveVar(false);
 	},
 	rendered: function() {
 		$('body').css(
@@ -9,16 +9,21 @@ Controller('loginView', {
 		);
 	},
 	helpers:{
-
+		loginIsLoading:function(){
+			return (loginIsLoadingVar.get()?'loading':'');
+		}
 	},
 	events: {
 		'submit #loginForm':function(e, t) {
 			e.preventDefault();
+			loginIsLoadingVar.set(true);
 			var fields = $(e.target).form('get values');
 			Meteor.loginWithPassword(fields.email, fields.password, function(err, result) {
 				if (err) {
+					loginIsLoadingVar.set(false);
 					Bert.alert('Usuário ou Senha inválidos.', 'danger');
 				} else {
+					loginIsLoadingVar.set(false);
 					Bert.alert('Login efetuado com sucesso!','success');
 					FlowRouter.go('homeRoute');
 					$('body').css('backgroundColor','#fff');

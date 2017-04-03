@@ -44,7 +44,8 @@ Controller('bibliotecaView',{
 			var search = {
 				tags:{
 					$in:bibliotecaTypesVar.get()
-				}
+				},
+				aplicativoId:FlowRouter.getParam('aplicativoId')
 			};
 			if (FlowRouter.getParam('public')) {
 				search.cloud_name = 'technoapp';

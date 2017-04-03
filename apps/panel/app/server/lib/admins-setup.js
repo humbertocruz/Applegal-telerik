@@ -21,6 +21,7 @@ Meteor.startup(function() {
 		var ida = userAdm._id;
 		Roles.addUsersToRoles(ida,['admin']);
 	}
+	
 	var plugins = Plugin.findOne();
 	if (!plugins) {
 		var plugins = [{

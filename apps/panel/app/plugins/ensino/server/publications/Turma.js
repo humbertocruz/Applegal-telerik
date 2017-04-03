@@ -13,7 +13,7 @@ Meteor.publish('appTurmas', function(page, cursoId, aplicativoId, turmaId) {
 		}
 	}
 	if (!page) page = 1;
-	var pages = 10;
+	var pages = 15;
 	Counts.publish(this, 'appTurmas', Turma.find(search), {
 		noReady: true
 	});

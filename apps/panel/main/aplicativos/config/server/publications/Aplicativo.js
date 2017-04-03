@@ -1,28 +1,33 @@
-Meteor.publish("allAplicativos", function(page,pages,search){
+//Meteor.publish("allAplicativos", function(page,pages,search){
+Meteor.publish("allAplicativos", function(params){
+
+	// Segurança - Apenas ADMINS
 	if (!securityCheck(this.userId,null,null)) return this.ready();
 
-	if (!page) page = 1;
-	if (!pages) pages = 15;
-	if (!search) search = {};
+	// Verifica os parametros e criar os não enviados com valores padrão
+	if (!params) params = {};
+	if (!params.page) params.page = 1;
+	if (!params.pages) params.pages = 15;
+	if (!params.search) params.search = {};
 
 	if (!Roles.userIsInRole(this.userId,'admin')) {
 		var groups = Roles.getGroupsForUser(this.userId, 'manager');
-		search._id = {
+		params.search._id = {
 			$in:groups
 		};
 	}
-	Counts.publish(this, 'allAplicativos', Aplicativo.find(search), {
+	Counts.publish(this, 'allAplicativos', Aplicativo.find(params.earch), {
 		noReady: true
 	});
-	var aplicativos = Aplicativo.find(search, {
+	var aplicativos = Aplicativo.find(params.search, {
 		sort: {
 			'info.name': 1
 		},
 		sort: {
 			name:1
 		},
-		limit: pages,
-		skip: (page - 1) * pages
+		limit: params.pages,
+		skip: (params.page - 1) * params.pages
 	});
 	var plugins = AplicativoPlugin.find({
 		aplicativoId:{
@@ -30,6 +35,10 @@ Meteor.publish("allAplicativos", function(page,pages,search){
 		}
 	});
 
+	if (serverShowLogsVar) {
+		console.log(aplicativos.fetch());
+		console.log(plugins.fetch());
+	}
 	return [aplicativos,plugins];
 });
 

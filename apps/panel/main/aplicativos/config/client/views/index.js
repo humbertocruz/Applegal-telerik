@@ -6,8 +6,11 @@ Controller('aplicativosView',{
 			icon:'list'
 		});
 		me.autorun(function(){
-			var page = FlowRouter.getQueryParam('page');
-			allAplicativos = me.subscribe('allAplicativos', page, 15);
+			var params = {
+				page:(FlowRouter.getQueryParam('page')?FlowRouter.getQueryParam('page'):1),
+				pages:15
+			};
+			allAplicativos = me.subscribe('allAplicativos', params);
 		});
 	},
 	rendered:function(){
@@ -16,10 +19,6 @@ Controller('aplicativosView',{
 			on:'click',
 			position: 'right center'
 		});
-	},
-	destroyed:function(){
-		// Ao sair da "route", remover dados da memória
-		allAplicativos.stop();
 	},
 	helpers:{
 		aplicativos:function(){

@@ -4,6 +4,6 @@ template(name="appCodeView")
 			img.ui.small.centered.image(src="#{clUrl 'AppLegal' cloud_name='technoapp' crop='scale' width=230}")
 			form.ui.form#appCodeForm
 				.field
-					label Código
-					input#codeField(type="tel",name="code",maxlength="6")
+					label Código de Desenvolvimento
+					input#codeField(type="tel",name="code",maxlength="6",autocomplete="off")
 				button.ui.violet.fluid.button(type="submit") Carregar App

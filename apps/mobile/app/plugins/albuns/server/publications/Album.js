@@ -44,7 +44,6 @@ Meteor.publishComposite('oneAlbum',function(id, aplicativoId){
 							]
 						}
 					});
-					console.log(bib.fetch());
 					return bib;
 				}
 			}

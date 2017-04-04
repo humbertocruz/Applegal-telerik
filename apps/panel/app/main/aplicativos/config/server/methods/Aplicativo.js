@@ -1,4 +1,11 @@
 Meteor.methods({
+	appChangeBgColor:function(data){
+		return Aplicativo.update(data.appId,{
+			$set:{
+				wallpaper:data.rgb
+			}
+		})
+	},
 	appRemoveAll:function(aplicativoId){
 
 		// Removendo Arquivos

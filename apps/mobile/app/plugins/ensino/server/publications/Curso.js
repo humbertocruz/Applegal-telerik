@@ -8,7 +8,6 @@ Meteor.publishComposite('appCursos', function(aplicativoId) {
 					order: 1
 				}
 			});
-			console.log(cursos.fetch());
 			return cursos;
 		},
 		children: [{

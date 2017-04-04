@@ -42,7 +42,7 @@ template(name="cursosView")
 												th Encerrada
 										tbody
 											each turmas
-												tr
+												tr(class="#{turmaSetColor}")
 													td
 														.ui.small.icon.button.showAlunosEvent(class="#{addClassIf 'disabled' alunos.length 0 'eq'}")
 															i.down.arrow.icon
@@ -52,11 +52,11 @@ template(name="cursosView")
 													td #{name}
 													td
 														.ui.toggle.checkbox
-															input(data-turma="#{_id}",type="checkbox",tabindex="0",class="hidden",name="canAdd")
+															input(data-turma="#{_id}",checked=canAdd,type="checkbox",tabindex="0",class="hidden",name="canAdd")
 															label Aceitando Inscrições ?
 													td
 														.ui.toggle.checkbox
-															input(data-turma="#{_id}",type="checkbox",tabindex="0",class="hidden",name="isDone")
+															input(data-turma="#{_id}",checked=isDone,type="checkbox",tabindex="0",class="hidden",name="isDone")
 															label Encerrada ?
 
 												if alunos

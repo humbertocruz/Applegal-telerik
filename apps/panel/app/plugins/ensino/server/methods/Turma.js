@@ -6,6 +6,13 @@ Meteor.methods({
 			}
 		})
 	},
+	turmasIsDone:function(data) {
+		return Turma.update(data.id,{
+			$set:{
+				isDone:data.value
+			}
+		})
+	},
 	turmasForm: function(fields, aplicativoId) {
 		fields.aplicativoId = aplicativoId;
 		if (fields._id) {

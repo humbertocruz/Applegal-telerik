@@ -31,9 +31,33 @@ Controller('aplicativosUpdateThemeView',{
 	helpers:{
 		semanticColors:function(){
 			return _.sortBy(semanticColors,'title');
+		},
+		bgTypeImage:function(){
+			var appInfo = Aplicativo.findOne(FlowRouter.getParam('aplicativoId'));
+			if (appInfo) {
+				if (typeof(appInfo.wallpaper) == 'object') return true;
+				else return false;
+			}
 		}
 	},
 	events:{
+		'click .bgColorChangeEvent':function(e,t){
+			e.preventDefault();
+			var me = this;
+			htmlConfirm('Aviso','Deseja alterar a cor de fundo do App ?',function(){
+				Meteor.call("appChangeBgColor", {
+					appId:FlowRouter.getParam('aplicativoId'),
+					rgb:me.rgb
+				}, function(error, result){
+					if(error){
+						console.log("error", error);
+					}
+					if(result){
+						 Bert.alert('Cor de Fundo configurada com sucesso!','success');
+					}
+				});
+			});
+		},
 		'submit .aplicativosForm':function(e,t){
 			e.preventDefault();
 			var fields = $(e.currentTarget).form('get values');

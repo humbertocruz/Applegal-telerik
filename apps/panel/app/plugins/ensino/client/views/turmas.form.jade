@@ -8,35 +8,54 @@ template(name="ensinoTurmasFormView")
 				.field
 					label Ano
 					input#anoField(type="text",name="year")
-			.ui.two.column.grid
-				.column
-					table.ui.violet.top.attached.table
-						caption Provas
-						thead
-							tr
-								th Data
-						tbody
-							each turmaProvas
-								tr
-									td #{dateBr date}
-					.ui.secondary.bottom.attached.segment
-						.ui.action.fluid.input
-							input#newProvaDate(type="date",name="new_prova_date")
-							.ui.blue.button#newProvaEvent Salvar
-				.column
-					table.ui.green.top.attached.table
-						caption Trabalhos
-						thead
-							tr
-								th Data
-						tbody
-							each turmaTrabalhos
-								tr
-									td #{date}
-					.ui.secondary.bottom.attached.segment
-						.ui.action.fluid.input
-							input#newTrabalhoDate(type="date",name="new_trabalho_date")
-							.ui.blue.button#newTrabalhoEvent Salvar
+	
 	.ui.bottom.attached.secondary.segment
 		button.ui.blue.button(type="submit", form="turmasForm") Salvar
 		a.ui.button(href="#{pathFor 'ensinoRoute' aplicativoId=appInfo._id}") Voltar
+	
+	.ui.violet.segment
+		.ui.two.column.grid
+			.column
+				table.ui.orange.top.attached.table
+					caption Datas das Provas
+					thead
+						tr
+							th Data
+					tbody
+						unless Template.subscriptionsReady
+							tr
+								td
+									+loadingView
+						else
+							each turma.provas
+								tr
+									td 
+										i.link.trash.icon.removeProvaDate
+										|#{dateBr date}
+				.ui.secondary.bottom.attached.segment
+					form.ui.small.form#addProvaForm(method="post")
+						.ui.action.fluid.input
+							input#newProvaDate(type="date",name="new_prova_date")
+							button.ui.blue.button(type="submit",form="addProvaForm") Salvar
+			.column
+				table.ui.green.top.attached.table
+					caption Data dos Trabalhos
+					thead
+						tr
+							th Data
+					tbody
+						unless Template.subscriptionsReady
+							tr
+								td
+									+loadingView
+						else
+							each turma.trabalhos
+								tr
+									td
+										i.link.trash.icon.removeTrabalhoDate
+										|#{dateBr date}
+				.ui.secondary.bottom.attached.segment
+					form.ui.small.form#addTrabalhoForm(method="post")
+						.ui.action.fluid.input
+							input#newTrabalhoDate(type="date",name="new_trabalho_date")
+							button.ui.blue.button(type="submit",form="addTrabalhoForm") Salvar

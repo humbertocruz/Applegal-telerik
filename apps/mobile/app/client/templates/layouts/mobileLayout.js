@@ -9,6 +9,13 @@ Controller('adminLayout',{
 
 	},
 	helpers:{
+		bgTypeImage:function(){
+			var appInfo = Aplicativo.findOne();
+			if (appInfo) {
+				if (typeof(appInfo.wallpaper) == 'object') return true;
+				else return false;
+			}
+		},
 		isApp:function(){
 			return isAppVar.get();
 		},

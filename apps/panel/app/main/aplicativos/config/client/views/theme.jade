@@ -4,7 +4,10 @@ template(name="aplicativosUpdateThemeView")
 		.three.wide.column
 			img.ui.rounded.image(width="136",src="#{clUrl appInfo.logotype.public_id cloud_name=appInfo.logotype.cloud_name width=250 crop='scale'}")
 		.three.wide.column
-			img.ui.rounded.image(width="136",height="242",src="#{clUrl appInfo.wallpaper.public_id cloud_name=appInfo.wallpaper.cloud_name width=250 crop='scale'}")
+			if bgTypeImage
+				img.ui.rounded.image(width="136",height="242",src="#{clUrl appInfo.wallpaper.public_id cloud_name=appInfo.wallpaper.cloud_name width=250 crop='scale'}")
+			else
+				.ui.inverted.segment(style="width:136px; height:242px; background-color:#{appInfo.wallpaper}")
 		.ten.wide.column
 			form.ui.form.aplicativosForm#designForm(method="post")
 				.two.fields
@@ -42,6 +45,13 @@ template(name="aplicativosUpdateThemeView")
 							option(value="") Escolha o Tema
 							option(value="lighten") Claro
 							option(value="darken") Escuro
+				.ui.info.message
+					p 
+						|Você poder ver um "Preview" do seu App
+						a(href="https://m.applegal.com.br",target="_blank") aqui
+						|.
+						br
+						|O código de desenvolvimento pode ser gerado na aba Informações.
 		.sixteen.wide.column
 			.ui.clearing.divider
 			button.ui.blue.button(type="submit",form="designForm") Gravar
@@ -49,9 +59,18 @@ template(name="aplicativosUpdateThemeView")
 	.ui.header Escolha um Logotipo e Imagem de Fundo
 
 	.ui.top.attached.tabular.menu#bgChanger
-		a.item.active(data-tab='public') Galeria
+		a.item.active(data-tab="cores") Cores
+		a.item(data-tab='public') Galeria
 		a.item(data-tab='private') Suas Imagens
-	.ui.bottom.attached.tab.segment.active(data-tab='public')
+	.ui.bottom.attached.tab.segment.active(data-tab="cores")
+		.ui.three.column.grid
+			each semanticColors
+				.column
+					if compare className 'eq' 'white'
+						.ui.segment.bgColorChangeEvent(style="cursor:pointer;") #{title}
+					else
+						.ui.inverted.segment.bgColorChangeEvent(style="cursor:pointer;",class="#{className}") #{title}
+	.ui.bottom.attached.tab.segment(data-tab='public')
 		+pubWallpapersView
 	.ui.bottom.attached.tab.segment(data-tab='private')
 		+bibliotecaView

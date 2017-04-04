@@ -16,18 +16,15 @@ Meteor.publish("allAplicativos", function(params){
 			$in:groups
 		};
 	}
-	Counts.publish(this, 'allAplicativos', Aplicativo.find(params.earch), {
+	Counts.publish(this, 'allAplicativos', Aplicativo.find(params.search), {
 		noReady: true
 	});
 	var aplicativos = Aplicativo.find(params.search, {
 		sort: {
 			'info.name': 1
 		},
-		sort: {
-			name:1
-		},
 		limit: params.pages,
-		skip: (params.page - 1) * params.pages
+		skip: Math.ceil((params.page - 1) * params.pages)
 	});
 	var plugins = AplicativoPlugin.find({
 		aplicativoId:{

@@ -1,6 +1,5 @@
 Meteor.methods({
 	loadAppByCode:function(code){
-		 console.log(code);
 		 var app = Aplicativo.findOne({
 			 'info.code':code.code
 		 });

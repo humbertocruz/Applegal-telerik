@@ -11,6 +11,17 @@ Controller('cursosView', {
 		$('.ui.checkbox').checkbox();
 	},
 	helpers: {
+		turmaSetColor:function(){
+			if (this.isDone) return 'negative';
+			if (this.canAdd) return 'positive';
+			return 'warning';
+		},
+		canAddSet:function(){
+			console.log(this.canAdd);
+		},
+		isDoneSet:function(){
+			console.log(this.isDone);
+		},
 		cursos: function() {
 			var cursos = Curso.find({
 				aplicativoId:FlowRouter.getParam('aplicativoId')
@@ -43,6 +54,16 @@ Controller('cursosView', {
 							}
 						});
 					}
+					if ($(this).attr('name')=='isDone') {
+						Meteor.call("turmasIsDone", {id:$(this).data('turma'),value:true}, function(error, result){
+							if(error){
+								console.log("error", error);
+							}
+							if(result){
+								Bert.alert('A turma está encerrada!','success');
+							}
+						});
+					}
 				},
 				onUnchecked:function(){
 					if ($(this).attr('name')=='canAdd') {
@@ -52,6 +73,16 @@ Controller('cursosView', {
 							}
 							if(result){
 								Bert.alert('A turma não está mais aceitando inscrições!','success');
+							}
+						});
+					}
+					if ($(this).attr('name')=='isDone') {
+						Meteor.call("turmasIsDone", {id:$(this).data('turma'),value:false}, function(error, result){
+							if(error){
+								console.log("error", error);
+							}
+							if(result){
+								Bert.alert('A turma voltou a estar ativa!','success');
 							}
 						});
 					}

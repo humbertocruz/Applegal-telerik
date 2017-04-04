@@ -39,7 +39,6 @@ Controller('escalasPDFView',{
 				// Fetch the first page
 				pdf.getPage(page).then(function getPDFEscalas(page) {
 					var scale = currentZoomVar.get();
-					console.log(scale);
 					var viewport = page.getViewport(scale);
 
 					// Prepare canvas using PDF page dimensions
@@ -49,7 +48,7 @@ Controller('escalasPDFView',{
 					canvas.height = viewport.height;
 					canvas.width = viewport.width;
 
-					console.log(canvas.width);
+
 					// Render PDF page into canvas context
 					page.render({canvasContext: context, viewport: viewport}).promise.then(function () {
 

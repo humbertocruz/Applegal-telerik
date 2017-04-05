@@ -9,8 +9,44 @@ Controller('cursosView', {
 	},
 	rendered: function() {
 		$('.ui.checkbox').checkbox();
+		$('.ui.popup').popup({
+			inline:true
+		});
 	},
 	helpers: {
+		dateId:function(date){
+			return moment(date).format('YYYY_MM_DD');
+		},
+		provasAluno:function(){
+			var turma = Turma.findOne(this.turmaId);
+			var provasAluno = [];
+			var me = this;
+			_.each(turma.provas,function(prova){
+				var nota = false;
+				_.each(this.notas,function(nnota,idx){
+					if (moment(nnota.date).format('YYYY_MM_DD') == moment(prova.date).format('YYYY_MM_DD')){
+						nota = nnota;
+					}
+				});
+				console.log(nota);
+				if (!nota) {
+					console.log();
+					if (moment(prova.date).diff(moment(),'days') >= 0) nota = 'Por Fazer';
+					else nota = 'Não Encontrada!';
+				}
+				provasAluno.push({
+					date:prova.date,
+					nota:nota,
+					alunoId:me._id,
+					turmaId:me.turmaId
+				});
+			});
+			return provasAluno;
+		},
+		trabalhosAluno:function(){
+			var turma = Turma.findOne(this.turmaId);
+			return turma.trabalhos;
+		},
 		turmaSetColor:function(){
 			if (this.isDone) return 'negative';
 			if (this.canAdd) return 'positive';
@@ -92,6 +128,24 @@ Controller('cursosView', {
 		'click .showAlunosEvent':function(e,t){
 			$(e.currentTarget).parent().parent().next('.alunosRow').transition('toggle');
 			$('.ui.checkbox').checkbox();
+		},
+		'click .showProvasEvent':function(e,t){
+			$(e.currentTarget).parent().parent().next('.provasRow').transition('toggle');
+		},
+		'click .saveNotaAluno':function(e,t){
+			var me = this;
+			me.nota = $('#turma_'+me.turmaId+'_aluno_'+me.alunoId+'_data_'+moment(me.date).format('YYYY_MM_DD')).find('input').val();
+			Meteor.call("alunoChangeNota", me, function(error, result){
+				if(error){
+					console.log("error", error);
+				}
+				if(result){
+					Bert.alert('Nota do Aluno salva com sucesso!','success');
+				}
+			});
+		},
+		'click .showTrabalhosEvent':function(e,t){
+			$(e.currentTarget).parent().parent().next().next('.trabalhosRow').transition('toggle');
 		}
 	}
 });

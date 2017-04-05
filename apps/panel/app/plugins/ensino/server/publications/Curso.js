@@ -27,13 +27,19 @@ Meteor.publish('appCursos', function(page, aplicativoId, cursoId) {
 				$in:_.pluck(turmas.fetch(),'_id')
 			}
 		});
-	} else alunos = [];
-	if (alunos.count()>0){
-		var users = Meteor.users.find({
-			_id:{
-				$in:_.pluck(alunos.fetch(),'userId')
-			}
-		});
-	} else users = [];
+		if (alunos.count()>0){
+			var users = Meteor.users.find({
+				_id:{
+					$in:_.pluck(alunos.fetch(),'userId')
+				}
+			});
+		} else {
+			var users = Meteor.users.find({_id:0});
+		}
+	} else {
+		var alunos = Aluno.find({_id:0});
+		var users = Meteor.users.find({_id:0});
+	}
+
 	return [cursos,turmas,alunos,users];
 });

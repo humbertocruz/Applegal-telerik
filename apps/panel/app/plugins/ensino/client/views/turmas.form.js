@@ -114,7 +114,6 @@ Controller('ensinoTurmasFormView', {
 			}
 			fields.provas = provasVar.get();
 			fields.trabalhos = trabalhosVar.get();
-			console.log(fields);
 			Meteor.call("turmasForm", fields, FlowRouter.getParam('aplicativoId'), function(error, result) {
 				if (error) {
 					console.log("error", error);

@@ -6,17 +6,22 @@
   },
   "dependencies": {
     "babel-runtime": "^6.18.0",
+    "bcrypt": "^1.0.2",
     "body-parser": "^1.16.1",
     "cloudinary": "^1.7.1",
     "meteor-node-stubs": "~0.2.0",
     "request": "^2.79.0"
   },
-	"devDependencies": {
+  "devDependencies": {
     "autoprefixer": "^6.3.1"
   },
   "postcss": {
     "plugins": {
-      "autoprefixer": {"browsers": ["last 2 versions"]}
+      "autoprefixer": {
+        "browsers": [
+          "last 2 versions"
+        ]
+      }
     }
   }
 }

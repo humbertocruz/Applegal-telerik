@@ -16,37 +16,52 @@ template(name="ensinoTurmasFormView")
 	.ui.violet.segment
 		.ui.two.column.grid
 			.column
-				table.ui.orange.top.attached.table
+				table.ui.orange.table
 					caption Datas das Provas
 					thead
 						tr
 							th Data
+							th Google Form
 					tbody
 						unless Template.subscriptionsReady
 							tr
-								td
+								td(colspan="2")
 									+loadingView
 						else
-							each turma.provas
+							if compare turmas.provas.length 'eq' 0
 								tr
-									td 
-										i.link.trash.icon.removeProvaDate
-										|#{dateBr date}
-				.ui.secondary.bottom.attached.segment
+									td(colspan="2")
+										.ui.info.message
+											p Nenhuma Prova foi marcada ainda.
+							else
+								each turma.provas
+									tr
+										td
+											i.link.trash.icon.removeProvaDate
+											|#{dateBr date}
+										td
+											a(href="#{urlGForm}",target="_blank") Accessar a Prova
+				.ui.segment
 					form.ui.small.form#addProvaForm(method="post")
-						.ui.action.fluid.input
-							input#newProvaDate(type="date",name="new_prova_date")
-							button.ui.blue.button(type="submit",form="addProvaForm") Salvar
+						.field
+							label Data
+							input.datepicker-here#dateFieldProva(type="text",name="date")
+						.field
+							label URL do Google Form
+							input#urlGFormField(type="text",name="urlGForm")
+						button.ui.blue.button(type="submit",form="addProvaForm") Salvar
+						.ui.button#provasCancelAdd Cancelar
 			.column
 				table.ui.green.top.attached.table
 					caption Data dos Trabalhos
 					thead
 						tr
 							th Data
+							th Documento
 					tbody
 						unless Template.subscriptionsReady
 							tr
-								td
+								td(colspan="2")
 									+loadingView
 						else
 							each turma.trabalhos
@@ -54,8 +69,14 @@ template(name="ensinoTurmasFormView")
 									td
 										i.link.trash.icon.removeTrabalhoDate
 										|#{dateBr date}
+									td
+										a(href="#{document}",target="_blank") Acessar Documento
 				.ui.secondary.bottom.attached.segment
 					form.ui.small.form#addTrabalhoForm(method="post")
-						.ui.action.fluid.input
-							input#newTrabalhoDate(type="date",name="new_trabalho_date")
-							button.ui.blue.button(type="submit",form="addTrabalhoForm") Salvar
+						.field
+							label Data
+							input#dateFieldTrabalho(type="date",name="date")
+						.field
+							label Documento
+							input#documentField(type="text",name="document")
+						button.ui.blue.button(type="submit",form="addTrabalhoForm") Salvar

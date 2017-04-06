@@ -1,6 +1,11 @@
 Controller('leftMenu',{
 	created:function(){
-
+		var me = this;
+		me.autorun(function(){
+			me.subscribe("allAplicativos", {
+				_id:FlowRouter.getParam('aplicativoId')
+			});
+		});
 	},
 	rendered:function(){
 		$('.ui.accordion').accordion({

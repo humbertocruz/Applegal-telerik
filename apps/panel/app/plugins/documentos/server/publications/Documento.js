@@ -6,6 +6,7 @@ Meteor.publish('allDocumentos', function(search,page,aplicativoId){
 	var pages = 10;
 	Counts.publish(this,'allDocumentos',Documento.find(search), { noReady: true });
 	var documentos = Documento.find(search,{sort:{data:-1},limit:pages,skip:(page-1)*pages});
+	if (documentos.count() == 0) return this.ready();
 	var tipos =  Tipo.find({
 		_id:{
 			$in: _.pluck(documentos,'tipo_id')

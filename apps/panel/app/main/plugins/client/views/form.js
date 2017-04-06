@@ -1,16 +1,22 @@
 Controller('pluginsFormView',{
-	rendered:function(){
-		if (id = FlowRouter.getParam('id')){
-			Tracker.autorun(function(){
-				onePlugin = Meteor.subscribe('onePlugin', id);
-				var plugin = Plugin.findOne(id);
-				$('#pluginsForm').form('set values',plugin);
-			});
-		}
+	created:function(){
+		var me = this;
 		subMenuTitleVar.set({
 			title:'Plugins',
 			icon:'puzzle'
 		});
+		if (id = FlowRouter.getParam('id')){
+			me.autorun(function(){
+				allPlugins = me.subscribe('allPlugins', {
+					id:id
+				});
+				var plugin = Plugin.findOne(id);
+				$('#pluginsForm').form('set values',plugin);
+			});
+		}
+	},
+	rendered:function(){
+		$('.ui.checkbox').checkbox();
 	},
 	helpers:{
 		header:function(){

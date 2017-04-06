@@ -1,19 +1,30 @@
 Controller('pluginsView',{
 	created:function() {
+		var me = this;
 		subMenuTitleVar.set({
 			title:'Plugins',
 			icon:'puzzle'
 		});
+		me.autorun(function(){
+			allPlugins = me.subscribe("allPlugins", {
+				page:FlowRouter.getQueryParam('page'),
+				aplicativoId: FlowRouter.getParam('aplicativoId')
+			});
+		});
 	},
 	helpers:{
-		ready:function(){
-			return true;
-		},
 		plugins:function(){
 			var page = FlowRouter.getQueryParam('page');
 			if (!page) page = 1;
 			var qtd = 10;
-			var plugins = Plugin.find({},{sort:{name:1}}).fetch();
+			var plugins = Plugin.find({
+
+			},{
+				limit:qtd,
+				sort:{
+					title:1
+				}
+			}).fetch();
 
 			return {
 				page:page,

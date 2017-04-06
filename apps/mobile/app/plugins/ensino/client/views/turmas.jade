@@ -5,6 +5,7 @@ template(name="turmasView")
 	.ui.vertical.fluid.menu(style="background-color:#{appThemeBgColor}")
 			each turmas
 				a.item
-					.ui.blue.icon.button#ensinoCadastroEvent
-						i.add.icon
-					|#{name}
+					if canAdd
+						.ui.blue.icon.button#ensinoCadastroEvent
+							i.add.icon
+					|#{name} - #{alunos.length} alunos inscritos

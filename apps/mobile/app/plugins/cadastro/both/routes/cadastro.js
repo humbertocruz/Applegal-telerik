@@ -1,6 +1,4 @@
-import { permRoutes } from '../../../permRoutes.js';
-
-cadastroRoutes = permRoutes.group({
+cadastroRoutes = FlowRouter.group({
 	name: 'cadastroRoutes',
 	prefix: '/cadastro',
 	triggersEnter: [

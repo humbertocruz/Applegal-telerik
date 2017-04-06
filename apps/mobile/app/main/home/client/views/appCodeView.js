@@ -25,13 +25,11 @@ Controller('appCodeView',{
 		'submit #appCodeForm':function(e,t){
 			e.preventDefault();
 			var code = $(e.currentTarget).form('get values');
-			console.log(code);
 			Meteor.call('loadAppByCode', code, function(error, result){
 				if(error){
 					console.log("error", error);
 				}
 				if(result){
-					console.log(result);
 					loadedApp.set(true);
 					clientApp = Meteor.subscribe("clientApp", {identifier:result.store.appInfoId});
 				}

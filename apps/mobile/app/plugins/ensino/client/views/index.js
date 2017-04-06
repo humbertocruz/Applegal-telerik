@@ -1,10 +1,11 @@
 Controller('ensinoView', {
 	created: function() {
+		var me = this;
 		topTitleVar.set('Ensino');
-		Tracker.autorun(function(){
+		me.autorun(function(){
 			var app = Aplicativo.findOne();
 			if (!app) return false;
-			Meteor.subscribe('appCursos', app._id);
+			me.subscribe('appCursos', app._id);
 		});
 	},
 	rendered: function() {

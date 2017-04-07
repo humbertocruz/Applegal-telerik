@@ -2,10 +2,15 @@ Controller('ensinoView', {
 	created: function() {
 		var me = this;
 		topTitleVar.set('Ensino');
+		backBtnRouteVar.set({
+			route:'homeRoute',
+			params:{}
+		});
 		me.autorun(function(){
 			var app = Aplicativo.findOne();
 			if (!app) return false;
 			me.subscribe('appCursos', app._id);
+			me.subscribe('appAluno');
 		});
 	},
 	rendered: function() {
@@ -18,6 +23,17 @@ Controller('ensinoView', {
 					order: 1
 				}
 			}).fetch();
+		},
+		userInscrito:function(){
+			var me = this;
+			var alunos = Aluno.find().fetch();
+			if (alunos.length == 0) return false;
+			var cursoIds = [];
+			_.each(alunos,function(a){
+				cursoIds.push(a.turma().curso()._id);
+			});
+			if (_.contains(cursoIds,me._id)) return true;
+			else return false;
 		},
 		status: function() {
 			var me = this;

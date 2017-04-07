@@ -2,10 +2,26 @@ template(name="turmasView")
 	.ui.info.message(style="background-color:#{appThemeBgColor}")
 		i.large.student.icon
 		|Ensino
-	.ui.vertical.fluid.menu(style="background-color:#{appThemeBgColor}")
+	unless Template.subscriptionsReady
+		.ui.info.message
+			i.loading.spinner.icon
+			|Carregando...
+	else
+	.ui.cards
 			each turmas
-				a.item
-					if canAdd
-						.ui.blue.icon.button#ensinoCadastroEvent
-							i.add.icon
-					|#{name} - #{alunos.length} alunos inscritos
+				.ui.fluid.card(style="background-color:#{appThemeBgColor}")
+					.content
+						.header #{name}
+						.meta #{alunos.length} alunos inscritos
+					.extra.content
+						if canAdd
+							if userCanAdd
+								.ui.blue.button#ensinoCadastroEvent
+									i.add.icon
+									|Cadastre-se
+							else
+								.ui.error.message
+									p Você não possui os requisitos para se inscriver neste Curso.
+						else
+							.ui.warning.message
+								p As inscrições ainda não foram abertas.

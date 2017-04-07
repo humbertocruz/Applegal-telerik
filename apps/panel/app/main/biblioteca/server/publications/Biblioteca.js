@@ -11,7 +11,6 @@ Meteor.publish('appBiblioteca', function (page,aplicativoId,qtd,libType,id) {
 	Counts.publish(this, 'appBiblioteca', Biblioteca.find(search), {
 		noReady: true
 	});
-	console.log(search);
 	return Biblioteca.find(search,{
 		sort:{
 			created_at:-1

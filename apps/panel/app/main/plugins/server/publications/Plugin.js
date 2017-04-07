@@ -13,7 +13,5 @@ Meteor.publish('allPlugins', function(data) {
 			title: 1
 		}
 	});
-	console.log(plugins.fetch());
 	return [plugins];
-
 });

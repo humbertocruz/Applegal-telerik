@@ -67,7 +67,6 @@ Controller('usuariosFormView', {
 	events: {
 		'submit #addPerguntaForm':function(e,t){
 			e.preventDefault();
-			console.log('addPerguntaForm');
 		},
 		'submit #usuariosForm':function(e, t) {
 			e.preventDefault();

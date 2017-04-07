@@ -1,11 +1,49 @@
 Controller('turmasView', {
 	created: function() {
+		var me = this;
 		topTitleVar.set('Ensino - Turmas');
+		backBtnRouteVar.set({
+			route:'ensinoRoute',
+			params:{}
+		});
+		me.autorun(function(){
+			me.subscribe("appTurmas", {
+				cursoId:FlowRouter.getParam('cursoId')
+			});
+			me.subscribe('appAluno');
+		});
 	},
 	rendered: function() {
 
 	},
 	helpers: {
+		userCanAdd:function(){
+			var me = this;
+			var turma = Turma.findOne(me._id);
+			if (!turma) return false;
+			var curso = turma.curso();
+			if (!curso) return false;
+			var alunos = Aluno.find().fetch();
+			if (alunos.length == 0) {
+				var jaInscrito = false;
+			} else {
+				var jaInscrito = _.findWhere(alunos,{turmaId:me._id})
+			}
+			console.log(jaInscrito,alunos);
+			if (curso.requisito == "") {
+				var temRequisito = true;
+			} else {
+				var temRequisito = _.findWhere(alunos,{
+					cursoId:curso.requisito,
+					approved:true
+				});
+			}
+
+			if (jaInscrito == false && temRequisito == true) return true;
+			else return false;
+
+			return false;
+		},
 		turmas: function() {
 			return Turma.find({
 				cursoId:FlowRouter.getParam('cursoId')

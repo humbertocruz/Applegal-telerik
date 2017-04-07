@@ -1,4 +1,5 @@
-Meteor.publish('', function() {
+Meteor.publish('appAluno', function() {
+	var me = this;
 	var aluno = Aluno.find({
 		userId: this.userId
 	});
@@ -8,11 +9,12 @@ Meteor.publish('', function() {
 		}
 	});
 	if (turmas.count() > 0) {
-		var cursos = Curso.find({
-			_id:{
-				$in:_.pluck(turmas.fetch(),'cursoId')
-			}
-		});
-	} else cursos = this.ready();
+		cursoIds = _.pluck(turmas.fetch(),'cursoId');
+	} else cursoIds = [];
+	var cursos = Curso.find({
+		_id:{
+			$in:cursoIds
+		}
+	});
 	return [aluno,turmas,cursos];
 });

@@ -32,3 +32,14 @@ ensinoRoutes.route('/:cursoId/turmas', {
 		});
 	}
 });
+
+ensinoRoutes.route('/:cursoId/aluno', {
+	name: 'alunoRoute',
+	action: function() {
+		BlazeLayout.render('adminLayout', {
+			menu: 'topMenu',
+			main: 'alunoView',
+			technotronics: 'technotronicsMenu'
+		});
+	}
+});

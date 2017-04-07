@@ -4,13 +4,11 @@ cadastroRoutes = FlowRouter.group({
 	triggersEnter: [
 		function(obj, redirect) {
 			var access = false;
-      // Admin tem acesso
-			if (Roles.userIsInRole(Meteor.userId(), ['admin'])) access = true;
-      // Manager e Perm Exclusiva do App tem acesso
-			if (Roles.userIsInRole(Meteor.userId(), ['manager','cadastro'], obj.params.aplicativoId)) access = true;
-      // Niguem mais tem acesso
+			// Assinante do App tem acesso
+			if (Roles.userIsInRole(Meteor.userId(), ['subscriber'], aplicativoIdVar.get())) access = true;
+			// Niguem mais tem acesso
 			if (!access) {
-				Bert.alert('Você não tem permissão de acesso a este Plugin!', 'danger');
+				Bert.alert('Você não tem permissão de acesso!', 'danger');
 				redirect('homeRoute');
 			}
 		}
@@ -21,9 +19,9 @@ cadastroRoutes.route('/', {
 	name: 'cadastroRoute',
 	action: function() {
 		BlazeLayout.render('adminLayout', {
-			menu: 'mainMenu',
-			left: 'leftMenu',
-			main: 'cadastroView'
+			menu:'topMenu',
+			main:'cadastroView',
+			technotronics:'technotronicsMenu'
 		});
 	}
 

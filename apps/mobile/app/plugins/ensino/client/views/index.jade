@@ -2,6 +2,27 @@ template(name="ensinoView")
 	.ui.info.message(style="background-color:#{appThemeBgColor}")
 		i.large.student.icon
 		|Ensino
-	.ui.vertical.fluid.menu(style="background-color:#{appThemeBgColor}")
-			each cursos
-				a.item(href="#{pathFor 'turmasRoute' cursoId=_id}") #{name}
+	unless Template.subscriptionsReady
+		.ui.info.message(style="background-color:#{appThemeBgColor}")
+			i.large.spinner.loading.icon
+			|Carregando...
+	else
+		.ui.cards
+				each cursos
+					.ui.fluid.card(style="background-color:#{appThemeBgColor}")
+						.content
+							.header #{name}
+							.meta 
+								|Requisito:
+								if cursoRequisito
+									|#{cursoRequisito.name}
+								else
+									|Nenhum
+						.extra.content
+							a.ui.blue.button(href="#{pathFor 'turmasRoute' cursoId=_id}")
+								i.sidebar.icon
+								|Turmas
+							if userInscrito
+								a.ui.teal.button(href="#{pathFor 'alunoRoute' cursoId=_id}")
+									i.student.icon
+									|Sua Turma

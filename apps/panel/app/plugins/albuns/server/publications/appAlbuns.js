@@ -2,8 +2,6 @@ Meteor.publish('appAlbuns', function(search,page,aplicativoId,albumId){
 
 	if (!securityCheck(this.userId, ['manager','albuns'], aplicativoId)) return this.ready();
 
-	console.log(albumId);
-
 	if (!page) page = 1;
 	if (!search) search = {};
 	search.aplicativoId = aplicativoId;

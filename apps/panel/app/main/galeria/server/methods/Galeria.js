@@ -7,7 +7,6 @@ Meteor.methods({
 		PubGaleria.remove({});
 		// Lê Arquivos da conta Cloudinary
 		Cloudinary.api.resources(Meteor.bindEnvironment(function(result){
-			console.log(result);
 			if (!result) {
 				myFuture.return(false);
 			}

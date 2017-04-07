@@ -16,6 +16,12 @@ Meteor.publishComposite('appCursos', function(aplicativoId) {
 					cursoId:curso._id
 				});
 			}
+		},{
+			find:function(curso){
+				return Curso.find({
+					_id:curso.requisito
+				});
+			}
 		}]
 	}
 });

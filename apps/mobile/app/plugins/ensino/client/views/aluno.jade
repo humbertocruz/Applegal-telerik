@@ -1,0 +1,32 @@
+template(name="alunoView")
+	.ui.info.message(style="background-color:#{appThemeBgColor}")
+		i.large.student.icon
+		|Ensino
+	unless Template.subscriptionsReady
+		.ui.info.message
+			i.loading.spinner.icon
+			|Carregando...
+	else
+		.ui.fluid.card(style="background-color:#{appThemeBgColor}")
+			.content
+				.header Provas
+			.extra.content
+				table.ui.table
+					theader
+						tr
+							th Data
+							th Prova
+							th Nota
+					tbody
+						each aluno
+							each notas
+								tr
+									td #{dateBr date}
+									td Veja a Prova
+									td #{nota}
+		.ui.fluid.card(style="background-color:#{appThemeBgColor}")
+			.content
+				.header Trabalhos
+				.meta ok
+			.extra.content
+				

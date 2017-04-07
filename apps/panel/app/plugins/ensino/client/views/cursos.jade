@@ -67,6 +67,7 @@ template(name="cursosView")
 																	tr
 																		th.two.wide &nbsp;
 																		th Nome da Aluno
+																		th Aprovado
 																tbody
 																	each alunos
 																		tr
@@ -78,6 +79,10 @@ template(name="cursosView")
 																				.ui.small.button.showPresencasEvent
 																					|Presenças
 																			td #{user.profile.name}
+																			td
+																				.ui.toggle.checkbox
+																					input(data-aluno="#{_id}",checked=approved,type="checkbox",tabindex="0",class="hidden",name="approved")
+																					label Aprovado ?
 																		tr.transition.hidden.provasRow
 																			td(colspan="2")
 																				table.ui.blue.single.line.compact.table

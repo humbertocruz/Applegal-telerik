@@ -1,14 +1,15 @@
-Meteor.publishComposite('appCursos', function(aplicativoId) {
-	return {
-		find: function() {
-			var cursos = Curso.find({
-				aplicativoId:aplicativoId
-			}, {
-				sort: {
-					order: 1
-				}
-			});
-			return cursos;
+Meteor.publish('appCursos', function(params) {
+	var search = {};
+	if (params.aplicativoId) search.aplicativoId = params.aplicativoId;
+	if (params._id) search._id = params._id;
+	var cursos = Curso.find(search, {
+		sort: {
+			order: 1
+		}
+	});
+	return [cursos];
+});
+/*
 		},
 		children: [{
 			find:function(curso){
@@ -25,3 +26,4 @@ Meteor.publishComposite('appCursos', function(aplicativoId) {
 		}]
 	}
 });
+*/

@@ -1,27 +1,35 @@
 template(name="turmasView")
 	.ui.info.message(style="background-color:#{appThemeBgColor}")
 		i.large.student.icon
-		|Ensino
+		|Ensino - Turmas
 	unless Template.subscriptionsReady
 		.ui.info.message
 			i.loading.spinner.icon
 			|Carregando...
 	else
-	.ui.cards
-			each turmas
-				.ui.fluid.card(style="background-color:#{appThemeBgColor}")
-					.content
-						.header #{name}
-						.meta #{alunos.length} alunos inscritos
-					.extra.content
-						if canAdd
-							if userCanAdd
-								.ui.blue.button#ensinoCadastroEvent
-									i.add.icon
-									|Cadastre-se
-							else
-								.ui.error.message
-									p Você não possui os requisitos para se inscriver neste Curso.
-						else
-							.ui.warning.message
-								p As inscrições ainda não foram abertas.
+		.ui.info.message(style="background-color:#{appThemeBgColor}")
+			i.large.student.icon
+			|#{curso.name}
+		.ui.cards
+				each turmas
+					.ui.fluid.card(style="background-color:#{appThemeBgColor}")
+						.content
+							.header #{name}
+							.meta #{alunos.length} alunos inscritos
+							if alreadySubs
+								.meta Você já está inscrito neste Curso.
+							unless hasRequisitos
+								.meta Você não possui os requisitos necessários para se inscrever neste Curso.
+							unless canAdd
+								.meta As inscrições ainda não estão abertas.
+						.extra.content
+							if hasRequisitos
+								unless alreadySubs
+									.ui.blue.button#ensinoCadastroEvent
+										i.add.icon
+										|Cadastre-se
+							if alreadySubs
+								if compare alreadySubs 'eq' _id
+									a.ui.teal.button(href="#{pathFor 'alunoRoute' turmaId=_id}")
+										i.student.icon
+										|Dados

@@ -10,6 +10,9 @@ Controller('turmasView', {
 			me.subscribe("appTurmas", {
 				cursoId:FlowRouter.getParam('cursoId')
 			});
+			me.subscribe('appCursos',{
+				_id:FlowRouter.getParam('cursoId')
+			});
 			me.subscribe('appAluno');
 		});
 	},
@@ -17,32 +20,25 @@ Controller('turmasView', {
 
 	},
 	helpers: {
-		userCanAdd:function(){
-			var me = this;
-			var turma = Turma.findOne(me._id);
-			if (!turma) return false;
-			var curso = turma.curso();
-			if (!curso) return false;
-			var alunos = Aluno.find().fetch();
-			if (alunos.length == 0) {
-				var jaInscrito = false;
-			} else {
-				var jaInscrito = _.findWhere(alunos,{turmaId:me._id})
-			}
-			console.log(jaInscrito,alunos);
-			if (curso.requisito == "") {
-				var temRequisito = true;
-			} else {
-				var temRequisito = _.findWhere(alunos,{
-					cursoId:curso.requisito,
-					approved:true
-				});
-			}
-
-			if (jaInscrito == false && temRequisito == true) return true;
+		hasRequisitos:function(){
+			var curso = Curso.findOne(this.cursoId);
+			if (curso.requisito=='') return true;
+			var requisito = curso.requisito;
+			var alunos = Aluno.find({
+				cursoId:requisito,
+				approved:true
+			}).count();
+			return (alunos==0?false:true);
+		},
+		alreadySubs:function(){
+			var alunos = Aluno.find({
+				cursoId:this.cursoId
+			});
+			if (alunos.count()>0) return alunos.fetch()[0].turmaId;
 			else return false;
-
-			return false;
+		},
+		curso:function(){
+			return Curso.findOne(FlowRouter.getParam('cursoId'));
 		},
 		turmas: function() {
 			return Turma.find({
@@ -53,35 +49,8 @@ Controller('turmasView', {
 				}
 			}).fetch();
 		},
-		status: function() {
-			var me = this;
-			var userTurma = Aluno.findOne({
-				userId: Meteor.userId(),
-				cursoId: me.cursoId,
-				turmaId: me._id
-			});
-			if (!userTurma) return 'nothing';
-			if (userTurma.approved) return 'done';
-			else return 'doing';
-		},
-		nameCursoRequerido: function() {
-			var curso = Curso.findOne(this.requisito);
-			return curso.name;
-		},
-		hasRequisitos: function() {
-			var me = this;
-			var userTurma = Aluno.find({
-				userId: Meteor.userId(),
-				cursoId: me.cursoId,
-				approved: true
-			}).fetch();
-			var requisito = me.requisito;
-			if (!requisito) return '';
-			var test = 'disabled'
-			_.each(userTurma, function(c, idx) {
-				if (c.cursoId == requisito) test = '';
-			});
-			return test;
+		userInscrito:function(){
+			return true;
 		}
 	},
 	events: {
@@ -89,7 +58,7 @@ Controller('turmasView', {
 			e.preventDefault();
 			var me = this;
 			htmlConfirm('Inscrição no Curso', 'Você tem Certeza?', function() {
-				Meteor.call("eventoCadastro", me._id, function(error, result) {
+				Meteor.call("eventoCadastro", me._id, FlowRouter.getParam('cursoId'), function(error, result) {
 					if (error) {
 						console.log("error", error);
 					}

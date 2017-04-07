@@ -1,7 +1,7 @@
 template(name="ensinoView")
 	.ui.info.message(style="background-color:#{appThemeBgColor}")
 		i.large.student.icon
-		|Ensino
+		|Ensino - Cursos
 	unless Template.subscriptionsReady
 		.ui.info.message(style="background-color:#{appThemeBgColor}")
 			i.large.spinner.loading.icon
@@ -22,7 +22,4 @@ template(name="ensinoView")
 							a.ui.blue.button(href="#{pathFor 'turmasRoute' cursoId=_id}")
 								i.sidebar.icon
 								|Turmas
-							if userInscrito
-								a.ui.teal.button(href="#{pathFor 'alunoRoute' cursoId=_id}")
-									i.student.icon
-									|Sua Turma
+							

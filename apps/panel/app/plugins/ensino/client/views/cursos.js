@@ -125,7 +125,32 @@ Controller('cursosView', {
 		},
 		'click .showAlunosEvent':function(e,t){
 			$(e.currentTarget).parent().parent().next('.alunosRow').transition('toggle');
-			$('.ui.checkbox').checkbox();
+			$('.ui.checkbox').checkbox({
+				onChecked:function(){
+					if ($(this).attr('name')=='approved') {
+						Meteor.call("alunosApproved", {id:$(this).data('aluno'),value:true}, function(error, result){
+							if(error){
+								console.log("error", error);
+							}
+							if(result){
+								Bert.alert('O Aluno foi aprovado!','success');
+							}
+						});
+					}
+				},
+				onUnchecked:function(){
+					if ($(this).attr('name')=='approved') {
+						Meteor.call("alunosApproved", {id:$(this).data('aluno'),value:false}, function(error, result){
+							if(error){
+								console.log("error", error);
+							}
+							if(result){
+								Bert.alert('O Aluno foi reprovado!','success');
+							}
+						});
+					}
+				}
+			});
 		},
 		'click .showProvasEvent':function(e,t){
 			$(e.currentTarget).parent().parent().next('.provasRow').transition('toggle');

@@ -1,0 +1,30 @@
+template(name="documentosView")
+	//+indexHeaderSearch header=header newLink=newLink extraLinks=extraLinks
+	table.ui.blue.top.attached.table
+		thead
+			tr
+				th.two.wide &nbsp;
+				th.one.wide Ativo
+				th.two.wide Data
+				th.three.wide Tipo
+				th Título
+				th Arquivo
+		tbody
+			each documentos.data
+				tr
+					td
+						a.ui.icon.button.editBtn(href="#{pathFor 'documentosUpdateRoute' id=_id}",data-tooltip="Editar Documento",data-inverted)
+							i.edit.blue.icon
+						.ui.icon.button.removeBtn(data-tooltip="Excluir Documento",data-inverted)
+							i.trash.red.icon
+					td
+						+indexActivateButton active=active id=_id
+					td #{dateBr date}
+					td #{tipo.name}
+					td #{title}
+					td #{uploaded.originalname}
+	.ui.secondary.bottom.attached.segment
+		a.ui.blue.button(href="#{pathFor 'documentosInsertRoute' aplicativoId=appInfo._id}")
+			i.plug.icon
+			|Novo Documento
+	//+indexInfoPaginator ready=ready nothingFound='Nenhum documento encontrado.' count=documentos.count page=documentos.count pages=documentos.pages singularForm='Documento' pluralForm='Documentos'

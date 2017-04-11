@@ -1,0 +1,27 @@
+template(name="profileView")
+	.ui.blue.top.attached.segment
+		form.ui.form#profileForm(method="post",novalidate="novalidate")
+			.three.fields
+				.field
+					label Nome
+					input#nomeField(type="text",name="name")
+				.field
+					label Aniversário
+					input#aniversarioField(type="date",name="birth")
+				.field
+					label Telefone
+					input#phoneField(type="text",name="phone",placeholder="(61) 99999-9999")
+			unless isInRole 'admin'
+				.ui.dividing.header Permissões em Aplicativos
+				each userApps
+					if isManagerApp _id
+						.field
+							label #{name}
+							select.ui.dropdown.tipoField(id="app_#{_id}",name="tipo",multiple)
+								option(value="") Escolha as permissões do Usuário
+								option(value="manager") Gerente
+								each appPlugins
+									option(value="#{modulo.path}") #{modulo.title}
+
+	.ui.bottom.attached.secondary.segment
+		button.ui.primary.button(type="submit",form="profileForm") Salvar

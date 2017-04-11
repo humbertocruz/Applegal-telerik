@@ -1,0 +1,65 @@
+template(name="enquetesFormView")
+	if Template.subscriptionsReady
+		+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
+
+		form.ui.form#enquetesForm(method="post")
+			input#uploadField(type="file",style="display:none;")
+			.two.fields
+				.field
+					label Título
+					input#subjectField(type="text",name="title")
+				.field
+					label Cor
+					select.ui.dropdown#publicadaField(name="cor")
+						option(value="") Escolha uma opção
+						each semanticColors
+							option(value="#{className}") #{title}
+			.two.fields
+				.field
+					label Início
+					input#startingField(type="date",name="date_starting")
+				.field
+					label Fim
+					input#endingField(type="date",name="date_ending")
+		.ui.divider
+		table.ui.table
+			thead
+				tr
+					th.three.wide
+						a.ui.blue.small.icon.button#addPerguntaEvent(data-tooltip="Adicionar Pergunta",data-inverted)
+							i.add.icon
+						.ui.large.popup
+							form.ui.form#addPerguntaForm(method="post")
+								.field
+									label Título
+									input#titlePerguntaField(type="text",name="title")
+								.field
+									button.ui.primary.fluid.button(method="submit",form="addPerguntaForm") Adicionar
+					th.four.wide Pergunta
+					th Respostas
+			tbody
+				each perguntas
+					tr
+						td
+							a.ui.blue.small.icon.button.addOpcaoEvent(data-tooltip="Adicionar Opção de Resposta",data-inverted)
+								i.add.icon
+							.ui.large.popup
+								form.ui.form.addOpcaoForm(method="post")
+									.field
+										label Título
+										input#titleOpcaoField(type="text",name="title")
+									.field
+										button.ui.primary.fluid.button(method="submit",form="addPerguntaForm") Adicionar
+							a.ui.red.small.icon.button.removePerguntaEvent(data-tooltip="Remover Pergunta",data-inverted)
+								i.trash.icon
+						td #{title}
+						td &nbsp;
+					each opcoes
+						tr
+							td
+							td
+								a.ui.blue.small.icon.button#addFotoEnqueteEvent
+									i.picture.icon
+								a.ui.red.small.icon.button
+									i.trash.icon
+							td #{title}

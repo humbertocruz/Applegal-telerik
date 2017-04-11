@@ -1,0 +1,17 @@
+template(name="escalasView")
+	unless escalas
+		.ui.loading.message Carregando...
+	else
+		.ui.icon.fluid.input#escalasSearchEvent
+			input#dateField(type="text",name="date",placeholder="Escolha uma Data")
+			i.link.search.icon#searchEvent
+		if compare escalas.count 'eq' 0
+			.ui.red.message 
+				p Nenhua Escala encontrada
+		each escalas.data
+			.ui.fluid.card
+				.content
+					.header #{dateBr date}
+					.meta #{servico.name}
+				.extra.content
+					a.ui.fluid.blue.button#escalasViewEvent(href="#{pathFor 'escalasPDFViewRoute' id=_id}") Ver

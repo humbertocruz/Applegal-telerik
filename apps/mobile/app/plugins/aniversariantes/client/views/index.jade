@@ -1,0 +1,16 @@
+template(name="aniversariantesView")
+	.ui.info.message(style="background-color:#{appThemeBgColor}")
+		i.large.birthday.icon
+		|Aniversariantes de Mês
+	unless aniversariantes
+		.ui.loading.message Carregando...
+	else
+		if compare aniversariantes.count 'eq' 0
+			.ui.red.message(style="background-color:#{appThemeBgColor}")
+				p Nenhum aniversariante este mês
+		each aniversariantes.data
+			.ui.icon.message(class="#{appThemeText}",style="background-color:#{appThemeBgColor}")
+				i.birthday.icon
+				.content
+					.header #{profile.name}
+					p #{dateBr profile.birth}

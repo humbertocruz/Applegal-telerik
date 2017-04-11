@@ -1,0 +1,17 @@
+template(name="escalasServicosView")
+	+indexHeaderSearch header=header newLink=newLink extraLinks=extraLinks
+	table.ui.top.attached.table
+		thead
+			tr
+				th.two.wide &nbsp;
+				th Nome
+		tbody
+			each servicos.data
+				tr
+					td
+						a.ui.icon.button.editBtn(href="#{pathFor 'escalasServicosUpdateRoute' id=_id}")
+							i.edit.blue.icon
+						.ui.icon.button.removeBtn
+							i.trash.red.icon
+					td #{name}
+	+indexInfoPaginator ready=ready nothingFound='Nenhum serviço eadastrado.' count=servicos.count page=servicos.count pages=servicos.pages singularForm='Serviço' pluralForm='Serviços'

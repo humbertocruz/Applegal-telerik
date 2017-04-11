@@ -1,0 +1,11 @@
+template(name="paginator")
+	if compare count 'gt' 1
+		.ui.small.pagination.menu
+			each paginatorHelper count=count
+				a.item.changePage(class="#{active} #{disabled}",href="?page=#{page}") #{page}
+		.ui.small.pagination.menu
+			if compare count 'eq' 0
+				a.item Nenhum
+			else
+				a.item #{count}
+	

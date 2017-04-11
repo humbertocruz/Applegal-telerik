@@ -1,0 +1,4 @@
+Controller('technotronicsMenu', {
+	helpers: {
+	}
+});

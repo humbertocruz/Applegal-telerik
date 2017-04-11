@@ -1,0 +1,44 @@
+template(name="mainMenu")
+	.ui.blue.segment.stackable.grid#adminMenu
+		.one.wide.column
+			.ui.dropdown
+				i.sidebar.icon#adminSubMenuShow(data-variation="wide")
+				//i.dropdown.icon
+				.menu
+					a.ui.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
+						i.android.icon
+						|Apps
+					a.ui.item(class="#{isActiveRoute regex='^options'}",href="#{pathFor 'optionsRoute'}")
+						i.options.icon
+						|Opções
+					a.ui.item(class="#{isActiveRoute regex='^plugins'}",href="#{pathFor 'pluginsRoute'}")
+						i.puzzle.icon
+						|Plugins
+					a.ui.item(class="#{isActiveRoute regex='^admins'}",href="#{pathFor 'adminsRoute'}")
+						i.users.icon
+						|Admins
+		.fourteen.wide.column
+			.ui.breadcrumb
+				a.section(href="#{pathFor 'homeRoute'}")
+					i.android.icon
+					|Aplicativos
+				if appInfo
+					i.right.angle.icon.divider
+					.section #{appInfo.info.name}
+				i.right.angle.icon.divider
+				.section
+					i.icon(class="#{subMenuTitle.icon}")
+					|#{subMenuTitle.title}
+		.one.wide.column
+			i.user.icon#userPopupEvent(data-offset="12",style="float:right;")
+			.ui.popup
+				.ui.vertical.secondary.menu
+					a.ui.item(href="#{pathFor 'profileRoute'}")
+						img.ui.avatar.image#profileSubMenuShow(src="#{gravatar user.emails}")
+						|Profile
+					.link.item#changePwdEvent
+						i.key.icon
+						|Alterar Senha
+					.link.item#logoutEvent
+						i.sign.out.icon
+						|Sair

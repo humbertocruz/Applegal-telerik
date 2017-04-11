@@ -1,0 +1,22 @@
+template(name="fotosView")
+	.ui.info.message(style="background-color:#{appThemeBgColor}")
+		i.large.image.icon
+		|#{album.title}
+	.ui.two.cards
+		each fotos
+			.transition.hidden.fotos.card(style="background-color:#{appThemeBgColor}")
+				.image
+					img(src="#{clUrl public_id cloud_name=cloud_name crop='scale' width=320 effect='improve'}")
+				.extra.content
+					i.like.icon
+					|#{likes} likes
+	.ui.small.basic.modal#imageZoomModal(style="margin-top:-25%;")
+		.header Foto
+		.content
+			img.ui.fluid.image#imageZoom(src="")
+		.actions
+			unless hasLiked
+				.ui.red.icon.ok.button
+					i.like.icon#likeArquivo
+			.ui.close.cancel.icon.button
+				i.close.icon

@@ -1,0 +1,74 @@
+template(name="aplicativosPluginsView")
+	table.ui.blue.single.line.top.attached.table
+		thead
+			tr
+				th.two.wide
+				th Plugin
+				th Título
+		tbody
+			each plugins_ativos
+				tr
+					td.middle.aligned
+						if active
+							.ui.green.mini.icon.button.activeEvent(data-tooltip="Desativar Plugin",data-inverted)
+								i.check.icon
+						else
+							.ui.red.mini.icon.button.activeEvent(data-tooltip="Ativar Plugin",data-inverted)
+								i.close.icon
+						a.ui.mini.icon.button(href="#{pathFor 'aplicativosPluginsUpdateRoute' aplicativoId=appInfo._id id=_id}")
+							i.edit.icon
+						.ui.mini.icon.button.removeEvent
+							i.trash.icon
+					td #{plugin.title}
+					td #{title}
+	.ui.secondary.bottom.attached.segment
+		if isAdmin
+			.ui.blue.button#addAppPlugin Adicionar Plugin
+			.ui.popup
+				.ui.vertical.text.menu
+					each plugins_disponiveis
+						.ui.link.item.addPluginEvent
+							i.icon(class="#{icon}")
+							|#{title}
+	//.ui.bottom.attached.segment
+		.ui.grid
+			if isModAdmin
+				.four.wide.column
+					.ui.header Disponíveis
+					.ui.vertical.fluid.menu
+						each modulos_disponiveis
+							.link.item.addModulo
+								|#{title}
+								i.icon(class="#{icon}")
+			.four.wide.column
+				.ui.header Ativos
+				if modulos_ativos
+					.ui.vertical.fluid.menu
+						each modulos_ativos
+							.link.item.updateModulo
+								i.icon(class="#{icon}")
+								|#{title}
+				else
+					.ui.warning.message
+						p Nenhum Módulo Ativo
+			if isModAdmin
+				.eight.wide.column
+					+modulosConfigPanel
+			else
+				.twelve.wide.column
+					+modulosConfigPanel
+
+//template(name="modulosConfigPanel")
+	.ui.header Configuração
+	form.ui.form#appModuloForm(method="post")
+		.field
+			label Título
+			input#titleField(type="text",name="title")
+		.field
+			label Ordem
+			input#orderField(type="number",name="order")
+		.field
+			label Icone
+			input#iconField(type="text",name="icon")
+		.actions
+			button.ui.blue.button(type="submit",form="appModuloForm") Salvar

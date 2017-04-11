@@ -1,0 +1,26 @@
+template(name="pubWallpapersView")
+	.ui.violet.segment
+		.ui.text.menu(style="margin:0px;")
+			.item
+				.ui.button Galeria
+			.right.menu
+				.item
+					.ui.buttons
+						.ui.icon.button#prevPageEvent
+							i.left.arrow.icon
+						.ui.disabled.button #{galeria.page} de #{galeria.pages}
+						.ui.icon.button#nextPageEvent
+							i.right.arrow.icon
+		unless Template.subscriptionsReady
+			+loadingView
+		else
+			.ui.clearing.divider
+			.ui.six.cards
+				each galeria.data
+					.ui.card
+						.image
+							img(src="#{clUrl public_id crop='scale' width=210 cloud_name=cloud_name}")
+						.content
+							|!{toSemanticList tags}
+						.extra.content
+							i.link.large.mobile.icon.useOnAppEvent

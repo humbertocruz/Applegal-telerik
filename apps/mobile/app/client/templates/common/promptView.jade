@@ -1,0 +1,12 @@
+template(name="promptView")
+	.ui.small.modal.transition.hidden#promptView
+		.header #{promptView.title}
+		.content
+			p !{promptView.message}
+			form.ui.form
+				input#promptInput(type="text",name="promptInput")
+		.actions
+			.ui.negative.button Cancelar
+			.ui.positive.right.labeled.icon.button
+				|Enviar
+				i.right.chevron.icon

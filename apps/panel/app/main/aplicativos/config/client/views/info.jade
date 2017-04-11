@@ -1,0 +1,25 @@
+template(name="aplicativosUpdateInfoView")
+	+configMenu
+	.ui.blue.segment
+		form.ui.form.aplicativosForm#infoForm(method="post")
+			.field
+				label Código de Desenvolvimento
+				.ui.action.fluid.input
+					input#codeField(type="text",name="code",readonly)
+					.ui.blue.button#generateCodeEvent Gerar Código
+			.two.fields
+				.field
+					label Nome
+					input#nameField(type="text",name="name")
+				.field
+					label Email
+					input#emailField(type="text",name="mailFrom")
+			.two.fields
+				.field
+					label Domínio Opcional
+					input#domainField(type="text",name="domain",placeholder="https://site.com.br")
+				.field
+					label Quantidade Paginação
+					input#itemsPerPageField(type="number",name="itemsPerPage")
+			.ui.clearing.divider
+			button.ui.blue.button(type="submit",form="infoForm") Gravar

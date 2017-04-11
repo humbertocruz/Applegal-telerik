@@ -1,0 +1,86 @@
+body {
+	//overflow: auto;
+	transition: all .2s linear;
+	overflow-y: scroll;
+	//padding:10px 10px 10px 10px !important;
+	padding: 10px;
+	min-width: 320px;
+	min-height: 100vh;
+	background-color:#fff;
+}
+/*
+table.table {
+    display: table;
+    width: 100%;
+}
+table.table thead, table.table tbody {
+    float: left;
+    width: 100%;
+}
+table.table tbody {
+    overflow: auto;
+    max-height: 350px;
+}
+table.table tr {
+    width: 100%;
+    display: table;
+    text-align: left;
+}
+table.table th, table.table td {
+    width: 33%;
+}
+*/
+#adminMenu {
+	margin-top: 2px;
+}
+body.loginRoute {
+	background-color:#2185d0;
+	overflow: hidden;
+}
+body.passwordRoute {
+	background-color:#fbbd08;
+	overflow: hidden;
+}
+body.notFoundRoute {
+	background-color:#db2828;
+	overflow: hidden;
+}
+div#emulatorFloatDiv {
+	position: fixed;
+	display: block;
+	//top: 0px;
+	//left: 400px;
+	z-index: 10000;
+}
+#emulatorFrame {
+	position: relative;
+	width:360px;
+	height: 740px;
+	border: 0;
+	//background-color: #787878;
+	background-image: url('/images/pxlvs.svg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding: 74px 16px 84px 16px;
+}
+
+body.loginRoute, body.aplicativosEmulatorRoute {
+	padding:0px !important;
+}
+
+body.aplicativosEmulatorLoginRoute form {
+	padding: 10px;
+	border-radius: 6px;
+}
+
+.picker__select--month, .picker__select--year {
+	display: inline !important;
+	width: auto !important;
+}
+
+.hidePwd{
+  -webkit-text-security: disc;
+}
+.segment.container {
+	margin-bottom: 10px !important;
+}

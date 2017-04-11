@@ -1,0 +1,65 @@
+template(name="leftMenu")
+	+uploadStatus
+	.ui.fluid.accordion
+		if isAdmin
+			.title(class="#{addClassIf 'active' appInfo true 'empty'}")
+				.ui.violet.block.header Admin
+			.content#admin(class="#{addClassIf 'active' appInfo true 'empty'}")
+				.ui.violet.fluid.vertical.menu
+					a.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
+						i.android.icon
+						|Apps
+					if isInRole 'admin'
+						a.item(class="#{isActiveRoute regex='^options'}",href="#{pathFor 'optionsRoute'}")
+							i.options.icon
+							|Opções
+						a.item(class="#{isActiveRoute regex='^pubGaleriaRoute'}",href="#{pathFor 'pubGaleriaRoute'}")
+							i.image.icon
+							|Galeria
+						a.item(class="#{isActiveRoute regex='^plugins'}",href="#{pathFor 'pluginsRoute'}")
+							i.puzzle.icon
+							|Plugins
+						a.item(class="#{isActiveRoute regex='^admins'}",href="#{pathFor 'adminsRoute'}")
+							i.users.icon
+							|Admins
+
+		if isManagerOrAdmin
+			.title(class="#{addClassIf 'active' appInfo true '!empty'}") 
+				.ui.block.blue.header 
+					if appInfo 
+						|#{appInfo.info.name}
+					else
+						|Escolha o App
+			.content#app(class="#{addClassIf 'active' appInfo true '!empty'}")
+				if appInfo
+					.ui.blue.fluid.vertical.menu
+						a.item(class="#{isActiveRoute regex='^aplicativosUpdateInfoRoute'}",href="#{pathFor 'aplicativosUpdateInfoRoute' aplicativoId=appInfo._id}")
+							i.setting.icon
+							.content
+								.header Configuração
+						a.item(class="#{isActiveRoute regex='^aplicativosBiblioteca'}",href="#{pathFor 'aplicativosBibliotecaRoute' aplicativoId=appInfo._id}")
+							i.book.icon
+							.content
+								.header Biblioteca
+						a.item(class="#{isActiveRoute regex='^aplicativosPlugins'}",href="#{pathFor 'aplicativosPluginsRoute' aplicativoId=appInfo._id}")
+							i.puzzle.icon
+							.content
+								.header Plugins
+						a.item(class="#{isActiveRoute regex='^aplicativosUsuarios'}",href="#{pathFor 'aplicativosUsuariosRoute' aplicativoId=appInfo._id}")
+							i.users.icon
+							.content
+								.header Usuários
+					if appPlugins
+						.ui.teal.fluid.vertical.menu
+							unless Template.subscriptionsReady
+								.active.item 
+									i.notched.circle.loading.icon
+									|Carregando...
+							else
+								each appPlugins
+									if userHasPerm plugin.path
+										if active
+											a.item(class="#{isActiveRoute regex=plugin.path}", href="#{pathFor plugin.route aplicativoId=appInfo._id}")
+												i.icon(class="#{icon}")
+												.content
+													.header #{title}

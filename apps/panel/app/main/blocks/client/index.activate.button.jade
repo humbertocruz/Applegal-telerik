@@ -1,0 +1,5 @@
+template(name="indexActivateButton")
+	if compare active 'eq' true
+		.ui.green.small.circular.button#deactivateEvent(data-id="#{id}",data-tooltip="Desativar",data-inverted) Sim
+	else
+		.ui.red.small.circular.button#activateEvent(data-id="#{id}",data-tooltip="Ativar",data-inverted) Não

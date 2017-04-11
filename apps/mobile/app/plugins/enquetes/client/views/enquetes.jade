@@ -1,0 +1,19 @@
+template(name="enquetesView")
+	.ui.info.message(style="background-color:#{appThemeBgColor}")
+		i.large.wizard.icon
+		|Enquetes
+	unless enquetes
+		.ui.loading.message Carregando...
+	else
+		if compare enquetes.count 'eq' 0
+			.ui.red.message(style="background-color:#{appThemeBgColor}")
+				p Nenhua Enquete encontrada
+		each enquetes.data
+			.ui.fluid.card(style="background-color:#{appThemeBgColor}")
+				.content
+					.header #{title}
+				.extra.content
+					unless resposta
+						a.blue.ui.fluid.button#enquetesResponderEvent(href="#{pathFor 'enquetesResponderRoute' id=_id}") Responder
+					else
+						a.ui.grey.fluid.button Você já Respondeu

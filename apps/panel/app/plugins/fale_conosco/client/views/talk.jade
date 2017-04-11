@@ -1,0 +1,17 @@
+template(name="talkView")
+	+indexHeaderSearch header=header extraLinks=extraLinks
+	.ui.comments(style="margin-bottom:40px")
+		each chamado.mensagens
+			.comment
+				a.avatar
+					i.big.user.icon
+				.content
+					a.author #{remetente.profile.name}
+					.metadata
+						.date #{dateTimeBr date}
+					.text
+						| #{mensagem}
+	.ui.action.fluid.input
+		input#respostaField(type="text",name="resposta")
+		button.ui.blue.right.floated.button#sendRespostaBtn(type="button") Enviar
+	

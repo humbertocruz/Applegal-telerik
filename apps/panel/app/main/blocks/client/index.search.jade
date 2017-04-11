@@ -1,0 +1,15 @@
+template(name="indexSearching")
+	each searchFields
+		.ui.item(id="#{name}")
+			if compare type 'eq' 'select'
+				.ui.selection.dropdown
+					input(type="hidden",name="#{name}")
+					i.dropdown.icon
+					.default.text #{title}
+					.menu
+						each options
+							.item(data-value="#{val}") #{desc}
+			else
+				.ui.icon.input.searchFieldItem
+					input(type="#{type}" placeholder="#{title}",value="#{value}")
+					i.close.link.icon

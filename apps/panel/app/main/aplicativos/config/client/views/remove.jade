@@ -1,0 +1,14 @@
+template(name="aplicativosUpdateRemoveView")
+	+configMenu
+	.ui.red.segment
+		form.ui.form#removeForm(method="post")
+			.ui.red.message
+				i.exclamation.icon
+				span Digite o nome do aplicativo - #{appInfo.info.name} - para excluí-lo do sistema.
+				br
+				strong Essa ação não poderá ser desfeita.
+			.red.field
+				label Excluir Aplicativo
+				input#removeAppField(type="text",placeholder="#{appInfo.info.name}")
+			.ui.clearing.divider
+			button.ui.red.button#removeAppEvent(type="submit",form="removeForm") Excluir

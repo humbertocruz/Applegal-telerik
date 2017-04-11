@@ -1,0 +1,20 @@
+template(name="formAlbunsView")
+	.ui.blue.segment
+		form.ui.form#albunsForm(method="post",class="#{addClassIf 'loading' Template.subscriptionsReady true 'ne'}")
+			.two.fields
+				.field
+					label Data
+					input#dateField(type="date",name="date")
+				.field
+					label Título
+					input#titleField(type="text",name="title")
+			.ui.divider
+			button.ui.blue.button(type="submit",form="albunsForm") 
+				i.save.icon
+				|Salvar
+			a.ui.small.button(href="#{pathFor 'albunsRoute' aplicativoId=appInfo._id}")
+				i.left.arrow.icon
+				|Voltar
+	if fotoId
+		.ui.large.header Fotos do Álbum
+		+bibliotecaView

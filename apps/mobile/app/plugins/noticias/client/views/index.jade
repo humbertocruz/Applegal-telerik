@@ -1,0 +1,21 @@
+template(name="noticiasView")
+	.ui.info.message(style="background-color:#{appThemeBgColor}")
+		i.large.newspaper.icon
+		|Notícias
+	if compare noticias.count 'eq' 0
+		.ui.orange.message(style="background-color:#{appThemeBgColor}")
+			i.large.exclamation.icon
+			|Nenhuma notícia encontrada
+	else
+		each noticias.data
+			.ui.segment(style="background-color:#{appThemeBgColor}",class="#{appThemeText} #{cor}")
+				.ui.divided.items
+						a.item(href="#{pathFor 'noticiasDetalheRoute' id=_id}")
+							if fotoId
+								.fluid.image
+									img(src="#{clUrl fotoId.public_id cloud_name=fotoId.cloud_name crop='scale' width=320}")
+							.content
+								.header #{title}
+								.meta #{assunto.name}
+								.description !{resume mensagem 100}
+								.extra #{dateBr date}

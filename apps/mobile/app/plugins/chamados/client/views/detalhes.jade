@@ -1,0 +1,32 @@
+template(name="mensagensView")
+	.ui.info.message(style="background-color:#{appThemeBgColor};")
+		i.large.comments.outline.icon
+		|Fale Conosco
+	.ui.info.message(style="background-color:#{appThemeBgColor};")
+		i.large.calendar.icon
+		|#{dateTimeBr chamado.date}
+	.ui.bottom.fixed.menu(style="background-color:#{appThemeBgColor};margin-bottom:47px !important;")
+		.item
+			.ui.action.input
+				input#respostaField(type="text",name="resposta")
+				button.ui.blue.right.floated.button#sendRespostaBtn(type="button") Enviar
+	.ui.large.list
+		each chamado.mensagens
+			if compare userId 'eq' user._id
+				.item
+					img.ui.avatar.image(style="margin-top:10px;",src="#{gravatar user.emails}")
+					.content
+						.ui.left.pointing.label
+							.header #{user.profile.name}
+							.metadata
+								.date #{dateTimeBr date}
+							.description #{mensagem}
+			else
+				.right.aligned.item
+					img.ui.avatar.right.floated.image(style="margin-top:8px;",src="#{gravatar user.emails}")
+					.right.floated.content
+						.ui.right.pointing.label
+							.header #{user.profile.name}
+							.metadata
+								.date #{dateTimeBr date}
+							.description #{mensagem}

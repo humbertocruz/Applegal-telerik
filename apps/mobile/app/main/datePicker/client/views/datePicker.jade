@@ -1,0 +1,33 @@
+template(name="datePickerSidebar")
+	.ui.bottom.wide.sidebar#datePickerSidebar(style="box-shadow:none !important")
+		form.ui.form#datePickerForm
+			.ui.attached.segment.grid
+				.row
+					.five.wide.column
+						select#datePickerSidebarDay
+							option(value="") Dia
+							|!{makeOptions 1 31 2}
+					.six.wide.column
+						select#datePickerSidebarMonth
+							option(value="") Mês
+							option(value="01") Janeiro
+							option(value="02") Fevereiro
+							option(value="03") Março
+							option(value="04") Abril
+							option(value="05") Maio
+							option(value="06") Junho
+							option(value="07") Julho
+							option(value="08") Agosto
+							option(value="09") Setembro
+							option(value="10") Outubro
+							option(value="11") Novembro
+							option(value="12") Dezembro
+					.five.wide.column
+						select#datePickerSidebarYear
+							option(value="") Ano
+							|!{makeOptions 1950 2017 4}
+				.row
+					.eight.wide.column
+						.ui.small.blue.fluid.button#todayDateEvent Hoje
+					.eight.wide.column
+						.ui.small.blue.fluid.button#setDateEvent Definir 

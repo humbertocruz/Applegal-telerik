@@ -1,0 +1,28 @@
+template(name="adminLayout")
+	unless isApp
+		+appCodeView
+	else
+		if isOffline
+			.ui.active.dimmer
+				.ui.text.loader Offline! Sem conexão com o servidor...
+		if isLoading
+			.ui.active.dimmer
+				.ui.text.loader #{isLoading}
+		unless noApp
+			+sidebar
+			+technotronicsSidebar
+			+confirmView
+			if bgTypeImage
+				.pusher(style="background-image:url(#{clUrl appInfo.wallpaper.public_id}) !important; background-repeat: no-repeat !important;background-size: cover !important;")
+					+adminLayoutPart2
+			else
+				.pusher(style="background-color:#{appInfo.wallpaper} !important;")
+					+adminLayoutPart2
+
+template(name="adminLayoutPart2")
+	div#scrollDiv(style="height:100vh !important; overflow:auto;")
+		+Template.dynamic template=menu
+		br
+		.ui.basic.segment
+			+Template.dynamic template=main
+		+Template.dynamic template=technotronics

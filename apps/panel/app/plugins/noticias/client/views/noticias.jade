@@ -1,0 +1,35 @@
+template(name="noticiasView")
+	table.ui.blue.top.attached.table(style="transition:all .5s linear;")
+		thead
+			tr
+				th.three.wide &nbsp;
+				th.one.wide Ativa
+				th.one.wide Cor
+				th.three.wide Data
+				th.three.wide Assunto
+				th Título
+		unless Template.subscriptionsReady
+			tr
+				th(colspan="6")
+					+loadingView
+		else
+			tbody
+				each noticias.data
+					tr
+						td
+							a.ui.icon.button.editBtn(href="#{pathFor 'noticiasUpdateRoute' aplicativoId=aplicativoId noticiaId=_id}")
+								i.edit.icon
+							.ui.icon.button.removeBtn
+								i.trash.icon
+						td
+							+indexActivateButton active=active id=_id
+						td
+							.ui.circular.label(class="#{cor}")
+						td #{dateBr date}
+						td #{assunto.name}
+						td #{title}
+	.ui.secondary.bottom.attached.segment
+		a.ui.blue.small.button(href="#{pathFor 'noticiasInsertRoute' aplicativoId=appInfo._id}")
+			i.plus.icon
+			|Nova Notícia
+		a.ui.small.right.floated.button(href="#{pathFor 'noticiasAssuntosRoute' aplicativoId=appInfo._id}") Assuntos

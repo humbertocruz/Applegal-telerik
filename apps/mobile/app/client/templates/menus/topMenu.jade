@@ -1,0 +1,18 @@
+template(name="topMenu")
+	.ui.inverted.secondary.top.fixed.menu(style="background-color:#{menusRGBA} !important;")
+		.icon.item.toggleSidebar
+			i.sidebar.icon
+		if backBtnRouteHelper
+			.link.item#backRouteEvent
+				i.left.arrow.icon
+		.header.item #{topTitle}
+		.right.menu
+			if loadedApp
+				a.icon.item#unloadApp
+					i.android.icon
+			if isLogged
+				a.icon.item#logoutBtn
+					i.sign.out.icon
+			else
+				a.icon.item(href="#{pathFor 'loginRoute'}")
+					i.sign.in.icon

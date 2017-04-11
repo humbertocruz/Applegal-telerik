@@ -1,0 +1,35 @@
+template(name="sidebar")
+	.ui.left.sidebar.inverted.vertical.menu(class="#{appInfo.theme.sidebarBackgroundColor}")
+		unless clientAppReady
+			.active.item
+				i.notched.circle.loading.icon
+				|Carregando...
+		else
+			if userId
+				a.item(href="#{pathFor 'homeRoute'}")
+					i.home.icon
+					|Home
+				if isSubscriber
+					each plugins
+						if existsRoute plugin
+							a.item(href="#{pathFor plugin.route}")
+								i.icon(class="#{plugin.icon}")
+								|#{plugin.title}
+				if isGuest
+					a.item(href="#{pathFor 'suspensoRoute'}")
+						i.exclamation.icon
+						|Usuário Convidado
+				if isManager
+					a.item(href="#{pathFor 'managerRoute'}")
+						i.setting.icon
+						|Configurações
+			else
+				a.item(href="#{pathFor 'loginRoute'}")
+					i.power.icon
+					|Login
+				a.item(href="#{pathFor 'registerRoute'}")
+					i.power.icon
+					|Cadastre-se
+				a.item(href="#{pathFor 'passwordRoute'}")
+					i.power.icon
+					|Recuperar Senha

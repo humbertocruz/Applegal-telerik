@@ -1,0 +1,21 @@
+template(name="escalasView")
+	+indexHeaderSearch header=header searchFields=searchFields newLink=newLink extraLinks=extraLinks
+	table.ui.top.attached.table
+		thead
+			tr
+				th.two.wide &nbsp;
+				th.two.wide Data
+				th.three.wide Serviço
+				th Arquivo
+		tbody
+			each escalas.data
+				tr
+					td
+						a.ui.icon.button.editBtn(href="#{pathFor 'escalasUpdateRoute' id=_id}")
+							i.edit.blue.icon
+						.ui.icon.button.removeBtn
+							i.trash.red.icon
+					td #{dateBr date}
+					td #{servico.name}
+					td #{uploaded.originalname}
+	+indexInfoPaginator ready=ready nothingFound='Nenhuma Escala Cadastrada' count=escalas.count page=escalas.count pages=escalas.pages singularForm='Escala' pluralForm='Escalas'

@@ -1,0 +1,7 @@
+template(name="suspensoView")
+	if guest
+		.ui.blue.message
+			|Se você acabou de se cadastrar não se preocupe, dentro de alguns minutos seu acesso será liberado.
+	else
+		.ui.red.message
+				|Procure a administração para re-estabecer seu acesso.

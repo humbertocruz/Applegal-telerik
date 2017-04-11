@@ -1,0 +1,23 @@
+template(name="configMenu")
+	.ui.tiny.stackable.secondary.menu
+		a.blue.link.item(class="#{isActiveRoute regex='^aplicativosUpdateInfoRoute'}",href="#{pathFor 'aplicativosUpdateInfoRoute' aplicativoId=appInfo._id}")
+			i.info.icon
+			|Informações
+		a.blue.link.item(class="#{isActiveRoute regex='^aplicativosUpdateCloudinaryRoute'}",href="#{pathFor 'aplicativosUpdateCloudinaryRoute' aplicativoId=appInfo._id}")
+			i.cloud.icon
+			|Cloudinary
+		a.blue.link.item(class="#{isActiveRoute regex='^aplicativosUpdateThemeRoute'}",href="#{pathFor 'aplicativosUpdateThemeRoute' aplicativoId=appInfo._id}")
+			i.theme.icon
+			|Aparência
+		a.blue.link.item(class="#{isActiveRoute regex='^aplicativosUpdateHomeRoute'}",href="#{pathFor 'aplicativosUpdateHomeRoute' aplicativoId=appInfo._id}")
+			i.home.icon
+			|Home Page
+		a.blue.link.item(class="#{isActiveRoute regex='^aplicativosUpdateLoginRoute'}",href="#{pathFor 'aplicativosUpdateLoginRoute' aplicativoId=appInfo._id}")
+			i.user.icon
+			|Login
+		a.blue.link.item(class="#{isActiveRoute regex='^aplicativosUpdateStoreRoute'}",href="#{pathFor 'aplicativosUpdateStoreRoute' aplicativoId=appInfo._id}")
+			i.android.icon
+			|Store
+		a.red.right.link.item(class="#{isActiveRoute regex='^aplicativosUpdateRemoveRoute'}",href="#{pathFor 'aplicativosUpdateRemoveRoute' aplicativoId=appInfo._id}")
+			i.trash.icon
+			|Excluir

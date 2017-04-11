@@ -1,0 +1,21 @@
+template(name="insertMensagemView")
+	.ui.dividing.header Enviar Mensagem
+	form.ui.form#mensagensForm(method="post")
+		.three.fields
+			.field
+				label Assunto
+				input#subjectField(type="text",name="assunto")
+			.field
+				label Rementente
+				input#fromField(type="text",readonly,value="#{user.profile.name}")
+			.field
+				label Destinatários
+				select.ui.search.dropdown#toField(name="destinatarios")
+					option(value="") Escolha o Destinatário
+					each destinatarios
+						option(value="#{_id}") #{profile.name}
+		.field
+			label Mensagem
+			textarea#bodyField(name="mensagem")
+		.actions
+			button.ui.blue.button(type="submit") Enviar

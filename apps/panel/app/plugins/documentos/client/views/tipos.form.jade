@@ -1,0 +1,6 @@
+template(name="documentosTiposFormView")
+	+indexHeaderSearch header=header saveLink=saveLink extraLinks=extraLinks
+	form.ui.form#tiposForm(method="post")
+		.field
+			label Nome
+			input#nameField(type="text",name="name")

@@ -1,0 +1,16 @@
+template(name="chamadosView")
+	.ui.info.message(style="background-color:#{appThemeBgColor}")
+		i.large.comments.outline.icon
+		|Fale Conosco
+	unless chamados
+		.ui.loading.message Carregando...
+	else
+		if compare chamados.count 'eq' 0
+			.ui.red.message(style="background-color:#{appThemeBgColor}")
+				p Nenhum chamado encontrado
+		each chamados.data
+			.ui.info.message(style="background-color:#{appThemeBgColor};")
+				i.large.calendar.icon
+				a(href="#{pathFor 'mensagensRoute' id=_id}") #{dateTimeBr date}
+				
+		i.plus.large.inverted.icon#abrirChamadoBtn(style="background-color:#{iconRGBA} !important;",class="#{appInfo.home.iconColor} #{appInfo.home.iconType}")

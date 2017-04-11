@@ -1,0 +1,76 @@
+template(name="aplicativosUpdateThemeView")
+	+configMenu
+	.ui.blue.segment.grid
+		.three.wide.column
+			img.ui.rounded.image(width="136",src="#{clUrl appInfo.logotype.public_id cloud_name=appInfo.logotype.cloud_name width=250 crop='scale'}")
+		.three.wide.column
+			if bgTypeImage
+				img.ui.rounded.image(width="136",height="242",src="#{clUrl appInfo.wallpaper.public_id cloud_name=appInfo.wallpaper.cloud_name width=250 crop='scale'}")
+			else
+				.ui.inverted.segment(style="width:136px; height:242px; background-color:#{appInfo.wallpaper}")
+		.ten.wide.column
+			form.ui.form.aplicativosForm#designForm(method="post")
+				.two.fields
+					.field
+						label Cor de Fundo do Cabeçalho
+						select.ui.select.dropdown#headerField(name="headerBackgroundColor")
+							option(value="") Escolha uma Cor
+							each semanticColors
+								option(value="#{className}") #{title}
+					.field
+						label Transparência dos Menus
+						select.ui.select.dropdown#headersOpacityField(name="headersOpacity")
+							option(value="") Escolha uma opção
+							option(value="0") 100%
+							option(value=".1") 90%
+							option(value=".2") 80%
+							option(value=".3") 70%
+							option(value=".4") 60%
+							option(value=".5") 50%
+							option(value=".6") 40%
+							option(value=".7") 30%
+							option(value=".8") 20%
+							option(value=".9") 10%
+							option(value="1") 0%
+				.two.fields
+					.field
+						label Cor de Fundo do Menu Lateral
+						select.ui.select.dropdown#sidebarField(name="sidebarBackgroundColor")
+							option(value="") Escolha uma Cor
+							each semanticColors
+								option(value="#{className}") #{title}
+					.field
+						label Tema
+						select.ui.select.dropdown#themeField(name="theme")
+							option(value="") Escolha o Tema
+							option(value="lighten") Claro
+							option(value="darken") Escuro
+				.ui.info.message
+					p 
+						|Você poder ver um "Preview" do seu App
+						a(href="https://m.applegal.com.br",target="_blank") aqui
+						|.
+						br
+						|O código de desenvolvimento pode ser gerado na aba Informações.
+		.sixteen.wide.column
+			.ui.clearing.divider
+			button.ui.blue.button(type="submit",form="designForm") Gravar
+
+	.ui.header Escolha um Logotipo e Imagem de Fundo
+
+	.ui.top.attached.tabular.menu#bgChanger
+		a.item.active(data-tab="cores") Cores
+		a.item(data-tab='public') Galeria
+		a.item(data-tab='private') Suas Imagens
+	.ui.bottom.attached.tab.segment.active(data-tab="cores")
+		.ui.three.column.grid
+			each semanticColors
+				.column
+					if compare className 'eq' 'white'
+						.ui.segment.bgColorChangeEvent(style="cursor:pointer;") #{title}
+					else
+						.ui.inverted.segment.bgColorChangeEvent(style="cursor:pointer;",class="#{className}") #{title}
+	.ui.bottom.attached.tab.segment(data-tab='public')
+		+pubWallpapersView
+	.ui.bottom.attached.tab.segment(data-tab='private')
+		+bibliotecaView

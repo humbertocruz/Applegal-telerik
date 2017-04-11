@@ -1,0 +1,36 @@
+template(name="formNoticiasView")
+	.ui.blue.top.attached.segment(class="#{addClassIf 'loading' Template.subscriptionsReady true 'ne'}")
+		form.ui.stackable.form#noticiasForm(method="post")
+			.two.fields
+				.field
+					label Título
+					input#titleField(type="text",name="title")
+			.two.fields
+				.field
+					label Data
+					input#dateField(type="date",name="date")
+				.field
+					label Assunto
+					select.ui.search.dropdown#assuntoField(name="assunto_id")
+						option(value="") Escolha um Assunto
+						each assuntos
+							option(value="#{_id}") #{name}
+				.field
+					label Cor
+					select.ui.search.dropdown#corField(name="cor")
+						option(value="") Escolha uma Cor
+						each semanticColors
+							option(value="#{className}") #{title}
+			.fields
+				.three.wide.field
+					label Foto da Notícia
+					img.ui.fluid.image#fotoNoticia
+				.thirteen.wide.field
+					label Mensagem
+					textarea#bodyField(name="mensagem",rows="5")
+	.ui.bottom.attached.secondary.segment
+		button.ui.blue.small.button(type="submit",form="noticiasForm") Salvar
+		a.ui.small.button(href="#{pathFor 'noticiasRoute' aplicativoId=appInfo._id}") Voltar
+		a.ui.small.right.floated.button(href="#{pathFor 'noticiasAssuntosRoute' aplicativoId=appInfo._id}") Assuntos
+	.ui.large.header Foto da Notícia
+	+bibliotecaView

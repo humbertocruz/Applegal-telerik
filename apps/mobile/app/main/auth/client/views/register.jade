@@ -1,0 +1,62 @@
+template(name="registerView")
+	img.ui.small.centered.image(src="#{clUrl appInfo.logotype.public_id cloud_name=appInfo.logotype.cloud_name crop='scale' width=150}")
+	.ui.hidden.divider
+	form.ui.form#registerForm(style="background-color:#{appThemeBgColor}", class="#{appThemeText}",method="post",novalidate="novalidate")
+		.field
+			label Seu Email
+			input#emailField(type="email",name="email")
+		.ui.divider(class="#{appThemeText}")
+		button.ui.blue.fluid.button(type="submit",form="registerForm") Continuar
+
+template(name="registerAuthView")
+	img.ui.small.centered.image(src="#{clUrl appInfo.logotype.public_id cloud_name=appInfo.logotype.cloud_name crop='scale' width=150}")
+	.ui.hidden.divider
+	.ui.info.message(style="background-color:#{appThemeBgColor}")
+		i.large.exclamation.icon
+		|Você já está cadastrado, digite a sua senha para continuar.
+	form.ui.form#registerAuthForm(style="background-color:#{appThemeBgColor}", class="#{appThemeText}",method="post",novalidate="novalidate")
+		.field
+			label Senha
+			input#passwordField(type="password",name="email")
+		.ui.divider(class="#{appThemeText}")
+		button.ui.blue.fluid.button(type="submit",form="registerAuthForm") Continuar
+
+template(name="registerOneView")
+	img.ui.small.centered.image(src="#{clUrl appInfo.logotype.public_id cloud_name=appInfo.logotype.cloud_name crop='scale' width=150}")
+	.ui.hidden.divider
+	form.ui.form#registerOneForm(style="background-color:#{appThemeBgColor}", class="#{appThemeText}",method="post",novalidate="novalidate")
+		.field
+			label Seu CPF
+			input#usernameField(type="tel",name="username")
+		.field
+			label Sua Senha
+			.ui.action.input
+				input#password1Field.hidePwd(type="tel",name="password1",autocomplete="off")
+				.ui.icon.button.showPasswordBtn
+					i.eye.icon
+		.field
+			label Repita a Senha
+			.ui.action.input
+				input#password2Field.hidePwd(type="tel",name="password2",autocomplete="off")
+				.ui.icon.button.showPasswordBtn
+					i.eye.icon
+		.ui.divider(class="#{appThemeText}")
+		button.ui.blue.fluid.button(type="submit",form="registerOneForm") Continuar
+
+template(name="registerTwoView")
+	img.ui.small.centered.image(src="#{clUrl appInfo.logotype.public_id cloud_name=appInfo.logotype.cloud_name crop='scale' width=150}")
+	.ui.hidden.divider
+	form.ui.stackable.form#registerTwoForm(style="background-color:#{appThemeBgColor}", class="#{appThemeText}",method="post",novalidate="novalidate")
+		.field
+			label Nome
+			input(type="text",name="name",autocomplete="off")
+		.field
+			label Aniversário
+			input#aniversarioField(type="date",name="birthday",autocomplete="off")
+		.field
+			label Telefone
+			input#phoneField(type="tel",name="phone",autocomplete="off")
+	br
+	button.ui.blue.fluid.button(type="submit",form="registerTwoForm") Cadastre-se
+	br
+	a.ui.fluid.button(href="#{pathFor 'loginRoute'}") Cancelar

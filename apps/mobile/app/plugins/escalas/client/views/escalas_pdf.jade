@@ -1,0 +1,17 @@
+template(name="escalasPDFView")
+	.ui.left.floated.header 
+		|Escala - #{dateBr escala.date}
+		br
+		small #{escala.servico.name}
+	a.ui.right.floated.mini.icon.button(href="#{pathFor 'escalasRoute'}")
+		i.close.icon
+	a.ui.right.floated.mini.blue.button #{currentPage}
+	div#canvasWrapper
+		canvas#pdfcanvas
+	.ui.grid
+		.two.wide.column
+			i.left.chevron.link.icon#escalasPrevPage(class="#{addClassIf 'disabled' prevPageDisabled true 'eq'}")
+		.twelve.wide.column
+			.ui.range#zoomRange
+		.two.wide.column
+			i.right.chevron.link.icon#escalasNextPage(class="#{addClassIf 'disabled' nextPageDisabled true 'eq'}")

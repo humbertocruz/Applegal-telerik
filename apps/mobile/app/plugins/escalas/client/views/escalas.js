@@ -7,12 +7,6 @@ Controller('escalasView',{
 		});
 	},
 	rendered:function(){
-		var $input = $('#dateField').pickadate({
-			selectMonths: 12,
-			selectYears: 60
-		});
-		var picker = $input.pickadate('picker');
-		picker.set('min',moment().toDate());
 	},
 	helpers:{
 		escalas:function(){

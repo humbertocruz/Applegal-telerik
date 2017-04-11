@@ -1,0 +1,26 @@
+template(name="alunoView")
+	.ui.info.message(style="background-color:#{appThemeBgColor}")
+		i.large.student.icon
+		|Ensino - Aluno
+	unless Template.subscriptionsReady
+		.ui.info.message
+			i.large.loading.spinner.icon
+			|Carregando...
+	else
+		.ui.styled.accordion(style="background-color:#{appThemeBgColor}")
+			.active.title Provas
+			.active.content
+				each turma
+					each provas
+						.ui.mini.statistic(class="#{notasColor suaNota}")
+							.label #{dateBr date}
+							.value #{suaNota}
+				.ui.small.statistic(class="#{notasColor suaMedia}")
+					.label Média
+					.value #{suaMedia}
+			.title Trabalhos
+			.content
+				|Lista de Trabalhos
+			.title Presenças
+			.content 
+				|Lista de Presenças e Faltas

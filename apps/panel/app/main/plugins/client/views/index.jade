@@ -1,15 +1,17 @@
 template(name="pluginsView")
-	unless Template.subscriptionsReady
-		+loadingView
-	else
-		table.ui.blue.top.attached.table
-			thead
+	table.ui.blue.top.attached.table
+		thead
+			tr
+				th.three.wide &nbsp;
+				th.one.wide Ícone
+				th Título
+				th Caminho
+		tbody
+			unless Template.subscriptionsReady
 				tr
-					th.three.wide &nbsp;
-					th.one.wide Ícone
-					th Título
-					th Caminho
-			tbody
+					td(colspan="4")
+						+loadingView
+			else
 				each plugins.data
 					tr
 						td
@@ -21,5 +23,5 @@ template(name="pluginsView")
 							i.large.icon(class="#{icon}")
 						td #{title}
 						td #{route}
-		.ui.bottom.attached.segment
-			a.ui.blue.button(href="#{pathFor 'pluginsInsertRoute'}") Novo Plugin
+	.ui.bottom.attached.segment
+		a.ui.blue.button(href="#{pathFor 'pluginsInsertRoute'}") Novo Plugin

@@ -18,6 +18,10 @@ Controller('ensinoTurmasFormView', {
 			if (turma.provas) provasVar.set(turma.provas);
 			if (turma.trabalhos) trabalhosVar.set(turma.trabalhos);
 		}
+		$('.datepicker-here').datepicker({
+			language:'pt-BR'
+		});
+
 	},
 	helpers: {
 		turma:function(){
@@ -36,16 +40,23 @@ Controller('ensinoTurmasFormView', {
 		}
 	},
 	events: {
+		'click #dateFieldProva':function(e,t){
+			console.log('datepicker');
+			$(e.currentTarget).datepicker();
+		},
 		'submit #addProvaForm':function(e,t){
 			e.preventDefault();
 			var fields = $(e.currentTarget).form('get values');
-			provasVar.get().push({date:moment(fields.new_prova_date).toDate()});
+			provasVar.get().push({
+				date:moment(fields.date,'DD/MM/YYYY').toDate(),
+				urlGForm:fields.urlGForm
+			});
 			Meteor.call("turmasForm", {_id:FlowRouter.getParam('turmaId'),provas:provasVar.get()}, FlowRouter.getParam('aplicativoId'), function(error, result){
 				if(error){
 					console.log("error", error);
 				}
 				if(result){
-					 Bert.alert('Data da Prova adicionada com sucesso','success');
+					 Bert.alert('Prova adicionada com sucesso','success');
 				}
 			});
 		},
@@ -86,14 +97,14 @@ Controller('ensinoTurmasFormView', {
 		'click .removeTrabalhoDate':function(e,t){
 			var me = this;
 			var found = false;
-			_.each(trabalhosVar.get(),function(prova,idx){
+			_.each(trabalhosVar.get(),function(trabalho,idx){
 				var clicked = moment(me.date).format('YYYY-MM-DD');
-				var loop = moment(prova.date).format('YYYY-MM-DD');
+				var loop = moment(trabalho.date).format('YYYY-MM-DD');
 				if (clicked == loop) found = idx;
 			});
 			var trabalhos = trabalhosVar.get();
 			trabalhos.splice(found,1);
-			trabalhosVar.set(provas);
+			trabalhosVar.set(trabalhos);
 			Meteor.call("turmasForm", {_id:FlowRouter.getParam('turmaId'),trabalhos:trabalhosVar.get()}, FlowRouter.getParam('aplicativoId'), function(error, result){
 				if(error){
 					console.log("error", error);

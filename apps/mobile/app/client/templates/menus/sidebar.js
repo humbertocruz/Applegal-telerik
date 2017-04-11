@@ -1,8 +1,11 @@
 Controller('sidebar', {
 	rendered:function(){
-		
+
 	},
 	helpers: {
+		clientAppReady:function(){
+			return clientApp.ready();
+		},
 		userId: function() {
 			return Meteor.userId();
 		},
@@ -17,6 +20,12 @@ Controller('sidebar', {
 		},
 		plugins: function() {
 			return AplicativoPlugin.find().fetch();
+		},
+		existsRoute:function(route){
+			var routes = FlowRouter._routes;
+			var exist = _.findWhere(routes,{name:route.route});
+			if (!exist) console.log(route);
+			return exist;
 		}
 	},
 	events: {

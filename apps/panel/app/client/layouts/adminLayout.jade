@@ -1,10 +1,10 @@
 template(name="adminLayout")
 	+confirmView
 	+promptView
-	+Template.dynamic template=menu
-	//.ui.fluid.container(style="min-width:933px;")
-	.ui.stackable.grid
-		.three.wide.column
+	.ui.container.stackable.grid
+		.sixteen.wide.column
+			+Template.dynamic template=menu
+		.three.wide.column(style="padding-top:10px !important;")
 			+Template.dynamic template=left
 		.thirteen.wide.column
 			+Template.dynamic template=main

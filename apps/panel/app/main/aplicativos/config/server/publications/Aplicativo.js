@@ -39,10 +39,17 @@ Meteor.publish("oneAplicativo", function(aplicativoId){
 	if (!securityCheck(this.userId,null,null)) return this.ready();
 
 	var aplicativo = Aplicativo.find(aplicativoId);
-	var plugins = AplicativoPlugin.find({
+	var appPlugins = AplicativoPlugin.find({
 		aplicativoId:aplicativo.fetch()[0]._id
 	});
-	return [aplicativo,plugins];
+	if (appPlugins.count() > 0){
+		var plugins = Plugin.find({
+			_id:{
+				$in:_.pluck(appPlugins.fetch(),'pluginId')
+			}
+		});
+	} else plugins = this.ready();
+	return [aplicativo,appPlugins,plugins];
 });
 
 Meteor.publish("AppCloudinary", function(aplicativoId){

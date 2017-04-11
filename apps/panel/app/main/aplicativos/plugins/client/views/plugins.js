@@ -1,11 +1,17 @@
 Controller('aplicativosPluginsView',{
 	created:function(){
-		Meteor.call("setServerAppId", FlowRouter.getParam('aplicativoId'));
+		var me = this;
 		updatePluginVar = new ReactiveVar(false);
 		subMenuTitleVar.set({
 			title:'Plugins',
 			icon:'puzzle'
 		});
+		me.autorun(function(){
+			me.subscribe("allPlugins", {
+				aplicativoId:FlowRouter.getParam('aplicativoId')
+			});
+		});
+
 	},
 	rendered:function(){
 		$('#addAppPlugin').popup({

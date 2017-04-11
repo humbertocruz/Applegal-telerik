@@ -5,20 +5,25 @@ App.info({
 	author: 'Humberto Cruz',
 	email: 'humberto.cruz@gmail.com',
 	website: 'https://applegal.com.br',
-	version: '0.3.1'
+	version: '0.3.2'
 });
 App.icons({
-	'android_mdpi': '../../../src-gremio/Android/res/drawable-mdpi/icon.png',
-	'android_hdpi': '../../../src-gremio/Android/res/drawable-hdpi/icon.png',
-	'android_xhdpi': '../../../src-gremio/Android/res/drawable-xhdpi/icon.png',
-	'android_xxhdpi': '../../../src-gremio/Android/res/drawable-xxhdpi/icon.png',
-	'android_xxxhdpi': '../../../src-gremio/Android/res/drawable-xxxhdpi/icon.png'
+	'android_mdpi': '../../srcs/src-gremio/Android/res/drawable-mdpi/icon.png',
+	'android_hdpi': '../../srcs/src-gremio/Android/res/drawable-hdpi/icon.png',
+	'android_xhdpi': '../../srcs/src-gremio/Android/res/drawable-xhdpi/icon.png',
+	'android_xxhdpi': '../../srcs/src-gremio/Android/res/drawable-xxhdpi/icon.png',
+	'android_xxxhdpi': '../../srcs/src-gremio/Android/res/drawable-xxxhdpi/icon.png',
+	'iphone_2x': '../../srcs/src-gremio/iOS/Resources/icons/icon-60@2x.png',
+	'iphone_3x': '../../srcs/src-gremio/iOS/Resources/icons/icon-60@3x.png',
 });
 App.launchScreens({
-	'android_mdpi_portrait': '../../../src-gremio/Android/res/drawable-mdpi/screen.png',
-	'android_hdpi_portrait': '../../../src-gremio/Android/res/drawable-hdpi/screen.png',
-	'android_xhdpi_portrait': '../../../src-gremio/Android/res/drawable-xhdpi/screen.png',
-	'android_xxhdpi_portrait': '../../../src-gremio/Android/res/drawable-xxhdpi/screen.png'
+	'android_mdpi_portrait': '../../srcs/src-gremio/Android/res/drawable-mdpi/screen.png',
+	'android_hdpi_portrait': '../../srcs/src-gremio/Android/res/drawable-hdpi/screen.png',
+	'android_xhdpi_portrait': '../../srcs/src-gremio/Android/res/drawable-xhdpi/screen.png',
+	'android_xxhdpi_portrait': '../../srcs/src-gremio/Android/res/drawable-xxhdpi/screen.png',
+	'iphone_2x': '../../srcs/src-gremio/iOS/Resources/splash/Default@2x~iphone.png',
+	'iphone5': '../../srcs/src-gremio/iOS/Resources/splash/Default-568h@2x~iphone_640x1136.png',
+	'iphone6': '../../srcs/src-gremio/iOS/Resources/splash/Default-750@2x~iphone6-landscape_1334x750.png',
 });
 App.setPreference('android-minSdkVersion', '19');
 App.setPreference('BackgroundColor', '0xffffffff');
@@ -27,10 +32,6 @@ App.setPreference('Orientation', 'portrait');
 App.setPreference('EnableWebGL', true);
 App.setPreference('StatusBarOverlaysWebView', 'true');
 App.setPreference('StatusBarBackgroundColor', 'transparent');
-
-App.configurePlugin('phonegap-plugin-push', {
-	SENDER_ID: 1000788241076
-});
 
 // Acesso as imagens GridFS
 App.accessRule('*', true)

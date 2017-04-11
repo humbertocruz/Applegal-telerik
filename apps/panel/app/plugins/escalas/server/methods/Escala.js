@@ -1,4 +1,3 @@
-var fs = require('fs');
 Meteor.methods({
 	escalasForm:function(fields){
 		fields.appGroup = DomainAppVar.appGroup;
@@ -16,7 +15,6 @@ Meteor.methods({
 		try {
 			fs.unlinkSync(escala.uploaded.path);
 		} catch(e){
-			console.log(e);
 		}
 		return Escala.remove({
 			_id:id,

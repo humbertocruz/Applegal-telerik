@@ -4,6 +4,6 @@ Aluno.helpers({
 		return Meteor.users.findOne(this.userId);
 	},
 	turma: function() {
-		return Curso.findOne(this.turmaId);
+		return Turma.findOne(this.turmaId);
 	}
 });

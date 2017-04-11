@@ -1,28 +1,32 @@
 template(name="pluginsFormView")
-	form.ui.form#pluginsForm(method="post")
-		.two.fields
+	.ui.violet.segment
+		form.ui.form#pluginsForm(method="post",class="#{addClassIf 'loading' Template.subscriptionsReady true 'ne'}")
+			.two.fields
+				.field
+					label Titulo
+					input#titleField(type="text",name="title")
+				.field
+					label Path
+					input#pathField(type="text",name="path")
+			.two.fields
+				.field
+					label Route
+					input#routeField(type="text",name="route")
+				.field
+					label Ícone
+					input#iconField(type="text",name="icon")
+			.two.fields
+				.field
+					.ui.toggle.checkbox
+						input(checked=admin,type="checkbox",tabindex="0",class="hidden",name="admin",value="true")
+						label No Admin ?
+				.field
+					.ui.toggle.checkbox
+						input(checked=mobile,type="checkbox",tabindex="0",class="hidden",name="mobile",value="true")
+						label No Mobile ?
 			.field
-				label Titulo
-				input#titleField(type="text",name="title")
-			.field
-				label Path
-				input#pathField(type="text",name="path")
-		.two.fields
-			.field
-				label No Admin
-				input#adminField(type="text",name="admin")
-			.field
-				label No Mobile
-				input#mobileField(type="text",name="mobile")
-		.two.fields
-			.field
-				label Route
-				input#routeField(type="text",name="route")
-			.field
-				label Ícone
-				input#iconField(type="text",name="icon")
-		.field
-				label Descrição
-				textarea#descriptionField(name="description")
-		.ui.divider
-		button.ui.blue.button(type="submit",form="pluginsForm") Salvar
+					label Descrição
+					textarea#descriptionField(name="description")
+			.ui.divider
+			button.ui.blue.button(type="submit",form="pluginsForm") Salvar
+			a.ui.button(href="#{pathFor 'pluginsRoute' aplicativoId=appInfo._id}") Cancelar

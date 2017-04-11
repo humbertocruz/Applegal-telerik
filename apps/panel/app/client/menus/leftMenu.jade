@@ -5,7 +5,7 @@ template(name="leftMenu")
 			.title(class="#{addClassIf 'active' appInfo true 'empty'}")
 				.ui.violet.block.header Admin
 			.content#admin(class="#{addClassIf 'active' appInfo true 'empty'}")
-				.ui.violet.pointing.fluid.vertical.menu
+				.ui.violet.fluid.vertical.menu
 					a.item(class="#{isActiveRoute regex='^aplicativos'}",href="#{pathFor 'aplicativosRoute'}")
 						i.android.icon
 						|Apps
@@ -32,7 +32,7 @@ template(name="leftMenu")
 						|Escolha o App
 			.content#app(class="#{addClassIf 'active' appInfo true '!empty'}")
 				if appInfo
-					.ui.blue.fluid.pointing.vertical.menu
+					.ui.blue.fluid.vertical.menu
 						a.item(class="#{isActiveRoute regex='^aplicativosUpdateInfoRoute'}",href="#{pathFor 'aplicativosUpdateInfoRoute' aplicativoId=appInfo._id}")
 							i.setting.icon
 							.content
@@ -50,11 +50,16 @@ template(name="leftMenu")
 							.content
 								.header Usuários
 					if appPlugins
-						.ui.teal.fluid.pointing.vertical.menu
-							each appPlugins
-								if userHasPerm plugin.path
-									if active
-										a.item(class="#{isActiveRoute regex=plugin.path}", href="#{pathFor plugin.route aplicativoId=appInfo._id}")
-											i.icon(class="#{icon}")
-											.content
-												.header #{title}
+						.ui.teal.fluid.vertical.menu
+							unless Template.subscriptionsReady
+								.active.item 
+									i.notched.circle.loading.icon
+									|Carregando...
+							else
+								each appPlugins
+									if userHasPerm plugin.path
+										if active
+											a.item(class="#{isActiveRoute regex=plugin.path}", href="#{pathFor plugin.route aplicativoId=appInfo._id}")
+												i.icon(class="#{icon}")
+												.content
+													.header #{title}

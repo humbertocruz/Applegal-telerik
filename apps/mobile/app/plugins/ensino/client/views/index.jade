@@ -1,7 +1,0 @@
-template(name="ensinoView")
-	.ui.info.message(style="background-color:#{appThemeBgColor}")
-		i.large.student.icon
-		|Ensino
-	.ui.vertical.fluid.menu(style="background-color:#{appThemeBgColor}")
-			each cursos
-				a.item(href="#{pathFor 'turmasRoute' cursoId=_id}") #{name}

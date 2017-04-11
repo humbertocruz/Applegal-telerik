@@ -28,7 +28,6 @@ Controller('cursosView', {
 						nota = nnota;
 					}
 				});
-				console.log(nota);
 				if (!nota) {
 					console.log();
 					if (moment(prova.date).diff(moment(),'days') >= 0) nota = 'Por Fazer';

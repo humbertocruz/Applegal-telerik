@@ -1,1 +1,1 @@
-../../../src-nacoes/mobile-config.js
+../../srcs/src-nacoes/mobile-config-nacoes.js

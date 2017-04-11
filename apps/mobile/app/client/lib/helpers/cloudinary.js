@@ -11,5 +11,7 @@ Template.registerHelper("clUrl", function(public_id, options){
 	var cl = cloudinary.Cloudinary.new({cloud_name:hash.cloud_name});
 
 	// Retorna a url publica ou privativa
-	return cl.url(public_id,hash);
+	var url = cl.url(public_id,hash).replace('http:','https:');
+	console.log(url);
+	return url;
 });

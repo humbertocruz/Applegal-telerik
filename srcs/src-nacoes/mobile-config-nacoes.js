@@ -5,32 +5,34 @@ App.info({
 	author: 'Humberto Cruz',
 	email: 'humberto.cruz@gmail.com',
 	website: 'https://applegal.com.br',
-	version: '0.1.1'
+	version: '0.2.2'
 });
 App.icons({
-	'android_mdpi': '../../../src-nacoes/Android/res/drawable-mdpi/icon.png',
-	'android_hdpi': '../../../src-nacoes/Android/res/drawable-hdpi/icon.png',
-	'android_xhdpi': '../../../src-nacoes/Android/res/drawable-xhdpi/icon.png',
-	'android_xxhdpi': '../../../src-nacoes/Android/res/drawable-xxhdpi/icon.png',
-	'android_xxxhdpi': '../../../src-nacoes/Android/res/drawable-xxxhdpi/icon.png'
+	'android_mdpi': '../../srcs/src-nacoes/Android/res/drawable-mdpi/icon.png',
+	'android_hdpi': '../../srcs/src-nacoes/Android/res/drawable-hdpi/icon.png',
+	'android_xhdpi': '../../srcs/src-nacoes/Android/res/drawable-xhdpi/icon.png',
+	'android_xxhdpi': '../../srcs/src-nacoes/Android/res/drawable-xxhdpi/icon.png',
+	'android_xxxhdpi': '../../srcs/src-nacoes/Android/res/drawable-xxxhdpi/icon.png',
+	'iphone_2x': '../../srcs/src-nacoes/iOS/Resources/icons/icon-60@2x.png',
+	'iphone_3x': '../../srcs/src-nacoes/iOS/Resources/icons/icon-60@3x.png',
 });
 App.launchScreens({
-	'android_mdpi_portrait': '../../../src-nacoes/Android/res/drawable-mdpi/screen.png',
-	'android_hdpi_portrait': '../../../src-nacoes/Android/res/drawable-hdpi/screen.png',
-	'android_xhdpi_portrait': '../../../src-nacoes/Android/res/drawable-xhdpi/screen.png',
-	'android_xxhdpi_portrait': '../../../src-nacoes/Android/res/drawable-xxhdpi/screen.png'
+	'android_mdpi_portrait': '../../srcs/src-nacoes/Android/res/drawable-mdpi/screen.png',
+	'android_hdpi_portrait': '../../srcs/src-nacoes/Android/res/drawable-hdpi/screen.png',
+	'android_xhdpi_portrait': '../../srcs/src-nacoes/Android/res/drawable-xhdpi/screen.png',
+	'android_xxhdpi_portrait': '../../srcs/src-nacoes/Android/res/drawable-xxhdpi/screen.png',
+	'iphone_2x': '../../srcs/src-nacoes/iOS/Resources/splash/Default@2x~iphone_640x960.png',
+	'iphone5': '../../srcs/src-nacoes/iOS/Resources/splash/Default-568h@2x~iphone_640x1136.png',
+	'iphone6': '../../srcs/src-nacoes/iOS/Resources/splash/Default-750@2x~iphone6-landscape_1334x750.png',
 });
+
 App.setPreference('android-minSdkVersion', '19');
 App.setPreference('BackgroundColor', '0xffffffff');
 App.setPreference('HideKeyboardFormAccessoryBar', true);
 App.setPreference('Orientation', 'portrait');
 App.setPreference('EnableWebGL', true);
-App.setPreference('StatusBarOverlaysWebView', 'true');
-App.setPreference('StatusBarBackgroundColor', 'transparent');
-
-App.configurePlugin('phonegap-plugin-push', {
-	SENDER_ID: 1000788241076
-});
+//App.setPreference('StatusBarOverlaysWebView', 'true');
+//App.setPreference('StatusBarBackgroundColor', 'transparent');
 
 // Acesso as imagens GridFS
 App.accessRule('*', true)

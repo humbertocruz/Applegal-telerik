@@ -12,6 +12,5 @@ Template.registerHelper("clUrl", function(public_id, options){
 
 	// Retorna a url publica ou privativa
 	var url = cl.url(public_id,hash).replace('http:','https:');
-	console.log(url);
 	return url;
 });

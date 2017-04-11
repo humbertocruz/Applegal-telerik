@@ -1,14 +1,14 @@
 authRoutes = FlowRouter.group({
 	name:'authRoutes',
-	triggersEnter:[
-		function(obj,redirect){
-			if (!Meteor.isCordova){
-				if (window == window.parent) {
-					location.href = '/emulador.html';
-				}
-			}
-		}
-	]
+	//triggersEnter:[
+	//	function(obj,redirect){
+	//		if (!Meteor.isCordova){
+	//			if (window == window.parent) {
+	//				location.href = '/emulador.html';
+	//			}
+	//		}
+	//	}
+	//]
 });
 
 authRoutes.route('/login',{

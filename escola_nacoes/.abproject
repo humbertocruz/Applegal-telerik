@@ -1,0 +1,45 @@
+{
+  "ProjectName": "escola_nacoes",
+  "ProjectGuid": "159a3f82-425a-482b-b052-b6158886180d",
+  "projectVersion": 1,
+  "AppIdentifier": "com.telerik.escolanacoes",
+  "DisplayName": "escola_nacoes",
+  "Author": "",
+  "Description": "escola_nacoes",
+  "BundleVersion": "1.0",
+  "AndroidVersionCode": "1",
+  "iOSDeviceFamily": [
+    "1",
+    "2"
+  ],
+  "iOSBackgroundMode": [],
+  "ProjectTypeGuids": "{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}",
+  "FrameworkVersion": "6.4.0",
+  "AndroidPermissions": [
+    "android.permission.INTERNET"
+  ],
+  "DeviceOrientations": [
+    "Portrait",
+    "Landscape"
+  ],
+  "AndroidHardwareAcceleration": "true",
+  "iOSStatusBarStyle": "Default",
+  "Framework": "Cordova",
+  "WP8TileTitle": "",
+  "WP8Publisher": "",
+  "WP8Capabilities": [
+    "ID_CAP_NETWORKING",
+    "ID_CAP_WEBBROWSERCOMPONENT"
+  ],
+  "WP8Requirements": [],
+  "WP8PublisherID": "{fd12d8f7-2bbd-4286-a091-865a305b5664}",
+  "WP8ProductID": "{820344de-ba25-40cc-8f1e-32f260b949ad}",
+  "WPSdk": "8.0",
+  "WP8PackageIdentityName": "1234Telerik.escolanacoes",
+  "WP8WindowsPublisherName": "CN=Telerik",
+  "WP8SupportedResolutions": [
+    "ID_RESOLUTION_WVGA",
+    "ID_RESOLUTION_WXGA",
+    "ID_RESOLUTION_HD720P"
+  ]
+}
